@@ -1,26 +1,151 @@
-@import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+input, button {
+  cursor: pointer;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+input {
+  border-width: 1px;
+  border-radius: 0.5rem
+}
+
+button {
+  border: none;
+  border-radius: 0.5rem
+}
+
+*::-webkit-scrollbar{
+  display: none;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  width: 60vw;
+  max-width: 60vw;
+  min-height: 20vh;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  position: relative;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.toast-wrapper {
+  position: fixed;
+  bottom: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  z-index: 1000;
+}
+
+.layout {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.layout > .header {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  padding: 0 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  z-index: 40;
+}
+
+.layout > .content {
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: #f0f0f0;
+  padding: 0.2rem 0;
+  z-index: 20;
+}
+
+.layout > .content > div {
+  padding: 1rem;
+  background-color: white;
+}
+
+.layout > .navbar {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: white;
+  z-index: 40;
+}
+
+@media all and (max-width: 767px) {
+  .layout {
+  }
+  .header{
+    height: 4rem;
+  }
+  .content {
+    margin-top: 4rem;
+    min-height: calc(100vh - 8rem);
+    max-height: calc(100vh - 8rem);
+  }
+  .navbar {
+    height: 4rem
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media all and (min-width: 768px) and (max-width: 1023px) {
+  .layout {
+    margin: 0 5rem;
+  }
+  .header{
+    height: 4.5rem;
+  }
+  .content {
+    margin-top: 4.5rem;
+    min-height: calc(100vh - 9rem);
+    max-height: calc(100vh - 9rem);
+  }
+  .navbar {
+    height: 4.5rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .layout {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .header{
+    height: 5rem;
+  }
+  .content {
+    margin-top:  5rem;
+    min-height: calc(100vh - 10rem);
+    max-height: calc(100vh - 10rem);
+  }
+  .navbar {
+    height: 5rem;
+  }
 }
