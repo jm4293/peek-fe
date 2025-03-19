@@ -68,8 +68,8 @@ button {
   position: absolute;
   top: 0;
   padding: 0 1.2rem;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   background-color: white;
   z-index: 40;
