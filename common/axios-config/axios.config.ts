@@ -74,37 +74,36 @@ export class AxiosConfig {
         return response;
       },
       async (error) => {
-        // const originalRequest = error.config;
-        //
-        // if (error.response?.status === 302) {
-        //   const { redirect } = error.response.data;
-        //
-        //   window.location.href = redirect;
-        // } else if (error.response?.status === 400) {
-        //   const { message } = error.response.data;
-        //
-        //   if (message) {
-        //     alert(message);
-        //   }
-        // } else if (error.response?.status === 401) {
-        //   const refreshResponse = await AuthApi.postRefreshToken();
-        //   const newAccessToken = refreshResponse.data.data.accessToken;
-        //
-        //   const encryptedState = CryptoJS.AES.encrypt(
-        //     JSON.stringify({ accessToken: newAccessToken }),
-        //     process.env.NEXT_PUBLIC_LOCAL_STORAGE_SECRET_KEY,
-        //   ).toString();
-        //
-        //   sessionStorage.setItem('state', encryptedState);
-        //
-        //   originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
-        //
-        //   return this._axiosInstance(originalRequest);
-        // } else if (error.response?.status === 403) {
-        //   localStorage.clear();
-        //   sessionStorage.clear();
-        //   window.location.replace('/home');
-        // }
+        if (error.response?.status === 302) {
+          //   const { redirect } = error.response.data;
+          //
+          //   window.location.href = redirect;
+        } else if (error.response?.status === 400) {
+          const { message } = error.response.data;
+
+          if (message) {
+            alert(message);
+          }
+        } else if (error.response?.status === 401) {
+          // const originalRequest = error.config;
+          //   const refreshResponse = await AuthApi.postRefreshToken();
+          //   const newAccessToken = refreshResponse.data.data.accessToken;
+          //
+          //   const encryptedState = CryptoJS.AES.encrypt(
+          //     JSON.stringify({ accessToken: newAccessToken }),
+          //     process.env.NEXT_PUBLIC_LOCAL_STORAGE_SECRET_KEY,
+          //   ).toString();
+          //
+          //   sessionStorage.setItem('state', encryptedState);
+          //
+          //   originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
+          //
+          //   return this._axiosInstance(originalRequest);
+        } else if (error.response?.status === 403) {
+          //   localStorage.clear();
+          //   sessionStorage.clear();
+          //   window.location.replace('/home');
+        }
 
         return Promise.reject(error);
       },

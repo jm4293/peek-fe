@@ -5,14 +5,31 @@ import { useState } from 'react';
 import { Button } from '@/components/button';
 import { CheckBoxSvg } from '@/asset/svg';
 import { Text } from '@/components/text';
+import { useAuthMutation } from '@/hooks';
 
 export default function Page() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isAutoLogin, setIsAutoLogin] = useState(false);
 
+  const { onLoginEmailMutation } = useAuthMutation();
+
+  const onLoginHandler = () => {
+    if (!email) {
+      alert('이메일을 입력해주세요.');
+      return;
+    }
+
+    if (!password) {
+      alert('비밀번호를 입력해주세요.');
+      return;
+    }
+
+    onLoginEmailMutation.mutate({ email, password });
+  };
+
   const onKeyDownHandler = () => {
-    console.log('1231231');
+    onLoginHandler();
   };
 
   return (
@@ -36,7 +53,7 @@ export default function Page() {
       </div>
 
       <div className="mb-7">
-        <Button text="로그인" onClick={() => {}} />
+        <Button text="로그인" onClick={onLoginHandler} />
       </div>
 
       <div className="flex justify-between">

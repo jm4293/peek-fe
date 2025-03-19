@@ -1,10 +1,11 @@
-import CryptoJS from 'crypto-js';
 import AuthApi from '@/api-url/auth/auth.api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ICheckEmailDto, ILoginEmailDto, ILoginOauthDto, ISignUpDto } from '@/types/dto';
+import { useRouter } from 'next/navigation';
 
 export const useAuthMutation = () => {
   const queryClient = useQueryClient();
+  const router = useRouter();
 
   const onSignUpMutation = useMutation({
     mutationFn: (dto: ISignUpDto) => AuthApi.postSignUp(dto),
@@ -25,9 +26,9 @@ export const useAuthMutation = () => {
 
       _registerSessionStorage({ accessToken });
 
-      await _registerFirebaseToken();
+      // await _registerFirebaseToken();
 
-      // navigate('/home');
+      router.push('/home');
     },
     onError: (err) => {
       console.error(err);
@@ -43,7 +44,7 @@ export const useAuthMutation = () => {
 
       await _registerFirebaseToken();
 
-      // navigate('/home');
+      router.push('/home');
     },
     onError: (err) => {
       console.error(err);
@@ -85,11 +86,14 @@ export const useAuthMutation = () => {
   });
 
   const _registerSessionStorage = (params: { accessToken: string }) => {
+    const { accessToken } = params;
+
     // const encryptedState = CryptoJS.AES.encrypt(
     //   JSON.stringify(params),
-    //   process.env.NEXT_PUBLIC_LOCAL_STORAGE_SECRET_KEY,
+    //   process.env.NEXT_PUBLIC_LOCAL_STORAGE_SECRET_KEY as string,
     // ).toString();
-    // sessionStorage.setItem('state', encryptedState);
+
+    sessionStorage.setItem('state', accessToken);
   };
 
   const _registerFirebaseToken = async () => {
