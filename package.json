@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build-rm": "rm -rf dist",
+    "node_modules-rm": "rm -rf node_modules"
   },
   "dependencies": {
     "next": "15.2.2",
