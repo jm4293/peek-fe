@@ -1,3 +1,8 @@
+### use client
+- use client가 선언되어 있다해도 html 렌더링은 서버에서 이루어지며, 클라이언트에서만 동작하는 코드가 있다면 use client를 선언해야 한다.
+- hydration 유무로 use client를 판단할 수 있다.
+
+
 ```text
     Feat: 새로운 기능 추가
     Fix: 버그 수정
