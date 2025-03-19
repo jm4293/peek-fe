@@ -1,10 +1,13 @@
 'use client';
 
 import { Text } from '@/components/text';
+import { useRouter } from 'next/navigation';
 
 export default function DeactivateLogin() {
+  const router = useRouter();
+
   const onClickHandler = () => {
-    console.log('Text clicked');
+    router.push('/auth/login');
   };
 
   return (

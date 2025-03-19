@@ -3,7 +3,6 @@
 interface IClientTextProps {
   value: string;
   color: '#000000' | '#282828' | '#444444' | '#666666';
-  id?: string;
   size?: 'sm' | 'base' | 'lg' | 'xl';
   align?: 'left' | 'center' | 'right';
   weight?: 'normal' | 'bold';
@@ -37,7 +36,7 @@ const fontWeight = {
 };
 
 export const Text = (props: IClientTextProps) => {
-  const { value, id, color, size = 'base', align = 'left', weight = 'normal', onClick, className } = props;
+  const { value, color, size = 'base', align = 'left', weight = 'normal', onClick, className } = props;
 
   const onClickHandler = (event: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
     event.stopPropagation();
@@ -49,7 +48,6 @@ export const Text = (props: IClientTextProps) => {
 
   return (
     <p
-      id={id}
       className={`${textColor[color]} ${fontSize[size]} ${textAlign[align]} ${fontWeight[weight]} ${onClick && 'cursor-pointer'} ${className}`}
       onClick={(event) => onClickHandler(event)}
       style={{ wordBreak: 'break-word' }}>
