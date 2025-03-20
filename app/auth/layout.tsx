@@ -1,4 +1,5 @@
 import { BackSvg } from '@/asset/svg';
+import { Suspense } from 'react';
 
 interface IProps {
   children: React.ReactNode;
@@ -14,7 +15,9 @@ export default function Layout(props: IProps) {
           <BackSvg color="#000000" />
         </div>
 
-        <div className="w-full mt-10">{children}</div>
+        <div className="w-full mt-10">
+          <Suspense>{children}</Suspense>
+        </div>
       </div>
     </div>
   );
