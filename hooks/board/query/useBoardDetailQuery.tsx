@@ -1,5 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import BoardApi from '@/api-url/board/board.api';
+import { AxiosResponse } from 'axios';
+import { ResConfig } from '@/types/res.config';
+import { IBoardDetailRes } from '@/types/res';
 
 interface IProps {
   boardSeq: number | undefined;
@@ -11,7 +14,7 @@ export const useBoardDetailQuery = (props: IProps) => {
   return useQuery({
     queryKey: ['board-detail', boardSeq],
     queryFn: () => BoardApi.getBoardDetail(Number(boardSeq)),
-    select: (res) => {
+    select: (res: AxiosResponse<ResConfig<IBoardDetailRes>, any>) => {
       const { boardSeq, title, content, createdAt, updatedAt, user } = res.data.data.board;
       const { name, nickname, birthdate, thumbnail } = user;
 
