@@ -54,7 +54,7 @@ export const Textarea = (props: IProps) => {
       <textarea
         ref={textareaRef}
         name={name}
-        className={`w-full max-h-[60vh] resize-none px-4 py-5 ${borderColor[color]} ${className}`}
+        className={`w-full max-h-[60vh] px-3 py-4 ${borderColor[color]} ${className}`}
         value={value}
         onChange={handleInput}
         placeholder={`${optional ? '[선택] ' : ''}${placeholder}`}

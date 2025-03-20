@@ -15,6 +15,7 @@ input, button, textarea {
 input, textarea {
   border-width: 1px;
   border-radius: 0.5rem;
+  resize: none;
 }
 
 button {

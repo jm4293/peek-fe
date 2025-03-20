@@ -54,7 +54,7 @@ export const Input = (props: IProps) => {
       <Text value={title} color="#000000" />
       <input
         name={name}
-        className={`px-4 py-5 ${border_color[borderColor]} ${className}`}
+        className={`px-3 py-4 ${border_color[borderColor]} ${className}`}
         type={type}
         value={value}
         onChange={onChange}

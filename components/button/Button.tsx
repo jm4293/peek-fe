@@ -1,5 +1,3 @@
-import { useDeviceLayout } from '@/hooks/useDeviceLayout';
-
 interface IProps {
   text: string;
   onClick: () => void;
@@ -9,8 +7,6 @@ interface IProps {
 
 export const Button = (props: IProps) => {
   const { className, text, onClick, disabled } = props;
-
-  const { isMobile } = useDeviceLayout();
 
   const onClickHandler = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.stopPropagation();
@@ -22,7 +18,7 @@ export const Button = (props: IProps) => {
 
   return (
     <button
-      className={`w-full bg-[#5A4FCF] hover:bg-[#786DE8] disabled:bg-[#A7A3D3] ${isMobile ? 'py-4' : 'py-5'} ${className}`}
+      className={`w-full bg-[#5A4FCF] hover:bg-[#786DE8] disabled:bg-[#A7A3D3] py-4 ${className}`}
       name={text}
       onClick={onClickHandler}
       disabled={disabled}>
