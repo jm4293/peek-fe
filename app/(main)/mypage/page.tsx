@@ -1,5 +1,11 @@
-import VariableComponents from '@/app/(main)/mypage/_components/variableComponents';
+'use client';
+
+import ActivateLogin from '@/app/(main)/mypage/_components/activateLogin';
+import DeactivateLogin from '@/app/(main)/mypage/_components/deactivateLogin';
+import useIsAuth from '@/hooks/useIsAuth';
 
 export default function Page() {
-  return <VariableComponents />;
+  const [isAuth] = useIsAuth();
+
+  return isAuth ? <ActivateLogin /> : <DeactivateLogin />;
 }

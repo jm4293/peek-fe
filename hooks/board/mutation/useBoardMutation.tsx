@@ -1,14 +1,18 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import BoardApi from '@/api-url/board/board.api';
 import { ICreateBoardDto, IUpdateBoardDto } from '@/types/dto';
+import { useRouter } from 'next/navigation';
 
 export const useBoardMutation = () => {
   const queryClient = useQueryClient();
+  const router = useRouter();
 
   const onCreateBoardMutation = useMutation({
     mutationFn: (dto: ICreateBoardDto) => BoardApi.createBoard(dto),
-    onSuccess: () => {
-      // navigate('/board');
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['board-list'] });
+
+      router.push('/board');
     },
     onError: (err) => {
       console.error(err);

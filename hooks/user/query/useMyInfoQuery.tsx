@@ -3,12 +3,12 @@ import UserApi from '@/api-url/user/user.api';
 import { AxiosResponse } from 'axios';
 import { ResConfig } from '@/types/res.config';
 import { IMyInfoRes } from '@/types/res';
-import { SessionStorage } from '@/utils';
+import useIsAuth from '@/hooks/useIsAuth';
 
 type MyInfoRes = AxiosResponse<ResConfig<IMyInfoRes>, any>;
 
 export const useMyInfoQuery = () => {
-  const isAuth = SessionStorage.getItem('state');
+  const [isAuth] = useIsAuth();
 
   return useQuery({
     queryKey: ['user-my-info'],
