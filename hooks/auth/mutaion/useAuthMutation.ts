@@ -2,6 +2,7 @@ import AuthApi from '@/api-url/auth/auth.api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ICheckEmailDto, ILoginEmailDto, ILoginOauthDto, ISignUpDto } from '@/types/dto';
 import { useRouter } from 'next/navigation';
+import axios from 'axios';
 
 export const useAuthMutation = () => {
   const queryClient = useQueryClient();
@@ -12,7 +13,7 @@ export const useAuthMutation = () => {
     onSuccess: (res) => {
       const { email } = res.data.data;
 
-      // navigate('/auth/login', { state: { email } });
+      router.push('/auth/login' + `?email=${email}`);
     },
     onError: (err) => {
       console.error(err);
@@ -64,8 +65,10 @@ export const useAuthMutation = () => {
       // await deleteToken(firebase_messaging);
 
       // localStorage.clear();
-      // sessionStorage.clear();
-      // axios.defaults.headers.common = {};
+      sessionStorage.clear();
+      axios.defaults.headers.common = {};
+
+      router.push('/home');
     },
     onError: (err) => {
       console.error(err);
