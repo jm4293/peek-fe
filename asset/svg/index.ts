@@ -1,4 +1,4 @@
-export * from './BackSvg';
-export * from './CheckBoxSvg';
-export * from './ConfirmSvg';
+export * from './backSvg';
+export * from './checkBoxSvg';
+export * from './confirmSvg';
 export * from './humanSvg';

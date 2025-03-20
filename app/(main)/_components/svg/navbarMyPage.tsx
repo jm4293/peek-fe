@@ -17,8 +17,8 @@ export const NavbarMyPage = () => {
 
   return (
     <svg
-      width={isMobile ? '80' : '90'}
-      height={isMobile ? '52' : '68'}
+      width="90"
+      height="68"
       viewBox="0 0 95 68"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

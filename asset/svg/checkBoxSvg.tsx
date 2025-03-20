@@ -1,5 +1,3 @@
-'use clien';
-
 interface IProps {
   isCheck: boolean;
   onClick: () => void;

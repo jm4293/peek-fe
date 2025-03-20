@@ -12,14 +12,14 @@ export const NavbarBoard = () => {
   const onClickHandler = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
     event.stopPropagation();
 
-    router.push('/board/1');
+    router.push('/board');
   };
 
   return (
     <svg
-      width={isMobile ? '60' : '90'}
-      height={isMobile ? '52' : '68'}
-      viewBox="0 0 53 68"
+      width="60"
+      height="60"
+      viewBox="0 0 33 68"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       id="board"
