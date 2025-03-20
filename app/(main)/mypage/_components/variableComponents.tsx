@@ -1,10 +1,11 @@
 'use client';
 
+import { SessionStorage } from '@/utils';
 import ActivateLogin from '@/app/(main)/mypage/_components/activateLogin';
 import DeactivateLogin from '@/app/(main)/mypage/_components/deactivateLogin';
 
 export default function VariableComponents() {
-  const state = sessionStorage.getItem('state');
+  const isAuth = SessionStorage.getItem('state');
 
-  return state ? <ActivateLogin /> : <DeactivateLogin />;
+  return isAuth ? <ActivateLogin /> : <DeactivateLogin />;
 }

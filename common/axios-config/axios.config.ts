@@ -2,6 +2,7 @@ import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import AuthApi from '@/api-url/auth/auth.api';
 import CryptoJS from 'crypto-js';
 import { ResConfig } from '@/types/res.config';
+import { SessionStorage } from '@/utils';
 
 interface IGetReq<D> {
   url: string;
@@ -45,7 +46,7 @@ export class AxiosConfig {
 
     this._axiosInstance.interceptors.request.use(
       (config) => {
-        const AT = sessionStorage.getItem('state');
+        const AT = SessionStorage.getItem('state');
 
         if (AT) {
           // const decryptedState = CryptoJS.AES.decrypt(
@@ -94,14 +95,14 @@ export class AxiosConfig {
           //   process.env.NEXT_PUBLIC_LOCAL_STORAGE_SECRET_KEY,
           // ).toString();
 
-          sessionStorage.setItem('state', newAT);
+          SessionStorage.setItem('state', newAT);
 
           originalRequest.headers['Authorization'] = `Bearer ${newAT}`;
 
           return this._axiosInstance(originalRequest);
         } else if (error.response?.status === 403) {
           // localStorage.clear();
-          sessionStorage.clear();
+          SessionStorage.clear();
           window.location.replace('/home');
         }
 

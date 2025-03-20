@@ -3,11 +3,12 @@ import UserApi from '@/api-url/user/user.api';
 import { AxiosResponse } from 'axios';
 import { ResConfig } from '@/types/res.config';
 import { IMyInfoRes } from '@/types/res';
+import { SessionStorage } from '@/utils';
 
 type MyInfoRes = AxiosResponse<ResConfig<IMyInfoRes>, any>;
 
 export const useMyInfoQuery = () => {
-  const state = sessionStorage.getItem('state');
+  const isAuth = SessionStorage.getItem('state');
 
   return useQuery({
     queryKey: ['user-my-info'],
@@ -18,6 +19,6 @@ export const useMyInfoQuery = () => {
       return { email, name, nickname, thumbnail, userAccountType };
     },
     staleTime: 1000 * 60 * 60 * 6, // 6시간,
-    enabled: !!state,
+    enabled: !!isAuth,
   });
 };

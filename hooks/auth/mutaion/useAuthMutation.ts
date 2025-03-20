@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ICheckEmailDto, ILoginEmailDto, ILoginOauthDto, ISignUpDto } from '@/types/dto';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import { SessionStorage } from '@/utils';
 
 export const useAuthMutation = () => {
   const queryClient = useQueryClient();
@@ -65,7 +66,7 @@ export const useAuthMutation = () => {
       // await deleteToken(firebase_messaging);
 
       // localStorage.clear();
-      sessionStorage.clear();
+      SessionStorage.clear();
       axios.defaults.headers.common = {};
 
       router.push('/home');
@@ -96,7 +97,7 @@ export const useAuthMutation = () => {
     //   process.env.NEXT_PUBLIC_LOCAL_STORAGE_SECRET_KEY as string,
     // ).toString();
 
-    sessionStorage.setItem('state', accessToken);
+    SessionStorage.setItem('state', accessToken);
   };
 
   const _registerFirebaseToken = async () => {
