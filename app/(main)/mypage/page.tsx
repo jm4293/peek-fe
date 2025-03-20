@@ -1,11 +1,9 @@
-import DeactivateLogin from '@/app/(main)/mypage/_components/deactivateLogin';
+import VariableComponents from '@/app/(main)/mypage/_components/variableComponents';
 
 export default function Page() {
   return (
     <div>
-      <div className="flex gap-6">
-        <DeactivateLogin />
-      </div>
+      <VariableComponents />
     </div>
   );
 }
