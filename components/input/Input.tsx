@@ -1,5 +1,3 @@
-'use client';
-
 import { Text } from '@/components/text';
 import { useDeviceLayout } from '@/hooks';
 
@@ -28,12 +26,12 @@ export const Input = (props: IProps) => {
     title,
     value,
     onChange,
-    name,
+    name = '',
     placeholder = '',
     disabled = false,
     borderColor = 'gray',
     optional = false,
-    className,
+    className = '',
     onKeyDown,
   } = props;
 
@@ -56,7 +54,7 @@ export const Input = (props: IProps) => {
       <Text value={title} color="#000000" />
       <input
         name={name}
-        className={`px-4 ${isMobile ? 'py-4' : 'py-5'} ${border_color[borderColor]} ${className}`}
+        className={`px-4 py-5 ${border_color[borderColor]} ${className}`}
         type={type}
         value={value}
         onChange={onChange}

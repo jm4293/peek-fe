@@ -1,5 +1,3 @@
-'use client';
-
 interface IClientTextProps {
   value: string;
   color: '#000000' | '#282828' | '#444444' | '#666666';

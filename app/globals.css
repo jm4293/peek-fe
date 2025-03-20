@@ -8,11 +8,11 @@
   margin: 0;
 }
 
-input, button {
+input, button, textarea {
   cursor: pointer;
 }
 
-input {
+input, textarea {
   border-width: 1px;
   border-radius: 0.5rem;
 }
