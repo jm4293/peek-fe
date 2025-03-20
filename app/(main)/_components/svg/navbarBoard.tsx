@@ -12,7 +12,7 @@ export const NavbarBoard = () => {
   const onClickHandler = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
     event.stopPropagation();
 
-    router.push('/board');
+    router.push('/board/1');
   };
 
   return (
