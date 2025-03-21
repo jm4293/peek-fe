@@ -7,7 +7,7 @@ export const useBoardMutation = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
 
-  const onCreateBoardMutation = useMutation({
+  const createBoardMutation = useMutation({
     mutationFn: (dto: ICreateBoardDto) => BoardApi.createBoard(dto),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['board-list'] });
@@ -19,7 +19,7 @@ export const useBoardMutation = () => {
     },
   });
 
-  const onUpdateBoardMutation = useMutation({
+  const updateBoardMutation = useMutation({
     mutationFn: (dto: IUpdateBoardDto) => BoardApi.updateBoard(dto),
     onSuccess: async (_, variables) => {
       alert('게시글이 수정되었습니다.');
@@ -32,7 +32,7 @@ export const useBoardMutation = () => {
     },
   });
 
-  const onDeleteBoardMutation = useMutation({
+  const deleteBoardMutation = useMutation({
     mutationFn: (boardSeq: number) => BoardApi.deleteBoard({ boardSeq }),
     onSuccess: () => {
       // navigate('/board');
@@ -42,7 +42,7 @@ export const useBoardMutation = () => {
     },
   });
 
-  const onBoardLikeMutation = useMutation({
+  const boardLikeMutation = useMutation({
     mutationFn: (boardSeq: number) => BoardApi.boardLike(boardSeq),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['board-list'] });
@@ -53,9 +53,9 @@ export const useBoardMutation = () => {
   });
 
   return {
-    onCreateBoardMutation,
-    onUpdateBoardMutation,
-    onDeleteBoardMutation,
-    onBoardLikeMutation,
+    createBoardMutation,
+    updateBoardMutation,
+    deleteBoardMutation,
+    boardLikeMutation,
   };
 };

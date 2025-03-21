@@ -2,11 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import { CheckBoxSvg } from '@/asset/svg';
-import TextClient from '@/components/text/textClient';
 import { useAuthMutation, useDeviceLayout } from '@/hooks';
 import { useRouter, useSearchParams } from 'next/navigation';
-import InputClient from '@/components/input/inputClient';
-import ButtonClient from '@/components/button/buttonClient';
+import Input from '@/components/input/input';
+import Text from '@/components/text/text';
 
 export default function Page() {
   const router = useRouter();
@@ -18,7 +17,7 @@ export default function Page() {
   const [password, setPassword] = useState('');
   const [isAutoLogin, setIsAutoLogin] = useState(false);
 
-  const { onLoginEmailMutation } = useAuthMutation();
+  const { loginEmailMutation } = useAuthMutation();
 
   const onLoginHandler = () => {
     if (!email) {
@@ -31,7 +30,7 @@ export default function Page() {
       return;
     }
 
-    onLoginEmailMutation.mutate({ email, password });
+    loginEmailMutation.mutate({ email, password });
   };
 
   const onKeyDownHandler = () => {
@@ -49,16 +48,18 @@ export default function Page() {
   return (
     <div>
       <div className="w-full flex flex-col gap-4 mb-16">
-        <InputClient
+        <Input
           type="email"
           title="이메일"
+          name="email"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           placeholder="이메일 주소"
         />
-        <InputClient
+        <Input
           type="password"
           title="비밀번호"
+          name="password"
           value={password}
           onChange={(event) => setPassword(event.target.value)}
           placeholder="비밀번호"
@@ -67,21 +68,21 @@ export default function Page() {
       </div>
 
       <div className="mb-7">
-        <ButtonClient title="로그인" onClick={onLoginHandler} />
+        <button title="로그인" onClick={onLoginHandler} />
       </div>
 
       <div className={`flex justify-between ${isMobile ? 'flex-col gap-4' : 'flex-row'}`}>
         <div className="flex items-center gap-1.5">
           <CheckBoxSvg isCheck={isAutoLogin} onClick={() => setIsAutoLogin(!isAutoLogin)} />
-          <TextClient value="자동로그인" color="#000000" onClick={() => {}} />
+          <Text value="자동로그인" color="#000000" onClick={() => {}} />
         </div>
 
         <div className="flex items-center gap-3">
-          <TextClient value="아이디 찾기" color="#000000" onClick={() => {}} />
+          <Text value="아이디 찾기" color="#000000" onClick={() => {}} />
           <div className="w-[1px] h-2/3 bg-[#B5B5B5]" />
-          <TextClient value="비밀번호 찾기" color="#000000" onClick={() => {}} />
+          <Text value="비밀번호 찾기" color="#000000" onClick={() => {}} />
           <div className="w-[1px] h-2/3 bg-[#B5B5B5]" />
-          <TextClient value="회원가입" color="#000000" onClick={() => router.push('/auth/register')} />
+          <Text value="회원가입" color="#000000" onClick={() => router.push('/auth/register')} />
         </div>
       </div>
     </div>

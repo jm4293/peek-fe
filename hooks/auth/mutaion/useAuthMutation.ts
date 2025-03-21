@@ -1,6 +1,6 @@
 import AuthApi from '@/api/auth/auth.api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { ICheckEmailDto, ILoginEmailDto, ILoginOauthDto, ISignUpDto } from '@/types/dto';
+import { ICheckEmailDto, ILoginEmailDto, ILoginOauthDto } from '@/types/dto';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { SessionStorage } from '@/utils';
@@ -9,19 +9,19 @@ export const useAuthMutation = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
 
-  const onSignUpMutation = useMutation({
-    mutationFn: (dto: ISignUpDto) => AuthApi.postSignUp(dto),
-    onSuccess: (res) => {
-      const { email } = res.data.data;
+  // const signUpMutation = useMutation({
+  //   mutationFn: (dto: ISignUpDto) => AuthApi.postSignUp(dto),
+  //   onSuccess: (res) => {
+  //     const { email } = res.data.data;
+  //
+  //     router.push('/auth/login' + `?email=${email}`);
+  //   },
+  //   onError: (err) => {
+  //     console.error(err);
+  //   },
+  // });
 
-      router.push('/auth/login' + `?email=${email}`);
-    },
-    onError: (err) => {
-      console.error(err);
-    },
-  });
-
-  const onLoginEmailMutation = useMutation({
+  const loginEmailMutation = useMutation({
     mutationFn: (dto: ILoginEmailDto) => AuthApi.postSignInEmail(dto),
     onSuccess: async (res) => {
       const { accessToken } = res.data.data;
@@ -37,7 +37,7 @@ export const useAuthMutation = () => {
     },
   });
 
-  const onLoginOauthMutation = useMutation({
+  const loginOauthMutation = useMutation({
     mutationFn: (dto: ILoginOauthDto) => AuthApi.postSignInOauth(dto),
     onSuccess: async (res) => {
       const { accessToken } = res.data.data;
@@ -53,11 +53,11 @@ export const useAuthMutation = () => {
     },
   });
 
-  const onCheckEmailMutation = useMutation({
+  const checkEmailMutation = useMutation({
     mutationFn: (dto: ICheckEmailDto) => AuthApi.postCheckEmail(dto),
   });
 
-  const onLogoutMutation = useMutation({
+  const logoutMutation = useMutation({
     mutationFn: () => AuthApi.postLogout(),
     onSuccess: async () => {
       queryClient.clear();
@@ -76,7 +76,7 @@ export const useAuthMutation = () => {
     },
   });
 
-  const onRefreshTokenMutation = useMutation({
+  const refreshTokenMutation = useMutation({
     mutationFn: () => AuthApi.postRefreshToken(),
     onSuccess: (res) => {
       const { accessToken } = res.data.data;
@@ -110,11 +110,10 @@ export const useAuthMutation = () => {
   };
 
   return {
-    onLoginEmailMutation,
-    onLoginOauthMutation,
-    onSignUpMutation,
-    onCheckEmailMutation,
-    onLogoutMutation,
-    onRefreshTokenMutation,
+    loginEmailMutation,
+    loginOauthMutation,
+    checkEmailMutation,
+    logoutMutation,
+    refreshTokenMutation,
   };
 };

@@ -1,7 +1,5 @@
-'use client';
-
 import { useEffect, useRef } from 'react';
-import TextClient from '@/components/text/textClient';
+import Text from '@/components/text/text';
 
 interface IProps {
   title: string;
@@ -20,7 +18,7 @@ const borderColor = {
   green: 'border border-green-400',
 };
 
-export default function TextareaClient(props: IProps) {
+export default function Textarea(props: IProps) {
   const {
     title,
     value,
@@ -52,7 +50,7 @@ export default function TextareaClient(props: IProps) {
 
   return (
     <div className="flex flex-col gap-3">
-      <TextClient value={title} color="#000000" />
+      <Text value={title} color="#000000" />
       <textarea
         ref={textareaRef}
         name={name}

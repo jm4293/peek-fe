@@ -1,5 +1,3 @@
-'use client';
-
 import { JSX, useEffect, useRef } from 'react';
 import Loading from '@/components/loading/loading';
 

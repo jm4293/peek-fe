@@ -5,21 +5,21 @@ import { IReadNotificationDto } from '@/types/dto';
 export const useUserMutation = () => {
   const queryClient = useQueryClient();
 
-  const onReadNotificationMutation = useMutation({
+  const readNotificationMutation = useMutation({
     mutationFn: (dto: IReadNotificationDto) => UserApi.postNotificationRead(dto),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['notification-list'] });
     },
   });
 
-  const onReadAllNotificationMutation = useMutation({
+  const readAllNotificationMutation = useMutation({
     mutationFn: () => UserApi.postNotificationReadAll(),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['notification-list'] });
     },
   });
 
-  const onDeleteNotificationMutation = useMutation({
+  const deleteNotificationMutation = useMutation({
     mutationFn: (notificationSeq: number) => UserApi.deleteNotification(notificationSeq),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['notification-list'] });
@@ -27,8 +27,8 @@ export const useUserMutation = () => {
   });
 
   return {
-    onReadNotificationMutation,
-    onReadAllNotificationMutation,
-    onDeleteNotificationMutation,
+    readNotificationMutation,
+    readAllNotificationMutation,
+    deleteNotificationMutation,
   };
 };

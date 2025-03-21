@@ -1,2 +1,1 @@
-export * from './imageClient';
-export * from './imageServer';
+export * from './image';

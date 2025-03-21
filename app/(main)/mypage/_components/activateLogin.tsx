@@ -1,18 +1,18 @@
 'use client';
 
-import TextClient from '@/components/text/textClient';
 import { useAuthMutation, useMyInfoQuery } from '@/hooks';
 import { ImageTypeEnum } from '@/constant/enum';
-import ImageClient from '@/components/image/imageClient';
+import Image from '@/components/image/image';
+import Text from '@/components/text/text';
 
 export default function ActivateLogin() {
   const myInfoQuery = useMyInfoQuery();
 
-  const { onLogoutMutation } = useAuthMutation();
+  const { logoutMutation } = useAuthMutation();
 
   const onClickLogoutHandler = () => {
     if (confirm('로그아웃 하시겠습니까?')) {
-      onLogoutMutation.mutate();
+      logoutMutation.mutate();
     }
   };
 
@@ -21,24 +21,24 @@ export default function ActivateLogin() {
       <div className="flex flex-col gap-10">
         <div className="flex items-center gap-4">
           <div>
-            <ImageClient src={myInfoQuery.data.thumbnail} alt="profile" type={ImageTypeEnum.THUMBNAIL} />
+            <Image src={myInfoQuery.data.thumbnail} alt="profile" type={ImageTypeEnum.THUMBNAIL} />
           </div>
           <div>
-            <TextClient value={myInfoQuery.data.nickname} color="#000000" />
-            <TextClient value={myInfoQuery.data.email} color="#000000" />
+            <Text value={myInfoQuery.data.nickname} color="#000000" />
+            <Text value={myInfoQuery.data.email} color="#000000" />
           </div>
         </div>
 
         <div className="flex flex-col gap-4">
-          <TextClient value="게시판" color="#000000" size="lg" />
+          <Text value="게시판" color="#000000" size="lg" />
           <div className="flex flex-col gap-2">
-            <TextClient value="작성한 게시글" color="#000000" onClick={() => {}} />
-            <TextClient value="작성한 댓글" color="#000000" onClick={() => {}} />
+            <Text value="작성한 게시글" color="#000000" onClick={() => {}} />
+            <Text value="작성한 댓글" color="#000000" onClick={() => {}} />
           </div>
         </div>
 
         <div>
-          <TextClient value="로그아웃" color="#000000" size="lg" onClick={onClickLogoutHandler} />
+          <Text value="로그아웃" color="#000000" size="lg" onClick={onClickLogoutHandler} />
         </div>
       </div>
     )

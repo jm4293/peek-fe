@@ -1,2 +1,1 @@
-export * from './buttonClient';
-export * from './buttonServer';
+export * from './button';

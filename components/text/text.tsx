@@ -1,11 +1,10 @@
-'use server';
-
 interface IClientTextProps {
   value: string;
   color: '#000000' | '#282828' | '#444444' | '#666666';
   size?: 'sm' | 'base' | 'lg' | 'xl';
   align?: 'left' | 'center' | 'right';
   weight?: 'normal' | 'bold';
+  onClick?: () => void;
   className?: string;
 }
 
@@ -34,12 +33,21 @@ const fontWeight = {
   bold: 'font-bold',
 };
 
-export default async function TextServer(props: IClientTextProps) {
-  const { value, color, size = 'base', align = 'left', weight = 'normal', className } = props;
+export default function Text(props: IClientTextProps) {
+  const { value, color, size = 'base', align = 'left', weight = 'normal', onClick, className } = props;
+
+  const onClickHandler = (event: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
+    event.stopPropagation();
+
+    if (onClick) {
+      onClick();
+    }
+  };
 
   return (
     <p
-      className={`${textColor[color]} ${fontSize[size]} ${textAlign[align]} ${fontWeight[weight]} ${className}`}
+      className={`${textColor[color]} ${fontSize[size]} ${textAlign[align]} ${fontWeight[weight]} ${onClick && 'cursor-pointer'} ${className}`}
+      onClick={(event) => onClickHandler(event)}
       style={{ wordBreak: 'break-word' }}>
       {value}
     </p>

@@ -5,7 +5,7 @@ import BoardApi from '@/api/board/board.api';
 export const useBoardCommentMutation = () => {
   const queryClient = useQueryClient();
 
-  const onCreateBoardCommentMutation = useMutation({
+  const createBoardCommentMutation = useMutation({
     mutationFn: (dto: ICreateBoardCommentDto) => BoardApi.createBoardComment(dto),
     onSuccess: async (_, variables) => {
       const { boardSeq } = variables;
@@ -17,7 +17,7 @@ export const useBoardCommentMutation = () => {
     },
   });
 
-  const onUpdateBoardCommentMutation = useMutation({
+  const updateBoardCommentMutation = useMutation({
     mutationFn: (dto: IUpdateBoardCommentDto) => BoardApi.updateBoardComment(dto),
     onSuccess: async (_, variables) => {
       await queryClient.invalidateQueries({ queryKey: [] });
@@ -27,7 +27,7 @@ export const useBoardCommentMutation = () => {
     },
   });
 
-  const onDeleteBoardCommentMutation = useMutation({
+  const deleteBoardCommentMutation = useMutation({
     mutationFn: (params: { boardSeq: number; boardCommentSeq: number }) => BoardApi.deleteBoardComment(params),
     onSuccess: async (_, variables) => {
       await queryClient.invalidateQueries({ queryKey: ['board-comment-list'] });
@@ -38,8 +38,8 @@ export const useBoardCommentMutation = () => {
   });
 
   return {
-    onCreateBoardCommentMutation,
-    onUpdateBoardCommentMutation,
-    onDeleteBoardCommentMutation,
+    createBoardCommentMutation,
+    updateBoardCommentMutation,
+    deleteBoardCommentMutation,
   };
 };

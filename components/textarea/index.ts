@@ -1,1 +1,1 @@
-export * from './textareaClient';
+export * from './textarea';

@@ -1,7 +1,5 @@
-'use server';
-
 import { JSX } from 'react';
-import TextServer from '@/components/text/textServer';
+import Text from '@/components/text/text';
 
 interface IProps {
   total: number | undefined;
@@ -16,10 +14,10 @@ export default async function InfinityListWrapper(props: IProps) {
     <div className="flex flex-col gap-4">
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-1">
-          <TextServer value="총" color="#000000" size="lg" />
+          <Text value="총" color="#000000" size="lg" />
           <div className="flex">
-            <TextServer value={String(total)} color="#000000" />
-            <TextServer value="개" color="#000000" />
+            <Text value={String(total)} color="#000000" />
+            <Text value="개" color="#000000" />
           </div>
         </div>
 

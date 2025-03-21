@@ -1,2 +1,1 @@
-export * from './textServer';
-export * from './textClient';
+export * from './text';

@@ -1,2 +1,1 @@
-export * from './inputServer';
-export * from './inputClient';
+export * from './input';
