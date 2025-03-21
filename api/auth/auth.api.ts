@@ -5,12 +5,12 @@ import { ICheckEmailDto, ILoginEmailDto, ILoginOauthDto, ISignUpDto } from '@/ty
 class AuthApi extends AxiosConfig {
   private readonly _baseURL = '/auth';
 
-  async postSignUp(dto: ISignUpDto) {
-    return await this.post<ISignUpRes, ISignUpDto>({
-      url: `${this._baseURL}/register-email`,
-      data: dto,
-    });
-  }
+  // async postSignUp(dto: ISignUpDto) {
+  //   return await this.post<ISignUpRes, ISignUpDto>({
+  //     url: `${this._baseURL}/register-email`,
+  //     data: dto,
+  //   });
+  // }
 
   async postSignInEmail(dto: ILoginEmailDto) {
     return await this.post<ILoginRes, ILoginEmailDto>({

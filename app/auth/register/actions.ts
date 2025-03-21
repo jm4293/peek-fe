@@ -1,22 +1,22 @@
+'use server';
+
 import { redirect } from 'next/navigation';
+import utilFetch from '@/utils/fetch';
 
-export async function registerUser(formData: FormData) {
-  'use server';
-
+export async function registerUser(prevState: unknown, formData: FormData) {
   const email = formData.get('email') as string;
   const password = formData.get('password') as string;
-  const passwordConfirm = formData.get('passwordConfirm') as string;
   const nickname = formData.get('nickname') as string;
   const name = formData.get('name') as string;
   const birthdate = formData.get('birthdate') as string;
 
-  console.log('email', email);
-  console.log('password', password);
+  const res = await utilFetch({
+    path: '/auth/register-email',
+    method: 'POST',
+    body: { email, password, nickname, name, birthdate, policy: true },
+  });
 
-  if (!email || !password || !nickname || !name) {
-    alert('모든 필드를 입력해주세요.');
-    return;
-  }
+  const { email: registeredEmail } = res.data;
 
-  redirect('/auth/login');
+  redirect(`/auth/login?email=${registeredEmail}`);
 }
