@@ -1,4 +1,4 @@
-import AuthApi from '@/api-url/auth/auth.api';
+import AuthApi from '@/api/auth/auth.api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ICheckEmailDto, ILoginEmailDto, ILoginOauthDto, ISignUpDto } from '@/types/dto';
 import { useRouter } from 'next/navigation';

@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import AuthApi from '@/api-url/auth/auth.api';
+import AuthApi from '@/api/auth/auth.api';
 import CryptoJS from 'crypto-js';
 import { ResConfig } from '@/types/res.config';
 import { SessionStorage } from '@/utils';

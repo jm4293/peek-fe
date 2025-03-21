@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import KisApi from '@/api-url/kis/kis.api';
+import KisApi from '@/api/kis/kis.api';
 import { AxiosResponse } from 'axios';
 import { ResConfig } from '@/types/res.config';
 import { IKisOauthTokenRes } from '@/types/res';

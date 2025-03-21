@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import BoardApi from '@/api-url/board/board.api';
+import BoardApi from '@/api/board/board.api';
 import { ICreateBoardDto, IUpdateBoardDto } from '@/types/dto';
 import { useRouter } from 'next/navigation';
 

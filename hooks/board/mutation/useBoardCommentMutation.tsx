@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ICreateBoardCommentDto, IUpdateBoardCommentDto } from '@/types/dto';
-import BoardApi from '@/api-url/board/board.api';
+import BoardApi from '@/api/board/board.api';
 
 export const useBoardCommentMutation = () => {
   const queryClient = useQueryClient();

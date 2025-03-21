@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import UserApi from '@/api-url/user/user.api';
+import UserApi from '@/api/user/user.api';
 import { IReadNotificationDto } from '@/types/dto';
 
 export const useUserMutation = () => {

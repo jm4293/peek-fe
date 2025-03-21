@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import BoardApi from '@/api-url/board/board.api';
+import BoardApi from '@/api/board/board.api';
 import { AxiosResponse } from 'axios';
 import { ResConfig } from '@/types/res.config';
 import { IBoardDetailRes } from '@/types/res';

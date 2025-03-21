@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import HomeApi from '@/api-url/home/home.api';
+import HomeApi from '@/api/home/home.api';
 import { AxiosResponse } from 'axios';
 import { ResConfig } from '@/types/res.config';
 import { IHomeRecentBoardListRes } from '@/types/res';
