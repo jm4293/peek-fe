@@ -5,11 +5,12 @@ import { AxiosResponse } from 'axios';
 import { ResConfig } from '@/types/res.config';
 import { IBoardListRes } from '@/types/res';
 import { IBoard } from '@/types/interface';
-import { Text } from '@/components/text';
+import TextClient from '@/components/text/textClient';
 import { HeartSvg } from '@/asset/svg/heartSvg';
 import { CommentSvg } from '@/asset/svg/commentSvg';
-import { InfinityList, InfinityListWrapper } from '@/components/infinity-list';
 import { useRouter } from 'next/navigation';
+import InfinityListWrapper from '@/components/infinity-list/infinityListWrapper';
+import InfinityList from '@/components/infinity-list/infinityList';
 
 export default function BoardList() {
   const router = useRouter();
@@ -36,13 +37,13 @@ export default function BoardList() {
           className="w-full flex flex-col gap-3 cursor-pointer"
           onClick={(event) => onClickHandler({ event, boardSeq: board.boardSeq })}>
           <div className="flex flex-col gap-1">
-            <Text className="font-bold" value={board.title} color="#000000" />
+            <TextClient className="font-bold" value={board.title} color="#000000" />
             <div className="grid grid-cols-6">
-              <Text className="col-span-5 line-clamp-2" value={board.content} color="#000000" />
+              <TextClient className="col-span-5 line-clamp-2" value={board.content} color="#000000" />
 
               <div className="flex justify-end gap-1 col-span-1">
-                <Text value="작성자" color="#000000" />
-                <Text value={board.user.nickname} color="#000000" />
+                <TextClient value="작성자" color="#000000" />
+                <TextClient value={board.user.nickname} color="#000000" />
               </div>
             </div>
           </div>
@@ -50,22 +51,22 @@ export default function BoardList() {
             <div className="flex gap-4">
               <div className="flex gap-1">
                 <HeartSvg />
-                <Text value={String(board.likeCount)} color="#000000" />
+                <TextClient value={String(board.likeCount)} color="#000000" />
               </div>
               <div className="flex gap-1">
                 <CommentSvg />
-                <Text value={String(board.commentCount)} color="#000000" />
+                <TextClient value={String(board.commentCount)} color="#000000" />
               </div>
             </div>
             <div className="flex gap-1">
-              <Text value="조회수" color="#000000" />
-              <Text value={String(board.viewCount)} color="#000000" />
+              <TextClient value="조회수" color="#000000" />
+              <TextClient value={String(board.viewCount)} color="#000000" />
             </div>
           </div>
         </div>
       ))
     ) : (
-      <Text value="게시글이 없습니다." color="#000000" />
+      <TextClient value="게시글이 없습니다." color="#000000" />
     );
   };
 

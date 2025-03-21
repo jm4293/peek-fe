@@ -1,1 +1,2 @@
-export * from './Text';
+export * from './textServer';
+export * from './textClient';

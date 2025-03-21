@@ -1,12 +1,12 @@
 'use client';
 
-import { Input } from '@/components/input';
 import { useEffect, useState } from 'react';
-import { Button } from '@/components/button';
 import { CheckBoxSvg } from '@/asset/svg';
-import { Text } from '@/components/text';
+import TextClient from '@/components/text/textClient';
 import { useAuthMutation, useDeviceLayout } from '@/hooks';
 import { useRouter, useSearchParams } from 'next/navigation';
+import InputClient from '@/components/input/inputClient';
+import ButtonClient from '@/components/button/buttonClient';
 
 export default function Page() {
   const router = useRouter();
@@ -49,14 +49,14 @@ export default function Page() {
   return (
     <div>
       <div className="w-full flex flex-col gap-4 mb-16">
-        <Input
+        <InputClient
           type="email"
           title="이메일"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           placeholder="이메일 주소"
         />
-        <Input
+        <InputClient
           type="password"
           title="비밀번호"
           value={password}
@@ -67,21 +67,21 @@ export default function Page() {
       </div>
 
       <div className="mb-7">
-        <Button text="로그인" onClick={onLoginHandler} />
+        <ButtonClient title="로그인" onClick={onLoginHandler} />
       </div>
 
       <div className={`flex justify-between ${isMobile ? 'flex-col gap-4' : 'flex-row'}`}>
         <div className="flex items-center gap-1.5">
           <CheckBoxSvg isCheck={isAutoLogin} onClick={() => setIsAutoLogin(!isAutoLogin)} />
-          <Text value="자동로그인" color="#000000" onClick={() => {}} />
+          <TextClient value="자동로그인" color="#000000" onClick={() => {}} />
         </div>
 
         <div className="flex items-center gap-3">
-          <Text value="아이디 찾기" color="#000000" onClick={() => {}} />
+          <TextClient value="아이디 찾기" color="#000000" onClick={() => {}} />
           <div className="w-[1px] h-2/3 bg-[#B5B5B5]" />
-          <Text value="비밀번호 찾기" color="#000000" onClick={() => {}} />
+          <TextClient value="비밀번호 찾기" color="#000000" onClick={() => {}} />
           <div className="w-[1px] h-2/3 bg-[#B5B5B5]" />
-          <Text value="회원가입" color="#000000" onClick={() => router.push('/auth/register')} />
+          <TextClient value="회원가입" color="#000000" onClick={() => router.push('/auth/register')} />
         </div>
       </div>
     </div>

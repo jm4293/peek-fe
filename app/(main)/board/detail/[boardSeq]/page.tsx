@@ -1,3 +1,5 @@
+'use client';
+
 async function getBoardList(params: { page: string }) {
   const { page } = params;
 

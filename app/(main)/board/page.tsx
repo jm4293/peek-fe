@@ -14,15 +14,17 @@ export default function Page() {
     router.push('/board/register');
   };
 
-  return (
-    <div>
-      <BoardList />
+  // return (
+  //   <div>
+  //     <BoardList />
+  //
+  //     {isAuth && (
+  //       <div className="bottom-28 absolute right-8">
+  //         <BoardRegisterSvg onClick={onClickHandler} />
+  //       </div>
+  //     )}
+  //   </div>
+  // );
 
-      {isAuth && (
-        <div className="bottom-28 absolute right-8">
-          <BoardRegisterSvg onClick={onClickHandler} />
-        </div>
-      )}
-    </div>
-  );
+  return <></>;
 }

@@ -1,5 +1,6 @@
-import { Text } from '@/components/text';
-import { useDeviceLayout } from '@/hooks';
+'use client';
+
+import TextClient from '@/components/text/textClient';
 
 interface IProps {
   type: 'text' | 'email' | 'password' | 'date' | 'datetime-local';
@@ -20,7 +21,7 @@ const border_color = {
   green: 'border border-green-400',
 };
 
-export const Input = (props: IProps) => {
+export default function InputClient(props: IProps) {
   const {
     type,
     title,
@@ -34,8 +35,6 @@ export const Input = (props: IProps) => {
     className = '',
     onKeyDown,
   } = props;
-
-  const { isMobile } = useDeviceLayout();
 
   const onKeyDownHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
     event.stopPropagation();
@@ -51,7 +50,7 @@ export const Input = (props: IProps) => {
 
   return (
     <div className="flex flex-col gap-3">
-      <Text value={title} color="#000000" />
+      <TextClient value={title} color="#000000" />
       <input
         name={name}
         className={`px-3 py-4 ${border_color[borderColor]} ${className}`}
@@ -64,4 +63,4 @@ export const Input = (props: IProps) => {
       />
     </div>
   );
-};
+}

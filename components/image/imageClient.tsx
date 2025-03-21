@@ -1,3 +1,5 @@
+'use client';
+
 import { useDeviceLayout } from '@/hooks/useDeviceLayout';
 import { ImageTypeEnum } from '@/constant/enum';
 import { HumanSvg } from '@/asset/svg';
@@ -19,7 +21,7 @@ const imageSizes = {
   [ImageTypeEnum.THUMBNAIL]: { mobile: 40, desktop: 50 },
 };
 
-export const Image = (props: IProps) => {
+export default function ImageClient(props: IProps) {
   const { src, type, alt, onClick, className } = props;
 
   const { isMobile } = useDeviceLayout();
@@ -36,4 +38,4 @@ export const Image = (props: IProps) => {
   ) : (
     <HumanSvg />
   );
-};
+}

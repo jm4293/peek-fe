@@ -1,2 +1,2 @@
-export * from './InfinityList';
-export * from './InfinityListWrapper';
+export * from './infinityList';
+export * from './infinityListWrapper';

@@ -1,7 +1,7 @@
 'use client';
 
 import { JSX, useEffect, useRef } from 'react';
-import { Loading } from '@/components/loading';
+import Loading from '@/components/loading/loading';
 
 interface IProps<T> {
   data: T[];
@@ -11,7 +11,7 @@ interface IProps<T> {
   isFetchingNextPage: boolean;
 }
 
-export function InfinityList<T>(props: IProps<T>) {
+export default function InfinityList<T>(props: IProps<T>) {
   const { data, renderItem, fetchNextPage, hasNextPage, isFetchingNextPage } = props;
 
   const observerRef = useRef<IntersectionObserver | null>(null);
