@@ -42,7 +42,7 @@ export const useAuthMutation = () => {
     onSuccess: async (res) => {
       const { accessToken } = res.data.data;
 
-      _registerSessionStorage({ accessToken });
+      // _registerSessionStorage({ accessToken });
 
       await _registerFirebaseToken();
 
@@ -76,36 +76,36 @@ export const useAuthMutation = () => {
     },
   });
 
-  const refreshTokenMutation = useMutation({
-    mutationFn: () => AuthApi.postRefreshToken(),
-    onSuccess: (res) => {
-      const { accessToken } = res.data.data;
+  // const refreshTokenMutation = useMutation({
+  //   mutationFn: () => AuthApi.postRefreshToken(),
+  //   onSuccess: (res) => {
+  //     const { accessToken } = res.data.data;
+  //
+  //     _registerSessionStorage({ accessToken });
+  //   },
+  //   onError: (err) => {
+  //     // alert('로그인이 필요합니다.');
+  //     // navigate('/auth/login', { replace: true });
+  //   },
+  // });
 
-      _registerSessionStorage({ accessToken });
-    },
-    onError: (err) => {
-      // alert('로그인이 필요합니다.');
-      // navigate('/auth/login', { replace: true });
-    },
-  });
-
-  const _registerSessionStorage = (params: { accessToken: string }) => {
-    const { accessToken } = params;
-
-    // const encryptedState = CryptoJS.AES.encrypt(
-    //   JSON.stringify(params),
-    //   process.env.NEXT_PUBLIC_LOCAL_STORAGE_SECRET_KEY as string,
-    // ).toString();
-
-    SessionStorage.setItem('state', accessToken);
-  };
+  // const _registerSessionStorage = (params: { accessToken: string }) => {
+  //   const { accessToken } = params;
+  //
+  // const encryptedState = CryptoJS.AES.encrypt(
+  //   JSON.stringify(params),
+  //   process.env.NEXT_PUBLIC_LOCAL_STORAGE_SECRET_KEY as string,
+  // ).toString();
+  //
+  // SessionStorage.setItem('state', accessToken);
+  // };
 
   const _registerFirebaseToken = async () => {
     // const token = await requestForToken();
     // if (token) {
     //   await UserApi.postRegisterPushToken({ pushToken: token });
-    // const encryptedToken = CryptoJS.AES.encrypt(token, process.env.NEXT_PUBLIC_LOCAL_STORAGE_SECRET_KEY).toString();
-    // localStorage.setItem('FT', encryptedToken);
+    //   const encryptedToken = CryptoJS.AES.encrypt(token, process.env.NEXT_PUBLIC_LOCAL_STORAGE_SECRET_KEY).toString();
+    //   localStorage.setItem('FT', encryptedToken);
     // }
   };
 
@@ -113,6 +113,5 @@ export const useAuthMutation = () => {
     loginOauthMutation,
     checkEmailMutation,
     logoutMutation,
-    refreshTokenMutation,
   };
 };

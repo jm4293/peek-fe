@@ -8,7 +8,7 @@ export async function middleware(request: NextRequest) {
   }
 
   if (pathname === '/user') {
-    const cookie = request.cookies.get('AT');
+    const cookie = request.cookies.get('RT');
 
     if (!cookie) {
       return NextResponse.redirect(new URL('/guest', request.url));

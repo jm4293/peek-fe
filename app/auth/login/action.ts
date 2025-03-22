@@ -27,19 +27,15 @@ export async function login(formData: FormData) {
     return { result: ResCodeEnum.FAIL, message: json.message };
   }
 
+  const { accessToken, refreshToken } = json.data;
+
   const cookieStore = await cookies();
 
-  cookieStore.set('AT', json.data.accessToken, {
-    httpOnly: true,
-    sameSite: 'strict',
-    maxAge: ACCESS_TOKEN_COOKIE_TIME,
-  });
-
-  cookieStore.set('RT', json.data.refreshToken, {
+  cookieStore.set('RT', refreshToken, {
     httpOnly: true,
     sameSite: 'strict',
     maxAge: REFRESH_TOKEN_COOKIE_TIME,
   });
 
-  return redirect('/home');
+  return { result: ResCodeEnum.SUCCESS, accessToken };
 }

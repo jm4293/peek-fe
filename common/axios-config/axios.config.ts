@@ -46,19 +46,10 @@ export class AxiosConfig {
 
     this._axiosInstance.interceptors.request.use(
       (config) => {
-        const AT = SessionStorage.getItem('state');
+        const AT = SessionStorage.getItem('AT');
 
         if (AT) {
-          // const decryptedState = CryptoJS.AES.decrypt(
-          //   sessionState,
-          //   process.env.NEXT_PUBLIC_LOCAL_STORAGE_SECRET_KEY,
-          // ).toString(CryptoJS.enc.Utf8);
-
-          // const state = JSON.parse(sessionState);
-
           if (config.headers) {
-            // const { accessToken } = state;
-
             config.headers['Authorization'] = `Bearer ${AT}`;
           }
         }
@@ -86,18 +77,12 @@ export class AxiosConfig {
             alert(message);
           }
         } else if (error.response?.status === 401) {
-          const originalRequest = error.config;
           const ret = await AuthApi.postRefreshToken();
           const newAT = ret.data.data.accessToken;
 
-          // const encryptedState = CryptoJS.AES.encrypt(
-          //   JSON.stringify({ accessToken: newAccessToken }),
-          //   process.env.NEXT_PUBLIC_LOCAL_STORAGE_SECRET_KEY,
-          // ).toString();
+          SessionStorage.setItem('AT', newAT);
 
-          SessionStorage.setItem('state', newAT);
-
-          originalRequest.headers['Authorization'] = `Bearer ${newAT}`;
+          const originalRequest = error.config;
 
           return this._axiosInstance(originalRequest);
         } else if (error.response?.status === 403) {

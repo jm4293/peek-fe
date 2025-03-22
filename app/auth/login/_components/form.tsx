@@ -8,6 +8,7 @@ import { useEffect, useState, useTransition } from 'react';
 import Button from '@/components/button/button';
 import { login } from '@/app/auth/login/action';
 import { ResCodeEnum } from '@/constant/enum';
+import { SessionStorage } from '@/utils';
 
 export default function Form() {
   const router = useRouter();
@@ -29,8 +30,16 @@ export default function Form() {
     startTransition(async () => {
       const ret = await login(formData);
 
-      if (ret.result === ResCodeEnum.FAIL) {
-        setErrorMessages(ret.message);
+      if (ret.result === ResCodeEnum.SUCCESS) {
+        const { accessToken } = ret;
+
+        SessionStorage.setItem('AT', accessToken);
+
+        router.push('/home');
+      } else if (ret.result === ResCodeEnum.FAIL) {
+        const { message } = ret;
+
+        setErrorMessages(message);
       }
     });
   };
