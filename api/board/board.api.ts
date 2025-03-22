@@ -21,9 +21,9 @@ class BoardApi extends AxiosConfig {
     return await this.get<IBoardDetailRes, null>({ url: `${this._baseURL}/${boardSeq}` });
   }
 
-  async createBoard(dto: ICreateBoardDto) {
-    return await this.post<null, Pick<ICreateBoardDto, 'title' | 'content'>>({ url: `${this._baseURL}`, data: dto });
-  }
+  // async createBoard(dto: ICreateBoardDto) {
+  //   return await this.post<null, ICreateBoardDto>({ url: `${this._baseURL}`, data: dto });
+  // }
 
   async updateBoard(dto: IUpdateBoardDto) {
     const { boardSeq, ...res } = dto;

@@ -1,23 +1,23 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import BoardApi from '@/api/board/board.api';
-import { ICreateBoardDto, IUpdateBoardDto } from '@/types/dto';
+import { IUpdateBoardDto } from '@/types/dto';
 import { useRouter } from 'next/navigation';
 
 export const useBoardMutation = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
 
-  const createBoardMutation = useMutation({
-    mutationFn: (dto: ICreateBoardDto) => BoardApi.createBoard(dto),
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['board-list'] });
-
-      router.push('/board');
-    },
-    onError: (err) => {
-      console.error(err);
-    },
-  });
+  // const createBoardMutation = useMutation({
+  //   mutationFn: (dto: ICreateBoardDto) => BoardApi.createBoard(dto),
+  //   onSuccess: async () => {
+  //     await queryClient.invalidateQueries({ queryKey: ['board-list'] });
+  //
+  //     router.push('/board');
+  //   },
+  //   onError: (err) => {
+  //     console.error(err);
+  //   },
+  // });
 
   const updateBoardMutation = useMutation({
     mutationFn: (dto: IUpdateBoardDto) => BoardApi.updateBoard(dto),
@@ -53,7 +53,6 @@ export const useBoardMutation = () => {
   });
 
   return {
-    createBoardMutation,
     updateBoardMutation,
     deleteBoardMutation,
     boardLikeMutation,
