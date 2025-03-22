@@ -2,21 +2,29 @@
 
 import { redirect } from 'next/navigation';
 import utilFetch from '@/utils/fetch';
+import { ISignUpDto } from '@/types/dto';
 
-export async function registerUser(prevState: unknown, formData: FormData) {
-  const email = formData.get('email') as string;
-  const password = formData.get('password') as string;
-  const nickname = formData.get('nickname') as string;
-  const name = formData.get('name') as string;
-  const birthdate = formData.get('birthdate') as string;
+interface IBody extends ISignUpDto {}
+
+export async function registerUser(_: void, formData: FormData) {
+  const body: IBody = {
+    email: formData.get('email') as string,
+    password: formData.get('password') as string,
+    nickname: formData.get('nickname') as string,
+    name: formData.get('name') as string,
+    birthdate: formData.get('birthdate') as string,
+    policy: true,
+  };
 
   const res = await utilFetch({
     path: '/auth/register-email',
     method: 'POST',
-    body: { email, password, nickname, name, birthdate, policy: true },
+    body,
   });
 
-  const { email: registeredEmail } = res.data;
+  const json = await res.json();
 
-  redirect(`/auth/login?email=${registeredEmail}`);
+  const { email: registeredEmail } = json.data;
+
+  return redirect(`/auth/login?email=${registeredEmail}`);
 }

@@ -5,16 +5,21 @@ import Button from '@/components/button/button';
 import Input from '@/components/input/input';
 import { startTransition, useActionState, useState } from 'react';
 import { useAuthMutation } from '@/hooks';
+import { useRouter } from 'next/navigation';
 
-export default function RegisterForm() {
-  const [email, setEmail] = useState('');
+export default function Form() {
+  const router = useRouter();
+
   const [checkEmail, setCheckEmail] = useState(false);
 
   const [state, formAction, pending] = useActionState(registerUser, undefined);
 
   const { checkEmailMutation } = useAuthMutation();
 
-  const handleCheckEmail = async () => {
+  const handleCheckEmail = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const formData = new FormData(event.currentTarget.form as HTMLFormElement);
+    const email = formData.get('email') as string;
+
     if (checkEmail) {
       return;
     }
@@ -68,10 +73,7 @@ export default function RegisterForm() {
               title="이메일"
               name="email"
               placeholder="이메일 주소"
-              onChange={(event) => {
-                setEmail(event.target.value);
-                setCheckEmail(false);
-              }}
+              onChange={() => setCheckEmail(false)}
               required
             />
           </div>
@@ -79,7 +81,7 @@ export default function RegisterForm() {
             <Button
               type="button"
               title={checkEmail ? '완료' : '중복확인'}
-              onClick={handleCheckEmail}
+              onClick={(event) => event && handleCheckEmail(event)}
               disabled={checkEmail}
             />
           </div>
@@ -96,7 +98,7 @@ export default function RegisterForm() {
 
       <div className="flex flex-col gap-4">
         <Button type="submit" title="회원가입" disabled={pending} />
-        <Button type="button" title="뒤로가기" onClick={() => {}} />
+        <Button type="button" title="뒤로가기" onClick={() => router.push('/auth/login')} />
       </div>
     </form>
   );

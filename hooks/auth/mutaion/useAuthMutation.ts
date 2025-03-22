@@ -21,21 +21,21 @@ export const useAuthMutation = () => {
   //   },
   // });
 
-  const loginEmailMutation = useMutation({
-    mutationFn: (dto: ILoginEmailDto) => AuthApi.postSignInEmail(dto),
-    onSuccess: async (res) => {
-      const { accessToken } = res.data.data;
-
-      _registerSessionStorage({ accessToken });
-
-      // await _registerFirebaseToken();
-
-      router.push('/home');
-    },
-    onError: (err) => {
-      console.error(err);
-    },
-  });
+  // const loginEmailMutation = useMutation({
+  //   mutationFn: (dto: ILoginEmailDto) => AuthApi.postSignInEmail(dto),
+  //   onSuccess: async (res) => {
+  //     const { accessToken } = res.data.data;
+  //
+  //     _registerSessionStorage({ accessToken });
+  //
+  //     // await _registerFirebaseToken();
+  //
+  //     router.push('/home');
+  //   },
+  //   onError: (err) => {
+  //     console.error(err);
+  //   },
+  // });
 
   const loginOauthMutation = useMutation({
     mutationFn: (dto: ILoginOauthDto) => AuthApi.postSignInOauth(dto),
@@ -110,7 +110,6 @@ export const useAuthMutation = () => {
   };
 
   return {
-    loginEmailMutation,
     loginOauthMutation,
     checkEmailMutation,
     logoutMutation,
