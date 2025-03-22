@@ -1,13 +1,10 @@
 'use client';
 
-import { useDeviceLayout } from '@/hooks';
 import { usePathname, useRouter } from 'next/navigation';
 
 export const NavbarHome = () => {
   const router = useRouter();
   const pathName = usePathname();
-
-  const { isMobile } = useDeviceLayout();
 
   const onClickHandler = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
     event.stopPropagation();

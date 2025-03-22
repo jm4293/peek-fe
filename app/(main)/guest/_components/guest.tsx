@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import Text from '@/components/text/text';
 
-export default function DeactivateLogin() {
+export default function Guest() {
   const router = useRouter();
 
   const onClickHandler = () => {

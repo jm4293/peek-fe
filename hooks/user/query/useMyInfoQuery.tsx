@@ -3,13 +3,10 @@ import UserApi from '@/api/user/user.api';
 import { AxiosResponse } from 'axios';
 import { ResConfig } from '@/types/res.config';
 import { IMyInfoRes } from '@/types/res';
-import useIsAuth from '@/hooks/useIsAuth';
 
 type MyInfoRes = AxiosResponse<ResConfig<IMyInfoRes>, any>;
 
 export const useMyInfoQuery = () => {
-  const [isAuth] = useIsAuth();
-
   return useQuery({
     queryKey: ['user-my-info'],
     queryFn: () => UserApi.getMyInfo(),
@@ -19,6 +16,5 @@ export const useMyInfoQuery = () => {
       return { email, name, nickname, thumbnail, userAccountType };
     },
     staleTime: 1000 * 60 * 60 * 6, // 6시간,
-    enabled: !!isAuth,
   });
 };

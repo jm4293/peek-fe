@@ -8,9 +8,9 @@ const headerPathName: { [key: string]: string } = {
   '/board': '게시판',
   '/board/register': '게시판 등록',
   '/board/detail': '게시판 작성',
-  '/mypage': '마이페이지',
-  '/mypage/board': '작성한 게시글',
-  '/mypage/comment': '작성한 댓글',
+  '/user': '내 정보',
+  '/user/board': '작성한 게시글',
+  '/user/comment': '작성한 댓글',
   '/notification': '알림',
 };
 
