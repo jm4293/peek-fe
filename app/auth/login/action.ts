@@ -2,13 +2,14 @@
 
 import { ILoginEmailDto } from '@/types/dto';
 import utilFetch from '@/utils/fetch';
-import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { ACCESS_TOKEN_COOKIE_TIME, REFRESH_TOKEN_COOKIE_TIME } from '@/constant/expire-time';
+import { ResCodeEnum } from '@/constant/enum';
+import { redirect } from 'next/navigation';
 
 interface IBody extends ILoginEmailDto {}
 
-export async function login(prevState: any, formData: FormData) {
+export async function login(formData: FormData) {
   const body: IBody = {
     email: formData.get('email') as string,
     password: formData.get('password') as string,
@@ -23,7 +24,7 @@ export async function login(prevState: any, formData: FormData) {
   const json = await res.json();
 
   if (!res.ok) {
-    return { message: json.message };
+    return { result: ResCodeEnum.FAIL, message: json.message };
   }
 
   const cookieStore = await cookies();

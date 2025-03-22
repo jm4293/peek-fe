@@ -4,30 +4,34 @@ import Input from '@/components/input/input';
 import { CheckBoxSvg } from '@/asset/svg';
 import Text from '@/components/text/text';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { startTransition, useActionState, useEffect, useState } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import Button from '@/components/button/button';
 import { login } from '@/app/auth/login/action';
-
-const initialState = {
-  message: '',
-};
+import { ResCodeEnum } from '@/constant/enum';
 
 export default function Form() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const [state, formAction, pending] = useActionState(login, initialState);
+  const [isPending, startTransition] = useTransition();
 
   const [isAutoLogin, setIsAutoLogin] = useState(false);
+  const [errorMessages, setErrorMessages] = useState<string>('');
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     event.stopPropagation();
 
+    setErrorMessages('');
+
     const formData = new FormData(event.target as HTMLFormElement);
 
-    startTransition(() => {
-      formAction(formData);
+    startTransition(async () => {
+      const ret = await login(formData);
+
+      if (ret.result === ResCodeEnum.FAIL) {
+        setErrorMessages(ret.message);
+      }
     });
   };
 
@@ -66,8 +70,8 @@ export default function Form() {
       </div>
 
       <div className="flex flex-col gap-2 mb-8">
-        <Button title="로그인" type="submit" disabled={pending} />
-        {state?.message && <Text value={state.message} color="#F87171" />}
+        <Button title="로그인" type="submit" disabled={isPending} />
+        {errorMessages && <Text value={errorMessages} color="#F87171" />}
       </div>
 
       <div className="flex justify-between flex-wrap gap-4">
