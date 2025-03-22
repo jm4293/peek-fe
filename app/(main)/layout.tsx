@@ -11,7 +11,9 @@ export default function Layout(props: IProps) {
   return (
     <div className="layout">
       <Header />
-      <div className="content">{children}</div>
+      <div className="content_wrapper">
+        <div className="content">{children}</div>
+      </div>
       <Navbar />
     </div>
   );

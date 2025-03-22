@@ -7,7 +7,7 @@ interface IProps {
   renderList?: JSX.Element;
 }
 
-export default async function InfinityListWrapper(props: IProps) {
+export default function InfinityListWrapper(props: IProps) {
   const { total = 0, renderHeader, renderList } = props;
 
   return (

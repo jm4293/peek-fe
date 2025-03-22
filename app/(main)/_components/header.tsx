@@ -1,5 +1,4 @@
 import HeaderTitle from '@/app/(main)/_components/headerTitle';
-import { useRouter } from 'next/navigation';
 import { BackSvg } from '@/asset/svg';
 
 export default function Header() {

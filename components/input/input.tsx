@@ -40,7 +40,7 @@ export default function Input(props: IProps) {
     <div className="flex flex-col gap-3">
       <Text value={title} color="#000000" />
       <input
-        className={`px-3 py-4 ${border_color[borderColor]} ${className}`}
+        className={`${border_color[borderColor]} ${className}`}
         name={name}
         type={type}
         value={value}
