@@ -13,7 +13,6 @@ import { SessionStorage } from '@/utils';
 export default function Form() {
   const router = useRouter();
   const searchParams = useSearchParams();
-
   const [isPending, startTransition] = useTransition();
 
   const [isAutoLogin, setIsAutoLogin] = useState(false);
@@ -30,13 +29,7 @@ export default function Form() {
     startTransition(async () => {
       const ret = await login(formData);
 
-      if (ret.result === ResCodeEnum.SUCCESS) {
-        const { accessToken } = ret;
-
-        SessionStorage.setItem('AT', accessToken);
-
-        router.push('/home');
-      } else if (ret.result === ResCodeEnum.FAIL) {
+      if (ret.result === ResCodeEnum.FAIL) {
         const { message } = ret;
 
         setErrorMessages(message);

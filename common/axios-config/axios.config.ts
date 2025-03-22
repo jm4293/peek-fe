@@ -46,13 +46,13 @@ export class AxiosConfig {
 
     this._axiosInstance.interceptors.request.use(
       (config) => {
-        const AT = SessionStorage.getItem('AT');
-
-        if (AT) {
-          if (config.headers) {
-            config.headers['Authorization'] = `Bearer ${AT}`;
-          }
-        }
+        // const AT = SessionStorage.getItem('AT');
+        //
+        // if (AT) {
+        //   if (config.headers) {
+        //     config.headers['Authorization'] = `Bearer ${AT}`;
+        //   }
+        // }
 
         return config;
       },
@@ -77,16 +77,19 @@ export class AxiosConfig {
             alert(message);
           }
         } else if (error.response?.status === 401) {
-          const ret = await AuthApi.postRefreshToken();
-          const newAT = ret.data.data.accessToken;
+          // const ret = await AuthApi.postRefreshToken();
 
-          SessionStorage.setItem('AT', newAT);
+          // const newAT = ret.data.data.accessToken;
+
+          // SessionStorage.setItem('AT', newAT);
+
+          await AuthApi.postRefreshToken();
 
           const originalRequest = error.config;
 
           return this._axiosInstance(originalRequest);
         } else if (error.response?.status === 403) {
-          // localStorage.clear();
+          localStorage.clear();
           SessionStorage.clear();
           window.location.replace('/home');
         }

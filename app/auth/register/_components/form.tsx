@@ -3,18 +3,16 @@
 import { registerUser } from '@/app/auth/register/actions';
 import Button from '@/components/button/button';
 import Input from '@/components/input/input';
-import { startTransition, useActionState, useState } from 'react';
+import { useState, useTransition } from 'react';
 import { useAuthMutation } from '@/hooks';
 import { useRouter } from 'next/navigation';
 
 export default function Form() {
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+  const { checkEmailMutation } = useAuthMutation();
 
   const [checkEmail, setCheckEmail] = useState(false);
-
-  const [state, formAction, pending] = useActionState(registerUser, undefined);
-
-  const { checkEmailMutation } = useAuthMutation();
 
   const handleCheckEmail = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const formData = new FormData(event.currentTarget.form as HTMLFormElement);
@@ -58,8 +56,8 @@ export default function Form() {
       return;
     }
 
-    startTransition(() => {
-      formAction(formData);
+    startTransition(async () => {
+      await registerUser(formData);
     });
   };
 
@@ -97,7 +95,7 @@ export default function Form() {
       </div>
 
       <div className="flex flex-col gap-4">
-        <Button type="submit" title="회원가입" disabled={pending} />
+        <Button type="submit" title="회원가입" disabled={isPending} />
         <Button type="button" title="뒤로가기" onClick={() => router.push('/auth/login')} />
       </div>
     </form>

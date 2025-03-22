@@ -6,7 +6,7 @@ import { ISignUpDto } from '@/types/dto';
 
 interface IBody extends ISignUpDto {}
 
-export async function registerUser(_: void, formData: FormData) {
+export async function registerUser(formData: FormData) {
   const body: IBody = {
     email: formData.get('email') as string,
     password: formData.get('password') as string,
@@ -24,7 +24,11 @@ export async function registerUser(_: void, formData: FormData) {
 
   const json = await res.json();
 
-  const { email: registeredEmail } = json.data;
+  if (!res.ok) {
+    return { result: 'FAIL', message: json.message };
+  }
 
-  return redirect(`/auth/login?email=${registeredEmail}`);
+  const { email } = json.data;
+
+  return redirect(`/auth/login?email=${email}`);
 }

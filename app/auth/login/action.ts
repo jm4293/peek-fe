@@ -31,11 +31,17 @@ export async function login(formData: FormData) {
 
   const cookieStore = await cookies();
 
+  cookieStore.set('AT', accessToken, {
+    httpOnly: true,
+    sameSite: 'strict',
+    maxAge: ACCESS_TOKEN_COOKIE_TIME,
+  });
+
   cookieStore.set('RT', refreshToken, {
     httpOnly: true,
     sameSite: 'strict',
     maxAge: REFRESH_TOKEN_COOKIE_TIME,
   });
 
-  return { result: ResCodeEnum.SUCCESS, accessToken };
+  return redirect('/home');
 }
