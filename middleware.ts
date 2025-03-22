@@ -7,11 +7,17 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/home', request.url));
   }
 
-  if (pathname === '/user') {
-    const cookie = request.cookies.get('RT');
+  const cookie = request.cookies.get('RT');
 
+  if (pathname === '/board') {
     if (!cookie) {
-      return NextResponse.redirect(new URL('/guest', request.url));
+      return NextResponse.redirect(new URL('/board/guest', request.url));
+    }
+  }
+
+  if (pathname === '/user') {
+    if (!cookie) {
+      return NextResponse.redirect(new URL('/user/guest', request.url));
     }
   }
 }
