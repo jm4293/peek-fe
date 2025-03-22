@@ -1,7 +1,7 @@
 interface IProps {
   title: string;
   type?: 'submit' | 'button';
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   className?: string;
   disabled?: boolean;
 }
@@ -13,7 +13,7 @@ export default function Button(props: IProps) {
     event.stopPropagation();
 
     if (onClick) {
-      onClick();
+      onClick(event);
     }
   };
 

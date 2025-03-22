@@ -1,6 +1,6 @@
 interface IClientTextProps {
   value: string;
-  color: '#000000' | '#282828' | '#444444' | '#666666';
+  color: '#000000' | '#282828' | '#444444' | '#666666' | '#F87171';
   size?: 'sm' | 'base' | 'lg' | 'xl';
   align?: 'left' | 'center' | 'right';
   weight?: 'normal' | 'bold';
@@ -13,6 +13,7 @@ const textColor = {
   '#282828': 'text-[#282828]',
   '#444444': 'text-[#444444]',
   '#666666': 'text-[#666666]',
+  '#F87171': 'text-[#f87171]',
 };
 
 const fontSize = {
