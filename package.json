@@ -1,7 +1,8 @@
 {
-  "name": "stock-fe",
+  "name": "peek-fe",
   "version": "0.1.0",
   "private": true,
+  "author": "jm4293",
   "scripts": {
     "dev": "next dev -p 31180",
     "build": "next build",
