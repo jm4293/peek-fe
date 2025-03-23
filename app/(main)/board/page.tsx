@@ -1,11 +1,11 @@
-import BoardList from '@/app/(main)/board/_components/boardList';
-import BoardRegister from '@/app/(main)/board/_components/boardRegister';
+import Board from '@/app/(main)/board/_components/board';
+import BoardRegisterButton from '@/app/(main)/board/_components/boardRegisterButton';
 
 export default function Page() {
   return (
     <>
-      <BoardList />
-      <BoardRegister />
+      <Board />
+      <BoardRegisterButton />
     </>
   );
 }

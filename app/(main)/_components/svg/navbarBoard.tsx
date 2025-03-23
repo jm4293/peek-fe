@@ -9,7 +9,7 @@ export const NavbarBoard = () => {
   const clickHandler = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
     event.stopPropagation();
 
-    router.push('/board');
+    router.push('/board/list');
   };
 
   return (

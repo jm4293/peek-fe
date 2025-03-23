@@ -2,7 +2,7 @@ import { ImageTypeEnum } from '@/constant/enum';
 import { HumanSvg } from '@/asset/svg';
 
 interface IProps {
-  src: string;
+  src: string | undefined;
   type: ImageTypeEnum;
   alt: string;
   onClick?: (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => void;

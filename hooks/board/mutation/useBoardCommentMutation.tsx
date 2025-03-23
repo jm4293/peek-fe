@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { ICreateBoardCommentDto, IUpdateBoardCommentDto } from '@/types/dto';
+import { ICreateBoardCommentDto, IDeleteBoardCommentDto, IUpdateBoardCommentDto } from '@/types/dto';
 import BoardApi from '@/api/board/board.api';
 
 export const useBoardCommentMutation = () => {
@@ -28,7 +28,7 @@ export const useBoardCommentMutation = () => {
   });
 
   const deleteBoardCommentMutation = useMutation({
-    mutationFn: (params: { boardSeq: number; boardCommentSeq: number }) => BoardApi.deleteBoardComment(params),
+    mutationFn: (params: IDeleteBoardCommentDto) => BoardApi.deleteBoardComment(params),
     onSuccess: async (_, variables) => {
       await queryClient.invalidateQueries({ queryKey: ['board-comment-list'] });
     },

@@ -1,6 +1,6 @@
 import { AxiosConfig } from '@/common/axios-config';
 import { IBoardCommentListRes, IBoardDetailRes, IBoardListRes } from '@/types/res/board';
-import { ICreateBoardCommentDto, ICreateBoardDto, IUpdateBoardCommentDto, IUpdateBoardDto } from '@/types/dto';
+import { ICreateBoardCommentDto, IDeleteBoardCommentDto, IUpdateBoardCommentDto, IUpdateBoardDto } from '@/types/dto';
 
 class BoardApi extends AxiosConfig {
   private readonly _baseURL = '/board';
@@ -25,11 +25,11 @@ class BoardApi extends AxiosConfig {
   //   return await this.post<null, ICreateBoardDto>({ url: `${this._baseURL}`, data: dto });
   // }
 
-  async updateBoard(dto: IUpdateBoardDto) {
-    const { boardSeq, ...res } = dto;
-
-    return await this.put<null, Omit<IUpdateBoardDto, 'boardSeq'>>({ url: `${this._baseURL}/${boardSeq}`, data: res });
-  }
+  // async updateBoard(dto: IUpdateBoardDto) {
+  //   const { boardSeq, ...res } = dto;
+  //
+  //   return await this.put<null, Omit<IUpdateBoardDto, 'boardSeq'>>({ url: `${this._baseURL}/${boardSeq}`, data: res });
+  // }
 
   async deleteBoard(params: { boardSeq: number }) {
     const { boardSeq } = params;
@@ -72,7 +72,7 @@ class BoardApi extends AxiosConfig {
     });
   }
 
-  async deleteBoardComment(params: { boardSeq: number; boardCommentSeq: number }) {
+  async deleteBoardComment(params: IDeleteBoardCommentDto) {
     const { boardSeq, boardCommentSeq } = params;
 
     return await this.delete<null, null>({ url: `${this._baseURL}/${boardSeq}/comment/${boardCommentSeq}` });

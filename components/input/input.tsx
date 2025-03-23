@@ -7,6 +7,7 @@ interface IProps {
   title: string;
   name: string;
   value?: string;
+  defaultValue?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   borderColor?: 'gray' | 'green';
   optional?: boolean;
@@ -14,7 +15,7 @@ interface IProps {
   placeholder?: string;
   disabled?: boolean;
   required?: boolean;
-  onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+  onKeyDown?: () => void;
 }
 
 const border_color = {
@@ -28,6 +29,7 @@ export default function Input(props: IProps) {
     title,
     name,
     value,
+    defaultValue,
     onChange,
     borderColor = 'gray',
     optional = false,
@@ -38,6 +40,16 @@ export default function Input(props: IProps) {
     onKeyDown,
   } = props;
 
+  const keyDownHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    event.stopPropagation();
+
+    if (onKeyDown) {
+      if (event.key === 'Enter') {
+        onKeyDown();
+      }
+    }
+  };
+
   return (
     <div className="flex flex-col gap-3">
       <Text value={title} color="#000000" />
@@ -46,11 +58,12 @@ export default function Input(props: IProps) {
         name={name}
         type={type}
         value={value}
+        defaultValue={defaultValue}
         onChange={onChange}
         placeholder={`${placeholder} ${optional ? '[선택] ' : ''}`}
         disabled={disabled}
         required={required}
-        onKeyDown={onKeyDown}
+        onKeyDown={keyDownHandler}
       />
     </div>
   );

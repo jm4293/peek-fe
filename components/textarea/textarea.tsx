@@ -6,6 +6,7 @@ import Text from '@/components/text/text';
 interface IProps {
   title: string;
   value?: string;
+  defaultValue?: string;
   onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   name?: string;
   placeholder?: string;
@@ -25,6 +26,7 @@ export default function Textarea(props: IProps) {
   const {
     title,
     value,
+    defaultValue,
     onChange,
     name = '',
     placeholder = '',
@@ -53,6 +55,7 @@ export default function Textarea(props: IProps) {
         name={name}
         className={`min-h-[20vh] max-h-[60vh] ${borderColor[color]} ${className}`}
         value={value}
+        defaultValue={defaultValue}
         onChange={handleInput}
         placeholder={`${optional ? '[선택] ' : ''}${placeholder}`}
         disabled={disabled}

@@ -8,10 +8,11 @@ export interface IBoardListRes {
 
 export interface IBoardDetailRes {
   board: IBoard;
+  isMine: boolean;
 }
 
 export interface IBoardCommentListRes {
-  boardComments: IBoardComment[];
+  boardComments: (IBoardComment & { isMine: boolean })[];
   total: number;
   nextPage: number | null;
 }

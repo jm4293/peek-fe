@@ -19,23 +19,23 @@ export const useBoardMutation = () => {
   //   },
   // });
 
-  const updateBoardMutation = useMutation({
-    mutationFn: (dto: IUpdateBoardDto) => BoardApi.updateBoard(dto),
-    onSuccess: async (_, variables) => {
-      alert('게시글이 수정되었습니다.');
-
-      await queryClient.invalidateQueries({ queryKey: ['board-detail', variables.boardSeq] });
-      // navigate('/board');
-    },
-    onError: (err) => {
-      console.error(err);
-    },
-  });
+  // const updateBoardMutation = useMutation({
+  //   mutationFn: (dto: IUpdateBoardDto) => BoardApi.updateBoard(dto),
+  //   onSuccess: async (_, variables) => {
+  //     alert('게시글이 수정되었습니다.');
+  //
+  //     await queryClient.invalidateQueries({ queryKey: ['board-detail', variables.boardSeq] });
+  //     // navigate('/board');
+  //   },
+  //   onError: (err) => {
+  //     console.error(err);
+  //   },
+  // });
 
   const deleteBoardMutation = useMutation({
     mutationFn: (boardSeq: number) => BoardApi.deleteBoard({ boardSeq }),
     onSuccess: () => {
-      // navigate('/board');
+      router.push('/board');
     },
     onError: (err) => {
       console.error(err);
@@ -53,7 +53,6 @@ export const useBoardMutation = () => {
   });
 
   return {
-    updateBoardMutation,
     deleteBoardMutation,
     boardLikeMutation,
   };

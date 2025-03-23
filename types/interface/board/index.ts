@@ -9,11 +9,11 @@ export interface IBoard {
   updatedAt: Date;
   isDeleted: boolean;
   deletedAt: Date | null;
-  user: IUser;
-  boardComments: IBoardComment[];
   likeCount: number;
   commentCount: number;
   isLiked: boolean;
+
+  user: IUser;
 }
 
 export interface IBoardComment {
@@ -24,6 +24,6 @@ export interface IBoardComment {
   updatedAt: Date;
   isDeleted: boolean;
   deletedAt: Date | null;
+
   user: IUser;
-  board: IBoard;
 }

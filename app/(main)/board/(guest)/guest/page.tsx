@@ -1,9 +1,9 @@
-import BoardList from '@/app/(main)/board/_components/boardList';
+import Board from '@/app/(main)/board/_components/board';
 
 export default function Page() {
   return (
     <>
-      <BoardList />
+      <Board />
     </>
   );
 }

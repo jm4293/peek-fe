@@ -15,6 +15,14 @@ export async function middleware(request: NextRequest) {
     }
   }
 
+  if (pathname.includes('/board/detail')) {
+    if (!cookie) {
+      const number = pathname.split('/').at(-1);
+
+      return NextResponse.redirect(new URL(`/board/guest/detail/${number}`, request.url));
+    }
+  }
+
   if (pathname === '/user') {
     if (!cookie) {
       return NextResponse.redirect(new URL('/user/guest', request.url));

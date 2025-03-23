@@ -3,7 +3,7 @@
 import { BoardRegisterSvg } from '@/asset/svg/boardRegisterSvg';
 import { useRouter } from 'next/navigation';
 
-export default function BoardRegister() {
+export default function BoardRegisterButton() {
   const router = useRouter();
 
   return (
