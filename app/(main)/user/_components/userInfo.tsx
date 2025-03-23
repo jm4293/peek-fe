@@ -4,7 +4,7 @@ import { useAuthMutation, useMyInfoQuery } from '@/hooks';
 import { ImageTypeEnum } from '@/constant/enum';
 import Image from '@/components/image/image';
 import Text from '@/components/text/text';
-import Loading from '@/components/loading/loading';
+import Skeleton from '@/components/skeleton/skeleton';
 
 export default function UserInfo() {
   const myInfoQuery = useMyInfoQuery();
@@ -42,6 +42,6 @@ export default function UserInfo() {
       </div>
     </div>
   ) : (
-    <Loading />
+    <Skeleton />
   );
 }

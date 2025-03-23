@@ -1,5 +1,5 @@
 import { JSX, useEffect, useRef } from 'react';
-import Loading from '@/components/loading/loading';
+import Skeleton from '@/components/skeleton/skeleton';
 
 interface IProps<T> {
   data: T[];
@@ -42,7 +42,7 @@ export default function InfinityList<T>(props: IProps<T>) {
       <div className="w-full flex flex-col gap-8">{data.map(renderItem)}</div>
 
       <div ref={loadMoreRef} className="flex justify-center items-center">
-        {isFetchingNextPage && <Loading />}
+        {isFetchingNextPage && <Skeleton />}
       </div>
     </div>
   );
