@@ -4,7 +4,7 @@ import { ImageTypeEnum } from '@/constant/enum';
 import Input from '@/components/input/input';
 import Textarea from '@/components/textarea/textarea';
 import { IBoardDetailRes } from '@/types/res';
-import { GetBoardDetail } from '@/app/(main)/board/action';
+import { GetBoardDetail } from '@/app/(main)/board/list/action';
 import BoardDetailButton from '@/app/(main)/board/_components/boardDetailButton';
 
 interface IProps {
