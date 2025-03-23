@@ -1,3 +1,5 @@
+'use client';
+
 interface IClientTextProps {
   value: string;
   color: '#000000' | '#282828' | '#444444' | '#666666' | '#F87171';
@@ -37,7 +39,7 @@ const fontWeight = {
 export default function Text(props: IClientTextProps) {
   const { value, color, size = 'base', align = 'left', weight = 'normal', onClick, className } = props;
 
-  const onClickHandler = (event: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
+  const clickHandler = (event: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
     event.stopPropagation();
 
     if (onClick) {
@@ -48,7 +50,7 @@ export default function Text(props: IClientTextProps) {
   return (
     <p
       className={`${textColor[color]} ${fontSize[size]} ${textAlign[align]} ${fontWeight[weight]} ${onClick && 'cursor-pointer'} ${className}`}
-      onClick={(event) => onClickHandler(event)}
+      onClick={(event) => clickHandler(event)}
       style={{ wordBreak: 'break-word' }}>
       {value}
     </p>

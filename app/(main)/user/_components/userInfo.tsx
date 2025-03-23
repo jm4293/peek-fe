@@ -11,7 +11,7 @@ export default function UserInfo() {
 
   const { logoutMutation } = useAuthMutation();
 
-  const onClickLogoutHandler = () => {
+  const clickHandler = () => {
     if (confirm('로그아웃 하시겠습니까?')) {
       logoutMutation.mutate();
     }
@@ -38,7 +38,7 @@ export default function UserInfo() {
       </div>
 
       <div>
-        <Text value="로그아웃" color="#000000" size="lg" onClick={onClickLogoutHandler} />
+        <Text value="로그아웃" color="#000000" size="lg" onClick={clickHandler} />
       </div>
     </div>
   ) : (

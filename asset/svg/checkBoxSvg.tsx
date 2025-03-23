@@ -7,7 +7,7 @@ interface IProps {
 export const CheckBoxSvg = (props: IProps) => {
   const { isCheck, onClick, id } = props;
 
-  const onClickHandler = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
+  const clickHandler = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
     event.stopPropagation();
 
     if (onClick) {
@@ -23,7 +23,7 @@ export const CheckBoxSvg = (props: IProps) => {
       viewBox="0 0 16 16"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      onClick={onClickHandler}
+      onClick={clickHandler}
       className="cursor-pointer">
       <rect
         x="0.5"

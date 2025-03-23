@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 export const BackSvg = () => {
   const router = useRouter();
 
-  const onClickHandler = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
+  const clickHandler = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
     event.stopPropagation();
 
     router.back();
@@ -19,7 +19,7 @@ export const BackSvg = () => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className="cursor-pointer"
-      onClick={onClickHandler}>
+      onClick={clickHandler}>
       <path
         fillRule="evenodd"
         clipRule="evenodd"

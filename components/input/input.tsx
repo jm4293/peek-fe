@@ -1,3 +1,5 @@
+'use client';
+
 import Text from '@/components/text/text';
 
 interface IProps {

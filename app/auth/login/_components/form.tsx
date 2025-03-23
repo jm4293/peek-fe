@@ -37,7 +37,7 @@ export default function Form() {
     });
   };
 
-  const onKeyDownHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const keyDownHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       event.preventDefault();
       event.stopPropagation();
@@ -66,7 +66,7 @@ export default function Form() {
           title="비밀번호"
           name="password"
           placeholder="비밀번호"
-          onKeyDown={onKeyDownHandler}
+          onKeyDown={keyDownHandler}
           required
         />
       </div>
