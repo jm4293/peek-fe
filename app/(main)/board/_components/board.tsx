@@ -1,6 +1,6 @@
 'use client';
 
-import { useBoardListQuery } from '@/hooks';
+import { useAuthMutation, useBoardListQuery } from '@/hooks';
 import { IBoard } from '@/types/interface';
 import { HeartSvg } from '@/asset/svg/heartSvg';
 import { CommentSvg } from '@/asset/svg/commentSvg';
@@ -8,12 +8,14 @@ import { useRouter } from 'next/navigation';
 import InfinityListWrapper from '@/components/infinity-list/infinityListWrapper';
 import InfinityList from '@/components/infinity-list/infinityList';
 import Text from '@/components/text/text';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 
 export default function Board() {
   const router = useRouter();
 
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage } = useBoardListQuery();
+
+  const { registerFirebaseToken } = useAuthMutation();
 
   const clickHandler = useCallback(
     (params: { event: React.MouseEvent<HTMLDivElement, MouseEvent>; boardSeq: number }) => {
@@ -64,6 +66,23 @@ export default function Board() {
       </div>
     );
   };
+
+  useEffect(() => {
+    (async () => {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker
+          .register('/firebase-messaging-sw.js')
+          .then(async (registration) => {
+            console.log('Service Worker registration successful with scope: ', registration.scope);
+
+            await registerFirebaseToken();
+          })
+          .catch((err) => {
+            console.log('Service Worker registration failed: ', err);
+          });
+      }
+    })();
+  }, []);
 
   return (
     <InfinityListWrapper
