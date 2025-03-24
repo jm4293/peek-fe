@@ -29,8 +29,10 @@ export default function Form() {
 
     const ret = await checkEmailMutation.mutateAsync({ email });
 
-    if (ret.data.data.isExist) {
-      alert('이미 사용중인 이메일입니다.');
+    const { isExist, message } = ret.data.data;
+
+    if (isExist) {
+      alert(`${message}`);
       return;
     } else {
       setCheckEmail(true);

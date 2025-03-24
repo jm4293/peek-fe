@@ -15,7 +15,7 @@ interface IProps {
   placeholder?: string;
   disabled?: boolean;
   required?: boolean;
-  onKeyDown?: () => void;
+  onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
 const border_color = {
@@ -45,7 +45,7 @@ export default function Input(props: IProps) {
 
     if (onKeyDown) {
       if (event.key === 'Enter') {
-        onKeyDown();
+        onKeyDown(event);
       }
     }
   };
