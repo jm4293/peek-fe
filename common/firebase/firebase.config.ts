@@ -33,10 +33,10 @@ export const requestForToken = async (): Promise<string | null> => {
 };
 
 // 포그라운드 알림 수신
-export const onMessageListener = (messageListener: (payload: any) => void): (() => void) => {
-  return onMessage(messaging, (payload) => {
-    messageListener(payload);
-  });
-};
+// export const onMessageListener = (messageListener: (payload: any) => void): (() => void) => {
+//   return onMessage(messaging, (payload) => {
+//     messageListener(payload);
+//   });
+// };
 
 export default app;

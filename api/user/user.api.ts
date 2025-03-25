@@ -1,6 +1,6 @@
-import { AxiosConfig } from '@/common/axios-config';
 import { IReadNotificationDto, IRegisterPushTokenDto } from '@/types/dto';
 import { IMyInfoRes, INotificationListRes } from '@/types/res';
+import { AxiosConfig } from '@/common/axios';
 
 class UserApi extends AxiosConfig {
   private readonly _baseURL = '/user';

@@ -1,6 +1,6 @@
-import { AxiosConfig } from '@/common/axios-config';
 import { ICheckEmailRes, ILoginRes, IRefreshTokenRes, ISignUpRes } from '@/types/res';
 import { ICheckEmailDto, ILoginEmailDto, ILoginOauthDto, ISignUpDto } from '@/types/dto';
+import { AxiosConfig } from '@/common/axios';
 
 class AuthApi extends AxiosConfig {
   private readonly _baseURL = '/auth';

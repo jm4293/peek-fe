@@ -1,5 +1,5 @@
-import { AxiosConfig } from '@/common/axios-config';
 import { IHomeRecentBoardListRes } from '@/types/res';
+import { AxiosConfig } from '@/common/axios';
 
 class HomeApi extends AxiosConfig {
   private readonly _baseURL = '/home';

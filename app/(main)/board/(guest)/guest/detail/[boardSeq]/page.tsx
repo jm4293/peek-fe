@@ -1,8 +1,12 @@
 import BoardComment from '@/app/(main)/board/_components/boardComment';
 import BoardDetail from '@/app/(main)/board/_components/boardDetail';
 
-export default async function Page({ params }: { params: { boardSeq: string } }) {
-  const { boardSeq } = params;
+interface IProps {
+  params: Promise<{ boardSeq: string }>;
+}
+
+export default async function Page({ params }: IProps) {
+  const { boardSeq } = await params;
 
   return (
     <>

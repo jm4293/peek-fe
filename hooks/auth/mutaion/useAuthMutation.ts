@@ -4,8 +4,8 @@ import { ICheckEmailDto, ILoginEmailDto, ILoginOauthDto } from '@/types/dto';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { SessionStorage } from '@/utils';
-import { requestForToken } from '@/common/firebase-config';
 import UserApi from '@/api/user/user.api';
+import { requestForToken } from '@/common/firebase';
 
 export const useAuthMutation = () => {
   const queryClient = useQueryClient();
@@ -103,17 +103,17 @@ export const useAuthMutation = () => {
   // };
 
   const registerFirebaseToken = async () => {
-    const token = await requestForToken();
-
-    if (token) {
-      await UserApi.postRegisterPushToken({ pushToken: token });
-
-      const encryptedToken = CryptoJS.AES.encrypt(
-        token,
-        process.env.NEXT_PUBLIC_LOCAL_STORAGE_SECRET_KEY as string,
-      ).toString();
-      localStorage.setItem('FT', encryptedToken);
-    }
+    // const token = await requestForToken();
+    //
+    // if (token) {
+    //   await UserApi.postRegisterPushToken({ pushToken: token });
+    //
+    //   const encryptedToken = CryptoJS.AES.encrypt(
+    //     token,
+    //     process.env.NEXT_PUBLIC_LOCAL_STORAGE_SECRET_KEY as string,
+    //   ).toString();
+    //   localStorage.setItem('FT', encryptedToken);
+    // }
   };
 
   return {

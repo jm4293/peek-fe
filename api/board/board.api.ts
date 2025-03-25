@@ -1,6 +1,6 @@
-import { AxiosConfig } from '@/common/axios-config';
 import { IBoardCommentListRes, IBoardDetailRes, IBoardListRes } from '@/types/res/board';
 import { ICreateBoardCommentDto, IDeleteBoardCommentDto, IUpdateBoardCommentDto, IUpdateBoardDto } from '@/types/dto';
+import { AxiosConfig } from '@/common/axios';
 
 class BoardApi extends AxiosConfig {
   private readonly _baseURL = '/board';
