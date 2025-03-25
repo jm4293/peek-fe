@@ -103,17 +103,21 @@ export const useAuthMutation = () => {
   // };
 
   const registerFirebaseToken = async () => {
-    // const token = await requestForToken();
-    //
-    // if (token) {
-    //   await UserApi.postRegisterPushToken({ pushToken: token });
-    //
-    //   const encryptedToken = CryptoJS.AES.encrypt(
-    //     token,
-    //     process.env.NEXT_PUBLIC_LOCAL_STORAGE_SECRET_KEY as string,
-    //   ).toString();
-    //   localStorage.setItem('FT', encryptedToken);
-    // }
+    const token = await requestForToken();
+
+    console.log('token', token);
+
+    if (token) {
+      await UserApi.postRegisterPushToken({ pushToken: token });
+
+      // const encryptedToken = CryptoJS.AES.encrypt(
+      //   token,
+      //   process.env.NEXT_PUBLIC_LOCAL_STORAGE_SECRET_KEY as string,
+      // ).toString();
+      // localStorage.setItem('FT', encryptedToken);
+    }
+
+    return token;
   };
 
   return {
