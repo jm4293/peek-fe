@@ -1,3 +1,9 @@
+import WebWorkerConfig from '@/common/web-worker/web-worker.config';
+
 export default function Page() {
-  return <div>home</div>;
+  return (
+    <div>
+      <WebWorkerConfig>home</WebWorkerConfig>
+    </div>
+  );
 }

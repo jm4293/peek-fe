@@ -9,6 +9,18 @@ export async function middleware(request: NextRequest) {
 
   const cookie = request.cookies.get('RT');
 
+  if (pathname === '/home') {
+    if (!cookie) {
+      return NextResponse.redirect(new URL('/home/guest', request.url));
+    }
+  }
+
+  if (pathname === '/stock') {
+    if (!cookie) {
+      return NextResponse.redirect(new URL('/stock/guest', request.url));
+    }
+  }
+
   const boardFilter = ['/board/list', '/board/register', '/board/modify'];
 
   if (boardFilter.some((path) => pathname.startsWith(path))) {

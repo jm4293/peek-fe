@@ -1,6 +1,6 @@
 'use client';
 
-interface IClientTextProps {
+interface IProps {
   value: string;
   color: '#000000' | '#282828' | '#444444' | '#666666' | '#F87171';
   size?: 'sm' | 'base' | 'lg' | 'xl';
@@ -36,7 +36,7 @@ const fontWeight = {
   bold: 'font-bold',
 };
 
-export default function Text(props: IClientTextProps) {
+export default function Text(props: IProps) {
   const { value, color, size = 'base', align = 'left', weight = 'normal', onClick, className } = props;
 
   const clickHandler = (event: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
