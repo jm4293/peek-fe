@@ -3,6 +3,8 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  console.log('middleware pathname', pathname);
+
   if (pathname === '/') {
     return NextResponse.redirect(new URL('/home', request.url));
   }
@@ -42,6 +44,8 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL('/user/guest', request.url));
     }
   }
+
+  return NextResponse.next();
 }
 
 export const config = {

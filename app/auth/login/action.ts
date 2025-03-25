@@ -43,5 +43,5 @@ export async function login(formData: FormData) {
     maxAge: REFRESH_TOKEN_COOKIE_TIME,
   });
 
-  return redirect('/home');
+  return redirect('/user');
 }

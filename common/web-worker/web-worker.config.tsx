@@ -1,8 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useAuthMutation } from '@/hooks';
-import { onMessageListener } from '@/common/firebase';
+import { requestForToken } from '@/common/firebase';
 
 interface IProps {
   children: React.ReactNode;
@@ -11,29 +10,28 @@ interface IProps {
 export default function WebWorkerConfig(props: IProps) {
   const { children } = props;
 
-  const { registerFirebaseToken } = useAuthMutation();
+  // const { registerFirebaseToken } = useAuthMutation();
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       (async () => {
-        const token = await registerFirebaseToken();
+        const token = await requestForToken();
 
-        if ('serviceWorker' in navigator) {
-          token &&
-            navigator.serviceWorker
-              .register('/firebase-messaging-sw.js')
-              .then(async (registration) => {
-                console.log('registration', registration);
+        console.log('worker token', token);
 
-                console.info('Service Worker registration successful');
-              })
-              .catch((err) => {
-                console.log('Service Worker registration failed: ', err);
-              });
+        if ('serviceWorker' in navigator && 'PushManager' in window) {
+          navigator.serviceWorker
+            .register('/firebase-messaging-sw.js') // 경로 수정
+            .then((registration) => {})
+            .catch((error) => {
+              console.error('Service Worker registration failed:', error);
+            });
+        } else {
+          console.warn('This browser does not support the required APIs for Firebase Messaging.');
         }
       })();
     }
   }, []);
 
-  return <>{children}</>;
+  return <div>{children}</div>;
 }
