@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect } from 'react';
-import { isClientRender } from '@/utils';
 import { requestForToken } from '@/common/firebase/firebase.config';
 import { useAuthMutation } from '@/hooks';
 
@@ -15,15 +14,13 @@ export default function MessagingConfig(props: IProps) {
   const { registerMessagingTokenMutation } = useAuthMutation();
 
   useEffect(() => {
-    if (isClientRender()) {
-      (async () => {
-        const token = await requestForToken();
+    (async () => {
+      const token = await requestForToken();
 
-        console.log('firebase cloud messaging token:', token);
+      console.log('firebase cloud messaging token:', token);
 
-        registerMessagingTokenMutation.mutate(token);
-      })();
-    }
+      token && registerMessagingTokenMutation.mutate(token);
+    })();
   }, []);
 
   return <div>{children}</div>;

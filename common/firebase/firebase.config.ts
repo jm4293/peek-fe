@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getMessaging, getToken, onMessage } from 'firebase/messaging';
+import { getMessaging, getToken, Messaging, onMessage } from 'firebase/messaging';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -11,23 +11,37 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
+const web_push_token = process.env.NEXT_PUBLIC_FIREBASE_WEB_PUSH_TOKEN;
+
 Object.freeze(firebaseConfig);
 
 const app = initializeApp(firebaseConfig);
 
-const messaging = getMessaging(app);
+let messaging: Messaging | null = null;
 
-const web_push_token = process.env.NEXT_PUBLIC_FIREBASE_WEB_PUSH_TOKEN;
+if (typeof window !== 'undefined') {
+  // getMessaging()는 클라이언트에서만 사용할 수 있다.
+  // service worker 등록은 클라이언트에서만 가능
+  messaging = getMessaging(app);
+}
 
-onMessage(messaging, (payload) => {});
+if (messaging) {
+  onMessage(messaging, (payload) => {});
+}
 
 export const requestForToken = async () => {
+  if (!messaging) {
+    return;
+  }
+
   return await getToken(messaging, { vapidKey: web_push_token });
 };
 
 // 포그라운드 알림 수신
 // export const onMessageListener = (messageListener: (payload: any) => void): (() => void) => {
-//   if (!messaging) return () => {};
+//   if (!messaging) {
+//     return () => {};
+//   }
 //
 //   return onMessage(messaging, (payload) => {
 //     console.log('Message received. ', payload);

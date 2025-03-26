@@ -2,7 +2,6 @@
 
 import { useEffect } from 'react';
 import { requestForToken } from '@/common/firebase';
-import { getToken } from 'firebase/messaging';
 
 interface IProps {
   children: React.ReactNode;

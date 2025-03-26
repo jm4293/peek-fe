@@ -8,7 +8,6 @@ import { useEffect, useState, useTransition } from 'react';
 import Button from '@/components/button/button';
 import { login } from '@/app/auth/login/action';
 import { ResCodeEnum } from '@/constant/enum';
-import { SessionStorage } from '@/utils';
 
 export default function Form() {
   const router = useRouter();

@@ -75,22 +75,22 @@ export const useAuthMutation = () => {
       const firebase_messaging = getMessaging();
       await deleteToken(firebase_messaging);
 
-      if ('serviceWorker' in navigator) {
-        const registrations = await navigator.serviceWorker.getRegistrations();
-
-        navigator.serviceWorker.addEventListener('message', (event) => {
-          if (event.data && event.data.type === 'TERMINATED') {
-            console.log('Service worker has been terminated.');
-          }
-        });
-
-        for (const registration of registrations) {
-          if (registration.active) {
-            registration.active.postMessage({ type: 'TERMINATE' });
-          }
-          await registration.unregister();
-        }
-      }
+      // if ('serviceWorker' in navigator) {
+      //   const registrations = await navigator.serviceWorker.getRegistrations();
+      //
+      //   navigator.serviceWorker.addEventListener('message', (event) => {
+      //     if (event.data && event.data.type === 'TERMINATED') {
+      //       console.log('Service worker has been terminated.');
+      //     }
+      //   });
+      //
+      //   for (const registration of registrations) {
+      //     if (registration.active) {
+      //       registration.active.postMessage({ type: 'TERMINATE' });
+      //     }
+      //     await registration.unregister();
+      //   }
+      // }
 
       LocalStorage.clear();
       SessionStorage.clear();
