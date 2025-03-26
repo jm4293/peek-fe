@@ -19,12 +19,12 @@ class AuthApi extends AxiosConfig {
   //   });
   // }
 
-  async postSignInOauth(dto: ILoginOauthDto) {
-    return await this.post<ILoginRes, ILoginOauthDto>({
-      url: `${this._baseURL}/login-oauth`,
-      data: dto,
-    });
-  }
+  // async postSignInOauth(dto: ILoginOauthDto) {
+  //   return await this.post<ILoginRes, ILoginOauthDto>({
+  //     url: `${this._baseURL}/login-oauth`,
+  //     data: dto,
+  //   });
+  // }
 
   async postCheckEmail(dto: ICheckEmailDto) {
     return await this.post<ICheckEmailRes, ICheckEmailDto>({

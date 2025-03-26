@@ -8,7 +8,6 @@ import { useEffect, useState, useTransition } from 'react';
 import Button from '@/components/button/button';
 import { login } from '@/app/auth/login/action';
 import { ResCodeEnum } from '@/constant/enum';
-import { useAuthMutation } from '@/hooks';
 
 export default function Form() {
   const router = useRouter();
@@ -17,8 +16,6 @@ export default function Form() {
 
   const [isAutoLogin, setIsAutoLogin] = useState(false);
   const [errorMessages, setErrorMessages] = useState<string>('');
-
-  const { loginOauthMutation } = useAuthMutation();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -75,11 +72,11 @@ export default function Form() {
           onKeyDown={keyDownHandler}
           required
         />
+        {errorMessages && <Text value={errorMessages} color="#F87171" />}
       </div>
 
       <div className="flex flex-col gap-2 mb-8">
         <Button title="로그인" type="submit" disabled={isPending} />
-        {errorMessages && <Text value={errorMessages} color="#F87171" />}
       </div>
 
       <div className="flex justify-between flex-wrap gap-4 mb-8">

@@ -39,19 +39,19 @@ export const useAuthMutation = () => {
   //   },
   // });
 
-  const loginOauthMutation = useMutation({
-    mutationFn: (dto: ILoginOauthDto) => AuthApi.postSignInOauth(dto),
-    onSuccess: async (res) => {
-      const { accessToken } = res.data.data;
-
-      // await registerFirebaseToken();
-
-      router.push('/user');
-    },
-    onError: (err) => {
-      console.error(err);
-    },
-  });
+  // const loginOauthMutation = useMutation({
+  //   mutationFn: (dto: ILoginOauthDto) => AuthApi.postSignInOauth(dto),
+  //   onSuccess: async (res) => {
+  //     const { accessToken } = res.data.data;
+  //
+  //     // await registerFirebaseToken();
+  //
+  //     router.push('/user');
+  //   },
+  //   onError: (err) => {
+  //     console.error(err);
+  //   },
+  // });
 
   const checkEmailMutation = useMutation({
     mutationFn: (dto: ICheckEmailDto) => AuthApi.postCheckEmail(dto),
@@ -75,22 +75,22 @@ export const useAuthMutation = () => {
       const firebase_messaging = getMessaging();
       await deleteToken(firebase_messaging);
 
-      // if ('serviceWorker' in navigator) {
-      //   const registrations = await navigator.serviceWorker.getRegistrations();
-      //
-      //   navigator.serviceWorker.addEventListener('message', (event) => {
-      //     if (event.data && event.data.type === 'TERMINATED') {
-      //       console.log('Service worker has been terminated.');
-      //     }
-      //   });
-      //
-      //   for (const registration of registrations) {
-      //     if (registration.active) {
-      //       registration.active.postMessage({ type: 'TERMINATE' });
-      //     }
-      //     await registration.unregister();
-      //   }
-      // }
+      if ('serviceWorker' in navigator) {
+        const registrations = await navigator.serviceWorker.getRegistrations();
+
+        navigator.serviceWorker.addEventListener('message', (event) => {
+          if (event.data && event.data.type === 'TERMINATED') {
+            console.log('Service worker has been terminated.');
+          }
+        });
+
+        for (const registration of registrations) {
+          if (registration.active) {
+            registration.active.postMessage({ type: 'TERMINATE' });
+          }
+          await registration.unregister();
+        }
+      }
 
       LocalStorage.clear();
       SessionStorage.clear();
@@ -128,7 +128,6 @@ export const useAuthMutation = () => {
   // };
 
   return {
-    loginOauthMutation,
     checkEmailMutation,
     logoutMutation,
     registerMessagingTokenMutation,
