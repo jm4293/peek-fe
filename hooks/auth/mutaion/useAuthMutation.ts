@@ -1,9 +1,11 @@
 import AuthApi from '@/api/auth/auth.api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { ICheckEmailDto, ILoginEmailDto, ILoginOauthDto } from '@/types/dto';
+import { ICheckEmailDto, ILoginOauthDto } from '@/types/dto';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
-import { SessionStorage } from '@/utils';
+import { LocalStorage, SessionStorage } from '@/utils';
+import { deleteToken, getMessaging } from 'firebase/messaging';
+import UserApi from '@/api/user/user.api';
 
 export const useAuthMutation = () => {
   const queryClient = useQueryClient();
@@ -42,8 +44,6 @@ export const useAuthMutation = () => {
     onSuccess: async (res) => {
       const { accessToken } = res.data.data;
 
-      // _registerSessionStorage({ accessToken });
-
       // await registerFirebaseToken();
 
       router.push('/home');
@@ -57,15 +57,42 @@ export const useAuthMutation = () => {
     mutationFn: (dto: ICheckEmailDto) => AuthApi.postCheckEmail(dto),
   });
 
+  const registerMessagingTokenMutation = useMutation({
+    mutationFn: (token: string) => UserApi.postRegisterPushToken({ pushToken: token }),
+    onSuccess: (res) => {
+      console.log('registerFirebaseMessagingTokenMutation', res);
+    },
+    onError: (err) => {
+      console.error(err);
+    },
+  });
+
   const logoutMutation = useMutation({
     mutationFn: () => AuthApi.postLogout(),
     onSuccess: async () => {
       queryClient.clear();
 
-      // const firebase_messaging = getMessaging();
-      // await deleteToken(firebase_messaging);
+      const firebase_messaging = getMessaging();
+      await deleteToken(firebase_messaging);
 
-      // localStorage.clear();
+      if ('serviceWorker' in navigator) {
+        const registrations = await navigator.serviceWorker.getRegistrations();
+
+        navigator.serviceWorker.addEventListener('message', (event) => {
+          if (event.data && event.data.type === 'TERMINATED') {
+            console.log('Service worker has been terminated.');
+          }
+        });
+
+        for (const registration of registrations) {
+          if (registration.active) {
+            registration.active.postMessage({ type: 'TERMINATE' });
+          }
+          await registration.unregister();
+        }
+      }
+
+      LocalStorage.clear();
       SessionStorage.clear();
       axios.defaults.headers.common = {};
 
@@ -104,5 +131,6 @@ export const useAuthMutation = () => {
     loginOauthMutation,
     checkEmailMutation,
     logoutMutation,
+    registerMessagingTokenMutation,
   };
 };

@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { requestForToken } from '@/common/firebase';
+import { getToken } from 'firebase/messaging';
 
 interface IProps {
   children: React.ReactNode;
@@ -10,26 +11,41 @@ interface IProps {
 export default function WebWorkerConfig(props: IProps) {
   const { children } = props;
 
-  // const { registerFirebaseToken } = useAuthMutation();
-
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      (async () => {
-        const token = await requestForToken();
+    if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker
+          .register('/firebase-messaging-sw.js')
+          .then(async (registration) => {
+            const token = await requestForToken();
 
-        console.log('worker token', token);
+            console.log('Token:', token);
 
-        if ('serviceWorker' in navigator && 'PushManager' in window) {
-          navigator.serviceWorker
-            .register('/firebase-messaging-sw.js') // 경로 수정
-            .then((registration) => {})
-            .catch((error) => {
-              console.error('Service Worker registration failed:', error);
+            console.info('Service Worker registered with scope:', registration.scope);
+
+            navigator.serviceWorker.addEventListener('message', (event) => {
+              // if (event.data && event.data.type === 'FCM_TOKEN') {
+              //   const token = event.data.token;
+              //   localStorage.setItem('firebaseToken', token);
+              //   console.log('FCM Token:', token);
+              // }
+
+              if (event.data && event.data.type === 'FCM_MESSAGE') {
+                const { title, body } = event.data.payload.notification;
+                alert(`Title: ${title}\nBody: ${body}`);
+              }
+
+              if (event.data && event.data.type === 'TERMINATED') {
+                console.info('Service worker has been terminated.');
+              }
             });
-        } else {
-          console.warn('This browser does not support the required APIs for Firebase Messaging.');
-        }
-      })();
+          })
+          .catch((error) => {
+            console.error('Service Worker registration failed:', error);
+          });
+      } else {
+        console.warn('This browser does not support the required APIs for Firebase Messaging.');
+      }
     }
   }, []);
 

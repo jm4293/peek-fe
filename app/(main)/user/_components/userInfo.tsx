@@ -11,7 +11,7 @@ export default function UserInfo() {
 
   const { logoutMutation } = useAuthMutation();
 
-  const clickHandler = () => {
+  const clickHandler = async () => {
     if (confirm('로그아웃 하시겠습니까?')) {
       logoutMutation.mutate();
     }

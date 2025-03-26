@@ -1,12 +1,12 @@
 import UserInfo from '@/app/(main)/user/_components/userInfo';
-import WebWorkerConfig from '@/common/web-worker/web-worker.config';
+import MessagingConfig from '@/common/firebase/messaging.config';
 
 export default function Page() {
   return (
     <>
-      <WebWorkerConfig>
+      <MessagingConfig>
         <UserInfo />
-      </WebWorkerConfig>
+      </MessagingConfig>
     </>
   );
 }
