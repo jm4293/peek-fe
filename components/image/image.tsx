@@ -1,3 +1,5 @@
+'use client';
+
 import { ImageTypeEnum } from '@/constant/enum';
 import { HumanSvg } from '@/asset/svg';
 
@@ -5,7 +7,7 @@ interface IProps {
   src: string | undefined;
   type: ImageTypeEnum;
   alt: string;
-  onClick?: (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => void;
+  onClick?: () => void;
   className?: string;
 }
 
@@ -21,6 +23,14 @@ const imageSizes = {
 export default function Image(props: IProps) {
   const { src, type, alt, onClick, className } = props;
 
+  const clickHandler = (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
+    event.stopPropagation();
+
+    if (onClick) {
+      onClick();
+    }
+  };
+
   return src ? (
     <img
       className={`${onClick ? 'cursor-pointer' : ''} ${type === ImageTypeEnum.THUMBNAIL ? 'rounded-3xl' : ''} ${className}`}
@@ -28,7 +38,7 @@ export default function Image(props: IProps) {
       alt={alt}
       width={imageSizes[type].mobile}
       height={imageSizes[type].mobile}
-      onClick={(event) => onClick && onClick(event)}
+      onClick={(event) => clickHandler(event)}
     />
   ) : (
     <HumanSvg />
