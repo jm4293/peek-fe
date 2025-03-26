@@ -23,7 +23,7 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  const boardFilter = ['/board/list', '/board/register', '/board/modify'];
+  const boardFilter = ['/board', '/board/register', '/board/modify'];
 
   if (boardFilter.some((path) => pathname.startsWith(path))) {
     if (!cookie && pathname !== '/board/guest') {

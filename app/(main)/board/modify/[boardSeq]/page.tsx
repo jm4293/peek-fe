@@ -1,6 +1,6 @@
 import Form from '@/app/(main)/board/modify/[boardSeq]/_components/form';
 import { IBoardDetailRes } from '@/types/res';
-import { GetBoardDetail } from '@/app/(main)/board/list/action';
+import { GetBoardDetail } from '@/app/(main)/board/detail/[boardSeq]/action';
 
 interface IProps {
   params: Promise<{ boardSeq: string }>;

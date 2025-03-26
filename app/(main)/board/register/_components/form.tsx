@@ -25,7 +25,7 @@ export default function Form() {
 
       if (ret.result === ResCodeEnum.SUCCESS) {
         await queryClient.invalidateQueries({ queryKey: ['board-list'] });
-        router.push('/board/list');
+        router.push('/board');
       } else if (ret.result === ResCodeEnum.FAIL) {
         alert(ret.message);
       }
