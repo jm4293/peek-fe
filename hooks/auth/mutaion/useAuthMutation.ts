@@ -46,7 +46,7 @@ export const useAuthMutation = () => {
 
       // await registerFirebaseToken();
 
-      router.push('/home');
+      router.push('/user');
     },
     onError: (err) => {
       console.error(err);

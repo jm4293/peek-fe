@@ -8,6 +8,7 @@ import { useEffect, useState, useTransition } from 'react';
 import Button from '@/components/button/button';
 import { login } from '@/app/auth/login/action';
 import { ResCodeEnum } from '@/constant/enum';
+import { useAuthMutation } from '@/hooks';
 
 export default function Form() {
   const router = useRouter();
@@ -16,6 +17,8 @@ export default function Form() {
 
   const [isAutoLogin, setIsAutoLogin] = useState(false);
   const [errorMessages, setErrorMessages] = useState<string>('');
+
+  const { loginOauthMutation } = useAuthMutation();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -43,6 +46,10 @@ export default function Form() {
 
       event.currentTarget.form?.requestSubmit();
     }
+  };
+
+  const googleLoginHandler = () => {
+    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIEND_ID}&redirect_uri=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_REDIRECT_URL}&response_type=token&scope=openid email profile&include_granted_scopes=true`;
   };
 
   useEffect(() => {
@@ -75,7 +82,7 @@ export default function Form() {
         {errorMessages && <Text value={errorMessages} color="#F87171" />}
       </div>
 
-      <div className="flex justify-between flex-wrap gap-4">
+      <div className="flex justify-between flex-wrap gap-4 mb-8">
         <div className="flex items-center gap-1.5">
           <CheckBoxSvg isCheck={isAutoLogin} onClick={() => setIsAutoLogin(!isAutoLogin)} />
           <Text value="자동로그인" color="#000000" onClick={() => {}} />
@@ -88,6 +95,10 @@ export default function Form() {
           <div className="w-[1px] h-2/3 bg-[#B5B5B5]" />
           <Text value="회원가입" color="#000000" onClick={() => router.push('/auth/register')} />
         </div>
+      </div>
+
+      <div className="flex flex-col gap-2 mb-8">
+        <Button title="구글 로그인" type="button" onClick={googleLoginHandler} />
       </div>
     </form>
   );
