@@ -33,7 +33,7 @@ export const useBoardMutation = () => {
   // });
 
   const deleteBoardMutation = useMutation({
-    mutationFn: (boardSeq: number) => BoardApi.deleteBoard({ boardSeq }),
+    mutationFn: (boardSeq: number) => BoardApi.deleteBoard(boardSeq),
     onSuccess: () => {
       router.push('/board');
     },

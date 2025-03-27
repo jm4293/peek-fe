@@ -31,9 +31,7 @@ class BoardApi extends AxiosConfig {
   //   return await this.put<null, Omit<IUpdateBoardDto, 'boardSeq'>>({ url: `${this._baseURL}/${boardSeq}`, data: res });
   // }
 
-  async deleteBoard(params: { boardSeq: number }) {
-    const { boardSeq } = params;
-
+  async deleteBoard(boardSeq: number) {
     return await this.delete<null, null>({ url: `${this._baseURL}/${boardSeq}` });
   }
 
@@ -72,8 +70,8 @@ class BoardApi extends AxiosConfig {
     });
   }
 
-  async deleteBoardComment(params: IDeleteBoardCommentDto) {
-    const { boardSeq, boardCommentSeq } = params;
+  async deleteBoardComment(dto: IDeleteBoardCommentDto) {
+    const { boardSeq, boardCommentSeq } = dto;
 
     return await this.delete<null, null>({ url: `${this._baseURL}/${boardSeq}/comment/${boardCommentSeq}` });
   }
