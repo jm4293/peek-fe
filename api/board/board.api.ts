@@ -1,5 +1,11 @@
 import { IBoardCommentListRes, IBoardDetailRes, IBoardListRes } from '@/types/res/board';
-import { ICreateBoardCommentDto, IDeleteBoardCommentDto, IUpdateBoardCommentDto, IUpdateBoardDto } from '@/types/dto';
+import {
+  ICreateBoardCommentDto,
+  ICreateBoardDto,
+  IDeleteBoardCommentDto,
+  IUpdateBoardCommentDto,
+  IUpdateBoardDto,
+} from '@/types/dto';
 import { AxiosConfig } from '@/common/axios';
 
 class BoardApi extends AxiosConfig {
@@ -21,15 +27,15 @@ class BoardApi extends AxiosConfig {
     return await this.get<IBoardDetailRes, null>({ url: `${this._baseURL}/${boardSeq}` });
   }
 
-  // async createBoard(dto: ICreateBoardDto) {
-  //   return await this.post<null, ICreateBoardDto>({ url: `${this._baseURL}`, data: dto });
-  // }
+  async createBoard(dto: ICreateBoardDto) {
+    return await this.post<null, ICreateBoardDto>({ url: `${this._baseURL}`, data: dto });
+  }
 
-  // async updateBoard(dto: IUpdateBoardDto) {
-  //   const { boardSeq, ...res } = dto;
-  //
-  //   return await this.put<null, Omit<IUpdateBoardDto, 'boardSeq'>>({ url: `${this._baseURL}/${boardSeq}`, data: res });
-  // }
+  async updateBoard(dto: IUpdateBoardDto) {
+    const { boardSeq, ...res } = dto;
+
+    return await this.put<null, Omit<IUpdateBoardDto, 'boardSeq'>>({ url: `${this._baseURL}/${boardSeq}`, data: res });
+  }
 
   async deleteBoard(boardSeq: number) {
     return await this.delete<null, null>({ url: `${this._baseURL}/${boardSeq}` });

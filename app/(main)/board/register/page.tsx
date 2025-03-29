@@ -1,9 +1,9 @@
-import Form from '@/app/(main)/board/register/_components/form';
+import BoardRegister from '@/app/(main)/board/register/_components/boardRegister';
 
 export default function Page() {
   return (
     <>
-      <Form />
+      <BoardRegister />
     </>
   );
 }

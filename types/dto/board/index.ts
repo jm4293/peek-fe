@@ -5,7 +5,9 @@ interface IBaseBoardDto {
 
 export interface ICreateBoardDto extends IBaseBoardDto {}
 
-export interface IUpdateBoardDto extends IBaseBoardDto {}
+export interface IUpdateBoardDto extends IBaseBoardDto {
+  boardSeq: number;
+}
 
 export interface IBaseBoardCommentDto {
   content: string;

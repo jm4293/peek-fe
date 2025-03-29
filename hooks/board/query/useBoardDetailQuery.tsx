@@ -5,7 +5,7 @@ import { ResConfig } from '@/types/res.config';
 import { IBoardDetailRes } from '@/types/res';
 
 interface IProps {
-  boardSeq: number | undefined;
+  boardSeq: string | undefined;
 }
 
 export const useBoardDetailQuery = (props: IProps) => {
