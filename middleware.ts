@@ -23,11 +23,9 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  const boardFilter = ['/board', '/board/register', '/board/modify'];
-
-  if (boardFilter.some((path) => pathname.startsWith(path))) {
-    if (!cookie && pathname !== '/board/guest') {
-      return NextResponse.redirect(new URL('/board/guest', request.url));
+  if (pathname.includes('/board') && !pathname.includes('/board/guest') && !pathname.includes('/board/detail')) {
+    if (!cookie) {
+      return NextResponse.redirect(new URL(`/board/guest`, request.url));
     }
   }
 
@@ -36,6 +34,14 @@ export async function middleware(request: NextRequest) {
       const number = pathname.split('/').at(-1);
 
       return NextResponse.redirect(new URL(`/board/guest/detail/${number}`, request.url));
+    }
+  }
+
+  const boardFilter = ['/board/register', '/board/modify'];
+
+  if (boardFilter.some((path) => pathname.startsWith(path))) {
+    if (!cookie) {
+      return NextResponse.redirect(new URL('/board/guest', request.url));
     }
   }
 
