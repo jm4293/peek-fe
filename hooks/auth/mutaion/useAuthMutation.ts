@@ -59,12 +59,6 @@ export const useAuthMutation = () => {
 
   const registerMessagingTokenMutation = useMutation({
     mutationFn: (token: string) => UserApi.postRegisterPushToken({ pushToken: token }),
-    onSuccess: (res) => {
-      console.log('registerFirebaseMessagingTokenMutation', res);
-    },
-    onError: (err) => {
-      console.error(err);
-    },
   });
 
   const logoutMutation = useMutation({

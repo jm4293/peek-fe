@@ -6,8 +6,9 @@ import Text from '@/components/text/text';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState, useTransition } from 'react';
 import Button from '@/components/button/button';
-import { login } from '@/app/auth/login/action';
+import { loginEmail } from '@/app/auth/login/action';
 import { ResCodeEnum } from '@/constant/enum';
+import { useAuthMutation } from '@/hooks';
 
 export default function Form() {
   const router = useRouter();
@@ -16,6 +17,8 @@ export default function Form() {
 
   const [isAutoLogin, setIsAutoLogin] = useState(false);
   const [errorMessages, setErrorMessages] = useState<string>('');
+
+  const { registerMessagingTokenMutation } = useAuthMutation();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -26,7 +29,19 @@ export default function Form() {
     const formData = new FormData(event.target as HTMLFormElement);
 
     startTransition(async () => {
-      const ret = await login(formData);
+      const ret = await loginEmail(formData);
+
+      if (ret.result === ResCodeEnum.SUCCESS) {
+        //   if (Notification.permission === 'granted') {
+        //     const token = await requestForToken();
+        //
+        //     if (token) {
+        //       await registerMessagingTokenMutation.mutateAsync(token);
+        //     }
+        //   }
+        //
+        router.push('/user');
+      }
 
       if (ret.result === ResCodeEnum.FAIL) {
         const { message } = ret;

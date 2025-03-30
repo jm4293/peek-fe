@@ -1,13 +1,19 @@
 'use client';
 
 import { useEffect, useState, useTransition } from 'react';
-import { loginGoogle } from '@/app/auth/login/google/action';
 import Skeleton from '@/components/skeleton/skeleton';
+import { loginGoogle } from '@/app/auth/login/action';
+import { useAuthMutation } from '@/hooks';
+import { useRouter } from 'next/navigation';
+import { ResCodeEnum } from '@/constant/enum';
 
 export default function Form() {
+  const router = useRouter();
   const [isPending, startTransition] = useTransition();
 
   const [accessToken, setAccessToken] = useState('');
+
+  const { registerMessagingTokenMutation } = useAuthMutation();
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -32,7 +38,23 @@ export default function Form() {
   useEffect(() => {
     if (accessToken) {
       startTransition(async () => {
-        await loginGoogle(accessToken);
+        const ret = await loginGoogle(accessToken);
+
+        if (ret.result === ResCodeEnum.SUCCESS) {
+          // if (Notification.permission === 'granted') {
+          //   const token = await requestForToken();
+          //
+          //   if (token) {
+          //     await registerMessagingTokenMutation.mutateAsync(token);
+          //   }
+          // }
+
+          router.push('/user');
+        }
+
+        if (ret.result === ResCodeEnum.FAIL) {
+          router.push('/auth/login');
+        }
       });
     }
   }, [accessToken]);

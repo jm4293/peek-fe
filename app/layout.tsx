@@ -22,7 +22,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="ko" suppressHydrationWarning>
       <body>
-        <QueryProvider>{children}</QueryProvider>
+        <QueryProvider>
+          {/*<MessagingConfig>*/}
+          {children}
+          {/*</MessagingConfig>*/}
+        </QueryProvider>
       </body>
     </html>
   );
