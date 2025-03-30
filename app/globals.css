@@ -71,6 +71,12 @@ button {
   position: relative;
 }
 
+@supports (-webkit-touch-callout: none) {
+  .layout {
+    height: -webkit-fill-available;
+  }
+}
+
 .layout > .header {
   width: 100%;
   position: absolute;
