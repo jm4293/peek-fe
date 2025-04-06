@@ -1,9 +1,9 @@
-import Guest from '@/app/(main)/user/(guest)/guest/_components/guest';
+import UserGuest from '@/app/(main)/user/(guest)/guest/_components/userGuest';
 
 export default function Page() {
   return (
-    <>
-      <Guest />
-    </>
+    <div className="p-4">
+      <UserGuest />
+    </div>
   );
 }

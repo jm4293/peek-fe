@@ -42,18 +42,18 @@ export default function InfinityList<T>(props: IProps<T>) {
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   return (
-    <div className="flex flex-col items-center">
+    <>
       {total > 0 ? (
         <>
-          <div className="w-full flex flex-col gap-8">{data.map(renderItem)}</div>
+          <div className="w-full flex flex-col">{data.map(renderItem)}</div>
 
           <div ref={loadMoreRef} className="flex justify-center items-center">
             {isFetchingNextPage && <Skeleton />}
           </div>
         </>
       ) : (
-        <Text value="없습니다." color="#000000" />
+        <Text value="게시글이 없습니다." color="#000000" align="center" />
       )}
-    </div>
+    </>
   );
 }

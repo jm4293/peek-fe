@@ -92,15 +92,14 @@ button {
 .layout > .content_wrapper {
   overflow-x: hidden;
   overflow-y: auto;
-  background-color: #f0f0f0;
+  background-color: #F2F2F5;
   padding: 0.2rem 0;
-  z-index: 20;
   position: relative;
 }
 
 .layout > .content_wrapper > .content {
-  padding: 1rem;
-  background-color: white;
+  /*padding: 1rem 0;*/
+  /*background-color: white;*/
 }
 
 .layout > .navbar {

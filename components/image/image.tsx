@@ -2,6 +2,7 @@
 
 import { ImageTypeEnum } from '@/constant/enum';
 import { HumanSvg } from '@/asset/svg';
+import { useDeviceLayout } from '@/hooks';
 
 interface IProps {
   src: string | undefined;
@@ -17,11 +18,12 @@ const imageSizes = {
   [ImageTypeEnum.LARGE]: { mobile: 100, desktop: 120 },
   [ImageTypeEnum.MEDIUM]: { mobile: 80, desktop: 100 },
   [ImageTypeEnum.SMALL]: { mobile: 60, desktop: 80 },
-  [ImageTypeEnum.THUMBNAIL]: { mobile: 40, desktop: 50 },
 };
 
 export default function Image(props: IProps) {
   const { src, type, alt, onClick, className } = props;
+
+  const { isMobile } = useDeviceLayout();
 
   const clickHandler = (event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
     event.stopPropagation();
@@ -33,11 +35,11 @@ export default function Image(props: IProps) {
 
   return src ? (
     <img
-      className={`${onClick ? 'cursor-pointer' : ''} ${type === ImageTypeEnum.THUMBNAIL ? 'rounded-3xl' : ''} ${className}`}
+      className={`${onClick ? 'cursor-pointer' : ''} ${className}`}
       src={`${process.env.NEXT_PUBLIC_IMAGE_URL}:${process.env.NEXT_PUBLIC_IMAGE_PORT}${src}`}
       alt={alt}
-      width={imageSizes[type].mobile}
-      height={imageSizes[type].mobile}
+      width={isMobile ? imageSizes[type].mobile : imageSizes[type].desktop}
+      height={isMobile ? imageSizes[type].mobile : imageSizes[type].desktop}
       onClick={(event) => clickHandler(event)}
     />
   ) : (

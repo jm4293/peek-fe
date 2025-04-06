@@ -1,13 +1,13 @@
 'use client';
 
 import { useAuthMutation, useMyInfoQuery } from '@/hooks';
-import { ImageTypeEnum } from '@/constant/enum';
-import Image from '@/components/image/image';
 import Text from '@/components/text/text';
 import Skeleton from '@/components/skeleton/skeleton';
+import Thumbnail from '@/components/image/thumbnail';
+import Wrapper from '@/components/wrapper/wrapper';
 
 export default function UserInfo() {
-  const myInfoQuery = useMyInfoQuery();
+  const { data, isSuccess } = useMyInfoQuery();
 
   const { logoutMutation } = useAuthMutation();
 
@@ -17,31 +17,33 @@ export default function UserInfo() {
     }
   };
 
-  return myInfoQuery.isSuccess ? (
-    <div className="flex flex-col gap-10">
-      <div className="flex items-center gap-4">
-        <div>
-          <Image src={myInfoQuery.data.thumbnail} alt="profile" type={ImageTypeEnum.THUMBNAIL} />
-        </div>
-        <div>
-          <Text value={myInfoQuery.data.nickname} color="#000000" />
-          <Text value={myInfoQuery.data.email} color="#000000" />
-        </div>
-      </div>
+  if (!isSuccess) {
+    return <Skeleton />;
+  }
 
-      <div className="flex flex-col gap-4">
-        <Text value="게시판" color="#000000" size="lg" />
-        <div className="flex flex-col gap-2">
+  return (
+    <div className="flex flex-col gap-4">
+      <Wrapper>
+        <div className="flex items-center gap-4">
+          <Thumbnail src={data.thumbnail} onClick />
+
+          <div>
+            <Text value={data.nickname} color="#000000" />
+            <Text value={data.email} color="#000000" />
+          </div>
+        </div>
+      </Wrapper>
+
+      <Wrapper title="게시판">
+        <div className="flex flex-col gap-4">
           <Text value="작성한 게시글" color="#000000" onClick={() => {}} />
           <Text value="작성한 댓글" color="#000000" onClick={() => {}} />
         </div>
-      </div>
+      </Wrapper>
 
-      <div>
+      <Wrapper>
         <Text value="로그아웃" color="#000000" size="lg" onClick={clickHandler} />
-      </div>
+      </Wrapper>
     </div>
-  ) : (
-    <Skeleton />
   );
 }
