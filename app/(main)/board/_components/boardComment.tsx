@@ -41,8 +41,8 @@ export default function BoardComment(props: IProps) {
   return (
     <div className="flex flex-col gap-4 mt-8">
       <div className="flex items-center gap-2">
-        <Text value="댓글" color="#000000" size="lg" />
-        <Text value={`${String(data?.total ?? 0)}개`} color="#000000" />
+        <Text value="댓글" size="lg" />
+        <Text value={`${String(data?.total ?? 0)}개`} />
       </div>
 
       {data && data.total > 0 ? (
@@ -51,12 +51,12 @@ export default function BoardComment(props: IProps) {
             <div key={boardComment.boardCommentSeq} className="flex flex-col gap-4 pb-4 border-b border-gray-300">
               <div className="flex justify-between items-center gap-2">
                 <div className="flex items-center gap-2">
-                  <Image
-                    src={boardComment.user.thumbnail}
-                    type={ImageTypeEnum.THUMBNAIL}
-                    alt="board-comment-thumbnail"
-                  />
-                  <Text value={boardComment.user.nickname} color="#000000" />
+                  {/*<Image*/}
+                  {/*  src={boardComment.user.thumbnail}*/}
+                  {/*  type={ImageTypeEnum.THUMBNAIL}*/}
+                  {/*  alt="board-comment-thumbnail"*/}
+                  {/*/>*/}
+                  <Text value={boardComment.user.nickname} />
                 </div>
                 {isAuth && boardComment.isMine && (
                   <DeleteSvg onClick={() => deleteClickHandler(boardComment.boardCommentSeq)} />
@@ -65,18 +65,14 @@ export default function BoardComment(props: IProps) {
 
               <div className="flex flex-col gap-1">
                 <Input type="text" title="내용" name="title" value={boardComment.content} placeholder="내용" />
-                <Text
-                  value={dayjs(boardComment.createdAt).format('YY년 MM월 DD일 HH시 mm분')}
-                  color="#000000"
-                  className="text-end"
-                />
+                <Text value={dayjs(boardComment.createdAt).format('YY년 MM월 DD일 HH시 mm분')} className="text-end" />
               </div>
             </div>
           ))}
         </div>
       ) : (
         <div className="pb-4 border-b border-gray-300">
-          <Text value="등록된 댓글이 없습니다." color="#000000" />
+          <Text value="등록된 댓글이 없습니다." />
         </div>
       )}
 

@@ -49,7 +49,7 @@ export default function Textarea(props: IProps) {
 
   return (
     <div className="flex flex-col gap-3">
-      <Text value={title} color="#000000" />
+      <Text value={title} />
       <textarea
         ref={textareaRef}
         name={name}

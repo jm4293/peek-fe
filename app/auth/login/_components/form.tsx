@@ -87,7 +87,7 @@ export default function Form() {
           onKeyDown={keyDownHandler}
           required
         />
-        {errorMessages && <Text value={errorMessages} color="#F87171" />}
+        {errorMessages && <Text value={errorMessages} color="red" />}
       </div>
 
       <div className="flex flex-col gap-2 mb-8">
@@ -97,15 +97,15 @@ export default function Form() {
       <div className="flex justify-between flex-wrap gap-4 mb-8">
         <div className="flex items-center gap-1.5">
           <CheckBoxSvg isCheck={isAutoLogin} onClick={() => setIsAutoLogin(!isAutoLogin)} />
-          <Text value="자동로그인" color="#000000" onClick={() => {}} />
+          <Text value="자동로그인" onClick={() => {}} />
         </div>
 
         <div className="flex items-center gap-3">
-          <Text value="아이디 찾기" color="#000000" onClick={() => {}} />
+          <Text value="아이디 찾기" onClick={() => {}} />
           <div className="w-[1px] h-2/3 bg-[#B5B5B5]" />
-          <Text value="비밀번호 찾기" color="#000000" onClick={() => {}} />
+          <Text value="비밀번호 찾기" onClick={() => {}} />
           <div className="w-[1px] h-2/3 bg-[#B5B5B5]" />
-          <Text value="회원가입" color="#000000" onClick={() => router.push('/auth/register')} />
+          <Text value="회원가입" onClick={() => router.push('/auth/register')} />
         </div>
       </div>
 

@@ -35,13 +35,13 @@ export default function Board() {
         className="w-full flex flex-col gap-2 cursor-pointer border-b-2 border-gray-200 p-4"
         onClick={(event) => clickHandler({ event, boardSeq })}>
         <div className="flex flex-col gap-1">
-          <Text className="font-bold" value={title} color="#000000" size="xl" />
+          <Text className="font-bold" value={title} size="xl" />
           <div className="grid grid-cols-6">
-            <Text className="col-span-5 line-clamp-2" value={content} color="#666666" />
+            <Text className="col-span-5 line-clamp-2" value={content} color="gray" />
 
             <div className="flex justify-end gap-1 col-span-1">
-              <Text value="작성자" color="#000000" />
-              <Text value={user.nickname} color="#666666" />
+              <Text value="작성자" />
+              <Text value={user.nickname} color="gray" />
             </div>
           </div>
         </div>
@@ -49,16 +49,16 @@ export default function Board() {
           <div className="flex gap-4">
             <div className="flex gap-1">
               <HeartSvg />
-              <Text value={String(likeCount)} color="#666666" />
+              <Text value={String(likeCount)} color="gray" />
             </div>
             <div className="flex gap-1">
               <CommentSvg />
-              <Text value={String(commentCount)} color="#666666" />
+              <Text value={String(commentCount)} color="gray" />
             </div>
           </div>
           <div className="flex gap-1">
-            <Text value="조회수" color="#000000" />
-            <Text value={String(viewCount)} color="#666666" />
+            <Text value="조회수" />
+            <Text value={String(viewCount)} color="gray" />
           </div>
         </div>
       </div>

@@ -52,7 +52,7 @@ export default function Input(props: IProps) {
 
   return (
     <div className="flex flex-col gap-3">
-      <Text value={title} color="#000000" />
+      <Text value={title} />
       <input
         className={`${border_color[borderColor]} ${className}`}
         name={name}

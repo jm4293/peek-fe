@@ -23,13 +23,13 @@ export default async function BoardDetail(props: IProps) {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex justify-between items-center">
-        <Text value="게시글" color="#000000" size="lg" />
+        <Text value="게시글" size="lg" />
       </div>
 
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-2">
           <Image type={ImageTypeEnum.THUMBNAIL} src={user?.thumbnail} alt="board-detail-thumbnail" />
-          <Text value={user.nickname} color="#000000" />
+          <Text value={user.nickname} />
         </div>
 
         <div className="col-span-5 flex flex-col gap-2">

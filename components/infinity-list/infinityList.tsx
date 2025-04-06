@@ -52,7 +52,7 @@ export default function InfinityList<T>(props: IProps<T>) {
           </div>
         </>
       ) : (
-        <Text value="게시글이 없습니다." color="#000000" align="center" />
+        <Text value="게시글이 없습니다." align="center" />
       )}
     </>
   );

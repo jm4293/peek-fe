@@ -13,7 +13,7 @@ function Wrapper(props: IProps) {
       <div className="flex flex-col">
         {title && (
           <div>
-            <Text value={title} color="#000000" weight="bold" />
+            <Text value={title} weight="bold" />
             <div className="border-b border-gray-[#F2F2F5] my-4" />
           </div>
         )}

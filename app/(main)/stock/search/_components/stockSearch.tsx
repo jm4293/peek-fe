@@ -20,14 +20,14 @@ export default function StockSearch() {
               {data.stocks.map((stock) => {
                 return (
                   <div key={stock.code} className="flex justify-between">
-                    <Text value={stock.companyName} color="#000000" />
-                    <Text value={String(stock.code)} color="#666666" />
+                    <Text value={stock.companyName} />
+                    <Text value={String(stock.code)} color="gray" />
                   </div>
                 );
               })}
             </div>
           ) : (
-            <Text value="검색 결과가 없습니다." color="#000000" />
+            <Text value="검색 결과가 없습니다." />
           )
         ) : (
           <Skeleton />
