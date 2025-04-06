@@ -4,5 +4,4 @@ export enum ImageTypeEnum {
   LARGE = 'large',
   MEDIUM = 'medium',
   SMALL = 'small',
-  THUMBNAIL = 'thumbnail',
 }

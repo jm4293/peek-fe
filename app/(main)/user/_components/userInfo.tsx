@@ -6,6 +6,8 @@ import Skeleton from '@/components/skeleton/skeleton';
 import Thumbnail from '@/components/image/thumbnail';
 import Wrapper from '@/components/wrapper/wrapper';
 
+import { SlArrowRight } from 'react-icons/sl';
+
 export default function UserInfo() {
   const { data, isSuccess } = useMyInfoQuery();
 
@@ -24,13 +26,17 @@ export default function UserInfo() {
   return (
     <div className="flex flex-col gap-4">
       <Wrapper>
-        <div className="flex items-center gap-4">
-          <Thumbnail src={data.thumbnail} onClick />
+        <div className="flex items-center justify-between cursor-pointer">
+          <div className="flex items-center gap-4">
+            <Thumbnail src={data.thumbnail} onClick />
 
-          <div>
-            <Text value={data.nickname} />
-            <Text value={data.email} />
+            <div>
+              <Text value={data.nickname} />
+              <Text value={data.email} />
+            </div>
           </div>
+
+          <SlArrowRight />
         </div>
       </Wrapper>
 
