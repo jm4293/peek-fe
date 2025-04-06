@@ -3,6 +3,7 @@
 import { HumanSvg } from '@/asset/svg';
 import { useDeviceLayout, useImageMutation } from '@/hooks';
 import { useRef } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 
 interface IProps {
   src: string | undefined;
@@ -14,15 +15,23 @@ export default function Thumbnail(props: IProps) {
   const { src, onClick, className } = props;
 
   const { isMobile } = useDeviceLayout();
+  const queryClient = useQueryClient();
 
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const { uploadImageMutation } = useImageMutation();
 
-  const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
+
     if (file) {
-      console.log('file', file);
+      const formData = new FormData();
+
+      formData.append('image', file);
+
+      uploadImageMutation.mutate(file);
+
+      await queryClient.refetchQueries({ queryKey: ['user-my-info'] });
     }
   };
 

@@ -45,9 +45,25 @@ export const useFileUpload = (): UseFileUploadReturn => {
   const FileUploadButton = (): JSX.Element => (
     <div>
       <input type="file" ref={fileInputRef} style={{ display: 'none' }} onChange={handleFileChange} />
-      <button onClick={handleButtonClick}>이미지 선택 및 업로드</button>
+      <button onClick={handleButtonClick}>이미지 선택</button>
     </div>
   );
+
+  const uploadImage = async (file: File): Promise<string | undefined> => {
+    const formData = new FormData();
+    formData.append('image', file);
+
+    try {
+      const response = await axios.post(uploadUrl, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+
+      return `${imageUrl}${response.data.resizedImageUrl}`;
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      return undefined;
+    }
+  };
 
   return {
     FileUploadButton,
