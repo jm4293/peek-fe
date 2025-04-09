@@ -70,13 +70,17 @@ export class AxiosConfig {
           const { redirect } = error.response.data;
 
           // window.location.href = redirect;
-        } else if (error.response?.status === 400) {
+        }
+
+        if (error.response?.status === 400) {
           const { message } = error.response.data;
 
           if (message) {
             alert(message);
           }
-        } else if (error.response?.status === 401) {
+        }
+
+        if (error.response?.status === 401) {
           // const ret = await AuthApi.postRefreshToken();
 
           // const newAT = ret.data.data.accessToken;
@@ -88,7 +92,9 @@ export class AxiosConfig {
           const originalRequest = error.config;
 
           return this._axiosInstance(originalRequest);
-        } else if (error.response?.status === 403) {
+        }
+
+        if (error.response?.status === 403) {
           localStorage.clear();
           SessionStorage.clear();
           window.location.replace('/home');
@@ -100,34 +106,22 @@ export class AxiosConfig {
   }
 
   protected async get<T, D>({ url, params, headers }: IGetReq<D>) {
-    return await this._axiosInstance.get<ResConfig<T>>(url, {
-      params,
-      headers,
-    });
+    return await this._axiosInstance.get<ResConfig<T>>(url, { params, headers });
   }
 
   protected async post<T, D>({ url, data, headers }: IPostReq<D>) {
-    return await this._axiosInstance.post<ResConfig<T>>(url, data, {
-      headers,
-    });
+    return await this._axiosInstance.post<ResConfig<T>>(url, data, { headers });
   }
 
   protected async put<T, D>({ url, data, headers }: IPutReq<D>) {
-    return await this._axiosInstance.put<ResConfig<T>>(url, data, {
-      headers,
-    });
+    return await this._axiosInstance.put<ResConfig<T>>(url, data, { headers });
   }
 
   protected async delete<T, D>({ url, data, headers }: IDeleteReq<D>) {
-    return await this._axiosInstance.delete<ResConfig<T>>(url, {
-      data,
-      headers,
-    });
+    return await this._axiosInstance.delete<ResConfig<T>>(url, { data, headers });
   }
 
   protected async patch<T, D>({ url, data, headers }: IPatchReq<D>) {
-    return await this._axiosInstance.patch<ResConfig<T>>(url, data, {
-      headers,
-    });
+    return await this._axiosInstance.patch<ResConfig<T>>(url, data, { headers });
   }
 }
