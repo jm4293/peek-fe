@@ -8,6 +8,7 @@ import { GetBoardDetail } from '@/app/(main)/board/detail/[boardSeq]/action';
 import BoardDetailButton from '@/app/(main)/board/_components/boardDetailButton';
 import Wrapper from '@/components/wrapper/wrapper';
 import Thumbnail from '@/components/image/thumbnail';
+import dayjs from 'dayjs';
 
 interface IProps {
   boardSeq: string;
@@ -20,7 +21,9 @@ export default async function BoardDetail(props: IProps) {
   const boardDetail: IBoardDetailRes = await GetBoardDetail(Number(boardSeq));
 
   const { board, isMine } = boardDetail;
-  const { title, content, user } = board;
+  const { title, content, user, createdAt } = board;
+
+  console.log('content', content);
 
   return (
     <Wrapper>
@@ -31,9 +34,15 @@ export default async function BoardDetail(props: IProps) {
             <Text value={user.nickname} color="gray" />
           </div>
 
-          <div className="col-span-5 flex flex-col gap-2">
-            <Input type="text" title="제목" name="title" value={title} placeholder="제목" />
-            <Textarea title="내용" name="content" value={content} placeholder="내용" />
+          <div className="col-span-5 flex flex-col gap-4">
+            <div>
+              <Text value={title} />
+              <Text value={dayjs(createdAt).format('YYYY-MM-DD HH:mm')} />
+            </div>
+
+            <div className="border-[1px]" />
+
+            <pre className="whitespace-pre-line">{content}</pre>
           </div>
         </div>
 
