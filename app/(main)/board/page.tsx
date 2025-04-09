@@ -3,9 +3,9 @@ import BoardRegisterButton from '@/app/(main)/board/_components/boardRegisterBut
 
 export default function Page() {
   return (
-    <>
+    <div>
       <Board />
       <BoardRegisterButton />
-    </>
+    </div>
   );
 }

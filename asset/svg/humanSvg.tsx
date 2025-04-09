@@ -1,16 +1,13 @@
 export const HumanSvg = () => {
   return (
     <svg
-      width="30px"
-      height="30px"
+      width="40"
+      height="40"
       viewBox="0 0 32 32"
       enableBackground="new 0 0 32 32"
       id="Stock_cut"
       version="1.1"
-      // xml:space="preserve"
-      xmlns="http://www.w3.org/2000/svg"
-      // xmlns:xlink="http://www.w3.org/1999/xlink"
-    >
+      xmlns="http://www.w3.org/2000/svg">
       <desc />
 
       <g>

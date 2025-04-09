@@ -24,7 +24,7 @@ export default function UserInfo() {
   }
 
   return (
-    <div className="flex flex-col gap-4">
+    <main className="flex flex-col gap-4">
       <Wrapper>
         <div className="flex items-center justify-between cursor-pointer">
           <div className="w-full flex items-center gap-4">
@@ -40,23 +40,38 @@ export default function UserInfo() {
         </div>
       </Wrapper>
 
-      <Wrapper title="게시판">
-        <div className="flex flex-col gap-4">
-          <div className="flex items-center justify-between cursor-pointer">
-            <Text value="작성한 게시글" onClick={() => {}} />
-            <MdOutlineArrowForwardIos />
-          </div>
+      <div className="flex flex-col gap-2">
+        <Wrapper title="최근 기록">
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center justify-between cursor-pointer">
+              <Text value="검색 종목" onClick={() => {}} />
+              <MdOutlineArrowForwardIos />
+            </div>
 
-          <div className="flex items-center justify-between cursor-pointer">
-            <Text value="작성한 댓글" onClick={() => {}} />
-            <MdOutlineArrowForwardIos />
+            <div className="flex items-center justify-between cursor-pointer">
+              <Text value="즐겨찾기 종목" onClick={() => {}} />
+              <MdOutlineArrowForwardIos />
+            </div>
           </div>
-        </div>
-      </Wrapper>
+        </Wrapper>
 
-      <Wrapper>
-        <Text value="로그아웃" size="lg" onClick={clickHandler} color="red" />
-      </Wrapper>
-    </div>
+        <Wrapper title="게시판">
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center justify-between cursor-pointer">
+              <Text value="작성한 게시글" onClick={() => {}} />
+              <MdOutlineArrowForwardIos />
+            </div>
+
+            <div className="flex items-center justify-between cursor-pointer">
+              <Text value="작성한 댓글" onClick={() => {}} />
+              <MdOutlineArrowForwardIos />
+            </div>
+          </div>
+        </Wrapper>
+        <Wrapper>
+          <Text value="로그아웃" size="lg" onClick={clickHandler} color="red" />
+        </Wrapper>
+      </div>
+    </main>
   );
 }

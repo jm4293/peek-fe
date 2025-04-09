@@ -56,8 +56,8 @@ export default function Thumbnail(props: IProps) {
         className={`rounded-3xl ${onClick ? 'cursor-pointer' : ''} ${className}`}
         src={`${ImageApi.downloadImage(data.thumbnail)}`}
         alt="thumbnail"
-        width={isMobile ? 40 : 50}
-        height={isMobile ? 40 : 50}
+        width={isMobile ? 60 : 80}
+        height={isMobile ? 60 : 80}
         onClick={onClickHandler}
       />
     </div>

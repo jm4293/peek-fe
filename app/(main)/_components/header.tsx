@@ -5,11 +5,11 @@ import HeaderSearch from '@/app/(main)/_components/headerSearch';
 
 export default function Header() {
   return (
-    <div className="header">
+    <header className="header">
       <BackSvg />
       <HeaderTitle />
       <HeaderSearch />
       <HeaderAlert />
-    </div>
+    </header>
   );
 }

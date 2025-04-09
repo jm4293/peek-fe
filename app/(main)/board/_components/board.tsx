@@ -9,6 +9,7 @@ import InfinityListWrapper from '@/components/infinity-list/infinityListWrapper'
 import InfinityList from '@/components/infinity-list/infinityList';
 import Text from '@/components/text/text';
 import { useCallback } from 'react';
+import Wrapper from '@/components/wrapper/wrapper';
 
 export default function Board() {
   const router = useRouter();
@@ -27,41 +28,41 @@ export default function Board() {
   );
 
   const renderItem = (page: IBoard) => {
-    const { boardSeq, title, content, likeCount, commentCount, viewCount, user } = page;
+    const { boardSeq, title, likeCount, commentCount, viewCount, user } = page;
 
     return (
-      <div
-        key={`board-list-${boardSeq}`}
-        className="w-full flex flex-col gap-2 cursor-pointer border-b-2 border-gray-200 p-4"
-        onClick={(event) => clickHandler({ event, boardSeq })}>
-        <div className="flex flex-col gap-1">
-          <Text className="font-bold" value={title} size="xl" />
-          <div className="grid grid-cols-6">
-            <Text className="col-span-5 line-clamp-2" value={content} color="gray" />
+      <Wrapper>
+        <div className="flex flex-col gap-4 cursor-pointer" onClick={(event) => clickHandler({ event, boardSeq })}>
+          <div className="flex items-center gap-2">
+            <Text value={`${String(boardSeq)}.`} color="gray" nowrap />
+            <Text value={title} weight="bold" nowrap ellipsis />
+          </div>
 
-            <div className="flex justify-end gap-1 col-span-1">
-              <Text value="작성자" />
-              <Text value={user.nickname} color="gray" />
+          <div className="flex justify-between items-center">
+            <div className="flex gap-4">
+              <div className="flex items-center gap-1">
+                <HeartSvg />
+                <Text value={String(likeCount)} color="gray" />
+              </div>
+              <div className="flex items-center gap-1">
+                <CommentSvg />
+                <Text value={String(commentCount)} color="gray" />
+              </div>
+            </div>
+
+            <div className="flex gap-4">
+              <div className="flex items-center gap-1">
+                <Text value="조회수" />
+                <Text value={String(viewCount)} color="gray" />
+              </div>
+              <div className="flex items-center gap-1">
+                <Text value="작성자" />
+                <Text value={user.nickname} color="gray" />
+              </div>
             </div>
           </div>
         </div>
-        <div className="flex justify-between">
-          <div className="flex gap-4">
-            <div className="flex gap-1">
-              <HeartSvg />
-              <Text value={String(likeCount)} color="gray" />
-            </div>
-            <div className="flex gap-1">
-              <CommentSvg />
-              <Text value={String(commentCount)} color="gray" />
-            </div>
-          </div>
-          <div className="flex gap-1">
-            <Text value="조회수" />
-            <Text value={String(viewCount)} color="gray" />
-          </div>
-        </div>
-      </div>
+      </Wrapper>
     );
   };
 

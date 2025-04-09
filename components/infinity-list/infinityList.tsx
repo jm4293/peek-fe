@@ -45,7 +45,7 @@ export default function InfinityList<T>(props: IProps<T>) {
     <>
       {total > 0 ? (
         <>
-          <div className="w-full flex flex-col">{data.map(renderItem)}</div>
+          <div className="w-full flex flex-col gap-2">{data.map(renderItem)}</div>
 
           <div ref={loadMoreRef} className="flex justify-center items-center">
             {isFetchingNextPage && <Skeleton />}

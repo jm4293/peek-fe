@@ -93,13 +93,16 @@ button {
   overflow-x: hidden;
   overflow-y: auto;
   background-color: #F2F2F5;
-  padding: 0.2rem 0;
   position: relative;
 }
 
 .layout > .content_wrapper > .content {
   /*padding: 1rem 0;*/
   /*background-color: white;*/
+}
+
+.layout > .content_wrapper > .content > div {
+  padding: 0.5rem 1rem;
 }
 
 .layout > .navbar {

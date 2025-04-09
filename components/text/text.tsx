@@ -8,6 +8,8 @@ interface IProps {
   weight?: 'normal' | 'bold';
   onClick?: () => void;
   className?: string;
+  nowrap?: boolean;
+  ellipsis?: boolean;
 }
 
 const textColor = {
@@ -40,10 +42,20 @@ const fontWeight = {
 };
 
 export default function Text(props: IProps) {
-  const { value, color = 'black', size = 'base', align = 'left', weight = 'normal', onClick, className } = props;
+  const {
+    value,
+    color = 'black',
+    size = 'base',
+    align = 'left',
+    weight = 'normal',
+    onClick,
+    className,
+    nowrap,
+    ellipsis,
+  } = props;
 
   const clickHandler = (event: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
-    event.stopPropagation();
+    // event.stopPropagation();
 
     if (onClick) {
       onClick();
@@ -52,7 +64,7 @@ export default function Text(props: IProps) {
 
   return (
     <p
-      className={`${textColor[color]} ${fontSize[size]} ${textAlign[align]} ${fontWeight[weight]} ${onClick && 'cursor-pointer'} ${className}`}
+      className={`${textColor[color]} ${fontSize[size]} ${textAlign[align]} ${fontWeight[weight]} ${onClick && 'cursor-pointer'} ${nowrap && 'whitespace-nowrap'} ${ellipsis && 'overflow-hidden text-ellipsis'} ${className}`}
       onClick={(event) => clickHandler(event)}
       style={{ wordBreak: 'break-word' }}>
       {value}
