@@ -8,8 +8,6 @@ export default function HeaderAlert() {
   const router = useRouter();
 
   const clickHandler = () => {
-    console.log(pathname);
-
     if (pathname.includes('guest')) {
       alert('로그인이 필요한 서비스입니다.');
       return router.push('/auth/login');

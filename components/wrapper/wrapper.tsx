@@ -10,13 +10,8 @@ function Wrapper(props: IProps) {
 
   return (
     <div className="w-full bg-white rounded-2xl p-4">
-      <div className="flex flex-col">
-        {title && (
-          <div>
-            <Text value={title} weight="bold" />
-            <div className="border-b border-gray-[#F2F2F5] my-4" />
-          </div>
-        )}
+      <div className="flex flex-col gap-8">
+        {title && <Text value={title} weight="bold" />}
         <div>{children}</div>
       </div>
     </div>

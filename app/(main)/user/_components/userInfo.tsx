@@ -6,7 +6,7 @@ import Skeleton from '@/components/skeleton/skeleton';
 import Thumbnail from '@/components/image/thumbnail';
 import Wrapper from '@/components/wrapper/wrapper';
 
-import { SlArrowRight } from 'react-icons/sl';
+import { MdOutlineArrowForwardIos } from 'react-icons/md';
 
 export default function UserInfo() {
   const { data, isSuccess } = useMyInfoQuery();
@@ -27,8 +27,8 @@ export default function UserInfo() {
     <div className="flex flex-col gap-4">
       <Wrapper>
         <div className="flex items-center justify-between cursor-pointer">
-          <div className="flex items-center gap-4">
-            <Thumbnail src={data.thumbnail} onClick />
+          <div className="w-full flex items-center gap-4">
+            <Thumbnail onClick />
 
             <div>
               <Text value={data.nickname} />
@@ -36,14 +36,21 @@ export default function UserInfo() {
             </div>
           </div>
 
-          <SlArrowRight />
+          <MdOutlineArrowForwardIos />
         </div>
       </Wrapper>
 
       <Wrapper title="게시판">
         <div className="flex flex-col gap-4">
-          <Text value="작성한 게시글" onClick={() => {}} />
-          <Text value="작성한 댓글" onClick={() => {}} />
+          <div className="flex items-center justify-between cursor-pointer">
+            <Text value="작성한 게시글" onClick={() => {}} />
+            <MdOutlineArrowForwardIos />
+          </div>
+
+          <div className="flex items-center justify-between cursor-pointer">
+            <Text value="작성한 댓글" onClick={() => {}} />
+            <MdOutlineArrowForwardIos />
+          </div>
         </div>
       </Wrapper>
 
