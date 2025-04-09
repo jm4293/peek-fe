@@ -8,7 +8,7 @@ type MyInfoRes = AxiosResponse<ResConfig<IMyInfoRes>, any>;
 
 export const useMyInfoQuery = () => {
   return useQuery({
-    queryKey: ['user-my-info'],
+    queryKey: ['my-info'],
     queryFn: () => UserApi.getMyInfo(),
     select: (res: MyInfoRes) => {
       const { email, nickname, name, thumbnail, userAccountType } = res.data.data;

@@ -1,38 +1,42 @@
 'use client';
 
 import { HumanSvg } from '@/asset/svg';
-import { useDeviceLayout, useImageMutation } from '@/hooks';
+import { useDeviceLayout, useImageMutation, useMyInfoQuery } from '@/hooks';
 import { useRef } from 'react';
+import ThumbnailSkeleton from '@/components/skeleton/thumbnailSkeleton';
+import ImageApi from '@/api/image/image.api';
 import { useQueryClient } from '@tanstack/react-query';
 
 interface IProps {
-  src: string | undefined;
   onClick?: boolean;
   className?: string;
 }
 
 export default function Thumbnail(props: IProps) {
-  const { src, onClick, className } = props;
+  const { onClick, className } = props;
 
-  const { isMobile } = useDeviceLayout();
   const queryClient = useQueryClient();
+  const { isMobile } = useDeviceLayout();
 
   const inputRef = useRef<HTMLInputElement | null>(null);
+
+  const { data, isSuccess } = useMyInfoQuery();
 
   const { uploadImageMutation } = useImageMutation();
 
   const onFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
 
-    if (file) {
-      const formData = new FormData();
-
-      formData.append('image', file);
-
-      uploadImageMutation.mutate(file);
-
-      await queryClient.refetchQueries({ queryKey: ['user-my-info'] });
+    if (!file) {
+      alert('파일을 선택해주세요.');
+      return;
     }
+
+    await uploadImageMutation.mutateAsync({ file, width: 100, height: 100 });
+
+    await queryClient.refetchQueries({ queryKey: ['my-info'] });
+
+    event.target.value = '';
   };
 
   const onClickHandler = () => {
@@ -41,18 +45,22 @@ export default function Thumbnail(props: IProps) {
     }
   };
 
-  return src ? (
-    <>
+  if (!isSuccess) {
+    return <ThumbnailSkeleton />;
+  }
+
+  return data?.thumbnail ? (
+    <div>
       <input type="file" ref={inputRef} style={{ display: 'none' }} onChange={onFileChange} />
       <img
-        className={`cursor-pointer rounded-3xl ${className}`}
-        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}:${process.env.NEXT_PUBLIC_IMAGE_PORT}${src}`}
+        className={`rounded-3xl ${onClick ? 'cursor-pointer' : ''} ${className}`}
+        src={`${ImageApi.downloadImage(data.thumbnail)}`}
         alt="thumbnail"
         width={isMobile ? 40 : 50}
         height={isMobile ? 40 : 50}
         onClick={onClickHandler}
       />
-    </>
+    </div>
   ) : (
     <HumanSvg />
   );
