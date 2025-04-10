@@ -2,12 +2,20 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 
 import BoardApi from '@/api/board/board.api';
 
+import { IMARKET_TYPE } from '@/constant/stock';
+
 import { IBoardListRes } from '@/types/res';
 
-export const useBoardListQuery = () => {
+interface IProps {
+  marketType: IMARKET_TYPE;
+}
+
+export const useBoardListQuery = (props: IProps) => {
+  const { marketType } = props;
+
   return useInfiniteQuery({
-    queryKey: ['board-list'],
-    queryFn: ({ pageParam }) => BoardApi.getBoardList(pageParam),
+    queryKey: ['board-list', marketType],
+    queryFn: ({ pageParam }) => BoardApi.getBoardList({ pageParam, marketType }),
     getNextPageParam: (lastPage) => {
       const { nextPage } = lastPage.data.data;
 

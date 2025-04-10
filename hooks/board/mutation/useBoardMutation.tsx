@@ -27,7 +27,7 @@ export const useBoardMutation = () => {
       alert('게시글이 수정되었습니다.');
 
       await queryClient.resetQueries({ queryKey: ['board-detail', variables.boardSeq] });
-      // navigate('/board');
+      router.push(`/board/detail/${variables.boardSeq}`);
     },
     onError: (err) => {
       console.error(err);

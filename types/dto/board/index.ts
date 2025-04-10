@@ -1,4 +1,13 @@
+import { IMARKET_TYPE } from '@/constant/stock';
+
+// 게시판
+export interface IBoardListDto {
+  pageParam: number;
+  marketType: IMARKET_TYPE;
+}
+
 interface IBaseBoardDto {
+  marketType: IMARKET_TYPE;
   title: string;
   content: string;
 }
@@ -9,6 +18,7 @@ export interface IUpdateBoardDto extends IBaseBoardDto {
   boardSeq: number;
 }
 
+// 게시판 댓글
 export interface IBaseBoardCommentDto {
   content: string;
   boardSeq: number;

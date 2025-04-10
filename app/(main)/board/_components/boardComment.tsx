@@ -54,11 +54,11 @@ export default function BoardComment(props: IProps) {
 
           {isSuccess ? (
             data.total > 0 ? (
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col">
                 {data.boardComments.map((boardComment, idx) => (
                   <div
                     key={boardComment.boardCommentSeq}
-                    className={`flex flex-col gap-2 ${data.total !== idx + 1 ? 'border-b border-gray-300 pb-2' : ''}`}
+                    className={`flex flex-col gap-2 py-4 ${data.total !== idx + 1 ? 'border-b border-gray-300' : ''}`}
                   >
                     <div className="flex justify-between items-center gap-2">
                       <Text value={boardComment.user.nickname} />
@@ -98,7 +98,6 @@ export default function BoardComment(props: IProps) {
             name="comment"
             value={comment}
             onChange={(event) => setComment(event.target.value)}
-            onKeyDown={createClickHandler}
             placeholder="댓글을 입력해주세요"
             isPlus
             plusClick={createClickHandler}

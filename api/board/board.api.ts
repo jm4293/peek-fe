@@ -1,6 +1,9 @@
 import { AxiosConfig } from '@/common/axios';
 
+import { IMARKET_TYPE } from '@/constant/stock';
+
 import {
+  IBoardListDto,
   ICreateBoardCommentDto,
   ICreateBoardDto,
   IDeleteBoardCommentDto,
@@ -13,8 +16,13 @@ class BoardApi extends AxiosConfig {
   private readonly _baseURL = '/board';
 
   // 게시판
-  async getBoardList(pageParam: number) {
-    return await this.get<IBoardListRes, { pageParam: number }>({ url: `${this._baseURL}`, params: { pageParam } });
+  async getBoardList(dto: IBoardListDto) {
+    const { marketType, ...res } = dto;
+
+    return await this.get<IBoardListRes, { pageParam: number; marketType: string | undefined }>({
+      url: `${this._baseURL}`,
+      params: { marketType: marketType === 'ALL' ? undefined : marketType, ...res },
+    });
   }
 
   async getBoardListMine(pageParam: number) {

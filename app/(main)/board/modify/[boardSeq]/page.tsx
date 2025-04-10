@@ -13,8 +13,8 @@ export default async function Page({ params }: IProps) {
   const boardDetail: IBoardDetailRes = await GetBoardDetail(Number(boardSeq));
 
   return (
-    <>
+    <div>
       <BoardModify board={boardDetail.board} />
-    </>
+    </div>
   );
 }

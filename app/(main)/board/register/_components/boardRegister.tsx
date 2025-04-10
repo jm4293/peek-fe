@@ -5,16 +5,25 @@ import { useState } from 'react';
 
 import Button from '@/components/button/button';
 import Input from '@/components/input/input';
+import Text from '@/components/text/text';
 import Textarea from '@/components/textarea/textarea';
 import Wrapper from '@/components/wrapper/wrapper';
 
+import { IMARKET_TYPE, MARKET_TYPE } from '@/constant/stock';
+
 export default function BoardRegister() {
+  const [marketType, setMarketType] = useState<IMARKET_TYPE | null>(null);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
   const { createBoardMutation } = useBoardMutation();
 
   const clickHandler = () => {
+    if (!marketType) {
+      alert('종목을 선택해주세요');
+      return;
+    }
+
     if (!title || !title.trim()) {
       alert('제목을 입력해주세요');
       return;
@@ -25,13 +34,33 @@ export default function BoardRegister() {
       return;
     }
 
-    createBoardMutation.mutate({ title, content });
+    createBoardMutation.mutate({ marketType, title, content });
   };
 
   return (
     <Wrapper>
       <div className="flex flex-col gap-8">
         <div className="col-span-5 flex flex-col gap-4">
+          <div className="flex gap-4">
+            {Object.entries(MARKET_TYPE).reduce((acc: React.ReactNode[], [key, value]) => {
+              if (key === 'ALL') {
+                return acc;
+              }
+
+              acc.push(
+                <Text
+                  key={key}
+                  value={value}
+                  color={`${marketType === key ? 'black' : 'gray'}`}
+                  weight={`${marketType === key ? 'bold' : 'normal'}`}
+                  onClick={() => setMarketType(key as IMARKET_TYPE)}
+                />,
+              );
+
+              return acc;
+            }, [])}
+          </div>
+
           <Input
             type="text"
             title="제목"

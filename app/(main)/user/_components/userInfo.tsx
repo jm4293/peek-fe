@@ -22,9 +22,9 @@ export default function UserInfo() {
   if (!isSuccess) {
     return (
       <div className="flex flex-col gap-4">
-        <LineSkeleton height={1} />
-        <LineSkeleton height={1} />
-        <LineSkeleton height={1} />
+        <LineSkeleton height={2} />
+        <LineSkeleton height={2} />
+        <LineSkeleton height={2} />
       </div>
     );
   }

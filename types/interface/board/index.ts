@@ -1,7 +1,10 @@
+import { IMARKET_TYPE } from '@/constant/stock';
+
 import { IUser } from '@/types/interface';
 
 export interface IBoard {
   boardSeq: number;
+  marketType: IMARKET_TYPE;
   title: string;
   content: string;
   viewCount: number;
