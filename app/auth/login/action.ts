@@ -1,11 +1,14 @@
 'use server';
 
-import { ILoginEmailDto, ILoginOauthDto } from '@/types/dto';
-import utilFetch from '@/utils/fetch';
 import { cookies } from 'next/headers';
-import { ACCESS_TOKEN_COOKIE_TIME, REFRESH_TOKEN_COOKIE_TIME } from '@/constant/expire-time';
-import { ResCodeEnum, UserAccountTypeEnum } from '@/constant/enum';
 import { redirect } from 'next/navigation';
+
+import { ResCodeEnum, UserAccountTypeEnum } from '@/constant/enum';
+import { ACCESS_TOKEN_COOKIE_TIME, REFRESH_TOKEN_COOKIE_TIME } from '@/constant/expire-time';
+
+import { ILoginEmailDto, ILoginOauthDto } from '@/types/dto';
+
+import utilFetch from '@/utils/fetch';
 
 export async function loginEmail(formData: FormData) {
   const body: ILoginEmailDto = {

@@ -1,6 +1,7 @@
 'use client';
 
 import { usePathname, useRouter } from 'next/navigation';
+
 import { AlertSvg } from '@/asset/svg';
 
 export default function HeaderAlert() {

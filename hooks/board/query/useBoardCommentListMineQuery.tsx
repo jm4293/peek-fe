@@ -1,4 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
+
 import BoardApi from '@/api/board/board.api';
 
 export const useBoardCommentListMineQuery = () => {

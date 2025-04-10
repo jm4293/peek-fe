@@ -1,11 +1,13 @@
 'use client';
 
-import { registerUser } from '@/app/auth/register/actions';
-import Button from '@/components/button/button';
-import Input from '@/components/input/input';
-import { useState, useTransition } from 'react';
 import { useAuthMutation } from '@/hooks';
 import { useRouter } from 'next/navigation';
+import { useState, useTransition } from 'react';
+
+import { registerUser } from '@/app/auth/register/actions';
+
+import Button from '@/components/button/button';
+import Input from '@/components/input/input';
 
 export default function Form() {
   const router = useRouter();

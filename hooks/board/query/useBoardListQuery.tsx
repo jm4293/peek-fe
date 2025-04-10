@@ -1,5 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
+
 import BoardApi from '@/api/board/board.api';
+
 import { IBoardListRes } from '@/types/res';
 
 export const useBoardListQuery = () => {

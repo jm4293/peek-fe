@@ -1,8 +1,9 @@
 'use client';
 
 import { JSX, useEffect, useRef } from 'react';
-import Text from '@/components/text/text';
+
 import LineSkeleton from '@/components/skeleton/lineSkeleton';
+import Text from '@/components/text/text';
 import Wrapper from '@/components/wrapper/wrapper';
 
 interface IProps<T> {

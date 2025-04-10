@@ -1,8 +1,9 @@
 'use client';
 
-import Button from '@/components/button/button';
-import { useRouter } from 'next/navigation';
 import { useBoardMutation } from '@/hooks';
+import { useRouter } from 'next/navigation';
+
+import Button from '@/components/button/button';
 
 interface IProps {
   boardSeq: string;

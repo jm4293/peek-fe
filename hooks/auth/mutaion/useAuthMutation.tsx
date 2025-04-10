@@ -1,10 +1,12 @@
-import AuthApi from '@/api/auth/auth.api';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { ICheckEmailDto } from '@/types/dto';
-import { useRouter } from 'next/navigation';
-import axios from 'axios';
 import { LocalStorage, SessionStorage } from '@/utils';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
+
+import AuthApi from '@/api/auth/auth.api';
 import UserApi from '@/api/user/user.api';
+
+import { ICheckEmailDto } from '@/types/dto';
 
 export const useAuthMutation = () => {
   const queryClient = useQueryClient();

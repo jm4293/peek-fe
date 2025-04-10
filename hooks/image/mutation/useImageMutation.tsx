@@ -1,4 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
+
 import ImageApi from '@/api/image/image.api';
 
 export const useImageMutation = () => {

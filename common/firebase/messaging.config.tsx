@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+
 import { requestForToken } from '@/common/firebase/firebase.config';
 
 interface IProps {

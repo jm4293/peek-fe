@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
+
 import Text from '@/components/text/text';
 
 interface IProps {

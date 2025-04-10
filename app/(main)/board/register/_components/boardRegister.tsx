@@ -1,10 +1,11 @@
 'use client';
 
-import Input from '@/components/input/input';
-import Button from '@/components/button/button';
-import Textarea from '@/components/textarea/textarea';
-import { useState } from 'react';
 import { useBoardMutation } from '@/hooks';
+import { useState } from 'react';
+
+import Button from '@/components/button/button';
+import Input from '@/components/input/input';
+import Textarea from '@/components/textarea/textarea';
 import Wrapper from '@/components/wrapper/wrapper';
 
 export default function BoardRegister() {

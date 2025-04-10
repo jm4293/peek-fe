@@ -1,8 +1,10 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import AuthApi from '@/api/auth/auth.api';
-import CryptoJS from 'crypto-js';
-import { ResConfig } from '@/types/res.config';
 import { SessionStorage } from '@/utils';
+import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+import CryptoJS from 'crypto-js';
+
+import AuthApi from '@/api/auth/auth.api';
+
+import { ResConfig } from '@/types/res.config';
 
 interface IGetReq<D> {
   url: string;

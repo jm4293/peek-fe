@@ -1,8 +1,10 @@
 'use client';
 
-import { ImageTypeEnum } from '@/constant/enum';
-import { HumanSvg } from '@/asset/svg';
 import { useDeviceLayout } from '@/hooks';
+
+import { HumanSvg } from '@/asset/svg';
+
+import { ImageTypeEnum } from '@/constant/enum';
 
 interface IProps {
   src: string | undefined;

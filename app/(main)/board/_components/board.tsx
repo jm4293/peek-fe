@@ -1,14 +1,16 @@
 'use client';
 
 import { useBoardListQuery } from '@/hooks';
-import { IBoard } from '@/types/interface';
+import { Dayjs } from '@/utils';
 import { useRouter } from 'next/navigation';
-import InfinityListWrapper from '@/components/infinity-list/infinityListWrapper';
+import { BiComment, BiHeart } from 'react-icons/bi';
+
 import InfinityList from '@/components/infinity-list/infinityList';
+import InfinityListWrapper from '@/components/infinity-list/infinityListWrapper';
 import Text from '@/components/text/text';
 import Wrapper from '@/components/wrapper/wrapper';
-import { BiComment, BiHeart } from 'react-icons/bi';
-import { Dayjs } from '@/utils';
+
+import { IBoard } from '@/types/interface';
 
 export default function Board() {
   const router = useRouter();

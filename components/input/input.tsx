@@ -1,7 +1,8 @@
 'use client';
 
-import Text from '@/components/text/text';
 import { BiPlusCircle } from 'react-icons/bi';
+
+import Text from '@/components/text/text';
 
 interface IProps {
   type: 'text' | 'email' | 'password' | 'date' | 'datetime-local';

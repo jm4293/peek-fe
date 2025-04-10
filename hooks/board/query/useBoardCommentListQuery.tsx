@@ -1,5 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
+
 import BoardApi from '@/api/board/board.api';
+
 import { IBoardCommentListRes } from '@/types/res';
 
 interface IProps {

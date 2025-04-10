@@ -1,8 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import HomeApi from '@/api/home/home.api';
 import { AxiosResponse } from 'axios';
-import { ResConfig } from '@/types/res.config';
+
+import HomeApi from '@/api/home/home.api';
+
 import { IHomeRecentBoardListRes } from '@/types/res';
+import { ResConfig } from '@/types/res.config';
 
 export const useHomeRecentBoardListQuery = () => {
   return useQuery({

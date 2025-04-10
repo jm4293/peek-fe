@@ -1,8 +1,10 @@
 'use server';
 
 import { redirect } from 'next/navigation';
-import utilFetch from '@/utils/fetch';
+
 import { ISignUpDto } from '@/types/dto';
+
+import utilFetch from '@/utils/fetch';
 
 interface IBody extends ISignUpDto {}
 

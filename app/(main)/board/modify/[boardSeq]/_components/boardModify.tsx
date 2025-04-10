@@ -1,11 +1,13 @@
 'use client';
 
+import { useBoardMutation } from '@/hooks';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
+
+import Button from '@/components/button/button';
 import Input from '@/components/input/input';
 import Textarea from '@/components/textarea/textarea';
-import Button from '@/components/button/button';
-import { useBoardMutation } from '@/hooks';
+
 import { IBoard } from '@/types/interface';
 
 interface IProps {

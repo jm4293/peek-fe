@@ -1,4 +1,5 @@
 import { UserAccountTypeEnum } from '@/constant/enum';
+
 import { INotification } from '@/types/interface';
 
 export interface IMyInfoRes {

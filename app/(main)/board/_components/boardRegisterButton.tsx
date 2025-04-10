@@ -1,7 +1,8 @@
 'use client';
 
-import { BoardRegisterSvg } from '@/asset/svg/boardRegisterSvg';
 import { useRouter } from 'next/navigation';
+
+import { BoardRegisterSvg } from '@/asset/svg/boardRegisterSvg';
 
 export default function BoardRegisterButton() {
   const router = useRouter();

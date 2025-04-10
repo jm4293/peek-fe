@@ -1,8 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import UserApi from '@/api/user/user.api';
 import { AxiosResponse } from 'axios';
-import { ResConfig } from '@/types/res.config';
+
+import UserApi from '@/api/user/user.api';
+
 import { IMyInfoRes } from '@/types/res';
+import { ResConfig } from '@/types/res.config';
 
 type MyInfoRes = AxiosResponse<ResConfig<IMyInfoRes>, any>;
 

@@ -1,14 +1,16 @@
 'use client';
 
 import { useDebounce, useStockListQuery } from '@/hooks';
-import Text from '@/components/text/text';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+
+import Input from '@/components/input/input';
 import LineSkeleton from '@/components/skeleton/lineSkeleton';
 import VirtualTable from '@/components/table/virtualTable';
+import Text from '@/components/text/text';
 import Wrapper from '@/components/wrapper/wrapper';
-import Input from '@/components/input/input';
+
 import { StockKindDescription } from '@/constant/enum';
-import { useRouter } from 'next/navigation';
 
 export default function StockSearch() {
   const router = useRouter();
@@ -40,7 +42,8 @@ export default function StockSearch() {
     return (
       <div
         className="w-full flex justify-between items-center cursor-pointer"
-        onClick={(event) => clickHandler({ event, index })}>
+        onClick={(event) => clickHandler({ event, index })}
+      >
         <div className="flex gap-4">
           <Text value={StockKindDescription[stocks[index].marketType]} />
           <Text value={String(stocks[index].companyName)} />

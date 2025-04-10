@@ -1,8 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import KisApi from '@/api/kis/kis.api';
 import { AxiosResponse } from 'axios';
-import { ResConfig } from '@/types/res.config';
+
+import KisApi from '@/api/kis/kis.api';
+
 import { IKisOauthTokenRes } from '@/types/res';
+import { ResConfig } from '@/types/res.config';
 
 type KisOauthTokenRes = AxiosResponse<ResConfig<IKisOauthTokenRes>, any>;
 

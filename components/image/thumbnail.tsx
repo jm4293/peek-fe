@@ -1,11 +1,14 @@
 'use client';
 
-import { HumanSvg } from '@/asset/svg';
 import { useDeviceLayout, useImageMutation, useMyInfoQuery } from '@/hooks';
-import { useRef } from 'react';
-import ThumbnailSkeleton from '@/components/skeleton/thumbnailSkeleton';
-import ImageApi from '@/api/image/image.api';
 import { useQueryClient } from '@tanstack/react-query';
+import { useRef } from 'react';
+
+import ImageApi from '@/api/image/image.api';
+
+import { HumanSvg } from '@/asset/svg';
+
+import ThumbnailSkeleton from '@/components/skeleton/thumbnailSkeleton';
 
 interface IProps {
   onClick?: boolean;

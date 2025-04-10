@@ -1,12 +1,12 @@
 'use client';
 
 import { useAuthMutation, useMyInfoQuery } from '@/hooks';
-import Text from '@/components/text/text';
-import Thumbnail from '@/components/image/thumbnail';
-import Wrapper from '@/components/wrapper/wrapper';
-
 import { MdOutlineArrowForwardIos } from 'react-icons/md';
+
+import Thumbnail from '@/components/image/thumbnail';
 import LineSkeleton from '@/components/skeleton/lineSkeleton';
+import Text from '@/components/text/text';
+import Wrapper from '@/components/wrapper/wrapper';
 
 export default function UserInfo() {
   const { data, isSuccess } = useMyInfoQuery();

@@ -1,13 +1,15 @@
 'use client';
 
 import { useBoardCommentListQuery, useBoardCommentMutation } from '@/hooks';
-import Text from '@/components/text/text';
-import Input from '@/components/input/input';
-import { useState } from 'react';
-import { DeleteSvg } from '@/asset/svg/deleteSvg';
-import Wrapper from '@/components/wrapper/wrapper';
-import LineSkeleton from '@/components/skeleton/lineSkeleton';
 import { Dayjs } from '@/utils';
+import { useState } from 'react';
+
+import { DeleteSvg } from '@/asset/svg/deleteSvg';
+
+import Input from '@/components/input/input';
+import LineSkeleton from '@/components/skeleton/lineSkeleton';
+import Text from '@/components/text/text';
+import Wrapper from '@/components/wrapper/wrapper';
 
 interface IProps {
   boardSeq: string;
@@ -56,7 +58,8 @@ export default function BoardComment(props: IProps) {
                 {data.boardComments.map((boardComment, idx) => (
                   <div
                     key={boardComment.boardCommentSeq}
-                    className={`flex flex-col gap-2 ${data.total !== idx + 1 ? 'border-b border-gray-300 pb-2' : ''}`}>
+                    className={`flex flex-col gap-2 ${data.total !== idx + 1 ? 'border-b border-gray-300 pb-2' : ''}`}
+                  >
                     <div className="flex justify-between items-center gap-2">
                       <Text value={boardComment.user.nickname} />
                       <Text value={Dayjs.formatMMDD(boardComment.createdAt)} color="gray" />

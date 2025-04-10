@@ -1,10 +1,13 @@
-import Text from '@/components/text/text';
-import { IBoardDetailRes } from '@/types/res';
-import { GetBoardDetail } from '@/app/(main)/board/detail/[boardSeq]/action';
-import BoardDetailButton from '@/app/(main)/board/_components/boardDetailButton';
-import Wrapper from '@/components/wrapper/wrapper';
 import { Dayjs } from '@/utils';
+
+import BoardDetailButton from '@/app/(main)/board/_components/boardDetailButton';
+import { GetBoardDetail } from '@/app/(main)/board/detail/[boardSeq]/action';
+
 import PreText from '@/components/text/preText';
+import Text from '@/components/text/text';
+import Wrapper from '@/components/wrapper/wrapper';
+
+import { IBoardDetailRes } from '@/types/res';
 
 interface IProps {
   boardSeq: string;

@@ -1,6 +1,7 @@
 'use client';
 
 import { JSX } from 'react';
+
 import Text from '@/components/text/text';
 import Wrapper from '@/components/wrapper/wrapper';
 

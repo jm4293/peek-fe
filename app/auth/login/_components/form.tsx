@@ -1,14 +1,18 @@
 'use client';
 
-import Input from '@/components/input/input';
-import { CheckBoxSvg } from '@/asset/svg';
-import Text from '@/components/text/text';
+import { useAuthMutation } from '@/hooks';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState, useTransition } from 'react';
-import Button from '@/components/button/button';
+
 import { loginEmail } from '@/app/auth/login/action';
+
+import { CheckBoxSvg } from '@/asset/svg';
+
+import Button from '@/components/button/button';
+import Input from '@/components/input/input';
+import Text from '@/components/text/text';
+
 import { ResCodeEnum } from '@/constant/enum';
-import { useAuthMutation } from '@/hooks';
 
 export default function Form() {
   const router = useRouter();

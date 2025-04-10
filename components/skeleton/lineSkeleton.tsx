@@ -1,5 +1,6 @@
-import styles from './skeleton.module.css';
 import Text from '@/components/text/text';
+
+import styles from './skeleton.module.css';
 
 interface IProps {
   height?: number;

@@ -1,11 +1,14 @@
 'use client';
 
-import { useEffect, useState, useTransition } from 'react';
-import { loginGoogle } from '@/app/auth/login/action';
 import { useAuthMutation } from '@/hooks';
 import { useRouter } from 'next/navigation';
-import { ResCodeEnum } from '@/constant/enum';
+import { useEffect, useState, useTransition } from 'react';
+
+import { loginGoogle } from '@/app/auth/login/action';
+
 import LineSkeleton from '@/components/skeleton/lineSkeleton';
+
+import { ResCodeEnum } from '@/constant/enum';
 
 export default function Form() {
   const router = useRouter();

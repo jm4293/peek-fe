@@ -1,5 +1,6 @@
-import { BackSvg } from '@/asset/svg';
 import { Suspense } from 'react';
+
+import { BackSvg } from '@/asset/svg';
 
 interface IProps {
   children: React.ReactNode;

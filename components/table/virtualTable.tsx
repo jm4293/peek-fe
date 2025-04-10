@@ -1,5 +1,5 @@
-import { useRef } from 'react';
 import { useVirtualizer } from '@tanstack/react-virtual';
+import { useRef } from 'react';
 
 interface IProps {
   total: number;
@@ -23,13 +23,15 @@ export default function VirtualTable(props: IProps) {
     <div
       ref={parentRef}
       className="flex flex-col gap-4 overflow-y-auto"
-      style={{ maxHeight: `${rowHeight ? rowHeight : '50vh'}` }}>
+      style={{ maxHeight: `${rowHeight ? rowHeight : '50vh'}` }}
+    >
       <div
         style={{
           height: `${rowVirtualizer.getTotalSize()}px`,
           width: '100%',
           position: 'relative',
-        }}>
+        }}
+      >
         {rowVirtualizer.getVirtualItems().map((virtualItem) => {
           return (
             <div
@@ -43,7 +45,8 @@ export default function VirtualTable(props: IProps) {
                 transform: `translateY(${virtualItem.start}px)`,
                 display: 'flex',
                 alignItems: 'center',
-              }}>
+              }}
+            >
               {renderRow(virtualItem.index)}
             </div>
           );

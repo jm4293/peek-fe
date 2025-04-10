@@ -1,5 +1,6 @@
-import { IKisOauthTokenRes } from '@/types/res';
 import { AxiosConfig } from '@/common/axios';
+
+import { IKisOauthTokenRes } from '@/types/res';
 
 class KisApi extends AxiosConfig {
   private readonly _baseURL = '/kis';

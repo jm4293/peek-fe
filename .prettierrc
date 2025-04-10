@@ -5,6 +5,20 @@
   "trailingComma": "all",
   "tabWidth": 2,
   "printWidth": 120,
+  "importOrder": [
+    "^@/api/(.*)$",
+    "^@/app/(.*)$",
+    "^@/asset/(.*)$",
+    "^@/common/(.*)$",
+    "^@/components/(.*)$",
+    "^@/constant/(.*)$",
+    "^@/hooks/(.*)$",
+    "^@/hooks/(.*)$",
+    "^@/types/(.*)$",
+    "^@/utils/(.*)$",
+    "^[./]"
+  ],
   "importOrderSeparation": true,
-  "importOrderSortSpecifiers": true
+  "importOrderSortSpecifiers": true,
+  "plugins": ["@trivago/prettier-plugin-sort-imports"]
 }
