@@ -5,8 +5,8 @@ interface IProps {
   params: Promise<{ boardSeq: string }>;
 }
 
-export default async function Page({ params }: IProps) {
-  const { boardSeq } = await params;
+export default async function Page(props: IProps) {
+  const { boardSeq } = await props.params;
 
   return (
     <div className="flex flex-col gap-2">

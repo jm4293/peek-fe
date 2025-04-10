@@ -39,7 +39,7 @@ export default function Thumbnail(props: IProps) {
     event.target.value = '';
   };
 
-  const onClickHandler = () => {
+  const clickHandler = () => {
     if (onClick) {
       inputRef.current?.click();
     }
@@ -58,7 +58,7 @@ export default function Thumbnail(props: IProps) {
         alt="thumbnail"
         width={isMobile ? 60 : 80}
         height={isMobile ? 60 : 80}
-        onClick={onClickHandler}
+        onClick={clickHandler}
       />
     </div>
   ) : (

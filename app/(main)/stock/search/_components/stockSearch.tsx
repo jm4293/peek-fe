@@ -8,12 +8,27 @@ import VirtualTable from '@/components/table/virtualTable';
 import Wrapper from '@/components/wrapper/wrapper';
 import Input from '@/components/input/input';
 import { StockKindDescription } from '@/constant/enum';
+import { useRouter } from 'next/navigation';
 
 export default function StockSearch() {
+  const router = useRouter();
+
   const [searchText, setSearchText] = useState('');
   const { debouncedText, isPending } = useDebounce({ text: searchText, delay: 400 });
 
   const { data, isSuccess, isLoading } = useStockListQuery({ text: debouncedText });
+
+  const clickHandler = (params: { event: React.MouseEvent<HTMLDivElement, MouseEvent>; index: number }) => {
+    const { event, index } = params;
+
+    event.stopPropagation();
+
+    if (!data) {
+      return;
+    }
+
+    router.push(`/stock/detail/${data.stocks[index].code}`);
+  };
 
   const renderRow = (index: number) => {
     if (!isSuccess) {
@@ -23,7 +38,9 @@ export default function StockSearch() {
     const { stocks } = data;
 
     return (
-      <div className="w-full flex justify-between items-center cursor-pointer">
+      <div
+        className="w-full flex justify-between items-center cursor-pointer"
+        onClick={(event) => clickHandler({ event, index })}>
         <div className="flex gap-4">
           <Text value={StockKindDescription[stocks[index].marketType]} />
           <Text value={String(stocks[index].companyName)} />
