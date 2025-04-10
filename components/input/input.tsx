@@ -37,7 +37,7 @@ export default function Input(props: IProps) {
     borderColor = 'gray',
     optional = false,
     className,
-    placeholder,
+    placeholder = '',
     disabled = false,
     required = false,
     onKeyDown,

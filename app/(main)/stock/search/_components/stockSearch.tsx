@@ -1,17 +1,19 @@
 'use client';
 
-import { useStockListQuery } from '@/hooks';
+import { useDebounce, useStockListQuery } from '@/hooks';
 import Text from '@/components/text/text';
 import { useState } from 'react';
 import LineSkeleton from '@/components/skeleton/lineSkeleton';
 import VirtualTable from '@/components/table/virtualTable';
-import Datalist from '@/components/select/datalist';
 import Wrapper from '@/components/wrapper/wrapper';
+import Input from '@/components/input/input';
+import { StockKindDescription } from '@/constant/enum';
 
 export default function StockSearch() {
   const [searchText, setSearchText] = useState('');
+  const { debouncedText, isPending } = useDebounce({ text: searchText, delay: 400 });
 
-  const { data, isSuccess } = useStockListQuery({});
+  const { data, isSuccess, isLoading } = useStockListQuery({ text: debouncedText });
 
   const renderRow = (index: number) => {
     if (!isSuccess) {
@@ -21,40 +23,45 @@ export default function StockSearch() {
     const { stocks } = data;
 
     return (
-      <div className="flex justify-between items-center">
-        <Text value={String(stocks[index].companyName)} />
+      <div className="w-full flex justify-between items-center cursor-pointer">
+        <div className="flex gap-4">
+          <Text value={StockKindDescription[stocks[index].marketType]} />
+          <Text value={String(stocks[index].companyName)} />
+        </div>
         <Text value={String(stocks[index].code)} />
       </div>
     );
   };
 
-  console.log('searchText', searchText);
-
   return (
     <div className="flex flex-col gap-4">
-      <Datalist
-        name="주식종목"
-        optionList={data?.stocks.map((el) => el.companyName)}
-        value={searchText}
-        onChange={(event) => setSearchText(event.target.value)}
-      />
-
       <Wrapper>
-        {isSuccess ? (
-          data?.total > 0 ? (
-            <VirtualTable total={data.total} renderRow={renderRow} />
-          ) : (
-            <Text value="검색 결과가 없습니다." />
-          )
-        ) : (
-          <div className="flex flex-col gap-2">
-            <LineSkeleton height={2} />
-            <LineSkeleton height={2} />
-            <LineSkeleton height={2} />
-            <LineSkeleton height={2} />
-          </div>
-        )}
+        <Input
+          type="text"
+          title="종목 검색"
+          name="search"
+          value={searchText}
+          onChange={(event) => setSearchText(event.target.value)}
+        />
       </Wrapper>
+
+      {isPending || isLoading ? (
+        <div className="flex flex-col gap-2">
+          <LineSkeleton height={2} />
+          <LineSkeleton height={2} />
+          <LineSkeleton height={2} />
+          <LineSkeleton height={2} />
+        </div>
+      ) : (
+        <Wrapper>
+          {isSuccess &&
+            (data?.total > 0 ? (
+              <VirtualTable total={data.total} renderRow={renderRow} />
+            ) : (
+              <Text value="검색 결과가 없습니다." />
+            ))}
+        </Wrapper>
+      )}
     </div>
   );
 }
