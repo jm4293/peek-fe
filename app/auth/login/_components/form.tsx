@@ -21,6 +21,7 @@ export default function Form() {
   const { registerMessagingTokenMutation } = useAuthMutation();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     event.stopPropagation();
 
     setErrorMessages('');
@@ -29,6 +30,8 @@ export default function Form() {
 
     startTransition(async () => {
       const ret = await loginEmail(formData);
+
+      console.log('1111', ret);
 
       if (ret.result === ResCodeEnum.SUCCESS) {
         //   if (Notification.permission === 'granted') {

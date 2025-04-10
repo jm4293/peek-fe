@@ -56,11 +56,10 @@ export default function BoardComment(props: IProps) {
                 {data.boardComments.map((boardComment, idx) => (
                   <div
                     key={boardComment.boardCommentSeq}
-                    className={`flex flex-col gap-2 ${data.total !== idx + 1 ? 'border-b border-gray-300 pb-2' : ''}`}
-                  >
+                    className={`flex flex-col gap-2 ${data.total !== idx + 1 ? 'border-b border-gray-300 pb-2' : ''}`}>
                     <div className="flex justify-between items-center gap-2">
                       <Text value={boardComment.user.nickname} />
-                      <Text value={Dayjs.formatMMDD(boardComment.createdAt)} />
+                      <Text value={Dayjs.formatMMDD(boardComment.createdAt)} color="gray" />
                     </div>
 
                     <div className="flex justify-between items-center gap-2">
@@ -88,8 +87,8 @@ export default function BoardComment(props: IProps) {
         </div>
       </Wrapper>
 
-      <div className="fixed w-full bottom-16 left-0 bg-white p-4">
-        {isAuth && (
+      {isAuth && (
+        <Wrapper>
           <Input
             type="text"
             title="댓글 등록"
@@ -101,8 +100,8 @@ export default function BoardComment(props: IProps) {
             isPlus
             plusClick={createClickHandler}
           />
-        )}
-      </div>
+        </Wrapper>
+      )}
     </>
   );
 }

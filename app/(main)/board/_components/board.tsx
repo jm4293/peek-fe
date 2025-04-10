@@ -31,7 +31,7 @@ export default function Board() {
         <div className="flex flex-col gap-4 cursor-pointer" onClick={(event) => clickHandler({ event, boardSeq })}>
           <div className="flex justify-between items-center gap-2">
             <Text value={title} nowrap ellipsis />
-            <Text value={Dayjs.formatYYMMDD(createdAt)} color="gray" />
+            <Text value={Dayjs.formatYYMMDD(createdAt)} color="gray" nowrap />
           </div>
 
           <div className="flex justify-between items-center">

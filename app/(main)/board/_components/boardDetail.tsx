@@ -25,7 +25,7 @@ export default async function BoardDetail(props: IProps) {
         <div className="flex flex-col gap-4">
           <div className="flex justify-between items-center gap-2">
             <Text value={user.nickname} color="gray" />
-            <Text value={Dayjs.formatYYMMDD(createdAt)} color="gray" />
+            <Text value={Dayjs.formatMMDD(createdAt)} color="gray" />
           </div>
 
           <div className="col-span-5 flex flex-col gap-4">

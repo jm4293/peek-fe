@@ -9,7 +9,7 @@ export default async function Page({ params }: IProps) {
   const { boardSeq } = await params;
 
   return (
-    <div className="flex flex-col gap-2 mb-32">
+    <div className="flex flex-col gap-2">
       <BoardDetail boardSeq={boardSeq} isAuth={true} />
       <BoardComment boardSeq={boardSeq} isAuth={true} />
     </div>
