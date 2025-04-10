@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.69.0",
+    "@tanstack/react-virtual": "^3.13.6",
     "axios": "^1.8.3",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.13",
