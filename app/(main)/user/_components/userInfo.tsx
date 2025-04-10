@@ -2,11 +2,11 @@
 
 import { useAuthMutation, useMyInfoQuery } from '@/hooks';
 import Text from '@/components/text/text';
-import Skeleton from '@/components/skeleton/skeleton';
 import Thumbnail from '@/components/image/thumbnail';
 import Wrapper from '@/components/wrapper/wrapper';
 
 import { MdOutlineArrowForwardIos } from 'react-icons/md';
+import LineSkeleton from '@/components/skeleton/lineSkeleton';
 
 export default function UserInfo() {
   const { data, isSuccess } = useMyInfoQuery();
@@ -20,7 +20,13 @@ export default function UserInfo() {
   };
 
   if (!isSuccess) {
-    return <Skeleton />;
+    return (
+      <div className="flex flex-col gap-4">
+        <LineSkeleton height={1} />
+        <LineSkeleton height={1} />
+        <LineSkeleton height={1} />
+      </div>
+    );
   }
 
   return (
@@ -68,6 +74,7 @@ export default function UserInfo() {
             </div>
           </div>
         </Wrapper>
+
         <Wrapper>
           <Text value="로그아웃" size="lg" onClick={clickHandler} color="red" />
         </Wrapper>

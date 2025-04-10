@@ -1,15 +1,10 @@
-'use client';
-
 interface IProps {
   value: string;
   color?: 'black' | 'gray' | 'red';
   size?: 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl';
   align?: 'left' | 'center' | 'right';
   weight?: 'normal' | 'bold';
-  onClick?: () => void;
   className?: string;
-  nowrap?: boolean;
-  ellipsis?: boolean;
 }
 
 const textColor = {
@@ -41,32 +36,14 @@ const fontWeight = {
   bold: 'font-bold',
 };
 
-export default function Text(props: IProps) {
-  const {
-    value,
-    color = 'black',
-    size = 'base',
-    align = 'left',
-    weight = 'normal',
-    onClick,
-    className,
-    nowrap,
-    ellipsis,
-  } = props;
-
-  const clickHandler = (event: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
-    if (onClick) {
-      onClick();
-    }
-  };
+export default function PreText(props: IProps) {
+  const { value, color = 'black', size = 'base', align = 'left', weight = 'normal', className } = props;
 
   return (
-    <p
-      className={`${textColor[color]} ${fontSize[size]} ${textAlign[align]} ${fontWeight[weight]} ${onClick && 'cursor-pointer'} ${nowrap && 'whitespace-nowrap'} ${ellipsis && 'overflow-hidden text-ellipsis'} ${className}`}
-      onClick={(event) => clickHandler(event)}
-      style={{ wordBreak: 'break-word' }}
+    <pre
+      className={`whitespace-pre-line ${textColor[color]} ${fontSize[size]} ${textAlign[align]} ${fontWeight[weight]} ${className}`}
     >
       {value}
-    </p>
+    </pre>
   );
 }

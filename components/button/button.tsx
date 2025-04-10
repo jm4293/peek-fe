@@ -30,7 +30,8 @@ export default function Button(props: IProps) {
       className={`w-full ${buttonColor[color]} py-4 ${className}`}
       type={type}
       onClick={clickHandler}
-      disabled={disabled}>
+      disabled={disabled}
+    >
       <p className="text-white text-base font-normal whitespace-nowrap">{title}</p>
     </button>
   );

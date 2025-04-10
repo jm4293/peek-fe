@@ -1,2 +1,2 @@
-export * from './skeleton';
+export * from './lineSkeleton';
 export * from './thumbnailSkeleton';

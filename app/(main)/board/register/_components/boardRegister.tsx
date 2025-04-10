@@ -14,12 +14,12 @@ export default function BoardRegister() {
   const { createBoardMutation } = useBoardMutation();
 
   const clickHandler = () => {
-    if (!title || title.trim() === '') {
+    if (!title || !title.trim()) {
       alert('제목을 입력해주세요');
       return;
     }
 
-    if (!content || content.trim() === '') {
+    if (!content || !content.trim()) {
       alert('내용을 입력해주세요');
       return;
     }

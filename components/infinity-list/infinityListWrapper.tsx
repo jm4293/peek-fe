@@ -15,8 +15,7 @@ export default function InfinityListWrapper(props: IProps) {
   return (
     <div className="w-full flex flex-col gap-4">
       <Wrapper>
-        <div className="flex justify-end items-center gap-1">
-          <Text value="총" size="lg" />
+        <div className="flex justify-end">
           <Text value={`${String(total)}개`} />
         </div>
       </Wrapper>

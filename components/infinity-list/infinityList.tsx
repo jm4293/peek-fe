@@ -1,8 +1,9 @@
 'use client';
 
 import { JSX, useEffect, useRef } from 'react';
-import Skeleton from '@/components/skeleton/skeleton';
 import Text from '@/components/text/text';
+import LineSkeleton from '@/components/skeleton/lineSkeleton';
+import Wrapper from '@/components/wrapper/wrapper';
 
 interface IProps<T> {
   data: T[] | undefined;
@@ -48,11 +49,13 @@ export default function InfinityList<T>(props: IProps<T>) {
           <div className="w-full flex flex-col gap-2">{data.map(renderItem)}</div>
 
           <div ref={loadMoreRef} className="flex justify-center items-center">
-            {isFetchingNextPage && <Skeleton />}
+            {isFetchingNextPage && <LineSkeleton text="로딩!!" height={2} />}
           </div>
         </>
       ) : (
-        <Text value="게시글이 없습니다." align="center" />
+        <Wrapper>
+          <Text value="게시글이 없습니다." align="center" />
+        </Wrapper>
       )}
     </>
   );

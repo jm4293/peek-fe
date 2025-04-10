@@ -1,11 +1,11 @@
 'use client';
 
 import { useEffect, useState, useTransition } from 'react';
-import Skeleton from '@/components/skeleton/skeleton';
 import { loginGoogle } from '@/app/auth/login/action';
 import { useAuthMutation } from '@/hooks';
 import { useRouter } from 'next/navigation';
 import { ResCodeEnum } from '@/constant/enum';
+import LineSkeleton from '@/components/skeleton/lineSkeleton';
 
 export default function Form() {
   const router = useRouter();
@@ -64,7 +64,7 @@ export default function Form() {
       <div className="text-center">
         <h1 className="text-2xl font-bold">Google 로그인중...</h1>
 
-        <Skeleton />
+        <LineSkeleton height={2} />
       </div>
     </>
   );

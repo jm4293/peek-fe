@@ -1,5 +1,14 @@
 import styles from './skeleton.module.css';
 
-export default function ThumbnailSkeleton() {
-  return <div className={`rounded-3xl w-[40px] h-[40px] ${styles.animatePulse}`} />;
+interface IProps {
+  width?: number;
+  height?: number;
+}
+
+export default function ThumbnailSkeleton(props: IProps) {
+  const { width = 1, height = 1 } = props;
+
+  return (
+    <div className={`rounded-3xl  ${styles.animatePulse}`} style={{ width: `${width}rem`, height: `${height}rem` }} />
+  );
 }

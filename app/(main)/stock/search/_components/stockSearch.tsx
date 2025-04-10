@@ -2,8 +2,8 @@
 
 import { useStockListQuery } from '@/hooks';
 import Text from '@/components/text/text';
-import Skeleton from '@/components/skeleton/skeleton';
 import { useState } from 'react';
+import LineSkeleton from '@/components/skeleton/lineSkeleton';
 
 export default function StockSearch() {
   const [searchText, setSearchText] = useState('');
@@ -30,7 +30,7 @@ export default function StockSearch() {
             <Text value="검색 결과가 없습니다." />
           )
         ) : (
-          <Skeleton />
+          <LineSkeleton height={2} />
         )}
       </div>
     </>

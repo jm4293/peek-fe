@@ -21,7 +21,6 @@ export default function Form() {
   const { registerMessagingTokenMutation } = useAuthMutation();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
     event.stopPropagation();
 
     setErrorMessages('');
