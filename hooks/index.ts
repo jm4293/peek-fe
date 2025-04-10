@@ -6,4 +6,5 @@ export * from './kis';
 export * from './stock';
 export * from './user';
 
+export * from './useDebounce';
 export * from './useDeviceLayout';
