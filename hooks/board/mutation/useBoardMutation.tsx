@@ -12,7 +12,7 @@ export const useBoardMutation = () => {
   const createBoardMutation = useMutation({
     mutationFn: (dto: ICreateBoardDto) => BoardApi.createBoard(dto),
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['board-list'] });
+      await queryClient.refetchQueries({ queryKey: ['board-list'] });
 
       router.push('/board');
     },
@@ -21,13 +21,17 @@ export const useBoardMutation = () => {
     },
   });
 
-  const modifyBoardMutation = useMutation({
+  const updateBoardMutation = useMutation({
     mutationFn: (dto: IUpdateBoardDto) => BoardApi.updateBoard(dto),
     onSuccess: async (_, variables) => {
+      const { boardSeq } = variables;
+
       alert('게시글이 수정되었습니다.');
 
-      await queryClient.resetQueries({ queryKey: ['board-detail', variables.boardSeq] });
-      router.push(`/board/detail/${variables.boardSeq}`);
+      await queryClient.invalidateQueries({ queryKey: ['board-detail', boardSeq] });
+      await queryClient.refetchQueries({ queryKey: ['board-list'] });
+
+      router.push(`/board/detail/${boardSeq}`);
     },
     onError: (err) => {
       console.error(err);
@@ -36,8 +40,10 @@ export const useBoardMutation = () => {
 
   const deleteBoardMutation = useMutation({
     mutationFn: (boardSeq: number) => BoardApi.deleteBoard(boardSeq),
-    onSuccess: () => {
+    onSuccess: async () => {
       router.push('/board');
+
+      await queryClient.invalidateQueries({ queryKey: ['board-list'] });
     },
     onError: (err) => {
       console.error(err);
@@ -56,7 +62,7 @@ export const useBoardMutation = () => {
 
   return {
     createBoardMutation,
-    modifyBoardMutation,
+    updateBoardMutation,
     deleteBoardMutation,
     boardLikeMutation,
   };

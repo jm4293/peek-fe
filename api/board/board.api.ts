@@ -5,8 +5,10 @@ import { IMARKET_TYPE } from '@/constant/stock';
 import {
   IBoardListDto,
   ICreateBoardCommentDto,
+  ICreateBoardCommentReplyDto,
   ICreateBoardDto,
   IDeleteBoardCommentDto,
+  IDeleteBoardCommentReplyDto,
   IUpdateBoardCommentDto,
   IUpdateBoardDto,
 } from '@/types/dto';
@@ -89,6 +91,24 @@ class BoardApi extends AxiosConfig {
     const { boardSeq, boardCommentSeq } = dto;
 
     return await this.delete<null, null>({ url: `${this._baseURL}/${boardSeq}/comment/${boardCommentSeq}` });
+  }
+
+  // 게시글 댓글 답장
+  async createBoardCommentReply(dto: ICreateBoardCommentReplyDto) {
+    const { boardSeq, boardCommentSeq, ...res } = dto;
+
+    return await this.post<null, Omit<ICreateBoardCommentReplyDto, 'boardSeq' | 'boardCommentSeq'>>({
+      url: `${this._baseURL}/${boardSeq}/comment/${boardCommentSeq}/reply`,
+      data: res,
+    });
+  }
+
+  async deleteBoardCommentReply(dto: IDeleteBoardCommentReplyDto) {
+    const { boardSeq, boardCommentSeq, boardCommentReplySeq } = dto;
+
+    return await this.delete<null, null>({
+      url: `${this._baseURL}/${boardSeq}/comment/${boardCommentSeq}/reply/${boardCommentReplySeq}`,
+    });
   }
 
   // 게시판 좋아요(찜)

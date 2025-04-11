@@ -12,7 +12,7 @@ export const useBoardCommentListQuery = (props: IProps) => {
   const { boardSeq } = props;
 
   return useInfiniteQuery({
-    queryKey: ['board-comment-list'],
+    queryKey: ['board-comment-list', boardSeq],
     queryFn: ({ pageParam = 1 }) => BoardApi.getBoardCommentList({ boardSeq: Number(boardSeq), pageParam }),
     getNextPageParam: (lastPage) => {
       const { nextPage } = lastPage.data.data;

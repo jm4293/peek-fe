@@ -28,7 +28,7 @@ export default function BoardModify(props: IProps) {
   const [content, setContent] = useState('');
   const boardSeqRef = useRef(pathName.split('/').at(-1));
 
-  const { modifyBoardMutation } = useBoardMutation();
+  const { updateBoardMutation } = useBoardMutation();
 
   const clickHandler = () => {
     if (!marketType) {
@@ -46,7 +46,7 @@ export default function BoardModify(props: IProps) {
       return;
     }
 
-    modifyBoardMutation.mutate({ marketType, boardSeq: Number(boardSeqRef.current), title, content });
+    updateBoardMutation.mutate({ marketType, boardSeq: Number(boardSeqRef.current), title, content });
   };
 
   useEffect(() => {

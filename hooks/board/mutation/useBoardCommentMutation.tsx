@@ -12,7 +12,7 @@ export const useBoardCommentMutation = () => {
     onSuccess: async (_, variables) => {
       const { boardSeq } = variables;
 
-      await queryClient.refetchQueries({ queryKey: ['board-comment-list'] });
+      await queryClient.invalidateQueries({ queryKey: ['board-comment-list', boardSeq] });
     },
     onError: (err) => {
       console.error(err);
@@ -22,7 +22,9 @@ export const useBoardCommentMutation = () => {
   const updateBoardCommentMutation = useMutation({
     mutationFn: (dto: IUpdateBoardCommentDto) => BoardApi.updateBoardComment(dto),
     onSuccess: async (_, variables) => {
-      await queryClient.invalidateQueries({ queryKey: [] });
+      const { boardSeq } = variables;
+
+      await queryClient.invalidateQueries({ queryKey: ['board-comment-list', boardSeq] });
     },
     onError: (err) => {
       console.error(err);
@@ -32,7 +34,9 @@ export const useBoardCommentMutation = () => {
   const deleteBoardCommentMutation = useMutation({
     mutationFn: (params: IDeleteBoardCommentDto) => BoardApi.deleteBoardComment(params),
     onSuccess: async (_, variables) => {
-      await queryClient.invalidateQueries({ queryKey: ['board-comment-list'] });
+      const { boardSeq } = variables;
+
+      await queryClient.invalidateQueries({ queryKey: ['board-comment-list', boardSeq] });
     },
     onError: (err) => {
       console.error(err);
