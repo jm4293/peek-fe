@@ -1,6 +1,6 @@
 import { AxiosConfig } from '@/common/axios';
 
-import { IReadNotificationDto, IRegisterPushTokenDto } from '@/types/dto';
+import { IReadNotificationDto, IRegisterPushTokenDto, IUpdateUserDto, IUpdateUserPasswordDto } from '@/types/dto';
 import { IMyInfoRes, INotificationListRes } from '@/types/res';
 
 class UserApi extends AxiosConfig {
@@ -10,10 +10,20 @@ class UserApi extends AxiosConfig {
     return await this.get<IMyInfoRes, null>({ url: `${this._baseURL}` });
   }
 
+  // 유저 정보 수정
+  async updateUser(dto: IUpdateUserDto) {
+    return await this.put<null, IUpdateUserDto>({ url: `${this._baseURL}`, data: dto });
+  }
+
+  async updatePassword(dto: IUpdateUserPasswordDto) {
+    return await this.patch<null, IUpdateUserPasswordDto>({ url: `${this._baseURL}/password`, data: dto });
+  }
+
   async postRegisterPushToken(dto: IRegisterPushTokenDto) {
     return await this.post<null, IRegisterPushTokenDto>({ url: `${this._baseURL}/push-token`, data: dto });
   }
 
+  // 알림
   async getNotificationList(pageParam: number) {
     return await this.get<INotificationListRes, { pageParam: number }>({
       url: `${this._baseURL}/notifications`,

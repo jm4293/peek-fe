@@ -43,7 +43,7 @@ export const useBoardMutation = () => {
     onSuccess: async () => {
       router.push('/board');
 
-      await queryClient.invalidateQueries({ queryKey: ['board-list'] });
+      await queryClient.refetchQueries({ queryKey: ['board-list'] });
     },
     onError: (err) => {
       console.error(err);
@@ -53,7 +53,7 @@ export const useBoardMutation = () => {
   const boardLikeMutation = useMutation({
     mutationFn: (boardSeq: number) => BoardApi.boardLike(boardSeq),
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['board-list'] });
+      await queryClient.refetchQueries({ queryKey: ['board-list'] });
     },
     onError: (err) => {
       console.error(err);
