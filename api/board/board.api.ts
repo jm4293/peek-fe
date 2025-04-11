@@ -95,19 +95,19 @@ class BoardApi extends AxiosConfig {
 
   // 게시글 댓글 답장
   async createBoardCommentReply(dto: ICreateBoardCommentReplyDto) {
-    const { boardSeq, boardCommentSeq, ...res } = dto;
+    const { boardCommentSeq, ...res } = dto;
 
-    return await this.post<null, Omit<ICreateBoardCommentReplyDto, 'boardSeq' | 'boardCommentSeq'>>({
-      url: `${this._baseURL}/${boardSeq}/comment/${boardCommentSeq}/reply`,
+    return await this.post<null, Omit<ICreateBoardCommentReplyDto, 'boardCommentSeq'>>({
+      url: `${this._baseURL}/${boardCommentSeq}/reply`,
       data: res,
     });
   }
 
   async deleteBoardCommentReply(dto: IDeleteBoardCommentReplyDto) {
-    const { boardSeq, boardCommentSeq, boardCommentReplySeq } = dto;
+    const { boardCommentSeq, boardCommentReplySeq } = dto;
 
     return await this.delete<null, null>({
-      url: `${this._baseURL}/${boardSeq}/comment/${boardCommentSeq}/reply/${boardCommentReplySeq}`,
+      url: `${this._baseURL}/${boardCommentSeq}/reply/${boardCommentReplySeq}`,
     });
   }
 

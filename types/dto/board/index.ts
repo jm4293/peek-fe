@@ -37,7 +37,6 @@ export interface IDeleteBoardCommentDto {
 
 // 게시글 댓글 답장
 interface IBaseBoardCommentReplyDto {
-  boardSeq: number;
   boardCommentSeq: number;
   content: string;
 }
@@ -45,7 +44,6 @@ interface IBaseBoardCommentReplyDto {
 export interface ICreateBoardCommentReplyDto extends IBaseBoardCommentReplyDto {}
 
 export interface IDeleteBoardCommentReplyDto {
-  boardSeq: number;
   boardCommentSeq: number;
   boardCommentReplySeq: number;
 }

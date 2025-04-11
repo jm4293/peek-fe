@@ -1,4 +1,4 @@
-import { IBoard, IBoardComment } from '@/types/interface';
+import { IBoard, IBoardComment, IBoardCommentReply } from '@/types/interface';
 
 export interface IBoardListRes {
   boards: IBoard[];
@@ -12,7 +12,10 @@ export interface IBoardDetailRes {
 }
 
 export interface IBoardCommentListRes {
-  boardComments: (IBoardComment & { isMine: boolean })[];
+  boardComments: (IBoardComment & {
+    isMine: boolean;
+    boardCommentReplies: (IBoardCommentReply & { isMine: boolean })[];
+  })[];
   total: number;
   nextPage: number | null;
 }

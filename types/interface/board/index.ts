@@ -30,3 +30,14 @@ export interface IBoardComment {
 
   user: IUser;
 }
+
+export interface IBoardCommentReply {
+  boardCommentReplySeq: number;
+  content: string;
+  createdAt: Date;
+  deletedAt: Date | null;
+  isDeleted: boolean;
+  updatedAt: Date;
+
+  user: IUser;
+}

@@ -12,7 +12,7 @@ export const useBoardCommentMutation = () => {
     onSuccess: async (_, variables) => {
       const { boardSeq } = variables;
 
-      await queryClient.invalidateQueries({ queryKey: ['board-comment-list', boardSeq] });
+      await queryClient.refetchQueries({ queryKey: ['board-comment-list', boardSeq] });
     },
     onError: (err) => {
       console.error(err);
@@ -36,7 +36,7 @@ export const useBoardCommentMutation = () => {
     onSuccess: async (_, variables) => {
       const { boardSeq } = variables;
 
-      await queryClient.invalidateQueries({ queryKey: ['board-comment-list', boardSeq] });
+      await queryClient.refetchQueries({ queryKey: ['board-comment-list', boardSeq] });
     },
     onError: (err) => {
       console.error(err);

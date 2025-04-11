@@ -80,7 +80,7 @@ export default function Input(props: IProps) {
           required={required}
           onKeyDown={keyDownHandler}
         />
-        {isPlus && <BiPlusCircle color="#666666" size={24} onClick={handlePlusClick} />}
+        {isPlus && <BiPlusCircle className="cursor-pointer" color="#666666" size={24} onClick={handlePlusClick} />}
       </div>
     </div>
   );

@@ -10,12 +10,14 @@
 
 input,
 button,
-textarea {
+textarea,
+select {
   cursor: pointer;
 }
 
 input,
-textarea {
+textarea,
+select {
   border-width: 1px;
   border-radius: 0.5rem;
   resize: none;
