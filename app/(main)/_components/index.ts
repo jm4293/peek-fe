@@ -1,5 +1,6 @@
+export * from './mobile-footer';
 export * from './header';
-export * from './headerTitle';
-export * from './navbar';
+export * from './header-alert';
+export * from './header-search';
 
-export * from './svg';
+export * from './mobile-header';

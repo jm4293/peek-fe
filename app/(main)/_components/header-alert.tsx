@@ -4,7 +4,7 @@ import { usePathname, useRouter } from 'next/navigation';
 
 import { AlertSvg } from '@/asset/svg';
 
-export default function HeaderAlert() {
+export function HeaderAlert() {
   const pathname = usePathname();
   const router = useRouter();
 

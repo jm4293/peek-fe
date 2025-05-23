@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter } from 'next/navigation';
 
-export default function HeaderSearch() {
+export function HeaderSearch() {
   const router = useRouter();
   const pathname = usePathname();
 

@@ -4,7 +4,7 @@ interface IProps {
   id?: string;
 }
 
-export const CheckBoxSvg = (props: IProps) => {
+export function CheckBoxSvg(props: IProps) {
   const { isCheck, onClick, id } = props;
 
   const clickHandler = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
@@ -24,8 +24,7 @@ export const CheckBoxSvg = (props: IProps) => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       onClick={clickHandler}
-      className="cursor-pointer"
-    >
+      className="cursor-pointer">
       <rect
         x="0.5"
         y="0.5"
@@ -43,4 +42,4 @@ export const CheckBoxSvg = (props: IProps) => {
       />
     </svg>
   );
-};
+}

@@ -2,7 +2,7 @@ interface IProps {
   onClick: () => void;
 }
 
-export const DeleteSvg = (props: IProps) => {
+export function DeleteSvg(props: IProps) {
   const { onClick } = props;
 
   const clickHandler = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
@@ -10,6 +10,7 @@ export const DeleteSvg = (props: IProps) => {
 
     onClick();
   };
+
   return (
     <svg
       width="26"
@@ -19,8 +20,7 @@ export const DeleteSvg = (props: IProps) => {
       xmlns="http://www.w3.org/2000/svg"
       className="cursor-pointer"
       onClick={clickHandler}
-      strokeWidth="1"
-    >
+      strokeWidth="1">
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -29,4 +29,4 @@ export const DeleteSvg = (props: IProps) => {
       />
     </svg>
   );
-};
+}

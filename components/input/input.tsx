@@ -5,7 +5,7 @@ import { BiPlusCircle } from 'react-icons/bi';
 import Text from '@/components/text/text';
 
 interface IProps {
-  type: 'text' | 'email' | 'password' | 'date' | 'datetime-local';
+  type: 'text' | 'email' | 'password' | 'date' | 'datetime-local' | 'checkbox';
   title: string;
   name: string;
   value?: string;
@@ -18,8 +18,10 @@ interface IProps {
   disabled?: boolean;
   required?: boolean;
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+  isError?: boolean;
   isPlus?: boolean;
   plusClick?: () => void;
+  children?: React.ReactNode;
 }
 
 const border_color = {
@@ -42,8 +44,10 @@ export default function Input(props: IProps) {
     disabled = false,
     required = false,
     onKeyDown,
+    isError = false,
     isPlus,
     plusClick,
+    children,
   } = props;
 
   const keyDownHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -65,11 +69,14 @@ export default function Input(props: IProps) {
   };
 
   return (
-    <div className="w-full flex flex-col gap-3">
-      <Text value={title} />
+    <div className="w-full flex flex-col gap-1">
+      <div className="pl-2">
+        <Text value={title} />
+      </div>
+
       <div className="flex items-center gap-2">
         <input
-          className={`${border_color[borderColor]} ${className}`}
+          className={`w-full ${border_color[borderColor]} ${isError ? 'border-red-500' : ''} ${className}`}
           name={name}
           type={type}
           value={value}
@@ -81,6 +88,7 @@ export default function Input(props: IProps) {
           onKeyDown={keyDownHandler}
         />
         {isPlus && <BiPlusCircle className="cursor-pointer" color="#666666" size={24} onClick={handlePlusClick} />}
+        {children && <div className="min-w-[80px]">{children}</div>}
       </div>
     </div>
   );

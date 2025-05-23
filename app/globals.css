@@ -8,10 +8,19 @@
   margin: 0;
 }
 
+*::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  background-color: #f2f2f5;
+}
+
 input,
 button,
 textarea,
-select {
+select,
+label {
   cursor: pointer;
 }
 
@@ -22,16 +31,12 @@ select {
   border-radius: 0.5rem;
   resize: none;
   padding: 0.75rem 1rem;
-  width: 100%;
+  /*width: 100%;*/
 }
 
 button {
   border: none;
   border-radius: 0.5rem;
-}
-
-*::-webkit-scrollbar {
-  display: none;
 }
 
 .modal-overlay {
@@ -68,12 +73,8 @@ button {
 }
 
 .layout {
-  min-width: 320px;
-  height: 100vh;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
-  position: relative;
 }
 
 @supports (-webkit-touch-callout: none) {
@@ -82,92 +83,76 @@ button {
   }
 }
 
-.layout > .header {
-  width: 100%;
-  position: absolute;
-  top: 0;
-  padding: 0 1.2rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  align-items: center;
+.layout > header {
+  min-width: 450px;
+  width: 100vw;
+  height: 4rem;
   background-color: white;
-  z-index: 40;
+  position: fixed;
+  transition: transform 0.3s;
+  transform: translateY(0);
+  display: flex;
+  align-items: center;
 }
 
-.layout > .content_wrapper {
-  overflow-x: hidden;
+.layout > header.hide {
+  transform: translateY(-100%);
+}
+
+.layout > main {
+  min-width: 450px;
   overflow-y: auto;
   background-color: #f2f2f5;
-  position: relative;
+  height: 100vh;
+  padding-top: 5rem;
 }
 
-.layout > .content_wrapper > .content {
-  /*padding: 1rem 0;*/
-  /*background-color: white;*/
-}
-
-.layout > .content_wrapper > .content > div {
-  padding: 0.5rem 1rem;
-}
-
-.layout > .navbar {
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background-color: white;
-  z-index: 40;
-}
-
-@media all and (max-width: 767px) {
+@media screen and (max-width: 950px) {
   .layout {
   }
-  .header {
-    height: 4rem;
+
+  header {
+    justify-content: start;
   }
-  .content_wrapper {
-    margin-top: 4rem;
-    min-height: calc(100vh - 8rem);
-    max-height: calc(100vh - 8rem);
+
+  header > div {
+    width: 100%;
   }
-  .navbar {
-    height: 4rem;
+
+  main {
+    padding: 0 2rem
   }
 }
 
-@media all and (min-width: 768px) and (max-width: 1023px) {
+@media screen and (min-width: 950px) and (max-width: 1200px) {
   .layout {
-    margin: 0 5rem;
   }
-  .header {
-    height: 4.5rem;
+
+  header {
+    justify-content: center;
   }
-  .content_wrapper {
-    margin-top: 4.5rem;
-    min-height: calc(100vh - 9rem);
-    max-height: calc(100vh - 9rem);
+
+  header > div {
+    width: 75%;
   }
-  .navbar {
-    height: 4.5rem;
+
+  main {
+    padding: 0 4rem
   }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1200px) {
   .layout {
-    max-width: 600px;
-    margin: 0 auto;
   }
-  .header {
-    height: 5rem;
+
+  header {
+    justify-content: center;
   }
-  .content_wrapper {
-    margin-top: 5rem;
-    min-height: calc(100vh - 10rem);
-    max-height: calc(100vh - 10rem);
+
+  header > div {
+    width: 75%;
   }
-  .navbar {
-    height: 5rem;
+  main {
+    padding: 0 16rem;
   }
 }
