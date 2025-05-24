@@ -1,6 +1,5 @@
 import { SessionStorage } from '@/utils';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import CryptoJS from 'crypto-js';
 
 import AuthApi from '@/api/auth/auth.api';
 
@@ -41,20 +40,21 @@ export class AxiosConfig {
 
   constructor() {
     this._axiosInstance = axios.create({
-      baseURL: `${process.env.NEXT_PUBLIC_API_URL}:${process.env.NEXT_PUBLIC_API_PORT}/${process.env.NEXT_PUBLIC_API_PREFIX}`,
+      baseURL: `${process.env.NEXT_PUBLIC_API_URL}:${process.env.NEXT_PUBLIC_API_PORT}`,
+      // baseURL: `${process.env.NEXT_PUBLIC_API_URL}`,
       headers: { 'Content-Type': 'application/json' },
       withCredentials: true,
     });
 
     this._axiosInstance.interceptors.request.use(
       (config) => {
-        // const AT = SessionStorage.getItem('AT');
-        //
-        // if (AT) {
-        //   if (config.headers) {
-        //     config.headers['Authorization'] = `Bearer ${AT}`;
-        //   }
-        // }
+        const accessToken = SessionStorage.getItem('accessToken');
+
+        if (accessToken) {
+          if (config.headers) {
+            config.headers['Authorization'] = `Bearer ${accessToken}`;
+          }
+        }
 
         return config;
       },
@@ -83,17 +83,17 @@ export class AxiosConfig {
         }
 
         if (error.response?.status === 401) {
-          // const ret = await AuthApi.postRefreshToken();
+          const ret = await AuthApi.postRefreshToken();
 
-          // const newAT = ret.data.data.accessToken;
+          const accessToken = ret.data.data.accessToken;
 
-          // SessionStorage.setItem('AT', newAT);
+          SessionStorage.setItem('accessToken', accessToken);
 
-          await AuthApi.postRefreshToken();
-
-          const originalRequest = error.config;
-
-          return this._axiosInstance(originalRequest);
+          // await AuthApi.postRefreshToken();
+          //
+          // const originalRequest = error.config;
+          //
+          // return this._axiosInstance(originalRequest);
         }
 
         if (error.response?.status === 403) {

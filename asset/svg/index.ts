@@ -7,5 +7,6 @@ export * from './check-box.svg';
 export * from './comment.svg';
 export * from './confirm.svg';
 export * from './delete.svg';
+export * from './google-oauth.svg';
 export * from './human.svg';
 export * from './human.svg';

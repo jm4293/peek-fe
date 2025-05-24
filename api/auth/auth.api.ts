@@ -6,26 +6,12 @@ import { ICheckEmailRes, ILoginRes, IRefreshTokenRes, ISignUpRes } from '@/types
 class AuthApi extends AxiosConfig {
   private readonly _baseURL = '/auth';
 
-  // async postSignUp(dto: ISignUpDto) {
-  //   return await this.post<ISignUpRes, ISignUpDto>({
-  //     url: `${this._baseURL}/register-email`,
-  //     data: dto,
-  //   });
-  // }
-
-  // async postSignInEmail(dto: ILoginEmailDto) {
-  //   return await this.post<ILoginRes, ILoginEmailDto>({
-  //     url: `${this._baseURL}/login-email`,
-  //     data: dto,
-  //   });
-  // }
-
-  // async postSignInOauth(dto: ILoginOauthDto) {
-  //   return await this.post<ILoginRes, ILoginOauthDto>({
-  //     url: `${this._baseURL}/login-oauth`,
-  //     data: dto,
-  //   });
-  // }
+  async postSignInEmail(dto: ILoginEmailDto) {
+    return await this.post<ILoginRes, ILoginEmailDto>({
+      url: `${this._baseURL}/login`,
+      data: dto,
+    });
+  }
 
   async postCheckEmail(dto: ICheckEmailDto) {
     return await this.post<ICheckEmailRes, ICheckEmailDto>({
@@ -33,6 +19,20 @@ class AuthApi extends AxiosConfig {
       data: dto,
     });
   }
+
+  async postSignUp(dto: ISignUpDto) {
+    return await this.post<ISignUpRes, ISignUpDto>({
+      url: `${this._baseURL}/register`,
+      data: dto,
+    });
+  }
+
+  // async postSignInOauth(dto: ILoginOauthDto) {
+  //   return await this.post<ILoginRes, ILoginOauthDto>({
+  //     url: `${this._baseURL}/login-oauth`,
+  //     data: dto,
+  //   });
+  // }
 
   async postLogout() {
     return await this.post<{}, {}>({ url: `${this._baseURL}/logout`, data: {} });

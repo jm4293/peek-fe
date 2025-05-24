@@ -6,14 +6,34 @@ import { useRouter } from 'next/navigation';
 import AuthApi from '@/api/auth/auth.api';
 import UserApi from '@/api/user/user.api';
 
-import { ICheckEmailDto } from '@/types/dto';
+import { ICheckEmailDto, ILoginEmailDto, ISignUpDto } from '@/types/dto';
 
 export const useAuthMutation = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
 
+  const signInMutation = useMutation({
+    mutationFn: (dto: ILoginEmailDto) => AuthApi.postSignInEmail(dto),
+    onSuccess: (res) => {
+      const { accessToken } = res.data.data;
+
+      SessionStorage.setItem('accessToken', accessToken);
+
+      router.push('/home');
+    },
+  });
+
   const checkEmailMutation = useMutation({
     mutationFn: (dto: ICheckEmailDto) => AuthApi.postCheckEmail(dto),
+  });
+
+  const signUpMutation = useMutation({
+    mutationFn: (dto: ISignUpDto) => AuthApi.postSignUp(dto),
+    onSuccess: (res) => {
+      const { email } = res.data.data;
+
+      router.push(`/auth/login?email=${email}`);
+    },
   });
 
   const registerMessagingTokenMutation = useMutation({
@@ -57,7 +77,10 @@ export const useAuthMutation = () => {
   });
 
   return {
+    signInMutation,
     checkEmailMutation,
+    signUpMutation,
+
     logoutMutation,
     registerMessagingTokenMutation,
   };
