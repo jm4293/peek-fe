@@ -67,7 +67,7 @@ export const useAuthMutation = () => {
 
       LocalStorage.clear();
       SessionStorage.clear();
-      axios.defaults.headers.common = {};
+      // axios.defaults.headers.common = {};
 
       router.push('/home');
     },
