@@ -3,8 +3,6 @@ import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 
 import AuthApi from '@/api/auth/auth.api';
 
-import { ResConfig } from '@/types/res.config';
-
 interface IGetReq<D> {
   url: string;
   params?: D;
@@ -85,7 +83,7 @@ export class AxiosConfig {
         if (error.response?.status === 401) {
           const ret = await AuthApi.postRefreshToken();
 
-          const accessToken = ret.data.data.accessToken;
+          const accessToken = ret.data.accessToken;
 
           SessionStorage.setItem('accessToken', accessToken);
 
@@ -108,22 +106,22 @@ export class AxiosConfig {
   }
 
   protected async get<T, D>({ url, params, headers }: IGetReq<D>) {
-    return await this._axiosInstance.get<ResConfig<T>>(url, { params, headers });
+    return await this._axiosInstance.get<T>(url, { params, headers });
   }
 
   protected async post<T, D>({ url, data, headers }: IPostReq<D>) {
-    return await this._axiosInstance.post<ResConfig<T>>(url, data, { headers });
+    return await this._axiosInstance.post<T>(url, data, { headers });
   }
 
   protected async put<T, D>({ url, data, headers }: IPutReq<D>) {
-    return await this._axiosInstance.put<ResConfig<T>>(url, data, { headers });
+    return await this._axiosInstance.put<T>(url, data, { headers });
   }
 
   protected async delete<T, D>({ url, data, headers }: IDeleteReq<D>) {
-    return await this._axiosInstance.delete<ResConfig<T>>(url, { data, headers });
+    return await this._axiosInstance.delete<T>(url, { data, headers });
   }
 
   protected async patch<T, D>({ url, data, headers }: IPatchReq<D>) {
-    return await this._axiosInstance.patch<ResConfig<T>>(url, data, { headers });
+    return await this._axiosInstance.patch<T>(url, data, { headers });
   }
 }

@@ -15,7 +15,7 @@ export const useAuthMutation = () => {
   const signInMutation = useMutation({
     mutationFn: (dto: ILoginEmailDto) => AuthApi.postSignInEmail(dto),
     onSuccess: (res) => {
-      const { accessToken } = res.data.data;
+      const { accessToken } = res.data;
 
       SessionStorage.setItem('accessToken', accessToken);
 
@@ -30,7 +30,7 @@ export const useAuthMutation = () => {
   const signUpMutation = useMutation({
     mutationFn: (dto: ISignUpDto) => AuthApi.postSignUp(dto),
     onSuccess: (res) => {
-      const { email } = res.data.data;
+      const { email } = res.data;
 
       router.push(`/auth/login?email=${email}`);
     },

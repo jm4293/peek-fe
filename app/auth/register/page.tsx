@@ -45,7 +45,7 @@ export default function Register() {
       { email: formData.email },
       {
         onSuccess: (res) => {
-          const { isExist } = res.data.data;
+          const { email, isExist } = res.data;
 
           if (isExist) {
             alert('이미 존재하는 이메일입니다.');
