@@ -37,7 +37,7 @@ export default function UserInfo() {
             <Thumbnail onClick />
 
             <div>
-              <Text value={data.nickname} />
+              <Text value={data.user.nickname} />
               <Text value={data.email} />
             </div>
           </div>
