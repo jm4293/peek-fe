@@ -10,7 +10,7 @@ export default function Header() {
   const lastScrollY = useRef(0);
 
   useEffect(() => {
-    setIsLoggedIn(!!SessionStorage.getItem('accessToken'));
+    setIsLoggedIn(!!SessionStorage.getItem('__xt__'));
 
     const handleScroll = () => {
       const currentY = window.scrollY;

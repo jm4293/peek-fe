@@ -9,7 +9,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/home', request.url));
   }
 
-  const cookie = request.cookies.get('refreshToken');
+  const cookie = request.cookies.get('__rt__');
 
   if (pathname === '/home') {
     if (!cookie) {

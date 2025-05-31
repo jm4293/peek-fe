@@ -3,34 +3,17 @@ import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 
 import AuthApi from '@/api/auth/auth.api';
 
-interface IGetReq<D> {
+interface IReq {
   url: string;
+  headers?: AxiosRequestConfig['headers'];
+}
+
+interface IGetReq<D> extends IReq {
   params?: D;
-  headers?: AxiosRequestConfig['headers'];
 }
 
-interface IPostReq<D> {
-  url: string;
+interface IPostReq<D> extends IReq {
   data: D;
-  headers?: AxiosRequestConfig['headers'];
-}
-
-interface IPutReq<D> {
-  url: string;
-  data: D;
-  headers?: AxiosRequestConfig['headers'];
-}
-
-interface IDeleteReq<D> {
-  url: string;
-  data?: D;
-  headers?: AxiosRequestConfig['headers'];
-}
-
-interface IPatchReq<D> {
-  url: string;
-  data: D;
-  headers?: AxiosRequestConfig['headers'];
 }
 
 export class AxiosConfig {
@@ -46,7 +29,7 @@ export class AxiosConfig {
 
     this._axiosInstance.interceptors.request.use(
       (config) => {
-        const accessToken = SessionStorage.getItem('accessToken');
+        const accessToken = SessionStorage.getItem('__xt__');
 
         if (accessToken) {
           if (config.headers) {
@@ -87,11 +70,9 @@ export class AxiosConfig {
 
           SessionStorage.setItem('accessToken', accessToken);
 
-          // await AuthApi.postRefreshToken();
-          //
-          // const originalRequest = error.config;
-          //
-          // return this._axiosInstance(originalRequest);
+          const originalRequest = error.config;
+
+          return this._axiosInstance(originalRequest);
         }
 
         if (error.response?.status === 403) {
@@ -113,15 +94,15 @@ export class AxiosConfig {
     return await this._axiosInstance.post<T>(url, data, { headers });
   }
 
-  protected async put<T, D>({ url, data, headers }: IPutReq<D>) {
+  protected async put<T, D>({ url, data, headers }: IPostReq<D>) {
     return await this._axiosInstance.put<T>(url, data, { headers });
   }
 
-  protected async delete<T, D>({ url, data, headers }: IDeleteReq<D>) {
-    return await this._axiosInstance.delete<T>(url, { data, headers });
+  protected async delete<T, D>({ url, params, headers }: IGetReq<D>) {
+    return await this._axiosInstance.delete<T>(url, { params, headers });
   }
 
-  protected async patch<T, D>({ url, data, headers }: IPatchReq<D>) {
+  protected async patch<T, D>({ url, data, headers }: IPostReq<D>) {
     return await this._axiosInstance.patch<T>(url, data, { headers });
   }
 }

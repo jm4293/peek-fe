@@ -17,7 +17,7 @@ export const useAuthMutation = () => {
     onSuccess: (res) => {
       const { accessToken } = res.data;
 
-      SessionStorage.setItem('accessToken', accessToken);
+      SessionStorage.setItem('__xt__', accessToken);
 
       router.push('/home');
     },
