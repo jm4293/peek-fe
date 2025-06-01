@@ -10,7 +10,21 @@ interface IProps {
 export default function QueryProvider(props: IProps) {
   const { children } = props;
 
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        // throwOnError: true,
+        throwOnError: false,
+        retry: 0,
+      },
+      mutations: {
+        throwOnError: false,
+        onError: (error) => {
+          console.error('Mutation error:', error);
+        },
+      },
+    },
+  });
 
   return (
     <QueryClientProvider client={queryClient}>

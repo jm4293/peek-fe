@@ -1,25 +1,23 @@
 export class LocalStorage {
-  static setItem(key: string, value: any): void {
+  static setItem(name: string, value: string) {
     if (typeof window !== 'undefined') {
-      localStorage.setItem(key, JSON.stringify(value));
+      localStorage.setItem(name, value);
     }
   }
 
-  static getItem(key: string): any {
+  static getItem(name: string) {
     if (typeof window !== 'undefined') {
-      const value = localStorage.getItem(key);
-      return value ? JSON.parse(value) : null;
-    }
-    return null;
-  }
-
-  static removeItem(key: string): void {
-    if (typeof window !== 'undefined') {
-      localStorage.removeItem(key);
+      return localStorage.getItem(name);
     }
   }
 
-  static clear(): void {
+  static removeItem(name: string) {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem(name);
+    }
+  }
+
+  static clear() {
     if (typeof window !== 'undefined') {
       localStorage.clear();
     }

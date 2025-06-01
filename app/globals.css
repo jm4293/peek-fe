@@ -20,7 +20,8 @@ input,
 button,
 textarea,
 select,
-label {
+label,
+li {
   cursor: pointer;
 }
 

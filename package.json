@@ -13,11 +13,13 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.69.0",
+    "@tanstack/react-query-devtools": "^5.79.0",
     "@tanstack/react-virtual": "^3.13.6",
     "axios": "^1.8.3",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.13",
     "firebase": "^11.5.0",
+    "jotai": "^2.12.5",
     "next": "^15.3.1",
     "prettier": "^3.5.3",
     "react": "^19.0.0",

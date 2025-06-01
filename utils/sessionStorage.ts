@@ -1,26 +1,46 @@
 export class SessionStorage {
-  static setItem(key: string, value: string) {
+  static setItem(name: string, value: string) {
     if (typeof window !== 'undefined') {
-      window.sessionStorage.setItem(key, value);
+      sessionStorage.setItem(name, value);
+    }
+  }
+  // static setItem(name: string, obj: { key: string; value: string }) {
+  //   if (typeof window !== 'undefined') {
+  //     const { key, value } = obj;
+  //
+  //     window.sessionStorage.setItem(key, JSON.stringify({ name, value }));
+  //   }
+  // }
+
+  static getItem(name: string) {
+    if (typeof window !== 'undefined') {
+      return sessionStorage.getItem(name);
     }
   }
 
-  static getItem(key: string) {
-    if (typeof window !== 'undefined') {
-      return window.sessionStorage.getItem(key);
-    }
-    return null;
-  }
+  // static getItem(name: string, key: string) {
+  //   if (typeof window !== 'undefined') {
+  //     const item = window.sessionStorage.getItem(key);
+  //
+  //     if (!item) {
+  //       return null;
+  //     }
+  //
+  //     const parsedItem = JSON.parse(item);
+  //
+  //     return parsedItem['name'] === name ? parsedItem.value : null;
+  //   }
+  // }
 
-  static removeItem(key: string) {
+  static removeItem(name: string) {
     if (typeof window !== 'undefined') {
-      window.sessionStorage.removeItem(key);
+      sessionStorage.removeItem(name);
     }
   }
 
   static clear() {
     if (typeof window !== 'undefined') {
-      window.sessionStorage.clear();
+      sessionStorage.clear();
     }
   }
 }

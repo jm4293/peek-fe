@@ -1,4 +1,4 @@
-import { SessionStorage } from '@/utils';
+import { LocalStorage, SessionStorage } from '@/utils';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 
 import AuthApi from '@/api/auth/auth.api';
@@ -29,7 +29,7 @@ export class AxiosConfig {
 
     this._axiosInstance.interceptors.request.use(
       (config) => {
-        const accessToken = SessionStorage.getItem('__xt__');
+        const accessToken = LocalStorage.getItem('__xt__');
 
         if (accessToken) {
           if (config.headers) {
@@ -56,11 +56,10 @@ export class AxiosConfig {
         }
 
         if (error.response?.status === 400) {
-          const { message } = error.response.data;
-
-          if (message) {
-            alert(message);
-          }
+          // const { message } = error.response.data;
+          // if (message) {
+          //   alert(message);
+          // }
         }
 
         if (error.response?.status === 401) {
@@ -68,7 +67,7 @@ export class AxiosConfig {
 
           const accessToken = ret.data.accessToken;
 
-          SessionStorage.setItem('accessToken', accessToken);
+          LocalStorage.setItem('__xt__', accessToken);
 
           const originalRequest = error.config;
 
