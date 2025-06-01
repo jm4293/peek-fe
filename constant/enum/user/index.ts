@@ -20,7 +20,4 @@ export enum UserStatusEnum {
   DELETE = 'DELETE',
 }
 
-export enum UserTypeEnum {
-  ADMIN = 'ADMIN',
-  USER = 'USER',
-}
+export * from './user-type.enum';

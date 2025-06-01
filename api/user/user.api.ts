@@ -1,7 +1,7 @@
 import { AxiosConfig } from '@/common/axios';
 
 import { IReadNotificationDto, IRegisterPushTokenDto, IUpdateUserDto, IUpdateUserPasswordDto } from '@/types/dto';
-import { IMyInfoRes, INotificationListRes } from '@/types/res';
+import { IMyInfoRes } from '@/types/res';
 
 class UserApi extends AxiosConfig {
   private readonly _baseURL = '/user';
@@ -25,10 +25,10 @@ class UserApi extends AxiosConfig {
 
   // 알림
   async getNotificationList(pageParam: number) {
-    return await this.get<INotificationListRes, { pageParam: number }>({
-      url: `${this._baseURL}/notifications`,
-      params: { pageParam },
-    });
+    // return await this.get<INotificationListRes, { pageParam: number }>({
+    //   url: `${this._baseURL}/notifications`,
+    //   params: { pageParam },
+    // });
   }
 
   async postNotificationRead(dto: IReadNotificationDto) {

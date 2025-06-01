@@ -1,10 +1,15 @@
-// import { INotification } from '@/types/interface';
-import { IUserAccount } from '@/types/model';
-
-export interface IMyInfoRes extends IUserAccount {}
-
-export interface INotificationListRes {
-  // notifications: INotification[];
-  // total: number;
-  // nextPage: number | null;
+export interface IUserRes {
+  nickname: string;
+  name: string;
+  birth: Date | null;
+  thumbnail: string | null;
+  createdAt: Date;
 }
+
+export interface IUserAccountRes {
+  email: string;
+  createdAt: Date;
+  user: IUserRes;
+}
+
+export interface IMyInfoRes extends IUserAccountRes {}

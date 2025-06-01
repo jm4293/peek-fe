@@ -1,6 +1,5 @@
 import { LocalStorage, SessionStorage } from '@/utils';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
 import AuthApi from '@/api/auth/auth.api';
@@ -17,7 +16,7 @@ export const useAuthMutation = () => {
     onSuccess: (res) => {
       const { accessToken } = res.data;
 
-      SessionStorage.setItem('__xt__', accessToken);
+      LocalStorage.setItem('__xt__', accessToken);
 
       router.push('/home');
     },
