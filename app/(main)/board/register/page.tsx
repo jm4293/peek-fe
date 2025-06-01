@@ -1,9 +1,5 @@
-import BoardRegister from '@/app/(main)/board/register/_components/boardRegister';
+import BoardRegister from '@/app/(main)/board/register/BoardRegister';
 
 export default function Page() {
-  return (
-    <div>
-      <BoardRegister />
-    </div>
-  );
+  return <BoardRegister />;
 }

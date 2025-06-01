@@ -1,7 +1,5 @@
 import { AxiosConfig } from '@/common/axios';
 
-import { IMARKET_TYPE } from '@/constant/stock';
-
 import {
   IBoardListDto,
   ICreateBoardCommentDto,
@@ -12,30 +10,33 @@ import {
   IUpdateBoardCommentDto,
   IUpdateBoardDto,
 } from '@/types/dto';
-import { IBoardCommentListRes, IBoardDetailRes, IBoardListRes } from '@/types/res/board';
+import { IBoardCategoryRes, IBoardListRes, IBoardRes } from '@/types/res';
 
 class BoardApi extends AxiosConfig {
   private readonly _baseURL = '/board';
 
-  // 게시판
-  async getBoardList(dto: IBoardListDto) {
-    const { marketType, ...res } = dto;
+  // 게시판 카테고리
+  async getBoardCategoryList() {
+    return await this.get<IBoardCategoryRes[], null>({ url: `${this._baseURL}/category` });
+  }
 
-    return await this.get<IBoardListRes, { pageParam: number; marketType: string | undefined }>({
+  // 게시판
+  async getBoardDetail(boardId: number) {
+    return await this.get<IBoardRes, null>({ url: `${this._baseURL}/${boardId}` });
+  }
+
+  async getBoardList(dto: IBoardListDto) {
+    return await this.get<IBoardListRes, { pageParam: number }>({
       url: `${this._baseURL}`,
-      params: { marketType: marketType === 'ALL' ? undefined : marketType, ...res },
+      params: dto,
     });
   }
 
   async getBoardListMine(pageParam: number) {
-    return await this.get<IBoardListRes, { pageParam: number }>({
-      url: `${this._baseURL}/mine`,
-      params: { pageParam },
-    });
-  }
-
-  async getBoardDetail(boardSeq: number) {
-    return await this.get<IBoardDetailRes, null>({ url: `${this._baseURL}/${boardSeq}` });
+    // return await this.get<IBoardListRes, { pageParam: number }>({
+    //   url: `${this._baseURL}/mine`,
+    //   params: { pageParam },
+    // });
   }
 
   async createBoard(dto: ICreateBoardDto) {
@@ -43,30 +44,30 @@ class BoardApi extends AxiosConfig {
   }
 
   async updateBoard(dto: IUpdateBoardDto) {
-    const { boardSeq, ...res } = dto;
+    const { boardId, ...res } = dto;
 
-    return await this.put<null, Omit<IUpdateBoardDto, 'boardSeq'>>({ url: `${this._baseURL}/${boardSeq}`, data: res });
+    return await this.put<null, Omit<IUpdateBoardDto, 'boardId'>>({ url: `${this._baseURL}/${boardId}`, data: res });
   }
 
-  async deleteBoard(boardSeq: number) {
-    return await this.delete<null, null>({ url: `${this._baseURL}/${boardSeq}` });
+  async deleteBoard(boardId: number) {
+    return await this.delete<null, null>({ url: `${this._baseURL}/${boardId}` });
   }
 
   // 게시판 댓글
   async getBoardCommentList(params: { boardSeq: number; pageParam: number }) {
     const { boardSeq, pageParam } = params;
 
-    return await this.get<IBoardCommentListRes, { pageParam: number }>({
-      url: `${this._baseURL}/${boardSeq}/comments`,
-      params: { pageParam },
-    });
+    // return await this.get<IBoardCommentListRes, { pageParam: number }>({
+    //   url: `${this._baseURL}/${boardSeq}/comments`,
+    //   params: { pageParam },
+    // });
   }
 
   async getBoardCommentListMine(pageParam: number) {
-    return await this.get<IBoardCommentListRes, { pageParam: number }>({
-      url: `${this._baseURL}/comment/mine`,
-      params: { pageParam },
-    });
+    // return await this.get<IBoardCommentListRes, { pageParam: number }>({
+    //   url: `${this._baseURL}/comment/mine`,
+    //   params: { pageParam },
+    // });
   }
 
   async createBoardComment(dto: ICreateBoardCommentDto) {

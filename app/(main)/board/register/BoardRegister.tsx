@@ -1,6 +1,6 @@
 'use client';
 
-import { useBoardMutation } from '@/hooks';
+import { useBoardCategoryList, useBoardMutation } from '@/hooks';
 import { useState } from 'react';
 
 import Button from '@/components/button/button';
@@ -9,17 +9,17 @@ import Text from '@/components/text/text';
 import Textarea from '@/components/textarea/textarea';
 import Wrapper from '@/components/wrapper/wrapper';
 
-import { IMARKET_TYPE, MARKET_TYPE } from '@/constant/stock';
-
 export default function BoardRegister() {
-  const [marketType, setMarketType] = useState<IMARKET_TYPE | null>(null);
+  const [category, setCategory] = useState<number | null>(null);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+
+  const { data: categoryList, isSuccess: categoryListIsSuccess } = useBoardCategoryList();
 
   const { createBoardMutation } = useBoardMutation();
 
   const clickHandler = () => {
-    if (!marketType) {
+    if (!category) {
       alert('종목을 선택해주세요');
       return;
     }
@@ -34,31 +34,28 @@ export default function BoardRegister() {
       return;
     }
 
-    createBoardMutation.mutate({ marketType, title, content });
+    createBoardMutation.mutate({ categoryId: category, title, content });
   };
 
   return (
     <Wrapper>
       <div className="flex flex-col gap-8">
-        <div className="col-span-5 flex flex-col gap-4">
-          <div className="flex gap-4">
-            {Object.entries(MARKET_TYPE).reduce((acc: React.ReactNode[], [key, value]) => {
-              if (key === 'ALL') {
-                return acc;
-              }
+        <div className="flex flex-col gap-4">
+          <div className="w-1/4 flex gap-4">
+            <div className="w-full flex flex-col gap-1">
+              <Text value="카테고리" />
 
-              acc.push(
-                <Text
-                  key={key}
-                  value={value}
-                  color={`${marketType === key ? 'black' : 'gray'}`}
-                  weight={`${marketType === key ? 'bold' : 'normal'}`}
-                  onClick={() => setMarketType(key as IMARKET_TYPE)}
-                />,
-              );
-
-              return acc;
-            }, [])}
+              <div className="flex gap-4">
+                {categoryList?.map((el) => (
+                  <Text
+                    key={el.id}
+                    value={el.name}
+                    color={`${category === el.id ? 'black' : 'gray'}`}
+                    onClick={() => setCategory(el.id)}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
 
           <Input

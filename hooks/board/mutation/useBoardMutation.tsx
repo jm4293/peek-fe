@@ -16,37 +16,28 @@ export const useBoardMutation = () => {
 
       router.push('/board');
     },
-    onError: (err) => {
-      console.error(err);
-    },
   });
 
   const updateBoardMutation = useMutation({
     mutationFn: (dto: IUpdateBoardDto) => BoardApi.updateBoard(dto),
     onSuccess: async (_, variables) => {
-      const { boardSeq } = variables;
+      const { boardId } = variables;
 
       alert('게시글이 수정되었습니다.');
 
-      await queryClient.invalidateQueries({ queryKey: ['board-detail', boardSeq] });
+      await queryClient.invalidateQueries({ queryKey: ['board-detail', boardId] });
       await queryClient.refetchQueries({ queryKey: ['board-list'] });
 
-      router.push(`/board/detail/${boardSeq}`);
-    },
-    onError: (err) => {
-      console.error(err);
+      router.push(`/board/${boardId}`);
     },
   });
 
   const deleteBoardMutation = useMutation({
-    mutationFn: (boardSeq: number) => BoardApi.deleteBoard(boardSeq),
+    mutationFn: (boardId: string) => BoardApi.deleteBoard(Number(boardId)),
     onSuccess: async () => {
       router.push('/board');
 
       await queryClient.refetchQueries({ queryKey: ['board-list'] });
-    },
-    onError: (err) => {
-      console.error(err);
     },
   });
 

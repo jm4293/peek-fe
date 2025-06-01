@@ -1,21 +1,20 @@
-import { IMARKET_TYPE } from '@/constant/stock';
-
 // 게시판
 export interface IBoardListDto {
   pageParam: number;
-  marketType: IMARKET_TYPE;
+  category?: string;
 }
 
 interface IBaseBoardDto {
-  marketType: IMARKET_TYPE;
   title: string;
   content: string;
 }
 
-export interface ICreateBoardDto extends IBaseBoardDto {}
+export interface ICreateBoardDto extends IBaseBoardDto {
+  categoryId: number;
+}
 
 export interface IUpdateBoardDto extends IBaseBoardDto {
-  boardSeq: number;
+  boardId: number;
 }
 
 // 게시판 댓글
