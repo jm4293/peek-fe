@@ -3,22 +3,15 @@ import { AxiosConfig } from '@/common/axios';
 import {
   IBoardListDto,
   ICreateBoardCommentDto,
-  ICreateBoardCommentReplyDto,
   ICreateBoardDto,
   IDeleteBoardCommentDto,
-  IDeleteBoardCommentReplyDto,
   IUpdateBoardCommentDto,
   IUpdateBoardDto,
 } from '@/types/dto';
-import { IBoardCategoryRes, IBoardListRes, IBoardRes } from '@/types/res';
+import { IBoardCommentListRes, IBoardListRes, IBoardRes } from '@/types/res';
 
 class BoardApi extends AxiosConfig {
   private readonly _baseURL = '/board';
-
-  // 게시판 카테고리
-  async getBoardCategoryList() {
-    return await this.get<IBoardCategoryRes[], null>({ url: `${this._baseURL}/category` });
-  }
 
   // 게시판
   async getBoardDetail(boardId: number) {
@@ -54,13 +47,13 @@ class BoardApi extends AxiosConfig {
   }
 
   // 게시판 댓글
-  async getBoardCommentList(params: { boardSeq: number; pageParam: number }) {
-    const { boardSeq, pageParam } = params;
+  async getBoardCommentList(params: { boardId: number; pageParam: number }) {
+    const { boardId, pageParam } = params;
 
-    // return await this.get<IBoardCommentListRes, { pageParam: number }>({
-    //   url: `${this._baseURL}/${boardSeq}/comments`,
-    //   params: { pageParam },
-    // });
+    return await this.get<IBoardCommentListRes, { pageParam: number }>({
+      url: `${this._baseURL}/${boardId}/comments`,
+      params: { pageParam },
+    });
   }
 
   async getBoardCommentListMine(pageParam: number) {
@@ -71,45 +64,27 @@ class BoardApi extends AxiosConfig {
   }
 
   async createBoardComment(dto: ICreateBoardCommentDto) {
-    const { boardSeq, ...res } = dto;
+    const { boardId, ...res } = dto;
 
-    return await this.post<null, Omit<ICreateBoardCommentDto, 'boardSeq'>>({
-      url: `${this._baseURL}/${boardSeq}/comment`,
+    return await this.post<null, Omit<ICreateBoardCommentDto, 'boardId'>>({
+      url: `${this._baseURL}/${boardId}/comment`,
       data: res,
     });
   }
 
   async updateBoardComment(dto: IUpdateBoardCommentDto) {
-    const { boardSeq, boardCommentSeq, ...res } = dto;
+    const { boardId, boardCommentSeq, ...res } = dto;
 
-    return await this.put<null, Omit<IUpdateBoardCommentDto, 'boardSeq' | 'boardCommentSeq'>>({
-      url: `${this._baseURL}/${boardSeq}/comment/${boardCommentSeq}`,
+    return await this.put<null, Omit<IUpdateBoardCommentDto, 'boardId' | 'boardCommentSeq'>>({
+      url: `${this._baseURL}/${boardId}/comment/${boardCommentSeq}`,
       data: res,
     });
   }
 
   async deleteBoardComment(dto: IDeleteBoardCommentDto) {
-    const { boardSeq, boardCommentSeq } = dto;
+    const { boardId, boardCommentId } = dto;
 
-    return await this.delete<null, null>({ url: `${this._baseURL}/${boardSeq}/comment/${boardCommentSeq}` });
-  }
-
-  // 게시글 댓글 답장
-  async createBoardCommentReply(dto: ICreateBoardCommentReplyDto) {
-    const { boardCommentSeq, ...res } = dto;
-
-    return await this.post<null, Omit<ICreateBoardCommentReplyDto, 'boardCommentSeq'>>({
-      url: `${this._baseURL}/${boardCommentSeq}/reply`,
-      data: res,
-    });
-  }
-
-  async deleteBoardCommentReply(dto: IDeleteBoardCommentReplyDto) {
-    const { boardCommentSeq, boardCommentReplySeq } = dto;
-
-    return await this.delete<null, null>({
-      url: `${this._baseURL}/${boardCommentSeq}/reply/${boardCommentReplySeq}`,
-    });
+    return await this.delete<null, null>({ url: `${this._baseURL}/${boardId}/comment/${boardCommentId}` });
   }
 
   // 게시판 좋아요(찜)

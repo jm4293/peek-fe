@@ -14,7 +14,7 @@ export default async function Page(props: IProps) {
   return (
     <div className="flex flex-col gap-2">
       <BoardDetail boardId={boardId} auth={auth} />
-      {/*<BoardComment boardSeq={boardSeq} isAuth={true} />*/}
+      <BoardComment boardId={boardId} auth={auth} />
     </div>
   );
 }

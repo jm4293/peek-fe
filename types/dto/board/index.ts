@@ -19,30 +19,19 @@ export interface IUpdateBoardDto extends IBaseBoardDto {
 
 // 게시판 댓글
 interface IBaseBoardCommentDto {
+  boardId: number;
   content: string;
-  boardSeq: number;
 }
 
-export interface ICreateBoardCommentDto extends IBaseBoardCommentDto {}
+export interface ICreateBoardCommentDto extends IBaseBoardCommentDto {
+  commentId?: number;
+}
 
 export interface IUpdateBoardCommentDto extends IBaseBoardCommentDto {
   boardCommentSeq: number;
 }
 
 export interface IDeleteBoardCommentDto {
-  boardSeq: number;
-  boardCommentSeq: number;
-}
-
-// 게시글 댓글 답장
-interface IBaseBoardCommentReplyDto {
-  boardCommentSeq: number;
-  content: string;
-}
-
-export interface ICreateBoardCommentReplyDto extends IBaseBoardCommentReplyDto {}
-
-export interface IDeleteBoardCommentReplyDto {
-  boardCommentSeq: number;
-  boardCommentReplySeq: number;
+  boardId: number;
+  boardCommentId: number;
 }

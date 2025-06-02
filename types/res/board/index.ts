@@ -2,18 +2,11 @@ import { BoardTypeEnum } from '@/constant/enum/board';
 
 import { IUserAccountRes } from '@/types/res';
 
-export interface IBoardListRes {
-  boards: IBoardRes[];
-  total: number;
-  nextPage: number | null;
-}
-
 export interface IBoardCategoryRes {
   id: number;
   name: string;
   enName: string;
   createdAt: Date;
-  boards?: IBoardRes[];
 }
 
 export interface IBoardRes {
@@ -29,7 +22,28 @@ export interface IBoardRes {
   userAccount: IUserAccountRes;
 }
 
+export interface IBoardListRes {
+  boards: IBoardRes[];
+  total: number;
+  nextPage: number | null;
+}
+
 export interface IBoardArticleRes {
   content: string;
   createdAt: Date;
+}
+
+export interface IBoardCommentRes {
+  id: number;
+  content: string;
+  createdAt: Date;
+  parentCommentId: number | null;
+  userAccount: IUserAccountRes;
+  replies: IBoardCommentRes[];
+}
+
+export interface IBoardCommentListRes {
+  boardComments: IBoardCommentRes[];
+  total: number;
+  nextPage: number | null;
 }
