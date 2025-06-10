@@ -6,7 +6,7 @@ interface IProps {
   params: Promise<{ boardId: string }>;
 }
 
-export default async function Page(props: IProps) {
+export default async function BoardDetailPage(props: IProps) {
   const { boardId } = await props.params;
 
   const auth = await isAuth();

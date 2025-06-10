@@ -2,11 +2,15 @@ import { BoardTypeEnum } from '@/constant/enum/board';
 
 import { IUserAccountRes } from '@/types/res';
 
-export interface IBoardCategoryRes {
+export interface IBoardCategory {
   id: number;
   name: string;
   enName: string;
   createdAt: Date;
+}
+
+export interface IBoardCategoryRes {
+  boardCategories: IBoardCategory[];
 }
 
 export interface IBoardRes {

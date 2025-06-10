@@ -13,7 +13,7 @@ export const useBoardList = (props: IProps) => {
 
   return useInfiniteQuery({
     queryKey: ['board-list', category],
-    queryFn: ({ pageParam }) => BoardApi.getBoardList({ pageParam }),
+    queryFn: ({ pageParam }) => BoardApi.getBoardList({ pageParam, category }),
     getNextPageParam: (lastPage) => {
       const { nextPage } = lastPage.data;
 

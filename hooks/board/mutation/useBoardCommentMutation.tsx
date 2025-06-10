@@ -26,7 +26,7 @@ export const useBoardCommentMutation = () => {
   });
 
   const deleteBoardCommentMutation = useMutation({
-    mutationFn: (params: IDeleteBoardCommentDto) => BoardApi.deleteBoardComment(params),
+    mutationFn: (dto: IDeleteBoardCommentDto) => BoardApi.deleteBoardComment(dto),
     onSuccess: async (_, variables) => {
       const { boardId } = variables;
 

@@ -1,10 +1,9 @@
 'use client';
 
-import { useBoardCommentListQuery, useBoardCommentMutation } from '@/hooks';
+import { useBoardCommentList, useBoardCommentMutation, useMyInfo } from '@/hooks';
 import { Dayjs } from '@/utils';
 import { useState } from 'react';
 import { BsArrowReturnRight } from 'react-icons/bs';
-import { HiMiniArrowTurnDownRight } from 'react-icons/hi2';
 
 import Input from '@/components/input/input';
 import LineSkeleton from '@/components/skeleton/lineSkeleton';
@@ -21,17 +20,16 @@ export default function BoardComment(props: IProps) {
 
   const [comment, setComment] = useState('');
   const [replyComment, setReplyComment] = useState('');
-
   const [isReply, setIsReply] = useState<number>(-1);
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status, isSuccess } = useBoardCommentListQuery({
+  const myInfo = useMyInfo(auth);
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status, isSuccess } = useBoardCommentList({
     boardId: Number(boardId),
   });
 
   const { createBoardCommentMutation, deleteBoardCommentMutation } = useBoardCommentMutation();
-  // const { createBoardCommentReplyMutation, deleteBoardCommentReplyMutation } = useBoardCommentReplyMutation();
 
-  const clickCreateCommentHandler = () => {
+  const onCreateCommentHandler = () => {
     if (!comment || !comment.trim()) {
       alert('댓글을 입력해주세요.');
       return;
@@ -41,13 +39,18 @@ export default function BoardComment(props: IProps) {
     setComment('');
   };
 
-  const clickDeleteCommentHandler = (boardCommentId: number) => {
-    // if (confirm('댓글을 삭제하시겠습니까?')) {
-    //   deleteBoardCommentMutation.mutate({ boardId: Number(boardId), boardCommentId });
-    // }
+  const onDeleteCommentHandler = (
+    event: React.MouseEvent<HTMLParagraphElement, MouseEvent> | undefined,
+    boardCommentId: number,
+  ) => {
+    event?.stopPropagation();
+
+    if (confirm('댓글을 삭제하시겠습니까?')) {
+      deleteBoardCommentMutation.mutate({ boardId: Number(boardId), boardCommentId });
+    }
   };
 
-  const clickReplyCommentHandler = (commentId: number) => {
+  const onCreateReplyCommentHandler = (commentId: number) => {
     if (!replyComment || !replyComment.trim()) {
       alert('답글을 입력해주세요.');
       return;
@@ -64,30 +67,20 @@ export default function BoardComment(props: IProps) {
     );
   };
 
-  // const clickDeleteReplyCommentHandler = (params: { boardCommentSeq: number; boardCommentReplySeq: number }) => {
-  //   const { boardCommentSeq, boardCommentReplySeq } = params;
-  //
-  //   if (confirm('답글을 삭제하시겠습니까?')) {
-  //     deleteBoardCommentReplyMutation.mutate({ boardSeq: Number(boardSeq), boardCommentSeq, boardCommentReplySeq });
-  //   }
-  // };
-
   return (
     <>
       <Wrapper>
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-2">
             <Text value="댓글" size="lg" />
-            {/*<Text value={`${String(data?.total ?? 0)}개`} />*/}
           </div>
 
           {isSuccess ? (
             data.total > 0 ? (
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-2">
                 {data.boardComments.map((boardComment, idx) => (
-                  <div>
+                  <div key={boardComment.id}>
                     <div
-                      key={boardComment.id}
                       className={`flex flex-col gap-2 cursor-pointer`}
                       onClick={() => {
                         setReplyComment('');
@@ -99,9 +92,14 @@ export default function BoardComment(props: IProps) {
                         <div className="flex justify-between items-center gap-2">
                           <Text value={boardComment.userAccount.user.nickname} />
                           <Text value={Dayjs.formatMMDD(boardComment.createdAt)} color="gray" />
-                          {/*{isAuth && boardComment.isMine && (*/}
-                          {/*  <DeleteSvg onClick={() => clickDeleteCommentHandler(boardComment.boardCommentSeq)} />*/}
-                          {/*)}*/}
+                          {boardComment.userAccount.email === myInfo.data?.email && (
+                            <Text
+                              value="삭제"
+                              color="red"
+                              size="sm"
+                              onClick={(event) => onDeleteCommentHandler(event, boardComment.id)}
+                            />
+                          )}
                         </div>
                       </div>
                     </div>
@@ -118,16 +116,14 @@ export default function BoardComment(props: IProps) {
                             <div className="flex items-center gap-2">
                               <Text value={reply.userAccount.user.nickname} />
                               <Text value={Dayjs.formatMMDD(reply.createdAt)} color="gray" />
-                              {/*{isAuth && boardCommentReply.isMine && (*/}
-                              {/*  <DeleteSvg*/}
-                              {/*    onClick={() =>*/}
-                              {/*      clickDeleteReplyCommentHandler({*/}
-                              {/*        boardCommentSeq: boardComment.boardCommentSeq,*/}
-                              {/*        boardCommentReplySeq: boardCommentReply.boardCommentReplySeq,*/}
-                              {/*      })*/}
-                              {/*    }*/}
-                              {/*  />*/}
-                              {/*)}*/}
+                              {boardComment.userAccount.email === myInfo.data?.email && (
+                                <Text
+                                  value="삭제"
+                                  color="red"
+                                  size="sm"
+                                  onClick={(event) => onDeleteCommentHandler(event, reply.id)}
+                                />
+                              )}
                             </div>
                           </div>
                         ))}
@@ -143,7 +139,8 @@ export default function BoardComment(props: IProps) {
                           onChange={(event) => setReplyComment(event.target.value)}
                           placeholder="답글을 입력해주세요"
                           isPlus
-                          plusClick={() => clickReplyCommentHandler(boardComment.id)}
+                          onKeyDown={() => onCreateReplyCommentHandler(boardComment.id)}
+                          plusClick={() => onCreateReplyCommentHandler(boardComment.id)}
                         />
                       )}
                     </div>
@@ -179,7 +176,8 @@ export default function BoardComment(props: IProps) {
             onChange={(event) => setComment(event.target.value)}
             placeholder="댓글을 입력해주세요"
             isPlus
-            plusClick={clickCreateCommentHandler}
+            onKeyDown={onCreateCommentHandler}
+            plusClick={onCreateCommentHandler}
           />
         </Wrapper>
       )}

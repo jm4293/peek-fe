@@ -7,7 +7,6 @@ import { useState } from 'react';
 import { BiComment, BiHeart } from 'react-icons/bi';
 
 import InfinityList from '@/components/infinity-list/infinityList';
-import InfinityListWrapper from '@/components/infinity-list/infinityListWrapper';
 import Text from '@/components/text/text';
 import Wrapper from '@/components/wrapper/wrapper';
 
@@ -32,20 +31,6 @@ export default function Board() {
 
     router.push(`/board/${id}`);
   };
-
-  const renderTitle = (
-    <div className="flex gap-4">
-      {boardCategoryList.data?.map((item) => (
-        <Text
-          key={item.id}
-          value={item.name}
-          color={`${category === item.id ? 'black' : 'gray'}`}
-          weight={`${category === item.id ? 'bold' : 'normal'}`}
-          onClick={() => setCategory(item.id)}
-        />
-      ))}
-    </div>
-  );
 
   const renderItem = (item: IBoardRes) => {
     const { id, type, title, createdAt, commentCount, likeCount, userAccount } = item;
@@ -85,7 +70,37 @@ export default function Board() {
   };
 
   return (
-    <InfinityListWrapper total={data?.total} title={renderTitle}>
+    <div className="flex flex-col gap-4">
+      <Wrapper>
+        <div className="flex items-center gap-4">
+          {boardCategoryList.data?.reduce<React.ReactNode[]>(
+            (acc, item) => {
+              acc.push(
+                <Text
+                  key={item.id}
+                  value={item.name}
+                  size={category === item.id ? 'xl' : 'base'}
+                  color={category === item.id ? 'black' : 'gray'}
+                  weight={category === item.id ? 'bold' : 'normal'}
+                  onClick={() => setCategory(item.id)}
+                />,
+              );
+              return acc;
+            },
+            [
+              <Text
+                key="all"
+                value="전체"
+                size={category === null ? 'xl' : 'base'}
+                color={category === null ? 'black' : 'gray'}
+                weight={category === null ? 'bold' : 'normal'}
+                onClick={() => setCategory(null)}
+              />,
+            ],
+          )}
+        </div>
+      </Wrapper>
+
       <InfinityList<IBoardRes>
         renderItem={renderItem}
         data={data?.boards}
@@ -93,6 +108,6 @@ export default function Board() {
         isFetchingNextPage={isFetchingNextPage}
         fetchNextPage={fetchNextPage}
       />
-    </InfinityListWrapper>
+    </div>
   );
 }

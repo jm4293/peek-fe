@@ -47,7 +47,7 @@ export default function BoardDetail(props: IProps) {
 
   return (
     <Wrapper>
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-4">
           <div className="flex justify-between items-center gap-2">
             <Text value={data.userAccount.user.nickname} color="gray" />
@@ -67,9 +67,9 @@ export default function BoardDetail(props: IProps) {
         </div>
 
         {data.userAccount.email === myInfo?.email && (
-          <div className="flex gap-4">
-            <Button title="수정" onClick={modifyClickHandler} />
-            <Button title="삭제" color="delete" onClick={deleteClickHandler} />
+          <div className="flex justify-end gap-4">
+            <Text value="수정" color="blue" onClick={modifyClickHandler} />
+            <Text value="삭제" color="red" onClick={deleteClickHandler} />
           </div>
         )}
       </div>

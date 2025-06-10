@@ -8,7 +8,7 @@ export const useBoardCategoryList = () => {
   return useQuery({
     queryKey: ['board-category-list'],
     queryFn: () => BoardApi.getBoardCategoryList(),
-    select: (res) => res.data,
+    select: (res) => res.data.boardCategories,
     staleTime: QUERY_STALE_TIME_ONE,
   });
 };

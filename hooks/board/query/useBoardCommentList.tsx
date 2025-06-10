@@ -8,7 +8,7 @@ interface IProps {
   boardId: number | undefined;
 }
 
-export const useBoardCommentListQuery = (props: IProps) => {
+export const useBoardCommentList = (props: IProps) => {
   const { boardId } = props;
 
   return useInfiniteQuery({

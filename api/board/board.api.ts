@@ -8,10 +8,14 @@ import {
   IUpdateBoardCommentDto,
   IUpdateBoardDto,
 } from '@/types/dto';
-import { IBoardCommentListRes, IBoardListRes, IBoardRes } from '@/types/res';
+import { IBoardCategoryRes, IBoardCommentListRes, IBoardListRes, IBoardRes } from '@/types/res';
 
 class BoardApi extends AxiosConfig {
   private readonly _baseURL = '/board';
+
+  async getBoardCategoryList() {
+    return await this.get<IBoardCategoryRes, null>({ url: `${this._baseURL}/category` });
+  }
 
   // 게시판
   async getBoardDetail(boardId: number) {

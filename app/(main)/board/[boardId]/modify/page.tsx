@@ -1,11 +1,11 @@
 import BoardModify from '@/app/(main)/board/[boardId]/modify/BoardModify';
 
 interface IProps {
-  params: { boardId: string };
+  params: Promise<{ boardId: string }>;
 }
 
-export default function Page({ params }: IProps) {
-  const { boardId } = params;
+export default async function BoardModifyPage({ params }: IProps) {
+  const { boardId } = await params;
 
   return <BoardModify boardId={boardId} />;
 }

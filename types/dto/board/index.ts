@@ -1,7 +1,7 @@
 // 게시판
 export interface IBoardListDto {
   pageParam: number;
-  category?: string;
+  category: number | null;
 }
 
 interface IBaseBoardDto {

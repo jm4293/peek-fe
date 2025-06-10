@@ -3,7 +3,7 @@ import Board from '@/app/(main)/board/Board';
 
 import { BoardRegisterSvg } from '@/asset/svg';
 
-export default async function Page() {
+export default async function BoardPage() {
   const auth = await isAuth();
 
   return (
