@@ -1,6 +1,7 @@
 'use client';
 
 import { useAuthMutation, useMyInfo } from '@/hooks';
+import { LocalStorage } from '@/utils';
 import { MdOutlineArrowForwardIos } from 'react-icons/md';
 
 import Thumbnail from '@/components/image/thumbnail';
@@ -9,7 +10,9 @@ import Text from '@/components/text/text';
 import Wrapper from '@/components/wrapper/wrapper';
 
 export default function User() {
-  const { data, isSuccess } = useMyInfo(true);
+  const xt = LocalStorage.getItem('__xt__');
+
+  const { data, isSuccess } = useMyInfo(!!xt);
 
   const { logoutMutation } = useAuthMutation();
 

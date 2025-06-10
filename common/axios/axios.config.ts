@@ -63,11 +63,11 @@ export class AxiosConfig {
         }
 
         if (error.response?.status === 401) {
-          const ret = await AuthApi.postRefreshToken();
+          const ret = await AuthApi.refreshToken();
 
-          const accessToken = ret.data.accessToken;
+          const newAccessToken = ret.data.accessToken;
 
-          LocalStorage.setItem('__xt__', accessToken);
+          LocalStorage.setItem('__xt__', newAccessToken);
 
           const originalRequest = error.config;
 
@@ -75,9 +75,9 @@ export class AxiosConfig {
         }
 
         if (error.response?.status === 403) {
-          localStorage.clear();
+          LocalStorage.clear();
           SessionStorage.clear();
-          window.location.replace('/home');
+          // window.location.replace('/home');
         }
 
         return Promise.reject(error);
