@@ -47,7 +47,7 @@ export default function Header() {
 
         <div className="flex items-center gap-8">
           <Link href="/user">마이페이지</Link>
-          <Link href="/auth/login">로그인</Link>
+          {/*<Link href="/auth/login">로그인</Link>*/}
         </div>
       </div>
     </header>

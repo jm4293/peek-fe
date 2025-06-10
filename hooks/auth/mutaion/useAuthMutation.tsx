@@ -1,18 +1,31 @@
 import { LocalStorage, SessionStorage } from '@/utils';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 
 import AuthApi from '@/api/auth/auth.api';
 import UserApi from '@/api/user/user.api';
 
-import { ICheckEmailDto, ILoginEmailDto, ISignUpDto } from '@/types/dto';
+import { ICheckEmailDto, ILoginEmailDto, ILoginOauthDto, ISignUpDto } from '@/types/dto';
+import { ILoginRes } from '@/types/res';
 
 export const useAuthMutation = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
 
   const signInMutation = useMutation({
-    mutationFn: (dto: ILoginEmailDto) => AuthApi.postSignInEmail(dto),
+    mutationFn: (dto: ILoginEmailDto) => AuthApi.signInEmail(dto),
+    onSuccess: (res) => {
+      const { accessToken } = res.data;
+
+      LocalStorage.setItem('__xt__', accessToken);
+
+      router.push('/home');
+    },
+  });
+
+  const googleSignInMutation = useMutation({
+    mutationFn: (dto: ILoginOauthDto) => AuthApi.signInOauth(dto),
     onSuccess: (res) => {
       const { accessToken } = res.data;
 
@@ -23,11 +36,11 @@ export const useAuthMutation = () => {
   });
 
   const checkEmailMutation = useMutation({
-    mutationFn: (dto: ICheckEmailDto) => AuthApi.postCheckEmail(dto),
+    mutationFn: (dto: ICheckEmailDto) => AuthApi.checkEmail(dto),
   });
 
   const signUpMutation = useMutation({
-    mutationFn: (dto: ISignUpDto) => AuthApi.postSignUp(dto),
+    mutationFn: (dto: ISignUpDto) => AuthApi.signUp(dto),
     onSuccess: (res) => {
       const { email } = res.data;
 
@@ -40,7 +53,7 @@ export const useAuthMutation = () => {
   });
 
   const logoutMutation = useMutation({
-    mutationFn: () => AuthApi.postLogout(),
+    mutationFn: () => AuthApi.logout(),
     onSuccess: async () => {
       queryClient.clear();
 
@@ -68,7 +81,7 @@ export const useAuthMutation = () => {
       SessionStorage.clear();
       // axios.defaults.headers.common = {};
 
-      router.push('/home');
+      router.push('/guest');
     },
     onError: (err) => {
       console.error(err);
@@ -77,9 +90,9 @@ export const useAuthMutation = () => {
 
   return {
     signInMutation,
+    googleSignInMutation,
     checkEmailMutation,
     signUpMutation,
-
     logoutMutation,
     registerMessagingTokenMutation,
   };

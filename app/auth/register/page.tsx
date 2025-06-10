@@ -2,6 +2,6 @@
 
 import Register from '@/app/auth/register/Register';
 
-export default function Page() {
+export default function RegisterPage() {
   return <Register />;
 }

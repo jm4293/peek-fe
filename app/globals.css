@@ -21,7 +21,8 @@ button,
 textarea,
 select,
 label,
-li {
+li,
+svg {
   cursor: pointer;
 }
 

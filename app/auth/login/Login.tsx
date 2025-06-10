@@ -4,6 +4,8 @@ import { useAuthMutation } from '@/hooks';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
+import { GoogleOauthSvg } from '@/asset/svg';
+
 import Button from '@/components/button/button';
 import Input from '@/components/input/input';
 import Text from '@/components/text/text';
@@ -26,7 +28,16 @@ export default function Login() {
 
     setErrorMessages(null);
 
-    signInMutation.mutate({ email, password });
+    signInMutation.mutate(
+      { email, password },
+      {
+        onError: (error: any) => {
+          const { message } = error.response.data;
+
+          setErrorMessages(message || '로그인에 실패했습니다. 다시 시도해주세요.');
+        },
+      },
+    );
   };
 
   const keyDownHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -39,7 +50,7 @@ export default function Login() {
   };
 
   const googleLoginHandler = () => {
-    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIEND_ID}&redirect_uri=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_REDIRECT_URL}&response_type=token&scope=openid email profile&include_granted_scopes=true`;
+    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIEND_ID}&redirect_uri=http://localhost:31180/auth/login/google&response_type=token&scope=openid email profile&include_granted_scopes=true`;
   };
 
   useEffect(() => {
@@ -51,7 +62,7 @@ export default function Login() {
   }, []);
 
   return (
-    <section>
+    <section className="flex flex-col gap-8">
       <div className="w-full flex flex-col gap-4">
         <Input
           type="email"
@@ -77,21 +88,18 @@ export default function Login() {
         {errorMessages && <Text value={errorMessages} color="red" />}
       </div>
 
-      <div className="flex flex-col items-center mt-8 gap-8">
+      <div className="flex flex-col items-center mt-8 gap-4">
         <Button title="로그인" onClick={clickHandler} />
-        {/*<GoogleOauthSvg onClick={() => {}} />*/}
+        <Button style="border" title="회원가입" onClick={() => router.push('/auth/register')} />
       </div>
 
-      <div className="flex justify-center items-center mt-8 gap-8">
-        {/*<Link href="/auth/find-id">아이디 찾기</Link>*/}
-        {/*<Link href="/auth/find-password">비밀번호 찾기</Link>*/}
-        <Button
-          style="border"
-          title="회원가입"
-          onClick={() => {
-            router.push('/auth/register');
-          }}
-        />
+      {/*<div className="flex justify-center items-center mt-8 gap-8">*/}
+      {/*  <Link href="/auth/find-id">아이디 찾기</Link>*/}
+      {/*  <Link href="/auth/find-password">비밀번호 찾기</Link>*/}
+      {/*</div>*/}
+
+      <div className="flex justify-center items-center">
+        <GoogleOauthSvg onClick={googleLoginHandler} />
       </div>
     </section>
   );
