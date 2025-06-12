@@ -3,6 +3,9 @@ import { Geist, Geist_Mono } from 'next/font/google';
 
 import QueryProvider from '@/common/react-query/reactQuery.config';
 
+import Modal from '@/components/modal/modal';
+import Toast from '@/components/modal/toast';
+
 import './globals.css';
 
 const geistSans = Geist({
@@ -27,8 +30,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <QueryProvider>
           {/*<MessagingConfig>*/}
           {children}
+          <Modal />
+          <Toast />
           {/*</MessagingConfig>*/}
         </QueryProvider>
+        <div id="modal-root" />
+        <div id="toast-root" />
       </body>
     </html>
   );
