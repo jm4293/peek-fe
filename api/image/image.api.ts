@@ -1,27 +1,29 @@
 import axios from 'axios';
 
 class ImageApi {
-  private readonly _baseURL = '/image';
-  private readonly UPLOAD_URL = `${process.env.NEXT_PUBLIC_IMAGE_URL}${this._baseURL}/upload`;
-  private readonly DOWNLOAD_URL = `${process.env.NEXT_PUBLIC_IMAGE_URL}${this._baseURL}/download`;
+    private readonly _baseURL = '';
+    private readonly UPLOAD_URL = `${process.env.NEXT_PUBLIC_IMAGE_URL}${this._baseURL}`;
+    private readonly DOWNLOAD_URL = `${process.env.NEXT_PUBLIC_IMAGE_URL}${this._baseURL}`;
 
-  async uploadImage(dto: { file: File; width: number; height: number }) {
-    const { file, width, height } = dto;
+    async uploadImage(dto: { file: File }) {
+        const { file } = dto;
 
-    const formData = new FormData();
+        const formData = new FormData();
 
-    formData.append('image', file);
-    formData.append('width', width.toString());
-    formData.append('height', height.toString());
+        formData.append('image', file);
 
-    const ret = await axios.post(this.UPLOAD_URL, formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+        const ret = await axios.post(this.UPLOAD_URL, formData, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+        });
 
-    return ret.data.resizedImageUrl;
-  }
+        return ret.data.name;
+    }
 
-  downloadImage(path: string) {
-    return `${this.DOWNLOAD_URL}${path}`;
-  }
+    downloadImage(dto: { name: string; width?: number }) {
+        const { name, width } = dto;
+
+        return `${this.DOWNLOAD_URL}?name=${name}${width ? `&width=${width}` : ''}`;
+    }
 }
 
 export default new ImageApi();

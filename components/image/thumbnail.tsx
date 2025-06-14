@@ -1,6 +1,6 @@
 'use client';
 
-import { useDeviceLayout, useImageMutation, useMyInfoQuery } from '@/hooks';
+import { useDeviceLayout, useImageMutation, useMyInfo, useUserMutation } from '@/hooks';
 import { useQueryClient } from '@tanstack/react-query';
 import { useRef } from 'react';
 
@@ -11,60 +11,71 @@ import { HumanSvg } from '@/asset/svg';
 import ThumbnailSkeleton from '@/components/skeleton/thumbnailSkeleton';
 
 interface IProps {
-  onClick?: boolean;
-  className?: string;
+    onClick?: boolean;
 }
 
 export default function Thumbnail(props: IProps) {
-  const { onClick, className } = props;
+    const { onClick } = props;
 
-  const queryClient = useQueryClient();
-  const { isMobile } = useDeviceLayout();
+    const { isMobile } = useDeviceLayout();
 
-  const inputRef = useRef<HTMLInputElement | null>(null);
+    const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const { data, isSuccess } = useMyInfoQuery();
+    const { data, isSuccess } = useMyInfo(true);
 
-  const { uploadImageMutation } = useImageMutation();
+    const { uploadImageMutation } = useImageMutation();
+    const { updateThumbnailMutation } = useUserMutation();
 
-  const onFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
+    const onFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
 
-    if (!file) {
-      alert('파일을 선택해주세요.');
-      return;
+        if (!file) {
+            alert('파일을 선택해주세요.');
+            return;
+        }
+
+        const ret = await uploadImageMutation.mutateAsync({ file });
+        updateThumbnailMutation.mutate({ thumbnail: ret });
+
+        event.target.value = '';
+    };
+
+    const onClickHandler = () => {
+        if (onClick) {
+            console.log('inputRef', inputRef.current);
+            inputRef.current?.click();
+        }
+    };
+
+    console.log('data', data);
+
+    if (!isSuccess) {
+        return <ThumbnailSkeleton />;
     }
 
-    await uploadImageMutation.mutateAsync({ file, width: 100, height: 100 });
-
-    await queryClient.refetchQueries({ queryKey: ['my-info'] });
-
-    event.target.value = '';
-  };
-
-  const clickHandler = () => {
-    if (onClick) {
-      inputRef.current?.click();
-    }
-  };
-
-  if (!isSuccess) {
-    return <ThumbnailSkeleton />;
-  }
-
-  return data?.thumbnail ? (
-    <div>
-      <input type="file" ref={inputRef} style={{ display: 'none' }} onChange={onFileChange} />
-      <img
-        className={`rounded-3xl ${onClick ? 'cursor-pointer' : ''} ${className}`}
-        src={`${ImageApi.downloadImage(data.thumbnail)}`}
-        alt="thumbnail"
-        width={isMobile ? 60 : 80}
-        height={isMobile ? 60 : 80}
-        onClick={clickHandler}
-      />
-    </div>
-  ) : (
-    <HumanSvg />
-  );
+    return (
+        <>
+            <input
+                type="file"
+                ref={inputRef}
+                style={{ display: 'none' }}
+                accept=".jpg,.jpeg,.png"
+                onChange={onFileChange}
+            />
+            {data.user.thumbnail ? (
+                <div onClick={onClickHandler}>
+                    <img
+                        src={`${ImageApi.downloadImage({ name: data.user.thumbnail, width: isMobile ? 60 : 80 })}`}
+                        alt="thumbnail"
+                        width={isMobile ? 60 : 80}
+                        height={isMobile ? 60 : 80}
+                    />
+                </div>
+            ) : (
+                <div onClick={onClickHandler}>
+                    <HumanSvg />
+                </div>
+            )}
+        </>
+    );
 }
