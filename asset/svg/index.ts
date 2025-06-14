@@ -1,5 +1,3 @@
-export * from './navbar';
-
 export * from './alert.svg';
 export * from './back.svg';
 export * from './board-register.svg';
@@ -10,3 +8,7 @@ export * from './delete.svg';
 export * from './google-oauth.svg';
 export * from './human.svg';
 export * from './human.svg';
+export * from './navbar-board.svg';
+export * from './navbar-home.svg';
+export * from './navbar-my.svg';
+export * from './navbar-stock.svg';

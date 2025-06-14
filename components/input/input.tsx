@@ -20,7 +20,7 @@ interface IProps {
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   isError?: boolean;
   isPlus?: boolean;
-  plusClick?: () => void;
+  plusClick?: (event: React.MouseEvent<SVGElement, MouseEvent>) => void;
   children?: React.ReactNode;
 }
 
@@ -64,18 +64,19 @@ export default function Input(props: IProps) {
     event.stopPropagation();
 
     if (plusClick) {
-      plusClick();
+      plusClick(event);
     }
   };
 
   return (
     <div className="w-full flex flex-col gap-1">
-      <div className="pl-2">
+      <label className="pl-2" htmlFor={name}>
         <Text value={title} />
-      </div>
+      </label>
 
       <div className="flex items-center gap-2">
         <input
+          id={name}
           className={`w-full ${border_color[borderColor]} ${isError ? 'border-red-500' : ''} ${className}`}
           name={name}
           type={type}

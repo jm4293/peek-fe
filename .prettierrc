@@ -3,7 +3,7 @@
   "bracketSpacing": true,
   "jsxBracketSameLine": true,
   "trailingComma": "all",
-  "tabWidth": 2,
+  "tabWidth": 4,
   "printWidth": 120,
   "importOrder": [
     "^@/api/(.*)$",
@@ -12,7 +12,6 @@
     "^@/common/(.*)$",
     "^@/components/(.*)$",
     "^@/constant/(.*)$",
-    "^@/hooks/(.*)$",
     "^@/hooks/(.*)$",
     "^@/types/(.*)$",
     "^@/utils/(.*)$",

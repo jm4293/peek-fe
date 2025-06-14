@@ -6,9 +6,9 @@
   "scripts": {
     "dev": "next dev -p 31180",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 31180" ,
     "lint": "next lint",
-    "build-rm": "rm -rf dist",
+    "build-rm": "rm -rf .next",
     "node_modules-rm": "rm -rf node_modules"
   },
   "dependencies": {

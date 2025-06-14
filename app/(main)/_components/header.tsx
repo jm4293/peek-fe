@@ -3,8 +3,13 @@
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
+const menuItems = [
+  { name: '홈', path: '/home' },
+  { name: '주식', path: '/stock' },
+  { name: '게시판', path: '/board' },
+];
+
 export default function Header() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const lastScrollY = useRef(0);
 
@@ -30,24 +35,19 @@ export default function Header() {
     <header className={`${isVisible ? '' : 'hide'}`}>
       <div className="flex justify-between items-center px-4 py-4">
         <div className="flex items-center gap-12">
-          <Link href="/home">
-            <strong>PEEK</strong>
-          </Link>
+          <strong>PEEK</strong>
 
           <div className="flex items-center gap-8">
-            <Link href="/stock">
-              <h2>주식</h2>
-            </Link>
-
-            <Link href="/board">
-              <h2>게시판</h2>
-            </Link>
+            {menuItems.map((item) => (
+              <Link key={item.name} href={item.path}>
+                <h2>{item.name}</h2>
+              </Link>
+            ))}
           </div>
         </div>
 
         <div className="flex items-center gap-8">
           <Link href="/user">마이페이지</Link>
-          {/*<Link href="/auth/login">로그인</Link>*/}
         </div>
       </div>
     </header>

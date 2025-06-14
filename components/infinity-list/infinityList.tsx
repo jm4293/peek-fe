@@ -7,16 +7,15 @@ import Text from '@/components/text/text';
 import Wrapper from '@/components/wrapper/wrapper';
 
 interface IProps<T> {
-  data: T[] | undefined;
   renderItem: (item: T) => JSX.Element | JSX.Element[];
-  total: number | undefined;
-  fetchNextPage: () => void;
+  data: T[] | undefined;
   hasNextPage: boolean;
   isFetchingNextPage: boolean;
+  fetchNextPage: () => void;
 }
 
 export default function InfinityList<T>(props: IProps<T>) {
-  const { data = [], renderItem, total = 0, fetchNextPage, hasNextPage, isFetchingNextPage } = props;
+  const { data = [], renderItem, fetchNextPage, hasNextPage, isFetchingNextPage } = props;
 
   const observerRef = useRef<IntersectionObserver | null>(null);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
@@ -45,9 +44,9 @@ export default function InfinityList<T>(props: IProps<T>) {
 
   return (
     <>
-      {total > 0 ? (
+      {data.length > 0 ? (
         <>
-          <div className="w-full flex flex-col gap-2">{data.map(renderItem)}</div>
+          <ol className="w-full flex flex-col gap-2">{data.map(renderItem)}</ol>
 
           <div ref={loadMoreRef} className="flex justify-center items-center">
             {isFetchingNextPage && <LineSkeleton text="로딩!!" height={2} />}

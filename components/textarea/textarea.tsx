@@ -49,9 +49,13 @@ export default function Textarea(props: IProps) {
   };
 
   return (
-    <div className="flex flex-col gap-3">
-      <Text value={title} />
+    <div className="w-full flex flex-col gap-1">
+      <label className="pl-2" htmlFor={name}>
+        <Text value={title} />
+      </label>
+
       <textarea
+        id={name}
         ref={textareaRef}
         name={name}
         className={`min-h-[20vh] max-h-[60vh] ${borderColor[color]} ${className}`}
