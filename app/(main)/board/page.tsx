@@ -1,24 +1,16 @@
-import { parseCookie } from '@/utils';
-import { headers } from 'next/headers';
-
 import { BoardRegisterSvg } from '@/asset/svg';
 
 import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
 import { stockCategoryListAction } from '@/services/stock';
-
-import { REFRESH_TOKEN_NAME } from '@/shared/constant/cookie';
+import { myAction } from '@/services/user';
 
 import BoardCategory from './BoardCategory';
 import BoardList from './BoardList';
 
 export default async function BoardPage() {
-  const headerList = await headers();
-  const cookie = headerList.get('cookie');
-
-  const isAuth = parseCookie.set(cookie).pick(REFRESH_TOKEN_NAME);
-
+  const { success: isAuth } = await myAction();
   const { success, data } = await stockCategoryListAction();
 
   if (!success) {

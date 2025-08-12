@@ -11,21 +11,20 @@ import { EditableText, Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
 import { useBoardCommentList, useBoardCommentMutation } from '@/services/board';
-import { useMyInfo } from '@/services/user';
+import { IUserAccountModel } from '@/services/user';
 
 interface IProps {
   id: string;
-  isAuth: string | null;
+  my: IUserAccountModel | null;
 }
 
 export default function BoardComment(props: IProps) {
-  const { id, isAuth } = props;
+  const { id, my } = props;
 
   const [comment, setComment] = useState('');
   const [replyComment, setReplyComment] = useState('');
   const [isReply, setIsReply] = useState<number>(-1);
 
-  const myInfo = useMyInfo();
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isSuccess } = useBoardCommentList({
     boardId: Number(id),
   });
@@ -90,7 +89,7 @@ export default function BoardComment(props: IProps) {
                         <div className="flex justify-between items-center gap-2">
                           <Text.PARAGRAPH text={boardComment.userAccount.user.nickname} />
                           <Text.PARAGRAPH text={Dayjs.of(boardComment.createdAt).formatMMDD()} color="gray" />
-                          {boardComment.userAccount.email === myInfo.data?.email && (
+                          {boardComment.userAccount.email === my?.email && (
                             <EditableText.PARAGRAPH
                               text="삭제"
                               color="red"
@@ -113,7 +112,7 @@ export default function BoardComment(props: IProps) {
                             <div className="flex items-center gap-2">
                               <Text.PARAGRAPH text={reply.userAccount.user.nickname} />
                               <Text.PARAGRAPH text={Dayjs.of(reply.createdAt).formatMMDD()} color="gray" />
-                              {boardComment.userAccount.email === myInfo.data?.email && (
+                              {boardComment.userAccount.email === my?.email && (
                                 <EditableText.PARAGRAPH
                                   text="삭제"
                                   color="red"
@@ -158,7 +157,7 @@ export default function BoardComment(props: IProps) {
         </div>
       </Wrapper>
 
-      {isAuth && (
+      {!!my && (
         <Wrapper>
           <div className="flex gap-4">
             <EditableInput.TEXT

@@ -1,3 +1,5 @@
+'use server';
+
 import KY from '@/lib/ky';
 
 import { IStockCategoryListRes } from '@/services/stock';

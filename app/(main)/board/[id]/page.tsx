@@ -1,12 +1,8 @@
-import { parseCookie } from '@/utils';
-import { headers } from 'next/headers';
-
 import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
 import { boardDetailAction } from '@/services/board';
-
-import { REFRESH_TOKEN_NAME } from '@/shared/constant/cookie';
+import { myAction } from '@/services/user';
 
 import BoardComment from './BoardComment';
 import BoardDetail from './BoardDetail';
@@ -18,14 +14,11 @@ interface IProps {
 export default async function BoardDetailPage(props: IProps) {
   const { id } = await props.params;
 
-  const headerList = await headers();
-  const cookie = headerList.get('cookie');
-
-  const isAuth = parseCookie.set(cookie).pick(REFRESH_TOKEN_NAME);
+  const { data: my } = await myAction();
 
   const { data, success } = await boardDetailAction(id);
 
-  if (!success) {
+  if (!success || !data) {
     return (
       <Wrapper>
         <Text.HEADING text="게시판 불러오는데 실패했습니다." />
@@ -35,8 +28,8 @@ export default async function BoardDetailPage(props: IProps) {
 
   return (
     <div className="flex flex-col gap-2">
-      <BoardDetail board={data!.board} id={id} isAuth={isAuth} />
-      <BoardComment id={id} isAuth={isAuth} />
+      <BoardDetail board={data} id={id} my={my} />
+      <BoardComment id={id} my={my} />
     </div>
   );
 }

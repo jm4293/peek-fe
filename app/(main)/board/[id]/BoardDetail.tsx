@@ -8,22 +8,20 @@ import PreText from '@/components/text/preText';
 import { Wrapper } from '@/components/wrapper';
 
 import { IBoardModel, useBoardMutation } from '@/services/board';
-import { useMyInfo } from '@/services/user';
+import { IUserAccountModel } from '@/services/user';
 
 import { BoardTypeEnumList } from '@/shared/enum/board';
 
 interface IProps {
   board: IBoardModel;
   id: string;
-  isAuth: string | null;
+  my: IUserAccountModel | null;
 }
 
 export default function BoardDetail(props: IProps) {
-  const { board, id, isAuth } = props;
+  const { board, id, my } = props;
 
   const router = useRouter();
-
-  const { data: myInfo } = useMyInfo();
 
   const { deleteBoardMutation } = useBoardMutation();
 
@@ -58,7 +56,7 @@ export default function BoardDetail(props: IProps) {
           </div>
         </div>
 
-        {board.userAccount.email === myInfo?.email && (
+        {board.userAccount.email === my?.email && (
           <div className="flex justify-end gap-4">
             <EditableText.PARAGRAPH text="수정" color="blue" onClick={modifyClickHandler} />
             <EditableText.PARAGRAPH text="삭제" color="red" onClick={deleteClickHandler} />

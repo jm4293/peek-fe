@@ -67,7 +67,7 @@ export default class AXIOS {
             withCredentials: true,
           });
 
-          await refreshInstance.post('/auth/refresh-token', {});
+          await refreshInstance.post('/auth/refresh', {});
 
           const originalRequest = error.config;
 
