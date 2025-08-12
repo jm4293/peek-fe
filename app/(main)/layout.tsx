@@ -1,4 +1,4 @@
-import Header from '@/app/(main)/_components/header';
+import { Header } from './_components';
 
 interface IProps {
   children: React.ReactNode;
@@ -10,7 +10,6 @@ export default function Layout(props: IProps) {
   return (
     <div className="layout">
       <Header />
-      {/*<MobileHeader />*/}
       <main>{children}</main>
     </div>
   );

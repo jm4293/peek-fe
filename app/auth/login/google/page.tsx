@@ -1,9 +1,9 @@
-import Form from '@/app/auth/login/google/_components/form';
+import GoogleOauth from '@/app/auth/login/google/GoogleOauth';
 
 export default function Page() {
   return (
     <>
-      <Form />
+      <GoogleOauth />
     </>
   );
 }

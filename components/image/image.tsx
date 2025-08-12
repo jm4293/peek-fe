@@ -4,7 +4,7 @@ import { useDeviceLayout } from '@/hooks';
 
 import { HumanSvg } from '@/asset/svg';
 
-import { ImageTypeEnum } from '@/constant/enum';
+import { ImageTypeEnum } from '@/shared/enum/image';
 
 interface IProps {
   src: string | undefined;
@@ -22,7 +22,7 @@ const imageSizes = {
   [ImageTypeEnum.SMALL]: { mobile: 60, desktop: 80 },
 };
 
-export default function Image(props: IProps) {
+export const Image = (props: IProps) => {
   const { src, type, alt, onClick, className } = props;
 
   const { isMobile } = useDeviceLayout();
@@ -47,4 +47,4 @@ export default function Image(props: IProps) {
   ) : (
     <HumanSvg />
   );
-}
+};

@@ -1,5 +1,5 @@
 interface IProps {
-  value: string;
+  text: string;
   color?: 'black' | 'gray' | 'red';
   size?: 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl';
   align?: 'left' | 'center' | 'right';
@@ -37,13 +37,12 @@ const fontWeight = {
 };
 
 export default function PreText(props: IProps) {
-  const { value, color = 'black', size = 'base', align = 'left', weight = 'normal', className } = props;
+  const { text, color = 'black', size = 'base', align = 'left', weight = 'normal', className } = props;
 
   return (
     <pre
-      className={`whitespace-pre-line ${textColor[color]} ${fontSize[size]} ${textAlign[align]} ${fontWeight[weight]} ${className}`}
-    >
-      {value}
+      className={`whitespace-pre-line ${textColor[color]} ${fontSize[size]} ${textAlign[align]} ${fontWeight[weight]} ${className}`}>
+      {text}
     </pre>
   );
 }

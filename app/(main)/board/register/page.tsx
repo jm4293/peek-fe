@@ -1,9 +1,25 @@
-import BoardRegister from '@/app/(main)/board/register/_components/boardRegister';
+import BoardRegister from '@/app/(main)/board/register/BoardRegister';
 
-export default function Page() {
+import { Text } from '@/components/text';
+import { Wrapper } from '@/components/wrapper';
+
+import { stockCategoryListAction } from '@/services/stock';
+
+export default async function BoardRegisterPage() {
+  const { success, data } = await stockCategoryListAction();
+
+  if (!success) {
+    return (
+      <Wrapper>
+        <Text.HEADING text="게시판 카테고리 목록을 불러오는데 실패했습니다." />
+      </Wrapper>
+    );
+  }
+
   return (
-    <div>
-      <BoardRegister />
+    <div className="flex flex-col gap-4">
+      <Text.SUBTITLE text="게시글 등록" />
+      <BoardRegister stockCategoryList={data!.stockCategoryList} />
     </div>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 
-import Text from '@/components/text/text';
+import { Text } from '../text/Text';
 
 interface IProps {
   title: string;
@@ -23,7 +23,7 @@ const borderColor = {
   green: 'border border-green-400',
 };
 
-export default function Textarea(props: IProps) {
+export const Textarea = (props: IProps) => {
   const {
     title,
     value,
@@ -45,13 +45,17 @@ export default function Textarea(props: IProps) {
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
     }
 
-    onChange && onChange(event);
+    onChange?.(event);
   };
 
   return (
-    <div className="flex flex-col gap-3">
-      <Text value={title} />
+    <div className="w-full flex flex-col gap-1">
+      <label className="pl-2" htmlFor={name}>
+        <Text.HEADING text={title} />
+      </label>
+
       <textarea
+        id={name}
         ref={textareaRef}
         name={name}
         className={`min-h-[20vh] max-h-[60vh] ${borderColor[color]} ${className}`}
@@ -64,4 +68,4 @@ export default function Textarea(props: IProps) {
       />
     </div>
   );
-}
+};

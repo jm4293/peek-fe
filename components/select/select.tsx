@@ -1,8 +1,4 @@
-interface IProps {}
-
-export default function Select(props: IProps) {
-  const {} = props;
-
+export default function Select() {
   return (
     <select>
       <option value="option1">Option 1</option>

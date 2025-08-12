@@ -1,0 +1,70 @@
+'use client';
+
+import { Dayjs } from '@/utils';
+import { useRouter } from 'next/navigation';
+
+import { EditableText, Text } from '@/components/text';
+import PreText from '@/components/text/preText';
+import { Wrapper } from '@/components/wrapper';
+
+import { IBoardModel, useBoardMutation } from '@/services/board';
+import { useMyInfo } from '@/services/user';
+
+import { BoardTypeEnumList } from '@/shared/enum/board';
+
+interface IProps {
+  board: IBoardModel;
+  id: string;
+  isAuth: string | null;
+}
+
+export default function BoardDetail(props: IProps) {
+  const { board, id, isAuth } = props;
+
+  const router = useRouter();
+
+  const { data: myInfo } = useMyInfo();
+
+  const { deleteBoardMutation } = useBoardMutation();
+
+  const modifyClickHandler = () => {
+    router.push(`/board/${id}/modify`);
+  };
+
+  const deleteClickHandler = () => {
+    if (confirm('게시글을 삭제하시겠습니까?')) {
+      deleteBoardMutation.mutate(id);
+    }
+  };
+
+  return (
+    <Wrapper>
+      <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4">
+          <div className="flex justify-between items-center gap-2">
+            <Text.HEADING text={board.userAccount.user.nickname} />
+            <Text.PARAGRAPH text={Dayjs.of(board.createdAt).formatMMDDHHmm()} color="gray" />
+          </div>
+
+          <div className="col-span-5 flex flex-col gap-4">
+            <div className="flex gap-2">
+              <Text.PARAGRAPH text={`[${BoardTypeEnumList[board.type].label}]`} color="gray" />
+              <Text.PARAGRAPH text={board.title} />
+            </div>
+
+            <div className="border-[1px]" />
+
+            <PreText text={board.article.content} />
+          </div>
+        </div>
+
+        {board.userAccount.email === myInfo?.email && (
+          <div className="flex justify-end gap-4">
+            <EditableText.PARAGRAPH text="수정" color="blue" onClick={modifyClickHandler} />
+            <EditableText.PARAGRAPH text="삭제" color="red" onClick={deleteClickHandler} />
+          </div>
+        )}
+      </div>
+    </Wrapper>
+  );
+}

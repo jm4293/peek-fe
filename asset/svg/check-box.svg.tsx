@@ -24,7 +24,8 @@ export function CheckBoxSvg(props: IProps) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       onClick={clickHandler}
-      className="cursor-pointer">
+      className="cursor-pointer"
+    >
       <rect
         x="0.5"
         y="0.5"

@@ -1,19 +1,11 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
 
-import QueryProvider from '@/common/react-query/reactQuery.config';
+import { Modal, Toast } from '@/components/modal';
+
+import { NetworkError } from '@/lib/network-error';
+import QueryProvider from '@/lib/react-query/reactQuery.config';
 
 import './globals.css';
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
 
 export const metadata: Metadata = {
   title: 'peek',
@@ -24,11 +16,19 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="ko" suppressHydrationWarning>
       <body>
-        <QueryProvider>
-          {/*<MessagingConfig>*/}
-          {children}
-          {/*</MessagingConfig>*/}
-        </QueryProvider>
+        <NetworkError>
+          <QueryProvider>
+            {/*<MessagingConfig>*/}
+            {children}
+            {/*</MessagingConfig>*/}
+          </QueryProvider>
+        </NetworkError>
+
+        <Modal />
+        <Toast />
+
+        <div id="modal-root" />
+        <div id="toast-root" />
       </body>
     </html>
   );

@@ -7,7 +7,8 @@ export function HumanSvg() {
       enableBackground="new 0 0 32 32"
       id="Stock_cut"
       version="1.1"
-      xmlns="http://www.w3.org/2000/svg">
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <desc />
 
       <g>

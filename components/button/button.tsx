@@ -1,46 +1,46 @@
 'use client';
 
 interface IProps {
-  title: string;
-  style?: 'contained' | 'border';
-  color?: 'base' | 'delete';
-  type?: 'submit' | 'button';
-  onClick?: () => void;
+  text: string;
   className?: string;
+  type?: 'submit' | 'button';
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   disabled?: boolean;
 }
 
-const buttonColor = {
-  base: 'bg-[#5A4FCF] hover:bg-[#786DE8] disabled:bg-[#A7A3D3]',
-  delete: 'bg-[#FF6666] hover:bg-[#FF9999] disabled:bg-[#FFCCCC]',
-};
-
-const buttonBorder = {
-  base: 'border border-solid border-[#5A4FCF]',
-  delete: 'border border-solid border-[#FF6666]',
-};
-
-export default function Button(props: IProps) {
-  const { title, style = 'contained', color = 'base', type = 'button', onClick, className, disabled } = props;
-
-  const clickHandler = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    event.stopPropagation();
-
-    if (onClick) {
-      onClick();
-    }
-  };
+const CONTAINER = (props: IProps) => {
+  const { text, type = 'button', onClick, className, disabled } = props;
 
   return (
     <button
-      className={`w-full py-4 ${style === 'contained' ? buttonColor[color] : buttonBorder[color]} ${className}`}
+      className={`w-full px-2 py-4 bg-[#5A4FCF] hover:bg-[#786DE8] disabled:bg-[#A7A3D3] ${className}`}
       type={type}
-      onClick={clickHandler}
+      onClick={onClick}
       disabled={disabled}>
-      <strong
-        className={`text-base font-normal whitespace-nowrap ${style === 'contained' ? 'text-white' : color === 'base' ? 'text-[#5A4FCF]' : 'text-[#FF6666]'}`}>
-        {title}
+      <strong className="text-base font-normal text-white whitespace-nowrap hover:text-white disabled:text-[#A7A3D3] disabled:cursor-not-allowed">
+        {text}
       </strong>
     </button>
   );
-}
+};
+
+const OUTLINE = (props: IProps) => {
+  const { text, type = 'button', onClick, className, disabled } = props;
+
+  return (
+    <button
+      className={`w-full px-2 py-4 border border-solid border-[#5A4FCF] bg-white hover:bg-[#F0F0FF] disabled:bg-[#F0F0FF] ${className}`}
+      type={type}
+      onClick={onClick}
+      disabled={disabled}>
+      <strong className="text-base font-normal text-[#5A4FCF] whitespace-nowrap hover:text-[#5A4FCF] disabled:text-[#A7A3D3] disabled:cursor-not-allowed">
+        {text}
+      </strong>
+    </button>
+  );
+};
+
+export const Button = {
+  CONTAINER,
+  OUTLINE,
+};

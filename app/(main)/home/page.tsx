@@ -1,6 +1,8 @@
-import { BestNews, BestWeekend, Chart } from '@/app/(main)/home/_components';
+import BestNews from '@/app/(main)/home/BestNews';
+import BestWeekend from '@/app/(main)/home/best-weekend';
+import Chart from '@/app/(main)/home/chart';
 
-export default function Page() {
+export default function HomePage() {
   return (
     <div className="flex gap-2">
       <div className="w-full flex flex-col gap-2">

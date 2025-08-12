@@ -1,0 +1,65 @@
+'use client';
+
+import React, { useState } from 'react';
+
+import { Button } from '@/components/button';
+import { EditableInput } from '@/components/input';
+import { Textarea } from '@/components/textarea';
+import { Wrapper } from '@/components/wrapper';
+
+import { IBoardModel, useBoardMutation } from '@/services/board';
+
+interface IProps {
+  board: IBoardModel;
+  id: string;
+}
+
+export default function BoardModify(props: IProps) {
+  const { board, id } = props;
+
+  const [title, setTitle] = useState(board.title || '');
+  const [content, setContent] = useState(board.article.content || '');
+
+  const { updateBoardMutation } = useBoardMutation();
+
+  const clickHandler = () => {
+    if (!title || !title.trim()) {
+      alert('제목을 입력해주세요');
+      return;
+    }
+
+    if (!content || !content.trim()) {
+      alert('내용을 입력해주세요');
+      return;
+    }
+
+    updateBoardMutation.mutate({ boardId: Number(id), title, content });
+  };
+
+  return (
+    <Wrapper>
+      <div className="flex flex-col gap-8">
+        <div className="col-span-5 flex flex-col gap-4">
+          <EditableInput.TEXT
+            title="제목"
+            name="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="제목을 입력해주세요"
+            required
+          />
+          <Textarea
+            title="내용"
+            name="content"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            placeholder="내용을 입력해주세요"
+            required
+          />
+        </div>
+
+        <Button.CONTAINER text="수정 하기" onClick={clickHandler} />
+      </div>
+    </Wrapper>
+  );
+}

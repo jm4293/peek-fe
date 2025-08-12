@@ -1,2 +1,3 @@
+export * from './EditableText';
 export * from './preText';
-export * from './text';
+export * from './Text';

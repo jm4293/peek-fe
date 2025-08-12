@@ -1,72 +1,50 @@
-'use client';
-
 interface IProps {
-  value: string;
-  color?: 'black' | 'gray' | 'red';
-  size?: 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl';
-  align?: 'left' | 'center' | 'right';
-  weight?: 'normal' | 'bold';
-  onClick?: () => void;
+  text: string;
   className?: string;
-  nowrap?: boolean;
-  ellipsis?: boolean;
+  color?: 'black' | 'gray' | 'blue' | 'red';
 }
 
 const textColor = {
   black: 'text-black',
-  gray: 'text-[#666666]',
-  red: 'text-[#F87171]',
+  gray: 'text-gray-500',
+  blue: 'text-blue-500',
+  red: 'text-red-500',
 };
 
-const fontSize = {
-  xs: 'text-xs', // 12px
-  sm: 'text-sm', // 14px
-  base: 'text-base', // 16px
-  lg: 'text-lg', // 18px
-  xl: 'text-xl', // 20px
-  '2xl': 'text-2xl', // 24px
-  '3xl': 'text-3xl', // 30px
-  '4xl': 'text-4xl', // 36px
-  '5xl': 'text-5xl', // 48px
+const TITLE = (props: IProps) => {
+  const { className, text, color = 'black' } = props;
+
+  return <h1 className={`${textColor[color]} text-3xl font-semibold ${className ?? ''}`}>{text}</h1>;
 };
 
-const textAlign = {
-  left: 'text-left',
-  center: 'text-center',
-  right: 'text-right',
+const SUBTITLE = (props: IProps) => {
+  const { className, text, color = 'black' } = props;
+
+  return <h2 className={`${textColor[color]} text-2xl font-medium ${className ?? ''}`}>{text}</h2>;
 };
 
-const fontWeight = {
-  normal: 'font-normal',
-  bold: 'font-bold',
+const HEADING = (props: IProps) => {
+  const { className, text, color = 'black' } = props;
+
+  return <h3 className={`${textColor[color]} text-base ${className ?? ''}`}>{text}</h3>;
 };
 
-export default function Text(props: IProps) {
-  const {
-    value,
-    color = 'black',
-    size = 'base',
-    align = 'left',
-    weight = 'normal',
-    onClick,
-    className,
-    nowrap,
-    ellipsis,
-  } = props;
+const PARAGRAPH = (props: IProps) => {
+  const { className, text, color = 'black' } = props;
 
-  const clickHandler = (event: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
-    if (onClick) {
-      onClick();
-    }
-  };
+  return <p className={`${textColor[color]} text-sm ${className ?? ''}`}>{text}</p>;
+};
 
-  return (
-    <p
-      className={`${textColor[color]} ${fontSize[size]} ${textAlign[align]} ${fontWeight[weight]} ${onClick && 'cursor-pointer'} ${nowrap && 'whitespace-nowrap'} ${ellipsis && 'overflow-hidden text-ellipsis'} ${className}`}
-      onClick={(event) => clickHandler(event)}
-      style={{ wordBreak: 'break-word' }}
-    >
-      {value}
-    </p>
-  );
-}
+const CAPTION = (props: IProps) => {
+  const { className, text, color = 'black' } = props;
+
+  return <span className={`${textColor[color]} text-xs italic ${className ?? ''}`}>{text}</span>;
+};
+
+export const Text = {
+  TITLE,
+  SUBTITLE,
+  HEADING,
+  PARAGRAPH,
+  CAPTION,
+};

@@ -1,35 +1,84 @@
 import dayjs from 'dayjs';
 
 export class Dayjs {
-  static formatMMDD(date: Date | undefined): string {
-    if (!date) {
-      return '-';
-    }
+  private date: Date | undefined;
 
-    return dayjs(date).format('MM.DD');
+  constructor(date?: Date) {
+    this.date = date;
   }
 
-  static formatYYMMDD(date: Date | undefined): string {
-    if (!date) {
-      return '-';
-    }
-
-    return dayjs(date).format('YY.MM.DD');
+  static of(date?: Date): Dayjs {
+    return new Dayjs(date);
   }
 
-  static formatYYYYMMDD(date: Date | undefined): string {
-    if (!date) {
+  formatMMDD(): string {
+    if (!this.date) {
       return '-';
     }
 
-    return dayjs(date).format('YYYY.MM.DD');
+    return dayjs(this.date).format('MM.DD');
   }
 
-  static formatYYYYMMDDHHmm(date: Date | undefined): string {
-    if (!date) {
+  formatMMDDHHmm(): string {
+    if (!this.date) {
       return '-';
     }
 
-    return dayjs(date).format('YYYY.MM.DD HH:mm');
+    return dayjs(this.date).format('MM.DD HH:mm');
+  }
+
+  formatYYMMDD(): string {
+    if (!this.date) {
+      return '-';
+    }
+
+    return dayjs(this.date).format('YY.MM.DD');
+  }
+
+  formatYYMMDDHHmm(): string {
+    if (!this.date) {
+      return '-';
+    }
+
+    return dayjs(this.date).format('YY.MM.DD HH:mm');
+  }
+
+  formatYYYYMMDD(): string {
+    if (!this.date) {
+      return '-';
+    }
+
+    return dayjs(this.date).format('YYYY.MM.DD');
+  }
+
+  formatYYYYMMDDHHmm(): string {
+    if (!this.date) {
+      return '-';
+    }
+
+    return dayjs(this.date).format('YYYY.MM.DD HH:mm');
+  }
+
+  // 추가적인 체이닝을 위한 메서드들
+  addDays(days: number): Dayjs {
+    if (!this.date) {
+      return this;
+    }
+
+    this.date = dayjs(this.date).add(days, 'day').toDate();
+    return this;
+  }
+
+  subtractDays(days: number): Dayjs {
+    if (!this.date) {
+      return this;
+    }
+
+    this.date = dayjs(this.date).subtract(days, 'day').toDate();
+    return this;
+  }
+
+  toDate(): Date | undefined {
+    return this.date;
   }
 }

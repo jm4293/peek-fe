@@ -1,4 +1,4 @@
-import BoardDetail from '@/app/(main)/stock/detail/[code]/_components/boardDetail';
+import BoardDetail from './BoardDetail';
 
 interface IProps {
   params: Promise<{ code: string }>;

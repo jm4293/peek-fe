@@ -2,28 +2,28 @@
 
 import { JSX } from 'react';
 
-import Text from '@/components/text/text';
-import Wrapper from '@/components/wrapper/wrapper';
+import { Text } from '../text';
+import { Wrapper } from '../wrapper';
 
 interface IProps {
   total: number | undefined;
-  renderList: JSX.Element;
-  titleRender?: JSX.Element;
+  children: JSX.Element;
+  title?: string | JSX.Element;
 }
 
-export default function InfinityListWrapper(props: IProps) {
-  const { total = 0, renderList, titleRender } = props;
+export const InfinityListWrapper = (props: IProps) => {
+  const { total = 0, children, title } = props;
 
   return (
     <div className="w-full flex flex-col gap-4">
       <Wrapper>
         <div className="flex justify-between items-center">
-          <div>{titleRender && titleRender}</div>
-          <Text value={`${String(total)}개`} />
+          <div>{title && title}</div>
+          <Text.PARAGRAPH text={`${String(total)}개`} />
         </div>
       </Wrapper>
 
-      <>{renderList}</>
+      <>{children}</>
     </div>
   );
-}
+};

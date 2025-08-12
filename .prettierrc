@@ -6,14 +6,14 @@
   "tabWidth": 2,
   "printWidth": 120,
   "importOrder": [
-    "^@/api/(.*)$",
     "^@/app/(.*)$",
     "^@/asset/(.*)$",
-    "^@/common/(.*)$",
     "^@/components/(.*)$",
-    "^@/constant/(.*)$",
     "^@/hooks/(.*)$",
-    "^@/hooks/(.*)$",
+    "^@/lib/(.*)$",
+    "^@/services/(.*)$",
+    "^@/shared/(.*)$",
+    "^@/stores/(.*)$",
     "^@/types/(.*)$",
     "^@/utils/(.*)$",
     "^[./]"

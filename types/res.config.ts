@@ -1,7 +1,7 @@
-import { ResCodeEnum } from '@/constant/enum';
+import { ResEnum } from '@/shared/enum/res';
 
 export interface ResConfig<T> {
-  result: ResCodeEnum;
+  result: ResEnum;
   message: string;
   data: T;
 }

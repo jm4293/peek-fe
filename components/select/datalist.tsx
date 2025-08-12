@@ -1,4 +1,4 @@
-import LineSkeleton from '@/components/skeleton/lineSkeleton';
+import { LineSkeleton } from '../skeleton';
 
 interface IProps {
   name: string;
@@ -7,7 +7,7 @@ interface IProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function Datalist(props: IProps) {
+export const Datalist = (props: IProps) => {
   const { name, optionList, value, onChange } = props;
 
   if (!optionList) {
@@ -25,4 +25,4 @@ export default function Datalist(props: IProps) {
       </datalist>
     </>
   );
-}
+};

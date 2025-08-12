@@ -1,0 +1,99 @@
+'use client';
+
+import { Dayjs } from '@/utils';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { BiComment, BiHeart } from 'react-icons/bi';
+
+import { InfinityList } from '@/components/infinity-list';
+import { EditableText } from '@/components/text';
+import { Wrapper } from '@/components/wrapper';
+
+import { useQueryParams } from '@/hooks/queryParams';
+
+import { IBoardModel, useBoardList } from '@/services/board';
+
+import { BoardTypeEnumList } from '@/shared/enum/board';
+
+export default function BoardList() {
+  const router = useRouter();
+
+  const [list, setList] = useState<IBoardModel[]>([]);
+
+  const { getQuery } = useQueryParams();
+  const category = getQuery('category');
+
+  const {
+    data: boardList,
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+    isSuccess,
+  } = useBoardList({ category: category ? Number(category) : undefined });
+
+  const clickHandler = (params: { event: React.MouseEvent<HTMLDivElement, MouseEvent>; id: number }) => {
+    const { event, id } = params;
+
+    router.push(`/board/${id}`);
+  };
+
+  useEffect(() => {
+    if (isSuccess && boardList) {
+      setList(boardList.boards);
+    }
+  }, [isSuccess, boardList]);
+
+  const renderItem = (item: IBoardModel) => {
+    const { id, type, title, createdAt, commentCount, likeCount, userAccount } = item;
+
+    return (
+      <li key={id}>
+        <Wrapper>
+          <div className="flex flex-col gap-4" onClick={(event) => clickHandler({ event, id })}>
+            <div className="flex justify-between items-center gap-2">
+              <div className="flex gap-2">
+                <EditableText.PARAGRAPH
+                  text={`[${BoardTypeEnumList[type].label}]`}
+                  color={`${BoardTypeEnumList[type].color}`}
+                />
+                <EditableText.PARAGRAPH text={title} />
+              </div>
+              <EditableText.PARAGRAPH text={Dayjs.of(createdAt).formatYYMMDDHHmm()} color="gray" />
+            </div>
+
+            <div className="flex justify-between items-center">
+              <div className="flex gap-4">
+                <div className="flex items-center gap-1">
+                  <BiHeart color="#666666" />
+                  <EditableText.PARAGRAPH text={String(likeCount)} color="gray" />
+                </div>
+                <div className="flex items-center gap-1">
+                  <BiComment color="#666666" />
+                  <EditableText.PARAGRAPH text={String(commentCount)} color="gray" />
+                </div>
+              </div>
+
+              <div className="flex items-center gap-1">
+                <EditableText.PARAGRAPH text={userAccount.user.nickname} color="gray" />
+              </div>
+            </div>
+          </div>
+        </Wrapper>
+      </li>
+    );
+  };
+
+  if (list.length === 0) {
+    return (
+      <Wrapper>
+        <EditableText.HEADING text="게시글이 없습니다." />
+      </Wrapper>
+    );
+  }
+
+  return (
+    <InfinityList hasNextPage={hasNextPage} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage}>
+      {list.map(renderItem)}
+    </InfinityList>
+  );
+}

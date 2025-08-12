@@ -19,7 +19,8 @@ export function BackSvg() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className="cursor-pointer"
-      onClick={clickHandler}>
+      onClick={clickHandler}
+    >
       <path
         fillRule="evenodd"
         clipRule="evenodd"

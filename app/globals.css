@@ -20,7 +20,9 @@ input,
 button,
 textarea,
 select,
-label {
+label,
+li,
+svg {
   cursor: pointer;
 }
 
@@ -120,7 +122,7 @@ button {
   }
 
   main {
-    padding: 0 2rem
+    padding: 0 2rem;
   }
 }
 
@@ -137,7 +139,7 @@ button {
   }
 
   main {
-    padding: 0 4rem
+    padding: 0 4rem;
   }
 }
 

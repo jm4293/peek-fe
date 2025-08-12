@@ -1,14 +1,12 @@
-interface IProps {
-  onClick: () => void;
-}
+'use client';
 
-export function BoardRegisterSvg(props: IProps) {
-  const { onClick } = props;
+import { useRouter } from 'next/navigation';
 
-  const clickHandler = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
-    event.stopPropagation();
+export function BoardRegisterSvg() {
+  const router = useRouter();
 
-    onClick();
+  const clickHandler = () => {
+    router.push('/board/register');
   };
 
   return (

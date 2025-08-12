@@ -2,21 +2,17 @@
 
 import { JSX, useEffect, useRef } from 'react';
 
-import LineSkeleton from '@/components/skeleton/lineSkeleton';
-import Text from '@/components/text/text';
-import Wrapper from '@/components/wrapper/wrapper';
+import { LineSkeleton } from '../skeleton';
 
-interface IProps<T> {
-  data: T[] | undefined;
-  renderItem: (item: T) => JSX.Element | JSX.Element[];
-  total: number | undefined;
-  fetchNextPage: () => void;
+interface IProps {
   hasNextPage: boolean;
   isFetchingNextPage: boolean;
+  fetchNextPage: () => void;
+  children: JSX.Element | JSX.Element[];
 }
 
-export default function InfinityList<T>(props: IProps<T>) {
-  const { data = [], renderItem, total = 0, fetchNextPage, hasNextPage, isFetchingNextPage } = props;
+export const InfinityList = (props: IProps) => {
+  const { fetchNextPage, hasNextPage, isFetchingNextPage, children } = props;
 
   const observerRef = useRef<IntersectionObserver | null>(null);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
@@ -44,20 +40,11 @@ export default function InfinityList<T>(props: IProps<T>) {
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   return (
-    <>
-      {total > 0 ? (
-        <>
-          <div className="w-full flex flex-col gap-2">{data.map(renderItem)}</div>
-
-          <div ref={loadMoreRef} className="flex justify-center items-center">
-            {isFetchingNextPage && <LineSkeleton text="로딩!!" height={2} />}
-          </div>
-        </>
-      ) : (
-        <Wrapper>
-          <Text value="게시글이 없습니다." align="center" />
-        </Wrapper>
-      )}
-    </>
+    <ol className="w-full flex flex-col gap-2">
+      {children}
+      <div ref={loadMoreRef} className="flex justify-center items-center">
+        {isFetchingNextPage && <LineSkeleton height={2} />}
+      </div>
+    </ol>
   );
-}
+};

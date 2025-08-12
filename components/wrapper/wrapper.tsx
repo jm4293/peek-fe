@@ -1,23 +1,20 @@
-import Text from '@/components/text/text';
+import { Text } from '@/components/text';
 
 interface IProps {
-  key?: string;
+  id?: string;
   title?: string;
-
   children: React.ReactNode;
 }
 
-function Wrapper(props: IProps) {
-  const { key, title, children } = props;
+export const Wrapper = (props: IProps) => {
+  const { id, title, children } = props;
 
   return (
-    <section key={key} className={`w-full bg-white rounded-lg p-4`}>
-      <div className="flex flex-col gap-8">
-        {title && <Text value={title} weight="bold" />}
-        <div>{children}</div>
+    <div key={id} className="w-full bg-white rounded-lg p-4">
+      <div className="flex flex-col gap-4">
+        {title && <Text.HEADING text={title} />}
+        {children}
       </div>
-    </section>
+    </div>
   );
-}
-
-export default Wrapper;
+};
