@@ -1,1 +1,1 @@
-export * from './Image2';
+export * from './Image';

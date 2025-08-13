@@ -4,7 +4,7 @@ import { Dayjs } from '@/utils';
 import { useRouter } from 'next/navigation';
 
 import { EditableText, Text } from '@/components/text';
-import PreText from '@/components/text/preText';
+import PreText from '@/components/text/PreText';
 import { Wrapper } from '@/components/wrapper';
 
 import { IBoardModel, useBoardMutation } from '@/services/board';
