@@ -14,7 +14,7 @@ export default async function BoardModifyPage(props: IProps) {
 
   const { data, success } = await boardDetailAction(id);
 
-  if (!success) {
+  if (!data) {
     return (
       <Wrapper>
         <Text.HEADING text="게시판 불러오는데 실패했습니다." />
@@ -22,5 +22,5 @@ export default async function BoardModifyPage(props: IProps) {
     );
   }
 
-  return <BoardModify board={data!.board} id={id} />;
+  return <BoardModify board={data} id={id} />;
 }

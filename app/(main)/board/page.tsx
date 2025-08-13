@@ -11,9 +11,9 @@ import BoardList from './BoardList';
 
 export default async function BoardPage() {
   const { success: isAuth } = await myAction();
-  const { success, data } = await stockCategoryListAction();
+  const { data } = await stockCategoryListAction();
 
-  if (!success) {
+  if (!data) {
     return (
       <Wrapper>
         <Text.HEADING text="게시판 카테고리 목록을 불러오는데 실패했습니다." />
@@ -26,7 +26,7 @@ export default async function BoardPage() {
       <Text.SUBTITLE text="게시판" />
 
       <div className="flex flex-col gap-4">
-        <BoardCategory stockCategoryList={data!.stockCategoryList} />
+        <BoardCategory stockCategoryList={data} />
         <BoardList />
       </div>
 

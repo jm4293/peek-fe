@@ -11,11 +11,8 @@ export const signinEmailAction = async (dto: ILoginEmailDto) => {
       json: dto,
     }).json();
 
-    return { success: true, data: ret };
+    return { success: true };
   } catch (error: unknown) {
-    return {
-      success: false,
-      message: error?.message || '네트워크 오류가 발생했습니다. 다시 시도해주세요.',
-    };
+    return { success: false };
   }
 };

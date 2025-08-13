@@ -1,3 +1,3 @@
 export * from './CheckBox';
 export * from './EditableInput';
-export * from './Input';
+export * from './Input2';

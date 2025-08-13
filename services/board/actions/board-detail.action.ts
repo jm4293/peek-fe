@@ -12,8 +12,6 @@ export const boardDetailAction = async (boardId: string) => {
 
     return { success: true, data: board };
   } catch (error: unknown) {
-    return {
-      success: false,
-    };
+    return { success: false, data: null };
   }
 };

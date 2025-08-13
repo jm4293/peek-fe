@@ -1,1 +1,1 @@
-export * from './wrapper';
+export * from './Wrapper2';

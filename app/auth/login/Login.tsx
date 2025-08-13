@@ -39,10 +39,10 @@ export default function Login() {
     setIsError(false);
 
     startTransition(async () => {
-      const { success, message } = await signinEmailAction(value);
+      const { success } = await signinEmailAction(value);
 
       if (!success) {
-        openToast({ type: 'error', message: message || '로그인에 실패했습니다. 다시 시도해주세요.' });
+        openToast({ type: 'error', message: '로그인에 실패했습니다. 다시 시도해주세요.' });
         return;
       }
 

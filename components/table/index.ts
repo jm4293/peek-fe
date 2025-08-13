@@ -1,1 +1,1 @@
-export * from './virtualTable';
+export * from './VirtualTable2';
