@@ -62,7 +62,8 @@ export default class AXIOS {
 
         if (error.response?.status === 401) {
           const refreshInstance = axios.create({
-            baseURL: `${process.env.NEXT_PUBLIC_API_URL}:${process.env.NEXT_PUBLIC_API_PORT}`,
+            // baseURL: `${process.env.NEXT_PUBLIC_API_URL}:${process.env.NEXT_PUBLIC_API_PORT}`,
+            baseURL: `${process.env.NEXT_PUBLIC_API_URL}`,
             headers: { 'Content-Type': 'application/json' },
             withCredentials: true,
           });
