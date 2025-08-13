@@ -7,7 +7,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/home', request.url));
   }
 
-  const cookie = request.cookies.get('__rt');
+  // const cookie = request.cookies.get('__rt');
 
   // if (pathname === '/home') {
   //   if (!cookie) {
@@ -49,11 +49,11 @@ export async function middleware(request: NextRequest) {
   //   }
   // }
 
-  if (pathname === '/user') {
-    if (!cookie) {
-      return NextResponse.redirect(new URL('/guest', request.url));
-    }
-  }
+  // if (pathname === '/user') {
+  //   if (!cookie) {
+  //     return NextResponse.redirect(new URL('/guest', request.url));
+  //   }
+  // }
 
   return NextResponse.next();
 }
