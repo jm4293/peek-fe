@@ -1,1 +1,1 @@
-export * from './reactQuery.config';
+export * from './react-query.config';

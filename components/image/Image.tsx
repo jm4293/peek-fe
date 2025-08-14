@@ -1,8 +1,8 @@
 'use client';
 
-import { useDeviceLayout } from '@/hooks';
-
 import { HumanSvg } from '@/asset/svg';
+
+import { useDeviceLayout } from '@/hooks/useDeviceLayout';
 
 import { ImageTypeEnum } from '@/shared/enum/image';
 

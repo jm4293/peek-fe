@@ -1,4 +1,4 @@
-import GoogleOauth from '@/app/auth/login/google/GoogleOauth';
+import GoogleOauth from './GoogleOauth';
 
 export default function Page() {
   return (

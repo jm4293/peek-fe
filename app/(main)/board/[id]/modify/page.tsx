@@ -1,9 +1,9 @@
-import BoardModify from '@/app/(main)/board/[id]/modify/BoardModify';
-
 import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
 import { boardDetailAction } from '@/services/board';
+
+import BoardModify from './BoardModify';
 
 interface IProps {
   params: Promise<{ id: string }>;

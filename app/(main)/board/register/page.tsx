@@ -1,9 +1,9 @@
-import BoardRegister from '@/app/(main)/board/register/BoardRegister';
-
 import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
 import { stockCategoryListAction } from '@/services/stock';
+
+import BoardRegister from './BoardRegister';
 
 export default async function BoardRegisterPage() {
   const { data } = await stockCategoryListAction();

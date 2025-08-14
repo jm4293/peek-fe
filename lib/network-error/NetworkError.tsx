@@ -1,6 +1,6 @@
 'use client';
 
-import { useNetworkOffline } from '@/hooks';
+import { useNetworkOffline } from '@/hooks/useNetworkOffline';
 
 interface IProps {
   children: React.ReactNode;

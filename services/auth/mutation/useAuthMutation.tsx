@@ -1,9 +1,11 @@
-import { LocalStorage, SessionStorage } from '@/utils';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
 import AuthApi, { ICheckEmailDto, ILoginEmailDto, ILoginOauthDto } from '@/services/auth';
 import UserApi from '@/services/user';
+
+import { LocalStorage } from '@/utils/localStorage';
+import { SessionStorage } from '@/utils/sessionStorage';
 
 export const useAuthMutation = () => {
   const queryClient = useQueryClient();

@@ -1,12 +1,13 @@
 'use server';
 
-import { parseCookie } from '@/utils';
 import { headers } from 'next/headers';
 
 import KY from '@/lib/ky';
 
 import { API_URL } from '@/shared/constant/api-url';
 import { ACCESS_TOKEN_NAME, REFRESH_TOKEN_NAME } from '@/shared/constant/cookie';
+
+import { parseCookie } from '@/utils/cookie';
 
 import { IUserAccountModel } from '../model';
 import { IMyInfoRes } from '../response';

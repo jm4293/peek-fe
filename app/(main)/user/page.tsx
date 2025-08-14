@@ -1,10 +1,9 @@
-import User from '@/app/(main)/user/User';
-
 import { Text } from '@/components/text';
 
 import { myAction } from '@/services/user';
 
 import NotAuth from './NotAuth';
+import User from './User';
 
 export default async function UserPage() {
   const { data: my } = await myAction();

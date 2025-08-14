@@ -1,6 +1,5 @@
 'use client';
 
-import { Dayjs } from '@/utils';
 import { useState } from 'react';
 import { BsArrowReturnRight } from 'react-icons/bs';
 
@@ -12,6 +11,8 @@ import { Wrapper } from '@/components/wrapper';
 
 import { useBoardCommentList, useBoardCommentMutation } from '@/services/board';
 import { IUserAccountModel } from '@/services/user';
+
+import { Dayjs } from '@/utils/dayjs';
 
 interface IProps {
   id: string;
@@ -82,7 +83,8 @@ export default function BoardComment(props: IProps) {
                       onClick={() => {
                         setReplyComment('');
                         setIsReply(isReply === boardComment.id ? -1 : boardComment.id);
-                      }}>
+                      }}
+                    >
                       <div className="flex justify-between items-center gap-2">
                         <Text.HEADING text={boardComment.content} />
 
@@ -131,7 +133,8 @@ export default function BoardComment(props: IProps) {
                         name="reply"
                         value={replyComment}
                         onChange={(event) => setReplyComment(event.target.value)}
-                        placeholder="답글을 입력해주세요">
+                        placeholder="답글을 입력해주세요"
+                      >
                         <Button.CONTAINER text="등록" onClick={() => onCreateReplyCommentHandler(boardComment.id)} />
                       </EditableInput.TEXT>
                     )}
@@ -165,7 +168,8 @@ export default function BoardComment(props: IProps) {
               name="comment"
               value={comment}
               onChange={(event) => setComment(event.target.value)}
-              placeholder="댓글을 입력해주세요">
+              placeholder="댓글을 입력해주세요"
+            >
               <Button.CONTAINER text="등록" onClick={onCreateCommentHandler} />
             </EditableInput.TEXT>
           </div>

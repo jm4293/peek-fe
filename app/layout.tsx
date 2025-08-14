@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { Modal, Toast } from '@/components/modal';
 
 import { NetworkError } from '@/lib/network-error';
-import QueryProvider from '@/lib/react-query/reactQuery.config';
+import QueryProvider from '@/lib/react-query/react-query.config';
 
 import './globals.css';
 

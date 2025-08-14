@@ -1,6 +1,6 @@
-import BestNews from '@/app/(main)/home/BestNews';
-import BestWeekend from '@/app/(main)/home/best-weekend';
-import Chart from '@/app/(main)/home/chart';
+import BestNews from './BestNews';
+import BestWeekend from './best-weekend';
+import Chart from './chart';
 
 export default function HomePage() {
   return (

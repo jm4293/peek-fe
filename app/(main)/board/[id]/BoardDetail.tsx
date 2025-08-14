@@ -1,6 +1,5 @@
 'use client';
 
-import { Dayjs } from '@/utils';
 import { useRouter } from 'next/navigation';
 
 import { EditableText, Text } from '@/components/text';
@@ -11,6 +10,8 @@ import { IBoardModel, useBoardMutation } from '@/services/board';
 import { IUserAccountModel } from '@/services/user';
 
 import { BoardTypeEnumList } from '@/shared/enum/board';
+
+import { Dayjs } from '@/utils/dayjs';
 
 interface IProps {
   board: IBoardModel;

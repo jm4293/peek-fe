@@ -1,8 +1,9 @@
 'use client';
 
-import { useDebounce } from '@/hooks';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+
+import { useDebounce } from '@/hooks/useDebounce';
 
 import { useStockListQuery } from '@/services/stock';
 

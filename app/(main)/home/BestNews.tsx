@@ -3,8 +3,6 @@
 import { EditableText } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
-// import { Wrapper } from '@/components/wrapper';
-
 export default function BestNews() {
   return (
     <Wrapper title="인기 뉴스">

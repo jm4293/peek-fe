@@ -1,6 +1,5 @@
 'use client';
 
-import { Dayjs } from '@/utils';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { BiComment, BiHeart } from 'react-icons/bi';
@@ -14,6 +13,8 @@ import { useQueryParams } from '@/hooks/queryParams';
 import { IBoardModel, useBoardList } from '@/services/board';
 
 import { BoardTypeEnumList } from '@/shared/enum/board';
+
+import { Dayjs } from '@/utils/dayjs';
 
 export default function BoardList() {
   const router = useRouter();

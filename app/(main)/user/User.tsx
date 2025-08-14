@@ -80,14 +80,16 @@ export default function User(props: IProps) {
           <div className="flex flex-col gap-2">
             <div
               className="py-1 flex items-center justify-between cursor-pointer"
-              onClick={() => router.push('/user/board')}>
+              onClick={() => router.push('/user/board')}
+            >
               <Text.PARAGRAPH text="작성한 게시글" />
               <MdOutlineArrowForwardIos />
             </div>
 
             <div
               className="py-1 flex items-center justify-between cursor-pointer"
-              onClick={() => router.push('/user/board/comment')}>
+              onClick={() => router.push('/user/board/comment')}
+            >
               <Text.PARAGRAPH text="작성한 게시글 댓글" />
               <MdOutlineArrowForwardIos />
             </div>

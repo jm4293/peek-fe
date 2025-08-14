@@ -1,5 +1,6 @@
-import { IToastState, toastAtom } from '@/stores/toast.atom';
 import { useAtom } from 'jotai';
+
+import { IToastState, toastAtom } from '@/stores/toast.atom';
 
 export const useToast = () => {
   const [toast, setToast] = useAtom(toastAtom);
