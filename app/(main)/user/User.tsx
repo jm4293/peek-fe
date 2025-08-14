@@ -1,5 +1,6 @@
 'use client';
 
+import { useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { MdOutlineArrowForwardIos } from 'react-icons/md';
@@ -9,8 +10,13 @@ import { HumanSvg } from '@/asset/svg';
 import { EditableText, Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
-import { useAuthMutation } from '@/services/auth';
+import { useToast } from '@/hooks/modal';
+
+import { signoutAction } from '@/services/auth';
 import { IUserAccountModel } from '@/services/user';
+
+import { LocalStorage } from '@/utils/localStorage';
+import { SessionStorage } from '@/utils/sessionStorage';
 
 interface IProps {
   my: IUserAccountModel;
@@ -19,8 +25,11 @@ interface IProps {
 export default function User(props: IProps) {
   const { my } = props;
   const router = useRouter();
+  const queryClient = useQueryClient();
 
-  const { logoutMutation } = useAuthMutation();
+  const { openToast } = useToast();
+
+  // const { logoutMutation } = useAuthMutation();
 
   const clickHandler = () => {
     router.push('/auth/login');
@@ -28,7 +37,18 @@ export default function User(props: IProps) {
 
   const logoutHandler = async () => {
     if (confirm('로그아웃 하시겠습니까?')) {
-      logoutMutation.mutate();
+      const { success } = await signoutAction();
+
+      if (!success) {
+        openToast({ type: 'error', message: '로그아웃에 실패했습니다. 다시 시도해주세요.' });
+        return;
+      }
+
+      queryClient.clear();
+      LocalStorage.clear();
+      SessionStorage.clear();
+      openToast({ type: 'success', message: '로그아웃에 성공했습니다.' });
+      router.push('/home');
     }
   };
 
@@ -80,16 +100,14 @@ export default function User(props: IProps) {
           <div className="flex flex-col gap-2">
             <div
               className="py-1 flex items-center justify-between cursor-pointer"
-              onClick={() => router.push('/user/board')}
-            >
+              onClick={() => router.push('/user/board')}>
               <Text.PARAGRAPH text="작성한 게시글" />
               <MdOutlineArrowForwardIos />
             </div>
 
             <div
               className="py-1 flex items-center justify-between cursor-pointer"
-              onClick={() => router.push('/user/board/comment')}
-            >
+              onClick={() => router.push('/user/board/comment')}>
               <Text.PARAGRAPH text="작성한 게시글 댓글" />
               <MdOutlineArrowForwardIos />
             </div>

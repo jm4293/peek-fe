@@ -1,3 +1,4 @@
 export interface ILoginRes {
-  // accessToken: string;
+  accessToken: string;
+  refreshToken: string;
 }

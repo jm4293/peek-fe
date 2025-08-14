@@ -23,7 +23,7 @@ class AuthApi extends AXIOS {
 
   async signInOauth(dto: ILoginOauthDto) {
     return await this.post<ILoginRes, ILoginOauthDto>({
-      url: `${this._baseURL}/login-oauth`,
+      url: `${this._baseURL}/login/oauth`,
       data: dto,
     });
   }

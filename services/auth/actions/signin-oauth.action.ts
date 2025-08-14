@@ -8,14 +8,14 @@ import { API_URL } from '@/shared/constant/api-url';
 import { ACCESS_TOKEN_NAME, REFRESH_TOKEN_NAME } from '@/shared/constant/cookie';
 import { ACCESS_TOKEN_COOKIE_TIME, REFRESH_TOKEN_COOKIE_TIME } from '@/shared/constant/expire-time';
 
-import { ILoginEmailDto } from '../dto';
+import { ILoginOauthDto } from '../dto';
 import { ILoginRes } from '../response';
 
-export const signinEmailAction = async (dto: ILoginEmailDto) => {
+export const signinOauthAction = async (dto: ILoginOauthDto) => {
   const cookieStore = await cookies();
 
   try {
-    const ret = await KY.post<ILoginRes>(`${API_URL}/auth/login`, {
+    const ret = await KY.post<ILoginRes>(`${API_URL}/auth/login/oauth`, {
       json: dto,
     }).json();
 

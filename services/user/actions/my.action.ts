@@ -21,9 +21,9 @@ export const myAction = async (): Promise<MyActionResult> => {
   const headerList = await headers();
   const cookie = headerList.get('cookie');
 
-  const cookies = parseCookie.set(cookie);
-  let access = cookies.pick(ACCESS_TOKEN_NAME);
-  const refresh = cookies.pick(REFRESH_TOKEN_NAME);
+  const cookieStore = parseCookie.set(cookie);
+  let access = cookieStore.pick(ACCESS_TOKEN_NAME);
+  const refresh = cookieStore.pick(REFRESH_TOKEN_NAME);
 
   try {
     if (!refresh) {

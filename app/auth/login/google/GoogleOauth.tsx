@@ -1,20 +1,20 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { LineSkeleton } from '@/components/skeleton';
 
-import { useAuthMutation } from '@/services/auth';
+import { useToast } from '@/hooks/modal';
 
-import { UserAccountTypeEnum } from '@/shared/enum/user';
+import { signinOauthAction } from '@/services/auth';
+
+import { UserAccountTypeEnum, userAccountTypeDescription } from '@/shared/enum/user';
 
 export default function GoogleOauth() {
   const router = useRouter();
 
-  const [accessToken, setAccessToken] = useState('');
-
-  const { googleSignInMutation } = useAuthMutation();
+  const { openToast } = useToast();
 
   useEffect(() => {
     (() => {
@@ -24,22 +24,30 @@ export default function GoogleOauth() {
 
       const token = params.get('access_token');
 
-      if (token) {
-        setAccessToken(token);
-      } else {
-        router.push('/auth/login');
-      }
+      (async () => {
+        if (token) {
+          const { success } = await signinOauthAction({
+            access_token: token,
+            userAccountType: UserAccountTypeEnum.GOOGLE,
+          });
+
+          if (!success) {
+            openToast({ type: 'error', message: '로그인에 실패했습니다. 다시 시도해주세요.' });
+            router.push('/auth/login');
+            return;
+          }
+
+          openToast({
+            type: 'success',
+            message: `${userAccountTypeDescription[UserAccountTypeEnum.GOOGLE]} 로그인에 성공했습니다.`,
+          });
+          router.push('/home');
+        } else {
+          router.push('/auth/login');
+        }
+      })();
     })();
   }, []);
-
-  useEffect(() => {
-    if (accessToken) {
-      googleSignInMutation.mutate({
-        userAccountType: UserAccountTypeEnum.GOOGLE,
-        access_token: accessToken,
-      });
-    }
-  }, [accessToken]);
 
   return (
     <>
