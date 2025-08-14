@@ -58,7 +58,7 @@ export default function Login() {
   };
 
   const googleLoginHandler = () => {
-    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIEND_ID}&redirect_uri=http://localhost:31180/auth/login/google&response_type=token&scope=openid email profile&include_granted_scopes=true`;
+    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_REDIRECT_URL}&response_type=token&scope=openid email profile&include_granted_scopes=true`;
   };
 
   useEffect(() => {
