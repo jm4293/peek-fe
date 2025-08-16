@@ -86,7 +86,7 @@ button {
 }
 
 .layout > header {
-  min-width: 450px;
+  min-width: 320px;
   width: 100vw;
   height: 4rem;
   background-color: white;
@@ -102,7 +102,7 @@ button {
 }
 
 .layout > main {
-  min-width: 450px;
+  min-width: 320px;
   overflow-y: auto;
   background-color: #f2f2f5;
   height: 100vh;

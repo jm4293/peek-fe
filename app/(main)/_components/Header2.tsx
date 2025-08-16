@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
+import { Text } from '@/components/text';
+
 const menuItems = [
   { name: '홈', path: '/home' },
   { name: '주식', path: '/stock' },
@@ -37,17 +39,19 @@ export function Header() {
         <div className="flex items-center gap-12">
           <strong>PEEK</strong>
 
-          <div className="flex items-center gap-8">
+          <div className="flex items-center gap-4">
             {menuItems.map((item) => (
               <Link key={item.name} href={item.path}>
-                <h2>{item.name}</h2>
+                <Text.HEADING text={item.name} />
               </Link>
             ))}
           </div>
         </div>
 
         <div className="flex items-center gap-8">
-          <Link href="/user">마이페이지</Link>
+          <Link href="/user">
+            <Text.PARAGRAPH text="마이페이지" />
+          </Link>
         </div>
       </div>
     </header>
