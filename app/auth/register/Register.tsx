@@ -121,7 +121,7 @@ export default function Register() {
           />
           <Button.CONTAINER
             className="mt-6"
-            text={checkEmail ? '이메일 확인 완료' : '이메일 중복 확인'}
+            text={checkEmail ? '확인 완료' : '중복 확인'}
             onClick={handleCheckEmail}
             disabled={checkEmail}
           />
