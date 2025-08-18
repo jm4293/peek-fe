@@ -66,7 +66,13 @@ export default function User(props: IProps) {
         <div className="flex items-center justify-between cursor-pointer">
           <div className="w-full flex items-center gap-4">
             {my.user.thumbnail ? (
-              <Image src={my.user.thumbnail} alt="thumbnail" width={80} height={80} />
+              <Image
+                src={`${process.env.NEXT_PUBLIC_IMAGE_HOST}/THUMBNAIL/${my.user.thumbnail}`}
+                alt="thumbnail"
+                width={50}
+                height={50}
+                className="rounded-full"
+              />
             ) : (
               <HumanSvg />
             )}
