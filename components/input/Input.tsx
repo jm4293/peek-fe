@@ -8,6 +8,8 @@ interface IProps {
   placeholder?: string;
   disabled?: boolean;
   isOptional?: boolean;
+  minLength?: number;
+  maxLength?: number;
   required?: boolean;
 }
 

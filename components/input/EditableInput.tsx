@@ -14,6 +14,8 @@ interface IProps {
   required?: boolean;
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   isError?: boolean;
+  minLength?: number;
+  maxLength?: number;
   children?: React.ReactNode;
 }
 
