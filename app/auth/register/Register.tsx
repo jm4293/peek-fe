@@ -27,18 +27,15 @@ export default function Register() {
   const { openModal, closeModal } = useModal();
   const { openToast } = useToast();
 
-  const [checkEmail, setCheckEmail] = useState(false);
+  const [checkEmail, setCheckEmail] = useState<number>(1);
   const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [code, setCode] = useState('');
 
   const [value, onChange] = useInput({ ...initialFormData });
 
-  const { checkEmailMutation } = useAuthMutation();
+  const { checkEmailMutation, checkEmailCodeMutation } = useAuthMutation();
 
   const handleCheckEmail = async () => {
-    if (checkEmail) {
-      return;
-    }
-
     if (!value.email || !value.email.trim()) {
       openModal({ content: '이메일을 입력해주세요.', onConfirm: closeModal });
       return;
@@ -48,22 +45,47 @@ export default function Register() {
       { email: value.email },
       {
         onSuccess: (res) => {
-          const { isExist } = res.data;
+          const { isExist, message } = res.data;
 
           if (isExist) {
-            openModal({ content: '이미 존재하는 이메일입니다.', onConfirm: closeModal });
+            openToast({ message, type: 'error' });
             return;
           }
 
-          setCheckEmail(true);
+          openToast({ message: '이메일 인증코드를 전송했습니다.', type: 'success' });
+          setCheckEmail(2);
+        },
+      },
+    );
+  };
+
+  const handleCheckCode = async () => {
+    if (!code || !code.trim()) {
+      openModal({ content: '인증코드를 입력해주세요.', onConfirm: closeModal });
+      return;
+    }
+
+    checkEmailCodeMutation.mutate(
+      { email: value.email, code },
+      {
+        onSuccess: (res) => {
+          const { success, message } = res.data;
+
+          if (!success) {
+            openToast({ message, type: 'error' });
+            return;
+          }
+
+          openToast({ message, type: 'success' });
+          setCheckEmail(3);
         },
       },
     );
   };
 
   const handleSubmit = async () => {
-    if (!checkEmail) {
-      openModal({ content: '이메일 중복확인을 해주세요.', onConfirm: closeModal });
+    if (checkEmail !== 3) {
+      openModal({ content: '이메일 인증을 완료해 주세요.', onConfirm: closeModal });
       return;
     }
 
@@ -116,16 +138,38 @@ export default function Register() {
             value={value.email}
             onChange={onChange}
             placeholder="이메일 주소"
-            disabled={checkEmail}
+            disabled={checkEmail !== 1}
             required
           />
           <Button.CONTAINER
             className="mt-6"
-            text={checkEmail ? '확인 완료' : '중복 확인'}
+            text={checkEmailMutation.isPending ? '코드 전송 중' : '이메일 인증'}
             onClick={handleCheckEmail}
-            disabled={checkEmail}
+            disabled={checkEmailMutation.isPending || checkEmail !== 1}
           />
         </div>
+        {checkEmail !== 1 && (
+          <div className="grid grid-cols-3 gap-2">
+            <EditableInput.TEXT
+              className="col-span-2"
+              title="인증코드"
+              name="code"
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+              placeholder="인증코드"
+              minLength={4}
+              maxLength={4}
+              disabled={checkEmail === 3}
+              required
+            />
+            <Button.CONTAINER
+              className="mt-6"
+              text={checkEmail === 3 ? '확인 완료' : '코드 확인'}
+              onClick={handleCheckCode}
+              disabled={checkEmail === 3}
+            />
+          </div>
+        )}
 
         <EditableInput.PASSWORD
           title="비밀번호"

@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
-import AuthApi, { ICheckEmailDto } from '@/services/auth';
+import AuthApi, { ICheckEmailCodeDto, ICheckEmailDto } from '@/services/auth';
 import UserApi from '@/services/user';
 
 import { LocalStorage } from '@/utils/localStorage';
@@ -27,6 +27,10 @@ export const useAuthMutation = () => {
 
   const checkEmailMutation = useMutation({
     mutationFn: (dto: ICheckEmailDto) => AuthApi.checkEmail(dto),
+  });
+
+  const checkEmailCodeMutation = useMutation({
+    mutationFn: (dto: ICheckEmailCodeDto) => AuthApi.checkEmailCode(dto),
   });
 
   // const signUpMutation = useMutation({
@@ -79,6 +83,7 @@ export const useAuthMutation = () => {
     // signInMutation,
     // googleSignInMutation,
     checkEmailMutation,
+    checkEmailCodeMutation,
     // signUpMutation,
     // logoutMutation,
     registerMessagingTokenMutation,

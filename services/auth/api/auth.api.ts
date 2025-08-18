@@ -1,6 +1,8 @@
 import AXIOS from '@/lib/axios';
 
 import {
+  ICheckEmailCodeDto,
+  ICheckEmailCodeRes,
   ICheckEmailDto,
   ICheckEmailRes,
   ILoginEmailDto,
@@ -31,6 +33,13 @@ class AuthApi extends AXIOS {
   async checkEmail(dto: ICheckEmailDto) {
     return await this.post<ICheckEmailRes, ICheckEmailDto>({
       url: `${this._baseURL}/check-email`,
+      data: dto,
+    });
+  }
+
+  async checkEmailCode(dto: ICheckEmailCodeDto) {
+    return await this.post<ICheckEmailCodeRes, ICheckEmailCodeDto>({
+      url: `${this._baseURL}/check-email-code`,
       data: dto,
     });
   }

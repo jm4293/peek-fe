@@ -1,3 +1,4 @@
+export * from './check-email-code.res';
 export * from './check-email.res';
 export * from './login.res';
 export * from './refresh-token.res';
