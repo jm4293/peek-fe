@@ -8,8 +8,8 @@ export default function Layout(props: IProps) {
   const { children } = props;
 
   return (
-    <div className="min-w-[320px] h-[100vh] flex justify-center overflow-hidden">
-      <div className="w-[450px] px-4 overflow-y-auto bg-white">
+    <div className="h-[100vh] flex justify-center overflow-hidden">
+      <div className="w-[720px] px-4 overflow-y-auto bg-white">
         <div className="w-full py-4">
           <BackSvg />
         </div>
