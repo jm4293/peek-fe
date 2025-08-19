@@ -16,6 +16,11 @@ import { ISignUpDto, signupEmailAction, useAuthMutation } from '@/services/auth'
 
 dayjs.extend(duration);
 
+const validateEmail = (email: string): boolean => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
+
 const initialFormData: ISignUpDto = {
   nickname: '',
   name: '',
@@ -44,6 +49,11 @@ export default function Register() {
   const handleCheckEmail = async () => {
     if (!value.email || !value.email.trim()) {
       openModal({ content: '이메일을 입력해주세요.', onConfirm: closeModal });
+      return;
+    }
+
+    if (!validateEmail(value.email)) {
+      openModal({ content: '유효한 이메일 주소가 아닙니다.', onConfirm: closeModal });
       return;
     }
 
