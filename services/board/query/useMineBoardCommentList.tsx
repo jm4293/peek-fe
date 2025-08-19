@@ -2,16 +2,12 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 
 import BoardApi, { IBoardCommentListRes } from '@/services/board';
 
-interface IProps {
-  boardId: number | undefined;
-}
+import { QueryKeys } from '@/shared/query-key';
 
-export const useBoardCommentList = (props: IProps) => {
-  const { boardId } = props;
-
+export const useBoardCommentListMineQuery = () => {
   return useInfiniteQuery({
-    queryKey: ['board-comment-list', boardId],
-    queryFn: ({ pageParam }) => BoardApi.getBoardCommentList({ boardId: Number(boardId), page: pageParam }),
+    queryKey: QueryKeys.board.mineCommentList(),
+    queryFn: ({ pageParam }) => BoardApi.getBoardCommentListMine(pageParam),
     getNextPageParam: (lastPage) => {
       const { nextPage } = lastPage.data;
 
@@ -28,6 +24,5 @@ export const useBoardCommentList = (props: IProps) => {
       );
     },
     initialPageParam: 1,
-    enabled: !!boardId,
   });
 };

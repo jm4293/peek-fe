@@ -29,8 +29,6 @@ export default function User(props: IProps) {
 
   const { openToast } = useToast();
 
-  // const { logoutMutation } = useAuthMutation();
-
   const clickHandler = () => {
     router.push('/auth/login');
   };

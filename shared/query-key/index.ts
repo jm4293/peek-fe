@@ -8,5 +8,7 @@ export class QueryKeys {
     detail: (boardId: string) => ['board', 'detail', boardId],
     list: (category?: number) => ['board', 'list', category],
     categoryList: () => ['board', 'categories'],
+    mineList: () => ['board', 'list-mine'],
+    mineCommentList: () => ['board', 'comment', 'mine'],
   };
 }

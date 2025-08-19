@@ -29,10 +29,10 @@ class BoardApi extends AXIOS {
   }
 
   async getBoardListMine(page: number) {
-    // return await this.get<IBoardListRes, { page: number }>({
-    //   url: `${this._baseURL}/mine`,
-    //   params: { page },
-    // });
+    return await this.get<IBoardListRes, IBoardListDto>({
+      url: `${this._baseURL}/mine`,
+      params: { page },
+    });
   }
 
   async createBoard(dto: ICreateBoardDto) {
@@ -63,10 +63,10 @@ class BoardApi extends AXIOS {
   }
 
   async getBoardCommentListMine(page: number) {
-    // return await this.get<IBoardCommentListRes, { page: number }>({
-    //   url: `${this._baseURL}/comment/mine`,
-    //   params: { page },
-    // });
+    return await this.get<IBoardCommentListRes, { page: number }>({
+      url: `${this._baseURL}/mine/comment`,
+      params: { page },
+    });
   }
 
   async createBoardComment(dto: ICreateBoardCommentDto) {
