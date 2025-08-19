@@ -65,7 +65,7 @@ export default function MineBoardCommentList() {
   if (list.length === 0) {
     return (
       <Wrapper>
-        <EditableText.HEADING text="작성한 게시글이 없습니다." />
+        <EditableText.HEADING text="작성한 게시글 댓글이 없습니다." />
       </Wrapper>
     );
   }
