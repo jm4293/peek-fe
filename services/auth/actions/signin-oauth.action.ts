@@ -26,6 +26,7 @@ export const signinOauthAction = async (dto: ILoginOauthDto) => {
       sameSite: 'lax',
       httpOnly: true,
       path: '/',
+      domain: process.env.NODE_ENV === 'production' ? '.peek.run' : 'localhost',
       maxAge: ACCESS_TOKEN_COOKIE_TIME,
     });
 
@@ -34,6 +35,7 @@ export const signinOauthAction = async (dto: ILoginOauthDto) => {
       sameSite: 'lax',
       httpOnly: true,
       path: '/',
+      domain: process.env.NODE_ENV === 'production' ? '.peek.run' : 'localhost',
       maxAge: REFRESH_TOKEN_COOKIE_TIME,
     });
 
