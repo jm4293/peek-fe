@@ -83,8 +83,7 @@ export default function BoardComment(props: IProps) {
                       onClick={() => {
                         setReplyComment('');
                         setIsReply(isReply === boardComment.id ? -1 : boardComment.id);
-                      }}
-                    >
+                      }}>
                       <div className="flex justify-between items-center gap-2">
                         <Text.HEADING text={boardComment.content} />
 
@@ -133,9 +132,12 @@ export default function BoardComment(props: IProps) {
                         name="reply"
                         value={replyComment}
                         onChange={(event) => setReplyComment(event.target.value)}
-                        placeholder="답글을 입력해주세요"
-                      >
-                        <Button.CONTAINER text="등록" onClick={() => onCreateReplyCommentHandler(boardComment.id)} />
+                        placeholder="답글을 입력해주세요">
+                        <EditableText.HEADING
+                          text="등록"
+                          color="blue"
+                          onClick={() => onCreateReplyCommentHandler(boardComment.id)}
+                        />
                       </EditableInput.TEXT>
                     )}
                   </div>
@@ -168,9 +170,8 @@ export default function BoardComment(props: IProps) {
               name="comment"
               value={comment}
               onChange={(event) => setComment(event.target.value)}
-              placeholder="댓글을 입력해주세요"
-            >
-              <Button.CONTAINER text="등록" onClick={onCreateCommentHandler} />
+              placeholder="댓글을 입력해주세요">
+              <EditableText.HEADING text="등록" color="blue" onClick={onCreateCommentHandler} />
             </EditableInput.TEXT>
           </div>
         </Wrapper>

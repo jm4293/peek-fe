@@ -31,7 +31,7 @@ export default async function BoardPage() {
       </div>
 
       {isAuth && (
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <div className="absolute bottom-0 right-0 -translate-x-1/2 -translate-y-1/2">
           <BoardRegisterSvg />
         </div>
       )}

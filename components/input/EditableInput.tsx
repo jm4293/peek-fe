@@ -31,7 +31,7 @@ const TEXT = (props: IProps) => {
       <div className="relative">
         <input
           id={name}
-          className={`w-full border border-gray-300 ${isError ? 'border-red-500' : ''} ${children ? 'col-span-5' : ''}`}
+          className={`w-full border border-gray-300 ${isError ? 'border-red-500' : ''} ${children ? 'pr-16' : ''}`}
           name={name}
           type="text"
           placeholder={`${placeholder} ${optional ? '[선택] ' : ''}`}
@@ -55,7 +55,7 @@ const EMAIL = (props: IProps) => {
       <div className="relative">
         <input
           id={name}
-          className={`w-full border border-gray-300 ${isError ? 'border-red-500' : ''} ${children ? 'col-span-5' : ''}`}
+          className={`w-full border border-gray-300 ${isError ? 'border-red-500' : ''} ${children ? 'pr-16' : ''}`}
           name={name}
           type="email"
           placeholder={`${placeholder} ${optional ? '[선택] ' : ''}`}
@@ -79,7 +79,7 @@ const PASSWORD = (props: IProps) => {
       <div className="relative">
         <input
           id={name}
-          className={`w-full border border-gray-300 ${isError ? 'border-red-500' : ''} ${children ? 'col-span-5' : ''}`}
+          className={`w-full border border-gray-300 ${isError ? 'border-red-500' : ''} ${children ? 'pr-16' : ''}`}
           name={name}
           type="password"
           placeholder={`${placeholder} ${optional ? '[선택] ' : ''}`}
