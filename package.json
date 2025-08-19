@@ -4,9 +4,9 @@
   "private": true,
   "author": "jm4293",
   "scripts": {
-    "dev": "next dev -p 31180",
+    "dev": "next dev",
     "build": "next build",
-    "start": "next start -p 31180",
+    "start": "next start",
     "lint": "next lint",
     "build-rm": "rm -rf .next",
     "node_modules-rm": "rm -rf node_modules"
