@@ -4,8 +4,8 @@ import { Text } from '@/components/text';
 
 export default function CatchAllPage() {
   return (
-    <div className="w-screen h-screen" style={{ border: '1px solid red' }}>
-      <div className="h-1/2 flex flex-col justify-center items-center gap-8" style={{ border: '1px solid blue' }}>
+    <div className="w-screen h-screen">
+      <div className="h-1/2 flex flex-col justify-center items-center gap-8">
         <strong>PEEK</strong>
 
         <div className="flex flex-col items-center gap-4">

@@ -1,5 +1,5 @@
 export * from './mobile-footer';
-export * from './Header2';
+export * from './Header';
 export * from './header-alert';
 export * from './header-search';
 export * from './isAuth';

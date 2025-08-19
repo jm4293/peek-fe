@@ -36,7 +36,7 @@ export function Header() {
   return (
     <header className={`${isVisible ? '' : 'hide'}`}>
       <div className="flex justify-between items-center px-4 py-4">
-        <div className="flex items-center gap-12">
+        <div className="flex items-center gap-8">
           <strong>PEEK</strong>
 
           <div className="flex items-center gap-4">
@@ -48,11 +48,9 @@ export function Header() {
           </div>
         </div>
 
-        <div className="flex items-center gap-8">
-          <Link href="/user">
-            <Text.PARAGRAPH text="마이페이지" />
-          </Link>
-        </div>
+        <Link href="/user">
+          <Text.PARAGRAPH text="마이페이지" />
+        </Link>
       </div>
     </header>
   );
