@@ -28,7 +28,7 @@ const TEXT = (props: IProps) => {
         <Text.HEADING text={title} />
       </label>
 
-      <div className={`${children ? 'grid grid-cols-6 gap-4' : ''}`}>
+      <div className="relative">
         <input
           id={name}
           className={`w-full border border-gray-300 ${isError ? 'border-red-500' : ''} ${children ? 'col-span-5' : ''}`}
@@ -37,7 +37,7 @@ const TEXT = (props: IProps) => {
           placeholder={`${placeholder} ${optional ? '[선택] ' : ''}`}
           {...rest}
         />
-        {children}
+        <div className="absolute right-4 bottom-1/2 translate-y-1/2">{children}</div>
       </div>
     </div>
   );
@@ -52,7 +52,7 @@ const EMAIL = (props: IProps) => {
         <Text.HEADING text={title} />
       </label>
 
-      <div className={`${children ? 'grid grid-cols-6 gap-4' : ''}`}>
+      <div className="relative">
         <input
           id={name}
           className={`w-full border border-gray-300 ${isError ? 'border-red-500' : ''} ${children ? 'col-span-5' : ''}`}
@@ -61,7 +61,7 @@ const EMAIL = (props: IProps) => {
           placeholder={`${placeholder} ${optional ? '[선택] ' : ''}`}
           {...rest}
         />
-        {children}
+        <div className="absolute right-4 bottom-1/2 translate-y-1/2">{children}</div>
       </div>
     </div>
   );
@@ -76,7 +76,7 @@ const PASSWORD = (props: IProps) => {
         <Text.HEADING text={title} />
       </label>
 
-      <div className={`${children ? 'grid grid-cols-6 gap-4' : ''}`}>
+      <div className="relative">
         <input
           id={name}
           className={`w-full border border-gray-300 ${isError ? 'border-red-500' : ''} ${children ? 'col-span-5' : ''}`}
@@ -85,7 +85,7 @@ const PASSWORD = (props: IProps) => {
           placeholder={`${placeholder} ${optional ? '[선택] ' : ''}`}
           {...rest}
         />
-        {children}
+        <div className="absolute right-4 bottom-1/2 translate-y-1/2">{children}</div>
       </div>
     </div>
   );

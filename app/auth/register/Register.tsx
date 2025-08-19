@@ -1,15 +1,20 @@
 'use client';
 
+import dayjs from 'dayjs';
+import duration from 'dayjs/plugin/duration';
 import { useRouter } from 'next/navigation';
-import { useState, useTransition } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 
 import { Button } from '@/components/button';
 import { CheckBox, EditableInput } from '@/components/input';
+import { Text } from '@/components/text';
 
 import { useInput } from '@/hooks/input';
 import { useModal, useToast } from '@/hooks/modal';
 
 import { ISignUpDto, signupEmailAction, useAuthMutation } from '@/services/auth';
+
+dayjs.extend(duration);
 
 const initialFormData: ISignUpDto = {
   nickname: '',
@@ -30,6 +35,7 @@ export default function Register() {
   const [checkEmail, setCheckEmail] = useState<number>(1);
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [code, setCode] = useState('');
+  const [count, setCount] = useState(300);
 
   const [value, onChange] = useInput({ ...initialFormData });
 
@@ -127,6 +133,28 @@ export default function Register() {
     });
   };
 
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+
+    if (checkEmail === 2) {
+      interval = setInterval(() => {
+        setCount((prev) => {
+          if (prev <= 1) {
+            setCheckEmail(1);
+            return 300;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+
+    return () => {
+      if (interval) {
+        clearInterval(interval);
+      }
+    };
+  }, [checkEmail]);
+
   return (
     <section className="w-full flex flex-col gap-8">
       <div className="flex flex-col gap-2">
@@ -160,8 +188,9 @@ export default function Register() {
               minLength={4}
               maxLength={4}
               disabled={checkEmail === 3}
-              required
-            />
+              required>
+              <Text.PARAGRAPH text={dayjs.duration(count, 'seconds').format('m:ss')} />
+            </EditableInput.TEXT>
             <Button.CONTAINER
               className="mt-6"
               text={checkEmail === 3 ? '확인 완료' : '코드 확인'}
