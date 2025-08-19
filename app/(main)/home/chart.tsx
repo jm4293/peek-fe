@@ -5,7 +5,7 @@ export default function Chart() {
   return (
     <Wrapper title="지수">
       <Text.PARAGRAPH text="코스피" />
-      <Text.PARAGRAPH text="코스닥" />
+      {/* <Text.PARAGRAPH text="코스닥" /> */}
     </Wrapper>
   );
 }

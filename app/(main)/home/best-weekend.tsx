@@ -8,7 +8,7 @@ export default function BestWeekend() {
     <Wrapper title="일주일 종합">
       <div className="flex flex-col gap-2">
         <EditableText.PARAGRAPH text="애플" />
-        <EditableText.PARAGRAPH text="삼성전자우" />
+        {/* <EditableText.PARAGRAPH text="삼성전자우" /> */}
       </div>
     </Wrapper>
   );
