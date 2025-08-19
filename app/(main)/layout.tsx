@@ -1,4 +1,4 @@
-import { Header } from './_components';
+import { Header } from './Header';
 
 interface IProps {
   children: React.ReactNode;

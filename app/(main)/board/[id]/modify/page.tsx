@@ -12,7 +12,7 @@ interface IProps {
 export default async function BoardModifyPage(props: IProps) {
   const { id } = await props.params;
 
-  const { data, success } = await boardDetailAction(id);
+  const { data } = await boardDetailAction(id);
 
   if (!data) {
     return (

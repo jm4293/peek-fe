@@ -21,9 +21,7 @@ export default function MineBoardList() {
 
   const { data: boardList, hasNextPage, fetchNextPage, isFetchingNextPage, isSuccess } = useMineBoardList();
 
-  const clickHandler = (params: { event: React.MouseEvent<HTMLDivElement, MouseEvent>; id: number }) => {
-    const { event, id } = params;
-
+  const clickHandler = (id: number) => {
     router.push(`/board/${id}`);
   };
 
@@ -39,7 +37,7 @@ export default function MineBoardList() {
     return (
       <li key={id}>
         <Wrapper>
-          <div className="flex flex-col gap-4" onClick={(event) => clickHandler({ event, id })}>
+          <div className="flex flex-col gap-4" onClick={() => clickHandler(id)}>
             <div className="flex justify-between items-center gap-2">
               <div className="flex gap-2">
                 <EditableText.PARAGRAPH
