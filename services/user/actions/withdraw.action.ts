@@ -31,8 +31,16 @@ export const withdrawAction = async () => {
       },
     });
 
-    (await cookies()).delete(ACCESS_TOKEN_NAME);
-    (await cookies()).delete(REFRESH_TOKEN_NAME);
+    (await cookies()).delete({
+      name: ACCESS_TOKEN_NAME,
+      path: '/',
+      domain: process.env.NODE_ENV === 'production' ? '.peek.run' : 'localhost',
+    });
+    (await cookies()).delete({
+      name: REFRESH_TOKEN_NAME,
+      path: '/',
+      domain: process.env.NODE_ENV === 'production' ? '.peek.run' : 'localhost',
+    });
 
     return { success: true };
   } catch (error: unknown) {
