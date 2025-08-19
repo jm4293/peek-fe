@@ -26,4 +26,8 @@ export const parseCookie = {
   pick: function (key: string) {
     return this.value[key] || null;
   },
+  delete: function (key: string) {
+    delete this.value[key];
+    return this;
+  },
 };
