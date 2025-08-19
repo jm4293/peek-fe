@@ -7,6 +7,8 @@ import { EditableInput } from '@/components/input';
 import { Textarea } from '@/components/textarea';
 import { Wrapper } from '@/components/wrapper';
 
+import { useToast } from '@/hooks/modal';
+
 import { IBoardModel, useBoardMutation } from '@/services/board';
 
 interface IProps {
@@ -20,16 +22,18 @@ export default function BoardModify(props: IProps) {
   const [title, setTitle] = useState(board.title || '');
   const [content, setContent] = useState(board.article.content || '');
 
+  const { openToast } = useToast();
+
   const { updateBoardMutation } = useBoardMutation();
 
   const clickHandler = () => {
     if (!title || !title.trim()) {
-      alert('제목을 입력해주세요');
+      openToast({ message: '제목을 입력해주세요', type: 'error' });
       return;
     }
 
     if (!content || !content.trim()) {
-      alert('내용을 입력해주세요');
+      openToast({ message: '내용을 입력해주세요', type: 'error' });
       return;
     }
 

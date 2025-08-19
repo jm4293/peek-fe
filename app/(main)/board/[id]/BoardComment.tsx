@@ -9,6 +9,8 @@ import { LineSkeleton } from '@/components/skeleton';
 import { EditableText, Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
+import { useToast } from '@/hooks/modal';
+
 import { useBoardCommentList, useBoardCommentMutation } from '@/services/board';
 import { IUserAccountModel } from '@/services/user';
 
@@ -26,6 +28,8 @@ export default function BoardComment(props: IProps) {
   const [replyComment, setReplyComment] = useState('');
   const [isReply, setIsReply] = useState<number>(-1);
 
+  const { openToast } = useToast();
+
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isSuccess } = useBoardCommentList({
     boardId: Number(id),
   });
@@ -34,7 +38,7 @@ export default function BoardComment(props: IProps) {
 
   const onCreateCommentHandler = () => {
     if (!comment || !comment.trim()) {
-      alert('댓글을 입력해주세요.');
+      openToast({ message: '댓글을 입력해주세요.', type: 'error' });
       return;
     }
 
@@ -50,7 +54,7 @@ export default function BoardComment(props: IProps) {
 
   const onCreateReplyCommentHandler = (commentId: number) => {
     if (!replyComment || !replyComment.trim()) {
-      alert('답글을 입력해주세요.');
+      openToast({ message: '답글을 입력해주세요.', type: 'error' });
       return;
     }
 

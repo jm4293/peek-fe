@@ -33,11 +33,10 @@ export const useBoardMutation = () => {
     onSuccess: async (_, variables) => {
       const { boardId } = variables;
 
-      alert('게시글이 수정되었습니다.');
-
       await queryClient.invalidateQueries({ queryKey: ['board-detail', boardId] });
       await queryClient.refetchQueries({ queryKey: ['board-list'] });
 
+      openToast({ message: '게시글이 수정되었습니다.', type: 'success' });
       router.push(`/board/${boardId}`);
     },
   });
