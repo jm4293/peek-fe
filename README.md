@@ -1,3 +1,52 @@
+## PEEK 프론트엔드
+
+- domain: https://stock.peek.run
+
+### 기술 스택
+
+- **Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Package Manager**: npm/yarn
+
+### 프로젝트 구조
+
+```
+peek-fe/
+├── app/                   # App Router 디렉토리
+│   ├── (main)             # 라우트 그룹 - 메인 페이지들
+│   ├── [...rest]          # 동적 라우트 - 모든 경로 캐치
+│   ├── auth               # 인증 관련 페이지 (로그인, 회원가입)
+│   ├── globals.css        # 전역 스타일
+│   ├── layout.tsx         # 루트 레이아웃
+│   └── page.tsx           # 홈 페이지
+├── components/            # 재사용 가능한 컴포넌트
+├── hooks/                 # 커스텀 React 훅
+├── lib/                   # 유틸리티 함수
+├── services/              # API 호출 관련 함수
+├── shared/                # 공통으로 사용되는 상수, 설정, 타입
+├── store/                 # 전역 상태 관리 (Jotai)
+├── types/                 # TypeScript 타입 정의
+├── utils/                 # 헬퍼 함수 및 유틸리티
+└── public/                # 정적 파일 (이미지, 아이콘 등)
+```
+
+### 개발 환경 설정
+
+```bash
+# 패키지 설치
+npm install
+
+# 개발 서버 실행
+npm run dev
+
+# 빌드
+npm run build
+
+# 프로덕션 실행
+npm start
+```
+
 ### server components vs client components
 
 ![이미지](https://cdn.hashnode.com/res/hashnode/image/upload/v1714958815126/caa8efda-5fbd-4318-8eab-8e19cde5e25b.png?auto=compress,format&format=webp)
