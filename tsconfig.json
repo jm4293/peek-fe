@@ -19,48 +19,42 @@
       }
     ],
     "paths": {
-      // "@/*": ["./*"],
-      // "@/app/board": ["./app/(main)/board"],
+      "@/*": ["./*"],
       "@/app/board/*": ["./app/(main)/board/*"],
-      // "@/app/home": ["./app/(main)/home"],
       "@/app/home/*": ["./app/(main)/home/*"],
-      // "@/app/stock": ["./app/(main)/stock"],
       "@/app/stock/*": ["./app/(main)/stock/*"],
-      // "@/app/user": ["./app/(main)/user"],
       "@/app/user/*": ["./app/(main)/user/*"],
-      // "@/app/auth/login": ["./app/auth/login"],
       "@/app/auth/login/*": ["./app/auth/login/*"],
-      // "@/app/auth/register": ["./app/auth/register"],
       "@/app/auth/register/*": ["./app/auth/register/*"],
 
-      // "@/asset": ["./asset"],
+      "@/asset": ["./asset"],
       "@/asset/*": ["./asset/*"],
 
-      // "@/components": ["./components"],
+      "@/components": ["./components"],
       "@/components/*": ["./components/*"],
 
-      // "@/hooks": ["./hooks"],
+      "@/hooks": ["./hooks"],
       "@/hooks/*": ["./hooks/*"],
 
-      // "@/lib": ["./lib"],
+      "@/lib": ["./lib"],
       "@/lib/*": ["./lib/*"],
 
-      // "@/public": ["./public"],
+      "@/public": ["./public"],
       "@/public/*": ["./public/*"],
 
-      // "@/services": ["./services"],
+      "@/services": ["./services"],
       "@/services/*": ["./services/*"],
 
-      // "@/shared": ["./shared"],
+      "@/shared": ["./shared"],
       "@/shared/*": ["./shared/*"],
 
-      // "@/stores": ["./stores"],
+      "@/stores": ["./stores"],
       "@/stores/*": ["./stores/*"],
 
-      // "@/types": ["./types"],
+      "@/types": ["./types"],
       "@/types/*": ["./types/*"],
 
-      // "@/utils": ["./utils"],
+      "@/utils": ["./utils"],
       "@/utils/*": ["./utils/*"]
     }
   },
