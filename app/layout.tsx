@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   title: 'PEEK',
   description: '주식 정보와 커뮤니티 서비스',
   keywords: '주식, 실시간, stock, 커뮤니티',
+  icons: {
+    icon: '/favicon.ico',
+  },
   verification: {
     google: 'uJW_8OCDzvQJqQgfYwsslu44VsruK8gm346PCn8lVKE',
   },
