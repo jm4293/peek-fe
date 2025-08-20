@@ -11,7 +11,7 @@ import './globals.css';
 export const metadata: Metadata = {
   title: 'Stock Peek',
   description: '실시간 주식 정보 Stock Peek 서비스입니다.',
-  keywords: '주식, 실시간, stock',
+  keywords: '주식, 실시간, stock, 커뮤니티',
   verification: {
     google: 'uJW_8OCDzvQJqQgfYwsslu44VsruK8gm346PCn8lVKE',
   },
@@ -22,9 +22,9 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Stock Peek - 주식 정보 서비스',
     images: {
-      url: '/peek-logo.png',
+      url: 'https://stock.peek.run/peek-logo.png',
     },
-    description: '실시간 주식 정보와 분석을 제공합니다.',
+    description: '실시간 주식 정보와 커뮤니티를 제공합니다.',
     url: 'https://stock.peek.run',
     type: 'website',
   },
