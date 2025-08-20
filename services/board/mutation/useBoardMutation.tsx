@@ -42,7 +42,7 @@ export const useBoardMutation = () => {
   });
 
   const deleteBoardMutation = useMutation({
-    mutationFn: (boardId: string) => BoardApi.deleteBoard(Number(boardId)),
+    mutationFn: (boardId: number) => BoardApi.deleteBoard(boardId),
     onSuccess: async () => {
       router.push('/board');
 

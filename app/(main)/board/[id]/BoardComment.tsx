@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { BsArrowReturnRight } from 'react-icons/bs';
 
-import { Button } from '@/components/button';
 import { EditableInput } from '@/components/input';
 import { LineSkeleton } from '@/components/skeleton';
 import { EditableText, Text } from '@/components/text';
@@ -83,17 +82,18 @@ export default function BoardComment(props: IProps) {
                 {data.boardComments.map((boardComment) => (
                   <div key={boardComment.id}>
                     <div
-                      className={`flex flex-col gap-2 cursor-pointer`}
+                      className="flex flex-col cursor-pointer"
                       onClick={() => {
                         setReplyComment('');
                         setIsReply(isReply === boardComment.id ? -1 : boardComment.id);
                       }}>
-                      <div className="flex justify-between items-center gap-2">
+                      <div className="flex justify-between items-center">
                         <Text.HEADING text={boardComment.content} />
 
                         <div className="flex justify-between items-center gap-2">
                           <Text.PARAGRAPH text={boardComment.userAccount.user.nickname} />
-                          <Text.PARAGRAPH text={Dayjs.of(boardComment.createdAt).formatMMDD()} color="gray" />
+                          <Text.PARAGRAPH text={Dayjs.of(boardComment.createdAt).formatMMDDHHmm()} color="gray" />
+
                           {boardComment.userAccount.email === my?.email && (
                             <EditableText.PARAGRAPH
                               text="삭제"
@@ -116,8 +116,8 @@ export default function BoardComment(props: IProps) {
 
                             <div className="flex items-center gap-2">
                               <Text.PARAGRAPH text={reply.userAccount.user.nickname} />
-                              <Text.PARAGRAPH text={Dayjs.of(reply.createdAt).formatMMDD()} color="gray" />
-                              {boardComment.userAccount.email === my?.email && (
+                              <Text.PARAGRAPH text={Dayjs.of(reply.createdAt).formatMMDDHHmm()} color="gray" />
+                              {reply.userAccount.email === my?.email && (
                                 <EditableText.PARAGRAPH
                                   text="삭제"
                                   color="red"

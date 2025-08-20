@@ -25,7 +25,7 @@ export default async function BoardPage() {
     <div className="flex flex-col gap-4">
       <Text.SUBTITLE text="게시판" />
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2">
         <BoardCategory stockCategoryList={data} />
         <BoardList />
       </div>

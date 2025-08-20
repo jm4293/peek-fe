@@ -9,30 +9,27 @@ import { Wrapper } from '@/components/wrapper';
 import { IBoardModel, useBoardMutation } from '@/services/board';
 import { IUserAccountModel } from '@/services/user';
 
-import { BoardTypeEnumList } from '@/shared/enum/board';
-
 import { Dayjs } from '@/utils/dayjs';
 
 interface IProps {
   board: IBoardModel;
-  id: string;
   my: IUserAccountModel | null;
 }
 
 export default function BoardDetail(props: IProps) {
-  const { board, id, my } = props;
+  const { board, my } = props;
 
   const router = useRouter();
 
   const { deleteBoardMutation } = useBoardMutation();
 
   const modifyClickHandler = () => {
-    router.push(`/board/${id}/modify`);
+    router.push(`/board/${board.id}/modify`);
   };
 
   const deleteClickHandler = () => {
     if (confirm('게시글을 삭제하시겠습니까?')) {
-      deleteBoardMutation.mutate(id);
+      deleteBoardMutation.mutate(board.id);
     }
   };
 
@@ -47,7 +44,7 @@ export default function BoardDetail(props: IProps) {
 
           <div className="col-span-5 flex flex-col gap-4">
             <div className="flex gap-2">
-              <Text.PARAGRAPH text={`[${BoardTypeEnumList[board.type].label}]`} color="gray" />
+              <Text.PARAGRAPH text={`[${board.category.name}]`} color="gray" />
               <Text.PARAGRAPH text={board.title} />
             </div>
 

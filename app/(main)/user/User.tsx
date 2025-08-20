@@ -1,9 +1,7 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { MdOutlineArrowForwardIos } from 'react-icons/md';
 
-import { HumanSvg } from '@/asset/svg';
-
+import { Thumbnail } from '@/components/image';
 import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
@@ -19,21 +17,11 @@ export default function User(props: IProps) {
   const { my } = props;
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-2">
       <Wrapper>
         <Link href="/user/detail" className="py-1 flex items-center justify-between">
           <div className="w-full flex items-center gap-4">
-            {my.user.thumbnail ? (
-              <Image
-                src={`${process.env.NEXT_PUBLIC_IMAGE_HOST}/THUMBNAIL/${my.user.thumbnail}`}
-                alt="thumbnail"
-                width={50}
-                height={50}
-                className="rounded-full"
-              />
-            ) : (
-              <HumanSvg />
-            )}
+            <Thumbnail thumbnail={my.user.thumbnail} />
             <div>
               <Text.PARAGRAPH text={my.user.nickname} />
               <Text.PARAGRAPH text={my.email} />

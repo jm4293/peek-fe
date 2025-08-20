@@ -1,14 +1,19 @@
-export function HumanSvg() {
+interface IProps {
+  w?: number;
+}
+
+export function HumanSvg(props: IProps) {
+  const { w = 40 } = props;
+
   return (
     <svg
-      width="40"
-      height="40"
+      width={w}
+      height={w}
       viewBox="0 0 32 32"
       enableBackground="new 0 0 32 32"
       id="Stock_cut"
       version="1.1"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+      xmlns="http://www.w3.org/2000/svg">
       <desc />
 
       <g>

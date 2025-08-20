@@ -28,7 +28,7 @@ export default async function BoardDetailPage(props: IProps) {
 
   return (
     <div className="flex flex-col gap-2">
-      <BoardDetail board={data} id={id} my={my} />
+      <BoardDetail board={data} my={my} />
       <BoardComment id={id} my={my} />
     </div>
   );
