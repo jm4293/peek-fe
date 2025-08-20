@@ -9,8 +9,6 @@ import { Wrapper } from '@/components/wrapper';
 
 import { IBoardCommentModel, useBoardCommentListMineQuery } from '@/services/board';
 
-import { BoardTypeEnumList } from '@/shared/enum/board';
-
 import { Dayjs } from '@/utils/dayjs';
 
 export default function MineBoardCommentList() {
@@ -42,9 +40,9 @@ export default function MineBoardCommentList() {
     return (
       <li key={id}>
         <Wrapper>
-          <div className="flex flex-col gap-4" onClick={() => clickHandler(board.id)}>
+          <div className="flex flex-col gap-2" onClick={() => clickHandler(board.id)}>
             <div className="flex items-center gap-2">
-              <EditableText.PARAGRAPH text={`[${BoardTypeEnumList[board.type].label}]`} />
+              <EditableText.PARAGRAPH text={`[${board.category.name}]`} color="gray" />
               <EditableText.PARAGRAPH text={board.title} />
             </div>
             <div className="flex justify-between items-center">

@@ -10,8 +10,6 @@ import { Wrapper } from '@/components/wrapper';
 
 import { IBoardModel, useMineBoardList } from '@/services/board';
 
-import { BoardTypeEnumList } from '@/shared/enum/board';
-
 import { Dayjs } from '@/utils/dayjs';
 
 export default function MineBoardList() {
@@ -32,18 +30,15 @@ export default function MineBoardList() {
   }, [isSuccess, boardList]);
 
   const renderItem = (item: IBoardModel) => {
-    const { id, type, title, createdAt, commentCount, likeCount } = item;
+    const { id, category, title, createdAt, commentCount, likeCount } = item;
 
     return (
       <li key={id}>
         <Wrapper>
-          <div className="flex flex-col gap-4" onClick={() => clickHandler(id)}>
+          <div className="flex flex-col gap-2" onClick={() => clickHandler(id)}>
             <div className="flex justify-between items-center gap-2">
               <div className="flex gap-2">
-                <EditableText.PARAGRAPH
-                  text={`[${BoardTypeEnumList[type].label}]`}
-                  color={`${BoardTypeEnumList[type].color}`}
-                />
+                <EditableText.PARAGRAPH text={`[${category.name}]`} color="gray" />
                 <EditableText.PARAGRAPH text={title} />
               </div>
               <EditableText.PARAGRAPH text={Dayjs.of(createdAt).formatYYMMDDHHmm()} color="gray" />

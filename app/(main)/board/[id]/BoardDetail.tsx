@@ -35,8 +35,8 @@ export default function BoardDetail(props: IProps) {
 
   return (
     <Wrapper>
-      <div className="flex flex-col gap-4">
-        <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2">
           <div className="flex justify-between items-center gap-2">
             <Text.HEADING text={board.userAccount.user.nickname} />
             <Text.PARAGRAPH text={Dayjs.of(board.createdAt).formatMMDDHHmm()} color="gray" />
@@ -55,7 +55,7 @@ export default function BoardDetail(props: IProps) {
         </div>
 
         {board.userAccount.email === my?.email && (
-          <div className="flex justify-end gap-4">
+          <div className="flex justify-end gap-2">
             <EditableText.PARAGRAPH text="수정" color="blue" onClick={modifyClickHandler} />
             <EditableText.PARAGRAPH text="삭제" color="red" onClick={deleteClickHandler} />
           </div>

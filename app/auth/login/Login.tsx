@@ -5,8 +5,6 @@ import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState, useTransition } from 'react';
 
-import { GoogleOauthSvg } from '@/asset/svg';
-
 import { Button } from '@/components/button';
 import { EditableInput } from '@/components/input';
 
@@ -59,10 +57,6 @@ export default function Login() {
     }
   };
 
-  const googleLoginHandler = () => {
-    window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_REDIRECT_URL}&response_type=token&scope=openid email profile&include_granted_scopes=true`;
-  };
-
   useEffect(() => {
     const value = searchParams.get('email');
 
@@ -99,11 +93,6 @@ export default function Login() {
         <Button.CONTAINER text="로그인" onClick={clickHandler} disabled={isPending} />
         <Button.OUTLINE text="회원가입" onClick={() => router.push('/auth/register')} />
       </div>
-
-      {/*<div className="flex justify-center items-center mt-8 gap-8">*/}
-      {/*  <Link href="/auth/find-id">아이디 찾기</Link>*/}
-      {/*  <Link href="/auth/find-password">비밀번호 찾기</Link>*/}
-      {/*</div>*/}
 
       <div className="flex flex-col items-center gap-4">
         <Link

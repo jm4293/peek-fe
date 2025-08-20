@@ -49,7 +49,7 @@ export function Header() {
         </div>
 
         <Link href="/user">
-          <Text.PARAGRAPH text="마이페이지" />
+          <Text.HEADING text="마이페이지" />
         </Link>
       </div>
     </header>

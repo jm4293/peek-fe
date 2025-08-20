@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import { BoardRegisterSvg } from '@/asset/svg';
 
 import { Text } from '@/components/text';
@@ -31,9 +33,9 @@ export default async function BoardPage() {
       </div>
 
       {isAuth && (
-        <div className="absolute bottom-0 right-0 -translate-x-1/2 -translate-y-1/2">
+        <Link href="/board/register" className="absolute bottom-0 right-0 -translate-x-1/2 -translate-y-1/2">
           <BoardRegisterSvg />
-        </div>
+        </Link>
       )}
     </div>
   );
