@@ -21,6 +21,9 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Stock Peek - 주식 정보 서비스',
+    images: {
+      url: '/peek-logo.png',
+    },
     description: '실시간 주식 정보와 분석을 제공합니다.',
     url: 'https://stock.peek.run',
     type: 'website',
