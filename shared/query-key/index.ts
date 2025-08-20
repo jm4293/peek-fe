@@ -7,8 +7,12 @@ export class QueryKeys {
   static board = {
     detail: (boardId: string) => ['board', 'detail', boardId],
     list: (category?: number) => ['board', 'list', category],
-    categoryList: () => ['board', 'categories'],
+    commentList: (boardId: string) => ['board', 'comment', boardId],
     mineList: () => ['board', 'list-mine'],
     mineCommentList: () => ['board', 'comment', 'mine'],
+  };
+
+  static stock = {
+    token: () => ['stock', 'token'],
   };
 }

@@ -2,9 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 
 import BoardApi from '@/services/board';
 
+import { QueryKeys } from '@/shared/query-key';
+
 export const useBoard = (boardId: string) => {
   return useQuery({
-    queryKey: ['board-detail', boardId],
+    queryKey: QueryKeys.board.detail(boardId),
     queryFn: () => BoardApi.getBoardDetail(Number(boardId)),
     select: (res) => res.data.board,
     enabled: !!boardId,

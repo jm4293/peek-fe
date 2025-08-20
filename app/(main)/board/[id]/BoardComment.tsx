@@ -30,7 +30,7 @@ export default function BoardComment(props: IProps) {
   const { openToast } = useToast();
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isSuccess } = useBoardCommentList({
-    boardId: Number(id),
+    boardId: id,
   });
 
   const { createBoardCommentMutation, deleteBoardCommentMutation } = useBoardCommentMutation();
