@@ -88,20 +88,20 @@ export default function Login() {
           required
         />
       </div>
-
       <div className="flex flex-col items-center mt-8 gap-4">
-        <Button.CONTAINER text="로그인" onClick={clickHandler} disabled={isPending} />
-        <Button.OUTLINE text="회원가입" onClick={() => router.push('/auth/register')} />
-      </div>
-
-      <div className="flex flex-col items-center gap-4">
+        <Button.CONTAINER text="로그인" onClick={clickHandler} disabled={isPending} className="w-[220px]" />
+        <Button.OUTLINE text="회원가입" onClick={() => router.push('/auth/register')} className="w-[220px]" />
         <Link
           href={`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_APP_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL}&response_type=code`}>
-          <Image src="/kakao_login.png" alt="Kakao Login" width={189} height={40} />
+          <Image src="/kakao_login.png" alt="Kakao Login" width={220} height={40} />
+        </Link>
+        <Link
+          href={`https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_NAVER_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_NAVER_REDIRECT_URL}&state=peek`}>
+          <Image src="/naver_login.png" alt="Naver Login" width={220} height={40} />
         </Link>
         <Link
           href={`https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_REDIRECT_URL}&response_type=token&scope=openid email profile&include_granted_scopes=true`}>
-          <Image src="/google_login.png" alt="Google Login" width={189} height={40} />
+          <Image src="/google_login.png" alt="Google Login" width={220} height={40} />
         </Link>
       </div>
     </section>
