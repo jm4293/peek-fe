@@ -9,7 +9,7 @@ import QueryProvider from '@/lib/react-query/react-query.config';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Stock Peek',
+  title: 'PEEK',
   description: '주식 정보와 커뮤니티 서비스',
   keywords: '주식, 실시간, stock, 커뮤니티',
   verification: {
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     follow: true,
   },
   openGraph: {
-    title: 'Stock Peek',
+    title: 'PEEK',
     images: {
       url: 'https://stock.peek.run/peek-logo.png',
     },
