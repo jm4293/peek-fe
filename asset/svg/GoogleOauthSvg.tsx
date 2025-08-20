@@ -1,25 +1,6 @@
-interface IProps {
-  onClick: () => void;
-}
-
-export function GoogleOauthSvg(props: IProps) {
-  const { onClick } = props;
-
-  const clickHandler = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
-    event.stopPropagation();
-
-    onClick();
-  };
-
+export function GoogleOauthSvg() {
   return (
-    <svg
-      width="189"
-      height="40"
-      viewBox="0 0 189 40"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      onClick={clickHandler}
-    >
+    <svg width="189" height="40" viewBox="0 0 189 40" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect x="0.5" y="0.5" width="188" height="39" rx="3.5" fill="white" />
       <g clipPath="url(#clip0_760_7197)">
         <path

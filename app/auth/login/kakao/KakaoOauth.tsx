@@ -11,24 +11,22 @@ import { signinOauthAction } from '@/services/auth';
 
 import { UserAccountTypeEnum, userAccountTypeDescription } from '@/shared/enum/user';
 
-export default function GoogleOauth() {
+export default function KakaoOauth() {
   const router = useRouter();
 
   const { openToast } = useToast();
 
   useEffect(() => {
     (() => {
-      const hash = window.location.hash;
+      const queryParams = new URLSearchParams(window.location.search);
 
-      const params = new URLSearchParams(hash.substring(1));
-
-      const token = params.get('access_token');
+      const token = queryParams.get('code');
 
       (async () => {
         if (token) {
           const { success } = await signinOauthAction({
             token,
-            userAccountType: UserAccountTypeEnum.GOOGLE,
+            userAccountType: UserAccountTypeEnum.KAKAO,
           });
 
           if (!success) {
@@ -39,7 +37,7 @@ export default function GoogleOauth() {
 
           openToast({
             type: 'success',
-            message: `${userAccountTypeDescription[UserAccountTypeEnum.GOOGLE]} 로그인에 성공했습니다.`,
+            message: `${userAccountTypeDescription[UserAccountTypeEnum.KAKAO]} 로그인에 성공했습니다.`,
           });
           router.push('/home');
         } else {
@@ -52,7 +50,7 @@ export default function GoogleOauth() {
   return (
     <>
       <div className="text-center flex flex-col gap-4">
-        <h1 className="text-2xl font-bold">구글 로그인중...</h1>
+        <h1 className="text-2xl font-bold">카카오 로그인중...</h1>
 
         <LineSkeleton height={2} />
         <LineSkeleton height={2} />

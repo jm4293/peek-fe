@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState, useTransition } from 'react';
 
@@ -103,8 +105,15 @@ export default function Login() {
       {/*  <Link href="/auth/find-password">비밀번호 찾기</Link>*/}
       {/*</div>*/}
 
-      <div className="flex justify-center items-center">
-        <GoogleOauthSvg onClick={googleLoginHandler} />
+      <div className="flex flex-col items-center gap-4">
+        <Link
+          href={`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_APP_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL}&response_type=code`}>
+          <Image src="/kakao_login.png" alt="Kakao Login" width={189} height={40} />
+        </Link>
+        <Link
+          href={`https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_REDIRECT_URL}&response_type=token&scope=openid email profile&include_granted_scopes=true`}>
+          <Image src="/google_login.png" alt="Google Login" width={189} height={40} />
+        </Link>
       </div>
     </section>
   );
