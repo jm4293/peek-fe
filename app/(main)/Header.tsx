@@ -58,10 +58,13 @@ export function Header(props: IProps) {
   }, []);
 
   useEffect(() => {
-    // 메뉴가 열려있거나 모바일일 때 스크롤 비활성화
-    if (isMenuOpen || isMobile) {
+    if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    if (!isMobile) {
       document.body.style.overflow = 'unset';
     }
 
@@ -96,8 +99,9 @@ export function Header(props: IProps) {
           <div className="flex flex-col h-full">
             <div className="flex justify-between items-center p-4 border-b">
               {!!my ? (
-                <Link href="/user" onClick={closeMenu}>
+                <Link href="/user" onClick={closeMenu} className="flex items-center gap-2">
                   <Thumbnail thumbnail={my.user.thumbnail} w={24} />
+                  <Text.HEADING text={my.user.nickname} />
                 </Link>
               ) : (
                 <Link href="/auth/login" onClick={closeMenu}>
@@ -137,8 +141,9 @@ export function Header(props: IProps) {
         </div>
 
         {!!my ? (
-          <Link href="/user">
+          <Link href="/user" className="flex items-center gap-2">
             <Thumbnail thumbnail={my.user.thumbnail} w={24} />
+            <Text.HEADING text={my.user.nickname} />
           </Link>
         ) : (
           <Link href="/auth/login">
