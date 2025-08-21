@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState, useTransition } from 'react';
 
-import { Button } from '@/components/button';
+import { EditableButton } from '@/components/button';
 import { EditableInput } from '@/components/input';
 
 import { useInput } from '@/hooks/input';
@@ -89,8 +89,8 @@ export default function Login() {
         />
       </div>
       <div className="flex flex-col items-center mt-8 gap-4">
-        <Button.CONTAINER text="로그인" onClick={clickHandler} disabled={isPending} className="w-[220px]" />
-        <Button.OUTLINE text="회원가입" onClick={() => router.push('/auth/register')} className="w-[220px]" />
+        <EditableButton.CONTAINER text="로그인" onClick={clickHandler} disabled={isPending} className="w-[220px]" />
+        <EditableButton.OUTLINE text="회원가입" onClick={() => router.push('/auth/register')} className="w-[220px]" />
         <Link
           href={`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_APP_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL}&response_type=code`}>
           <Image src="/kakao_login.png" alt="Kakao Login" width={220} height={40} />

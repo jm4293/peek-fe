@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import { Button } from '@/components/button';
+import { EditableButton } from '@/components/button';
 import { EditableInput } from '@/components/input';
 import { EditableText } from '@/components/text';
 import { Textarea } from '@/components/textarea';
@@ -88,7 +88,7 @@ export default function BoardRegister(props: IProps) {
           />
         </div>
 
-        <Button.CONTAINER text="등록 하기" onClick={clickHandler} disabled={createBoardMutation.isPending} />
+        <EditableButton.CONTAINER text="등록 하기" onClick={clickHandler} disabled={createBoardMutation.isPending} />
       </div>
     </Wrapper>
   );

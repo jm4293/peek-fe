@@ -5,7 +5,7 @@ import duration from 'dayjs/plugin/duration';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState, useTransition } from 'react';
 
-import { Button } from '@/components/button';
+import { EditableButton } from '@/components/button';
 import { CheckBox, EditableInput } from '@/components/input';
 import { Text } from '@/components/text';
 
@@ -179,7 +179,7 @@ export default function Register() {
             disabled={checkEmail !== 1}
             required
           />
-          <Button.CONTAINER
+          <EditableButton.CONTAINER
             className="mt-6"
             text={checkEmailMutation.isPending ? '코드 전송 중' : '이메일 인증'}
             onClick={handleCheckEmail}
@@ -201,7 +201,7 @@ export default function Register() {
               required>
               <Text.PARAGRAPH text={dayjs.duration(count, 'seconds').format('m:ss')} />
             </EditableInput.TEXT>
-            <Button.CONTAINER
+            <EditableButton.CONTAINER
               className="mt-6"
               text={checkEmail === 3 ? '확인 완료' : '코드 확인'}
               onClick={handleCheckCode}
@@ -260,13 +260,13 @@ export default function Register() {
       </div>
 
       <div className="w-full flex gap-2">
-        <Button.OUTLINE
+        <EditableButton.OUTLINE
           text="뒤로가기"
           onClick={() => {
             router.push('/auth/login');
           }}
         />
-        <Button.CONTAINER type="submit" text="회원가입" onClick={handleSubmit} disabled={isPending} />
+        <EditableButton.CONTAINER type="submit" text="회원가입" onClick={handleSubmit} disabled={isPending} />
       </div>
     </section>
   );

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-import { Button } from '@/components/button';
+import { EditableButton } from '@/components/button';
 import { EditableInput } from '@/components/input';
 import { Textarea } from '@/components/textarea';
 import { Wrapper } from '@/components/wrapper';
@@ -62,7 +62,7 @@ export default function BoardModify(props: IProps) {
           />
         </div>
 
-        <Button.CONTAINER text="수정 하기" onClick={clickHandler} />
+        <EditableButton.CONTAINER text="수정 하기" onClick={clickHandler} />
       </div>
     </Wrapper>
   );
