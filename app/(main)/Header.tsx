@@ -3,8 +3,10 @@
 import { useDeviceLayout } from '@/hooks';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
+import { IoIosClose } from 'react-icons/io';
 import { PiHamburger } from 'react-icons/pi';
 
+import { BackButton } from '@/components/button';
 import { Thumbnail } from '@/components/image';
 import { Text } from '@/components/text';
 
@@ -79,35 +81,32 @@ export function Header(props: IProps) {
     return (
       <>
         <header>
-          <div className="w-full flex justify-between">
+          <div className="w-full flex justify-between items-center">
+            <BackButton />
             <strong>PEEK</strong>
-            <button onClick={toggleMenu}>
-              <PiHamburger size={24} />
-            </button>
+            <PiHamburger size={24} onClick={toggleMenu} />
           </div>
         </header>
 
         {isMenuOpen && <div className="fixed inset-0 bg-black bg-opacity-50 z-40" onClick={closeMenu} />}
 
         <div
-          className={`fixed top-0 right-0 h-full w-80 bg-white shadow-lg transform transition-transform duration-300 ease-in-out z-50 ${
-            isMenuOpen ? 'translate-x-0' : 'translate-x-full'
-          }`}>
+          className={`fixed top-0 right-0 h-full w-80 bg-white shadow-lg transform transition-transform duration-300 ease-in-out z-50 ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
           <div className="flex flex-col h-full">
-            {/* 메뉴 헤더 */}
             <div className="flex justify-between items-center p-4 border-b">
               {!!my ? (
                 <Link href="/user" onClick={closeMenu}>
-                  <Thumbnail thumbnail={my.user.thumbnail} w={26} />
+                  <Thumbnail thumbnail={my.user.thumbnail} w={24} />
                 </Link>
               ) : (
                 <Link href="/auth/login" onClick={closeMenu}>
                   <Text.HEADING text="로그인" />
                 </Link>
               )}
+              <IoIosClose size={24} onClick={closeMenu} />
             </div>
 
-            <div className="flex flex-col p-4 space-y-4">
+            <div className="flex flex-col p-4 gap-4">
               {menuItems.map((item) => (
                 <Link key={item.name} href={item.path} onClick={closeMenu}>
                   <Text.HEADING text={item.name} />
@@ -138,7 +137,7 @@ export function Header(props: IProps) {
 
         {!!my ? (
           <Link href="/user">
-            <Thumbnail thumbnail={my.user.thumbnail} w={26} />
+            <Thumbnail thumbnail={my.user.thumbnail} w={24} />
           </Link>
         ) : (
           <Link href="/auth/login">

@@ -57,8 +57,9 @@ button {
   height: 4rem;
   background-color: white;
   position: fixed;
-  padding: 0 2rem;
+  padding: 0 1rem;
   display: flex;
+  justify-content: center;
   align-items: center;
 }
 
