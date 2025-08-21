@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 import { EditableButton } from '@/components/button';
@@ -18,6 +19,7 @@ interface IProps {
 
 export default function BoardModify(props: IProps) {
   const { board, id } = props;
+  const router = useRouter();
 
   const [title, setTitle] = useState(board.title || '');
   const [content, setContent] = useState(board.article.content || '');
@@ -62,7 +64,10 @@ export default function BoardModify(props: IProps) {
           />
         </div>
 
-        <EditableButton.CONTAINER text="수정 하기" onClick={clickHandler} />
+        <div className="flex justify-end gap-4">
+          <EditableButton.OUTLINE text="취소" onClick={() => router.back()} />
+          <EditableButton.CONTAINER text="수정 하기" onClick={clickHandler} />
+        </div>
       </div>
     </Wrapper>
   );

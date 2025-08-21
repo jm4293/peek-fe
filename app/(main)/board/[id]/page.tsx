@@ -27,9 +27,13 @@ export default async function BoardDetailPage(props: IProps) {
   }
 
   return (
-    <div className="flex flex-col gap-2">
-      <BoardDetail board={data} my={my} />
-      <BoardComment id={id} my={my} />
+    <div className="flex flex-col gap-4">
+      <Text.SUBTITLE text="게시글" />
+
+      <div className="flex flex-col gap-2">
+        <BoardDetail board={data} my={my} />
+        <BoardComment id={id} my={my} />
+      </div>
     </div>
   );
 }

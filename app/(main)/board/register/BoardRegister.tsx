@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import { EditableButton } from '@/components/button';
@@ -17,6 +18,7 @@ interface IProps extends IStockCategoryListRes {}
 
 export default function BoardRegister(props: IProps) {
   const { stockCategoryList } = props;
+  const router = useRouter();
 
   const [category, setCategory] = useState<number | null>(null);
   const [title, setTitle] = useState('');
@@ -88,7 +90,10 @@ export default function BoardRegister(props: IProps) {
           />
         </div>
 
-        <EditableButton.CONTAINER text="등록 하기" onClick={clickHandler} disabled={createBoardMutation.isPending} />
+        <div className="flex justify-end gap-4">
+          <EditableButton.OUTLINE text="취소" onClick={() => router.back()} />
+          <EditableButton.CONTAINER text="등록 하기" onClick={clickHandler} disabled={createBoardMutation.isPending} />
+        </div>
       </div>
     </Wrapper>
   );
