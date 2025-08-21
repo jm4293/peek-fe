@@ -24,6 +24,27 @@ export default function ModifyPassword() {
     const newPassword = formData.get('newPassword');
     const confirmPassword = formData.get('confirmPassword');
 
+    if (!currentPassword) {
+      openModal({
+        content: '현재 비밀번호를 입력해주세요.',
+      });
+      return;
+    }
+
+    if (!newPassword) {
+      openModal({
+        content: '새 비밀번호를 입력해주세요.',
+      });
+      return;
+    }
+
+    if (!confirmPassword) {
+      openModal({
+        content: '비밀번호 확인을 입력해주세요.',
+      });
+      return;
+    }
+
     if (newPassword !== confirmPassword) {
       openModal({
         content: '변경할 비밀번호와 확인 비밀번호가 일치하지 않습니다.',
