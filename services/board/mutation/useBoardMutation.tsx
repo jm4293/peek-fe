@@ -21,7 +21,7 @@ export const useBoardMutation = () => {
     onSuccess: async (_, variables) => {
       const { categoryId } = variables;
 
-      await queryClient.refetchQueries({ queryKey: QueryKeys.board.list(categoryId) });
+      await queryClient.invalidateQueries({ queryKey: QueryKeys.board.list(categoryId) });
 
       openToast({ message: '게시글이 등록되었습니다.', type: 'success' });
       router.push('/board');
@@ -33,8 +33,8 @@ export const useBoardMutation = () => {
     onSuccess: async (_, variables) => {
       const { boardId } = variables;
 
-      await queryClient.invalidateQueries({ queryKey: ['board-detail', boardId] });
-      await queryClient.refetchQueries({ queryKey: ['board-list'] });
+      await queryClient.refetchQueries({ queryKey: QueryKeys.board.detail(String(boardId)) });
+      await queryClient.invalidateQueries({ queryKey: QueryKeys.board.list() });
 
       openToast({ message: '게시글이 수정되었습니다.', type: 'success' });
       router.push(`/board/${boardId}`);
@@ -46,14 +46,14 @@ export const useBoardMutation = () => {
     onSuccess: async () => {
       router.push('/board');
 
-      await queryClient.refetchQueries({ queryKey: ['board-list'] });
+      await queryClient.invalidateQueries({ queryKey: QueryKeys.board.list() });
     },
   });
 
   const boardLikeMutation = useMutation({
     mutationFn: (boardSeq: number) => BoardApi.boardLike(boardSeq),
     onSuccess: async () => {
-      await queryClient.refetchQueries({ queryKey: ['board-list'] });
+      await queryClient.invalidateQueries({ queryKey: QueryKeys.board.list() });
     },
     onError: (err) => {},
   });
