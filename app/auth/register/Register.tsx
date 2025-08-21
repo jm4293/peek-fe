@@ -245,14 +245,14 @@ export default function Register() {
           placeholder="이름"
           required
         />
-        <EditableInput.TEXT
+        {/* <EditableInput.TEXT
           title="생년월일 8자리"
           name="birthdate"
           value={value.birthdate}
           onChange={onChange}
           placeholder="생년월일 8자리"
           optional
-        />
+        /> */}
       </div>
 
       <div className="flex justify-end">
