@@ -90,7 +90,7 @@ export default function BoardRegister(props: IProps) {
           />
         </div>
 
-        <div className="flex justify-end gap-4">
+        <div className="flex justify-end gap-2">
           <EditableButton.OUTLINE text="취소" onClick={() => router.back()} />
           <EditableButton.CONTAINER text="등록 하기" onClick={clickHandler} disabled={createBoardMutation.isPending} />
         </div>

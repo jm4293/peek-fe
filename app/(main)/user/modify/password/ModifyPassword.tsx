@@ -27,6 +27,7 @@ export default function ModifyPassword() {
     if (!currentPassword) {
       openModal({
         content: '현재 비밀번호를 입력해주세요.',
+        onConfirm: closeModal,
       });
       return;
     }
@@ -34,6 +35,7 @@ export default function ModifyPassword() {
     if (!newPassword) {
       openModal({
         content: '새 비밀번호를 입력해주세요.',
+        onConfirm: closeModal,
       });
       return;
     }
@@ -41,6 +43,7 @@ export default function ModifyPassword() {
     if (!confirmPassword) {
       openModal({
         content: '비밀번호 확인을 입력해주세요.',
+        onConfirm: closeModal,
       });
       return;
     }
