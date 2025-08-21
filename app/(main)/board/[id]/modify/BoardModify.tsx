@@ -64,9 +64,9 @@ export default function BoardModify(props: IProps) {
           />
         </div>
 
-        <div className="flex justify-end gap-4">
+        <div className="flex justify-end gap-2">
           <EditableButton.OUTLINE text="취소" onClick={() => router.back()} />
-          <EditableButton.CONTAINER text="수정 하기" onClick={clickHandler} />
+          <EditableButton.CONTAINER text="수정하기" onClick={clickHandler} />
         </div>
       </div>
     </Wrapper>

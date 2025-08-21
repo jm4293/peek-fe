@@ -22,5 +22,10 @@ export default async function BoardModifyPage(props: IProps) {
     );
   }
 
-  return <BoardModify board={data} id={id} />;
+  return (
+    <div className="flex flex-col gap-4">
+      <Text.SUBTITLE text="게시글 수정" />
+      <BoardModify board={data} id={id} />
+    </div>
+  );
 }
