@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 
 export const useDeviceLayout = () => {
-  const [width, setWidth] = useState(0);
+  const [width, setWidth] = useState<number | null>(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -20,6 +20,10 @@ export const useDeviceLayout = () => {
       };
     }
   }, []);
+
+  if (!width) {
+    return { isMobile: null };
+  }
 
   return { isMobile: width < 768 };
 };

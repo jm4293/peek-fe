@@ -33,7 +33,7 @@ export default async function BoardPage() {
       </div>
 
       {isAuth && (
-        <Link href="/board/register" className="absolute bottom-0 right-0 -translate-x-1/2 -translate-y-1/2">
+        <Link href="/board/register" className="fixed bottom-0 right-0 -translate-x-1/2 -translate-y-1/2">
           <BoardRegisterSvg />
         </Link>
       )}
