@@ -55,6 +55,27 @@ const EMAIL = (props: IProps) => {
   );
 };
 
+const NUMBER = (props: IProps) => {
+  const { title, name, className, placeholder, isOptional, ...rest } = props;
+
+  return (
+    <div className="w-full flex flex-col gap-2">
+      <label className="pl-2" htmlFor={name}>
+        <Text.PARAGRAPH text={title} />
+      </label>
+
+      <input
+        type="number"
+        id={name}
+        className={`w-full border border-gray-300 ${className}`}
+        name={name}
+        placeholder={`${placeholder} ${isOptional ? '[선택] ' : ''}`}
+        {...rest}
+      />
+    </div>
+  );
+};
+
 const PASSWORD = (props: IProps) => {
   const { title, name, className, placeholder, isOptional, ...rest } = props;
 
@@ -79,5 +100,6 @@ const PASSWORD = (props: IProps) => {
 export const Input = {
   TEXT,
   EMAIL,
+  NUMBER,
   PASSWORD,
 };

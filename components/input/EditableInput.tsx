@@ -67,6 +67,30 @@ const EMAIL = (props: IProps) => {
   );
 };
 
+const NUMBER = (props: IProps) => {
+  const { title, name, optional = false, className, placeholder, isError = false, children, ...rest } = props;
+
+  return (
+    <div className={`w-full flex flex-col gap-1 ${className}`}>
+      <label className="pl-2" htmlFor={name}>
+        <Text.HEADING text={title} />
+      </label>
+
+      <div className="relative">
+        <input
+          id={name}
+          className={`w-full border border-gray-300 ${isError ? 'border-red-500' : ''} ${children ? 'pr-16' : ''}`}
+          name={name}
+          type="number"
+          placeholder={`${placeholder} ${optional ? '[선택] ' : ''}`}
+          {...rest}
+        />
+        <div className="absolute right-4 bottom-1/2 translate-y-1/2">{children}</div>
+      </div>
+    </div>
+  );
+};
+
 const PASSWORD = (props: IProps) => {
   const { title, name, optional = false, className, placeholder, isError = false, children, ...rest } = props;
 
@@ -94,5 +118,6 @@ const PASSWORD = (props: IProps) => {
 export const EditableInput = {
   TEXT,
   EMAIL,
+  NUMBER,
   PASSWORD,
 };
