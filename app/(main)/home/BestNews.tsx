@@ -21,7 +21,10 @@ export default function BestNews(props: IProps) {
   const [priceData, setPriceData] = useState<Record<string, any> | null>(null);
 
   useEffect(() => {
-    const ws = new WebSocket('ws://ops.koreainvestment.com:21000');
+    const ws =
+      process.env.NODE_ENV === 'production'
+        ? new WebSocket('wss://ops.koreainvestment.com:21000')
+        : new WebSocket('ws://ops.koreainvestment.com:21000');
 
     ws.onopen = () => {
       const subscribeMsg = {
