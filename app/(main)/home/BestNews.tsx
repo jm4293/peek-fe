@@ -34,42 +34,31 @@ export default function BestNews(props: IProps) {
     setSocket(newSocket);
 
     newSocket.on('connect', () => {
-      console.log('서버에 연결됨');
       setConnectionStatus('connected');
 
       // 구독 요청
       newSocket.emit('subscribe', { token, symbol: 'DNASAAPL' });
     });
 
-    newSocket.on('subscribed', (data) => {
-      console.log('구독 완료:', data);
-    });
+    newSocket.on('subscribed', (data) => {});
 
     newSocket.on('price-update', (data) => {
-      console.log('가격 데이터 수신:', data);
       setPriceData(data);
     });
 
-    newSocket.on('kis-connected', () => {
-      console.log('KIS WebSocket 연결됨');
-    });
+    newSocket.on('kis-connected', () => {});
 
     newSocket.on('kis-error', (error) => {
-      console.error('KIS WebSocket 오류:', error);
       setConnectionStatus('error');
     });
 
-    newSocket.on('kis-disconnected', () => {
-      console.log('KIS WebSocket 연결 해제됨');
-    });
+    newSocket.on('kis-disconnected', () => {});
 
     newSocket.on('disconnect', () => {
-      console.log('서버 연결 해제됨');
       setConnectionStatus('closed');
     });
 
     newSocket.on('connect_error', (error) => {
-      console.error('연결 오류:', error);
       setConnectionStatus('error');
     });
 
