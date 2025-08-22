@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { BiComment, BiHeart } from 'react-icons/bi';
 
+import { Thumbnail } from '@/components/image';
 import { InfinityList } from '@/components/infinity-list';
 import { EditableText, Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
@@ -48,11 +49,14 @@ export default function BoardList() {
         <Wrapper>
           <div className="flex flex-col gap-2" onClick={() => clickHandler(id)}>
             <div className="flex justify-between items-center gap-2">
-              <div className="flex gap-2">
+              <div className="flex items-center gap-2">
                 <Text.PARAGRAPH text={`[${category.name}]`} color="gray" />
-                <EditableText.PARAGRAPH text={title} />
+                <EditableText.HEADING text={title} />
               </div>
-              <EditableText.PARAGRAPH text={Dayjs.of(createdAt).formatYYMMDDHHmm()} color="gray" />
+              <div className="flex items-center gap-1">
+                <Thumbnail thumbnail={userAccount.user.thumbnail} w={18} />
+                <EditableText.PARAGRAPH text={userAccount.user.nickname} color="gray" />
+              </div>
             </div>
 
             <div className="flex justify-between items-center">
@@ -68,7 +72,7 @@ export default function BoardList() {
               </div>
 
               <div className="flex items-center gap-1">
-                <EditableText.PARAGRAPH text={userAccount.user.nickname} color="gray" />
+                <EditableText.CAPTION text={Dayjs.of(createdAt).formatYYMMDDHHmm()} color="gray" />
               </div>
             </div>
           </div>

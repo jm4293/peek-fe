@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { BsArrowReturnRight } from 'react-icons/bs';
 
+import { Thumbnail } from '@/components/image';
 import { EditableInput } from '@/components/input';
 import { LineSkeleton } from '@/components/skeleton';
 import { EditableText, Text } from '@/components/text';
@@ -91,8 +92,11 @@ export default function BoardComment(props: IProps) {
                         <Text.HEADING text={boardComment.content} />
 
                         <div className="flex justify-between items-center gap-2">
-                          <Text.PARAGRAPH text={boardComment.userAccount.user.nickname} />
-                          <Text.PARAGRAPH text={Dayjs.of(boardComment.createdAt).formatMMDDHHmm()} color="gray" />
+                          <div className="flex items-center gap-1">
+                            <Thumbnail thumbnail={boardComment.userAccount.user.thumbnail} w={18} />
+                            <Text.PARAGRAPH text={boardComment.userAccount.user.nickname} />
+                          </div>
+                          <Text.CAPTION text={Dayjs.of(boardComment.createdAt).formatMMDDHHmm()} color="gray" />
 
                           {boardComment.userAccount.email === my?.email && (
                             <EditableText.PARAGRAPH
@@ -105,18 +109,21 @@ export default function BoardComment(props: IProps) {
                       </div>
                     </div>
 
-                    <div className="mt-2 pl-4 flex flex-col gap-2">
+                    <div className="pl-2 flex flex-col gap-2">
                       {boardComment.replies.length > 0 &&
                         boardComment.replies.map((reply) => (
-                          <div className="flex justify-between" key={reply.id}>
-                            <div className="flex items-center gap-2">
+                          <div className="flex justify-between items-center" key={reply.id}>
+                            <div className="flex items-center gap-1">
                               <BsArrowReturnRight color="#666666" />
                               <Text.HEADING text={reply.content} />
                             </div>
 
                             <div className="flex items-center gap-2">
-                              <Text.PARAGRAPH text={reply.userAccount.user.nickname} />
-                              <Text.PARAGRAPH text={Dayjs.of(reply.createdAt).formatMMDDHHmm()} color="gray" />
+                              <div className="flex items-center gap-1">
+                                <Thumbnail thumbnail={reply.userAccount.user.thumbnail} w={18} />
+                                <Text.PARAGRAPH text={reply.userAccount.user.nickname} />
+                              </div>
+                              <Text.CAPTION text={Dayjs.of(reply.createdAt).formatMMDDHHmm()} color="gray" />
                               {reply.userAccount.email === my?.email && (
                                 <EditableText.PARAGRAPH
                                   text="삭제"
