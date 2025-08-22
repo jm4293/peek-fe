@@ -37,7 +37,7 @@ export default function BoardDetail(props: IProps) {
   return (
     <Wrapper>
       <div className="flex flex-col gap-2">
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-1">
           <div className="flex justify-between items-center gap-2">
             <div className="flex items-center gap-2">
               <Text.PARAGRAPH text={`[${board.category.name}]`} color="gray" />
@@ -45,20 +45,18 @@ export default function BoardDetail(props: IProps) {
             </div>
             <div className="flex items-center gap-1">
               <Thumbnail thumbnail={board.userAccount.user.thumbnail} w={18} />
-              <Text.PARAGRAPH text={board.userAccount.user.nickname} />
+              <Text.PARAGRAPH text={board.userAccount.user.nickname} color="gray" />
             </div>
           </div>
 
-          <div className="col-span-5 flex flex-col gap-4">
-            <div className="flex justify-end items-center gap-2">
-              <Text.CAPTION text={Dayjs.of(board.createdAt).formatMMDDHHmm()} color="gray" />
-            </div>
-
-            <div className="border-[1px]" />
-
-            <PreText text={board.article.content} />
+          <div className="flex justify-end">
+            <Text.CAPTION text={Dayjs.of(board.createdAt).formatMMDDHHmm()} color="gray" />
           </div>
         </div>
+
+        <div className="border-[0.5px]" />
+
+        <PreText text={board.article.content} />
 
         {board.userAccount.email === my?.email && (
           <div className="flex justify-end gap-2">

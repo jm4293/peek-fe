@@ -40,7 +40,7 @@ export default function MineBoardCommentList() {
     return (
       <li key={id}>
         <Wrapper>
-          <div className="flex flex-col gap-2" onClick={() => clickHandler(board.id)}>
+          <div className="flex flex-col gap-1" onClick={() => clickHandler(board.id)}>
             <div className="flex items-center gap-2">
               <EditableText.PARAGRAPH text={`[${board.category.name}]`} color="gray" />
               <EditableText.PARAGRAPH text={board.title} />
@@ -50,7 +50,8 @@ export default function MineBoardCommentList() {
                 <EditableText.PARAGRAPH text="댓글:" />
                 <EditableText.PARAGRAPH text={content} />
               </div>
-              <EditableText.PARAGRAPH text={Dayjs.of(createdAt).formatYYMMDDHHmm()} color="gray" />
+
+              <EditableText.CAPTION text={Dayjs.of(createdAt).formatYYMMDDHHmm()} color="gray" />
             </div>
           </div>
         </Wrapper>

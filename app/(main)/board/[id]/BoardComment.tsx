@@ -37,6 +37,10 @@ export default function BoardComment(props: IProps) {
   const { createBoardCommentMutation, deleteBoardCommentMutation } = useBoardCommentMutation();
 
   const onCreateCommentHandler = () => {
+    if (createBoardCommentMutation.isPending) {
+      return;
+    }
+
     if (!comment || !comment.trim()) {
       openToast({ message: '댓글을 입력해주세요.', type: 'error' });
       return;
@@ -53,6 +57,10 @@ export default function BoardComment(props: IProps) {
   };
 
   const onCreateReplyCommentHandler = (commentId: number) => {
+    if (createBoardCommentMutation.isPending) {
+      return;
+    }
+
     if (!replyComment || !replyComment.trim()) {
       openToast({ message: '답글을 입력해주세요.', type: 'error' });
       return;
@@ -79,62 +87,61 @@ export default function BoardComment(props: IProps) {
 
           {isSuccess ? (
             data.total > 0 ? (
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-1">
                 {data.boardComments.map((boardComment) => (
                   <div key={boardComment.id}>
                     <div
-                      className="flex flex-col cursor-pointer"
+                      className="flex justify-between items-center cursor-pointer"
                       onClick={() => {
                         setReplyComment('');
                         setIsReply(isReply === boardComment.id ? -1 : boardComment.id);
                       }}>
-                      <div className="flex justify-between items-center">
-                        <Text.HEADING text={boardComment.content} />
+                      <Text.HEADING text={boardComment.content} />
 
-                        <div className="flex justify-between items-center gap-2">
-                          <div className="flex items-center gap-1">
-                            <Thumbnail thumbnail={boardComment.userAccount.user.thumbnail} w={18} />
-                            <Text.PARAGRAPH text={boardComment.userAccount.user.nickname} />
-                          </div>
-                          <Text.CAPTION text={Dayjs.of(boardComment.createdAt).formatMMDDHHmm()} color="gray" />
-
-                          {boardComment.userAccount.email === my?.email && (
-                            <EditableText.PARAGRAPH
-                              text="삭제"
-                              color="red"
-                              onClick={() => onDeleteCommentHandler(boardComment.id)}
-                            />
-                          )}
+                      <div className="flex justify-between items-center gap-2">
+                        <div className="flex items-center gap-1">
+                          <Thumbnail thumbnail={boardComment.userAccount.user.thumbnail} w={18} />
+                          <Text.PARAGRAPH text={boardComment.userAccount.user.nickname} color="gray" />
                         </div>
+
+                        <Text.CAPTION text={Dayjs.of(boardComment.createdAt).formatMMDDHHmm()} color="gray" />
+
+                        {boardComment.userAccount.email === my?.email && (
+                          <EditableText.PARAGRAPH
+                            text="삭제"
+                            color="red"
+                            onClick={() => onDeleteCommentHandler(boardComment.id)}
+                          />
+                        )}
                       </div>
                     </div>
 
-                    <div className="pl-2 flex flex-col gap-2">
-                      {boardComment.replies.length > 0 &&
-                        boardComment.replies.map((reply) => (
-                          <div className="flex justify-between items-center" key={reply.id}>
+                    {boardComment.replies.length > 0 &&
+                      boardComment.replies.map((reply) => (
+                        <div key={reply.id} className="pl-2 flex justify-between items-center">
+                          <div className="flex items-center gap-1">
+                            <BsArrowReturnRight color="#666666" />
+                            <Text.HEADING text={reply.content} />
+                          </div>
+
+                          <div className="flex items-center gap-2">
                             <div className="flex items-center gap-1">
-                              <BsArrowReturnRight color="#666666" />
-                              <Text.HEADING text={reply.content} />
+                              <Thumbnail thumbnail={reply.userAccount.user.thumbnail} w={18} />
+                              <Text.PARAGRAPH text={reply.userAccount.user.nickname} />
                             </div>
 
-                            <div className="flex items-center gap-2">
-                              <div className="flex items-center gap-1">
-                                <Thumbnail thumbnail={reply.userAccount.user.thumbnail} w={18} />
-                                <Text.PARAGRAPH text={reply.userAccount.user.nickname} />
-                              </div>
-                              <Text.CAPTION text={Dayjs.of(reply.createdAt).formatMMDDHHmm()} color="gray" />
-                              {reply.userAccount.email === my?.email && (
-                                <EditableText.PARAGRAPH
-                                  text="삭제"
-                                  color="red"
-                                  onClick={() => onDeleteCommentHandler(reply.id)}
-                                />
-                              )}
-                            </div>
+                            <Text.CAPTION text={Dayjs.of(reply.createdAt).formatMMDDHHmm()} color="gray" />
+
+                            {reply.userAccount.email === my?.email && (
+                              <EditableText.PARAGRAPH
+                                text="삭제"
+                                color="red"
+                                onClick={() => onDeleteCommentHandler(reply.id)}
+                              />
+                            )}
                           </div>
-                        ))}
-                    </div>
+                        </div>
+                      ))}
 
                     {isReply === boardComment.id && (
                       <EditableInput.TEXT
@@ -145,8 +152,8 @@ export default function BoardComment(props: IProps) {
                         onChange={(event) => setReplyComment(event.target.value)}
                         placeholder="답글을 입력해주세요">
                         <EditableText.HEADING
-                          text="등록"
-                          color="blue"
+                          text={createBoardCommentMutation.isPending ? '등록 중...' : '등록'}
+                          color={createBoardCommentMutation.isPending ? 'gray' : 'blue'}
                           onClick={() => onCreateReplyCommentHandler(boardComment.id)}
                         />
                       </EditableInput.TEXT>
@@ -182,7 +189,11 @@ export default function BoardComment(props: IProps) {
               value={comment}
               onChange={(event) => setComment(event.target.value)}
               placeholder="댓글을 입력해주세요">
-              <EditableText.HEADING text="등록" color="blue" onClick={onCreateCommentHandler} />
+              <EditableText.HEADING
+                text={createBoardCommentMutation.isPending ? '등록 중...' : '등록'}
+                color={createBoardCommentMutation.isPending ? 'gray' : 'blue'}
+                onClick={onCreateCommentHandler}
+              />
             </EditableInput.TEXT>
           </div>
         </Wrapper>

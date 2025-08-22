@@ -47,8 +47,8 @@ export default function BoardList() {
     return (
       <li key={id}>
         <Wrapper>
-          <div className="flex flex-col gap-2" onClick={() => clickHandler(id)}>
-            <div className="flex justify-between items-center gap-2">
+          <div className="flex flex-col gap-1" onClick={() => clickHandler(id)}>
+            <div className="flex justify-between items-center">
               <div className="flex items-center gap-2">
                 <Text.PARAGRAPH text={`[${category.name}]`} color="gray" />
                 <EditableText.HEADING text={title} />
@@ -60,7 +60,7 @@ export default function BoardList() {
             </div>
 
             <div className="flex justify-between items-center">
-              <div className="flex gap-4">
+              <div className="flex gap-2">
                 <div className="flex items-center gap-1">
                   <BiHeart color="#666666" />
                   <EditableText.PARAGRAPH text={String(likeCount)} color="gray" />
@@ -71,9 +71,7 @@ export default function BoardList() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-1">
-                <EditableText.CAPTION text={Dayjs.of(createdAt).formatYYMMDDHHmm()} color="gray" />
-              </div>
+              <EditableText.CAPTION text={Dayjs.of(createdAt).formatYYMMDDHHmm()} color="gray" />
             </div>
           </div>
         </Wrapper>

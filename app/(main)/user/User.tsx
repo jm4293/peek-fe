@@ -23,7 +23,7 @@ export default function User(props: IProps) {
           <div className="w-full flex items-center gap-4">
             <Thumbnail thumbnail={my.user.thumbnail} />
             <div>
-              <Text.PARAGRAPH text={my.user.nickname} />
+              <Text.HEADING text={my.user.nickname} />
               <Text.PARAGRAPH text={my.email} />
             </div>
           </div>
