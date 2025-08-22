@@ -6,6 +6,8 @@ import { Wrapper } from '@/components/wrapper';
 
 import { myAction } from '@/services/user';
 
+import { userAccountTypeDescription } from '@/shared/enum/user';
+
 import NotAuth from '../NotAuth';
 import UserWithdraw from './Withdraw';
 
@@ -22,6 +24,7 @@ export default async function UserDetailPage() {
 
       <div className="flex flex-col gap-2">
         <Wrapper>
+          <Text.HEADING text={`계정 타입: ${userAccountTypeDescription[my.userAccountType]}`} />
           <Text.HEADING text={`이메일: ${my.email}`} />
           <Text.HEADING text={`이름: ${my.user.name}`} />
           <Text.HEADING text={`닉네임: ${my.user.nickname}`} />

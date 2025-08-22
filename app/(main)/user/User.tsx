@@ -7,6 +7,8 @@ import { Wrapper } from '@/components/wrapper';
 
 import { IUserAccountModel } from '@/services/user';
 
+import { userAccountTypeDescription } from '@/shared/enum/user';
+
 import UserLogout from './Logout';
 
 interface IProps {
@@ -24,7 +26,11 @@ export default function User(props: IProps) {
             <Thumbnail thumbnail={my.user.thumbnail} />
             <div>
               <Text.HEADING text={my.user.nickname} />
-              <Text.PARAGRAPH text={my.email} />
+              <div className="flex items-center gap-2">
+                <Text.PARAGRAPH text={userAccountTypeDescription[my.userAccountType]} />
+                <span>|</span>
+                <Text.PARAGRAPH text={my.email} />
+              </div>
             </div>
           </div>
           <MdOutlineArrowForwardIos />
