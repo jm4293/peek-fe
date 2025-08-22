@@ -27,6 +27,8 @@ export default function NaverOauth() {
           const { success } = await signinOauthAction({
             token,
             userAccountType: UserAccountTypeEnum.NAVER,
+            tokenType: null,
+            expire: null,
           });
 
           if (!success) {

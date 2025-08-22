@@ -23,12 +23,16 @@ export default function GoogleOauth() {
       const params = new URLSearchParams(hash.substring(1));
 
       const token = params.get('access_token');
+      const tokenType = params.get('token_type');
+      const expire = params.get('expires_in');
 
       (async () => {
         if (token) {
           const { success } = await signinOauthAction({
             token,
             userAccountType: UserAccountTypeEnum.GOOGLE,
+            tokenType,
+            expire: expire ? Number(expire) : null,
           });
 
           if (!success) {

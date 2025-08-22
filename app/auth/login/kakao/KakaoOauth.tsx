@@ -27,6 +27,8 @@ export default function KakaoOauth() {
           const { success } = await signinOauthAction({
             token,
             userAccountType: UserAccountTypeEnum.KAKAO,
+            tokenType: null,
+            expire: null,
           });
 
           if (!success) {
