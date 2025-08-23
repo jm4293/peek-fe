@@ -9,8 +9,8 @@ export default function Layout(props: IProps) {
   const { children } = props;
 
   return (
-    <div className="bg-theme-bg-section">
-      <div className="w-[720px] h-screen flex flex-col m-auto overflow-y-auto bg-theme-bg-main">
+    <div className="h-screen flex justify-center bg-theme-bg-section">
+      <div className="w-[720px] overflow-y-auto bg-theme-bg-main">
         <div className="w-full h-16 grid grid-cols-3 items-center px-4 bg-theme-bg-header">
           <div className="flex justify-start">
             <BackButton />
@@ -25,7 +25,7 @@ export default function Layout(props: IProps) {
           </div>
         </div>
 
-        <div className="w-full h-full p-4 pb-8">{children}</div>
+        <div className="px-4 py-8">{children}</div>
       </div>
     </div>
   );

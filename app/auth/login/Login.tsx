@@ -95,7 +95,7 @@ export default function Login() {
         <Button.CONTAINER text="로그인" onClick={clickHandler} disabled={isPending} />
       </div>
 
-      <div className="flex justify-center items-center gap-8">
+      <div className="flex justify-center items-center gap-4">
         <Link href="">
           <Text.HEADING text="아이디 찾기" />
         </Link>

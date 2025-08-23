@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 import { LineSkeleton } from '@/components/skeleton';
+import { Text } from '@/components/text';
 
 import { useToast } from '@/hooks/modal';
 
@@ -52,7 +53,7 @@ export default function NaverOauth() {
   return (
     <>
       <div className="text-center flex flex-col gap-4">
-        <h1 className="text-2xl font-bold">네이버 로그인중...</h1>
+        <Text.HEADING text="네이버 로그인중..." />
 
         <LineSkeleton height={2} />
         <LineSkeleton height={2} />

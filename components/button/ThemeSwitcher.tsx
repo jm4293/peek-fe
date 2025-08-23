@@ -1,13 +1,18 @@
 'use client';
 
 import { useTheme } from 'next-themes';
-import { MdOutlineLightMode } from 'react-icons/md';
-import { MdOutlineDarkMode } from 'react-icons/md';
+import { useEffect, useState } from 'react';
+import { MdOutlineDarkMode, MdOutlineLightMode } from 'react-icons/md';
 
 export const ThemeSwitcher = () => {
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
-  if (typeof window === 'undefined') {
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
     return null;
   }
 

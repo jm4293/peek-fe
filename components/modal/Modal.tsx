@@ -41,11 +41,11 @@ export const Modal = () => {
       className="fixed inset-0 w-screen h-screen bg-black/40 flex items-center justify-center z-[1000]"
       onClick={closeModal}>
       <div
-        className="bg-white rounded-2xl shadow-lg p-6 min-w-[320px] flex flex-col"
+        className="rounded-2xl shadow-lg p-6 min-w-[320px] flex flex-col bg-theme-bg-main"
         onClick={(e) => e.stopPropagation()}>
-        <div className="text-2xl font-bold mb-4">{modal.title}</div>
+        <div className="text-xl font-semibold mb-4">{modal.title}</div>
 
-        <div className="text-xl mb-6 whitespace-pre-wrap">{modal.content}</div>
+        <div className="text-base font-medium mb-6 whitespace-pre-wrap">{modal.content}</div>
 
         {modal.onCancel && <Button.OUTLINE text={modal.cancelText || '취소'} onClick={(e) => handleCancel(e)} />}
 
