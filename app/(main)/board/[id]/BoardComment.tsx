@@ -4,9 +4,9 @@ import { useState } from 'react';
 import { BsArrowReturnRight } from 'react-icons/bs';
 
 import { Thumbnail } from '@/components/image';
-import { EditableInput } from '@/components/input';
+import { Input } from '@/components/input';
 import { LineSkeleton } from '@/components/skeleton';
-import { EditableText, Text } from '@/components/text';
+import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
 import { useToast } from '@/hooks/modal';
@@ -79,7 +79,7 @@ export default function BoardComment(props: IProps) {
 
   return (
     <>
-      <Wrapper>
+      <Wrapper.SECTION>
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-2">
             <Text.HEADING text="댓글" />
@@ -101,17 +101,15 @@ export default function BoardComment(props: IProps) {
                       <div className="flex justify-between items-center gap-2">
                         <div className="flex items-center gap-1">
                           <Thumbnail thumbnail={boardComment.userAccount.user.thumbnail} w={18} />
-                          <Text.PARAGRAPH text={boardComment.userAccount.user.nickname} color="gray" />
+                          <Text.PARAGRAPH text={boardComment.userAccount.user.nickname} />
                         </div>
 
                         <Text.CAPTION text={Dayjs.of(boardComment.createdAt).formatMMDDHHmm()} color="gray" />
 
                         {boardComment.userAccount.email === my?.email && (
-                          <EditableText.PARAGRAPH
-                            text="삭제"
-                            color="red"
-                            onClick={() => onDeleteCommentHandler(boardComment.id)}
-                          />
+                          <div className="cursor-pointer" onClick={() => onDeleteCommentHandler(boardComment.id)}>
+                            <Text.PARAGRAPH text="삭제" color="red" />
+                          </div>
                         )}
                       </div>
                     </div>
@@ -133,30 +131,29 @@ export default function BoardComment(props: IProps) {
                             <Text.CAPTION text={Dayjs.of(reply.createdAt).formatMMDDHHmm()} color="gray" />
 
                             {reply.userAccount.email === my?.email && (
-                              <EditableText.PARAGRAPH
-                                text="삭제"
-                                color="red"
-                                onClick={() => onDeleteCommentHandler(reply.id)}
-                              />
+                              <div className="cursor-pointer" onClick={() => onDeleteCommentHandler(reply.id)}>
+                                <Text.PARAGRAPH text="삭제" color="red" />
+                              </div>
                             )}
                           </div>
                         </div>
                       ))}
 
                     {isReply === boardComment.id && (
-                      <EditableInput.TEXT
+                      <Input
                         className="mb-4"
                         title=""
                         name="reply"
                         value={replyComment}
                         onChange={(event) => setReplyComment(event.target.value)}
                         placeholder="답글을 입력해주세요">
-                        <EditableText.HEADING
-                          text={createBoardCommentMutation.isPending ? '등록 중...' : '등록'}
-                          color={createBoardCommentMutation.isPending ? 'gray' : 'blue'}
-                          onClick={() => onCreateReplyCommentHandler(boardComment.id)}
-                        />
-                      </EditableInput.TEXT>
+                        <div className="cursor-pointer" onClick={() => onCreateReplyCommentHandler(boardComment.id)}>
+                          <Text.HEADING
+                            text={createBoardCommentMutation.isPending ? '등록 중...' : '등록'}
+                            color={createBoardCommentMutation.isPending ? 'gray' : 'blue'}
+                          />
+                        </div>
+                      </Input>
                     )}
                   </div>
                 ))}
@@ -178,25 +175,26 @@ export default function BoardComment(props: IProps) {
             </button>
           )}
         </div>
-      </Wrapper>
+      </Wrapper.SECTION>
 
       {!!my && (
-        <Wrapper>
+        <Wrapper.SECTION>
           <div className="flex gap-4">
-            <EditableInput.TEXT
+            <Input
               title="댓글 등록"
               name="comment"
               value={comment}
               onChange={(event) => setComment(event.target.value)}
               placeholder="댓글을 입력해주세요">
-              <EditableText.HEADING
-                text={createBoardCommentMutation.isPending ? '등록 중...' : '등록'}
-                color={createBoardCommentMutation.isPending ? 'gray' : 'blue'}
-                onClick={onCreateCommentHandler}
-              />
-            </EditableInput.TEXT>
+              <div className="cursor-pointer" onClick={onCreateCommentHandler}>
+                <Text.HEADING
+                  text={createBoardCommentMutation.isPending ? '등록 중...' : '등록'}
+                  color={createBoardCommentMutation.isPending ? 'gray' : 'blue'}
+                />
+              </div>
+            </Input>
           </div>
-        </Wrapper>
+        </Wrapper.SECTION>
       )}
     </>
   );

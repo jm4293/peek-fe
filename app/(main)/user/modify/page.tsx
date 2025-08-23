@@ -1,4 +1,4 @@
-import { Text } from '@/components/text';
+import { Wrapper } from '@/components/wrapper';
 
 import { myAction } from '@/services/user';
 
@@ -13,9 +13,8 @@ export default async function ModifyUserPage() {
   }
 
   return (
-    <div className="flex flex-col gap-4">
-      <Text.SUBTITLE text="회원 정보 수정" />
+    <Wrapper.MAIN text="유저정보 변경">
       <ModifyUser my={my} />
-    </div>
+    </Wrapper.MAIN>
   );
 }

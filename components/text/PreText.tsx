@@ -1,6 +1,6 @@
 interface IProps {
   text: string;
-  color?: 'black' | 'gray' | 'red';
+  color?: 'default' | 'gray' | 'blue' | 'red';
   size?: 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl';
   align?: 'left' | 'center' | 'right';
   weight?: 'normal' | 'bold';
@@ -8,9 +8,10 @@ interface IProps {
 }
 
 const textColor = {
-  black: 'text-black',
-  gray: 'text-[#666666]',
-  red: 'text-[#F87171]',
+  default: 'text-theme-txt-default',
+  gray: 'text-theme-txt-gray',
+  blue: 'text-theme-txt-blue',
+  red: 'text-theme-txt-red',
 };
 
 const fontSize = {
@@ -36,13 +37,12 @@ const fontWeight = {
   bold: 'font-bold',
 };
 
-export default function PreText(props: IProps) {
-  const { text, color = 'black', size = 'base', align = 'left', weight = 'normal', className } = props;
+export function PreText(props: IProps) {
+  const { text, color = 'default', size = 'base', align = 'left', weight = 'normal', className } = props;
 
   return (
     <pre
-      className={`whitespace-pre-line ${textColor[color]} ${fontSize[size]} ${textAlign[align]} ${fontWeight[weight]} ${className}`}
-    >
+      className={`whitespace-pre-line ${textColor[color]} ${fontSize[size]} ${textAlign[align]} ${fontWeight[weight]} ${className}`}>
       {text}
     </pre>
   );

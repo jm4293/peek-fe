@@ -11,12 +11,10 @@ export default function CatchAllPage() {
         <div className="flex flex-col items-center gap-4">
           <Text.SUBTITLE text="잘못된 경로입니다." />
 
-          <div className="flex flex-col gap-2">
+          <Link href="/login" className="flex flex-col items-center gap-2">
             <Text.HEADING text="존재하지 않는 페이지입니다." />
-            <Link href="/login">
-              <Text.HEADING text="로그인 페이지로 이동" />
-            </Link>
-          </div>
+            <Text.HEADING text="로그인 페이지로 이동" />
+          </Link>
         </div>
       </div>
     </div>

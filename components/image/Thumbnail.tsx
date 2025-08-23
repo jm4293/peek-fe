@@ -1,6 +1,5 @@
 import Image from 'next/image';
-
-import { HumanSvg } from '@/asset/svg';
+import { PiUserCircleLight } from 'react-icons/pi';
 
 interface IProps {
   thumbnail: string | null;
@@ -8,7 +7,7 @@ interface IProps {
 }
 
 export const Thumbnail = (props: IProps) => {
-  const { thumbnail, w = 40 } = props;
+  const { thumbnail, w = 24 } = props;
 
   return (
     <>
@@ -21,7 +20,7 @@ export const Thumbnail = (props: IProps) => {
           className="rounded-full"
         />
       ) : (
-        <HumanSvg w={w} />
+        <PiUserCircleLight size={w} />
       )}
     </>
   );

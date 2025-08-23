@@ -1,6 +1,7 @@
 'use client';
 
-import { EditableText } from '@/components/text';
+import { Clickable } from '@/components/interactive';
+import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
 import { useQueryParams } from '@/hooks/queryParams';
@@ -20,30 +21,39 @@ export default function BoardCategory(props: IProps) {
   };
 
   return (
-    <Wrapper>
+    <Wrapper.SECTION text="카테고리">
       <div className="flex items-center gap-4">
         {stockCategoryList.reduce(
           (acc, cur) => {
-            acc.push(
-              <EditableText.HEADING
-                key={cur.id}
-                text={cur.name}
-                color={category === String(cur.id) ? 'black' : 'gray'}
-                onClick={() => handleCategoryClick(cur)}
-              />,
-            );
+            if (category === String(cur.id)) {
+              acc.push(
+                <Clickable key={cur.id} onClick={() => handleCategoryClick(cur)}>
+                  <Text.HEADING text={cur.enName} color={category === String(cur.id) ? 'default' : 'gray'} />
+                </Clickable>,
+              );
+            } else {
+              acc.push(
+                <Clickable key={cur.id} onClick={() => handleCategoryClick(cur)}>
+                  <Text.PARAGRAPH text={cur.enName} color={category === String(cur.id) ? 'default' : 'gray'} />
+                </Clickable>,
+              );
+            }
+
             return acc;
           },
           [
-            <EditableText.HEADING
-              key="all"
-              text="전체"
-              color={category === null ? 'black' : 'gray'}
-              onClick={() => setQuery('category', null)}
-            />,
+            category === null ? (
+              <Clickable key="all" onClick={() => setQuery('category', null)}>
+                <Text.HEADING text="전체" color={category === null ? 'default' : 'gray'} />
+              </Clickable>
+            ) : (
+              <Clickable key="all" onClick={() => setQuery('category', null)}>
+                <Text.PARAGRAPH text="전체" color={category === null ? 'default' : 'gray'} />
+              </Clickable>
+            ),
           ],
         )}
       </div>
-    </Wrapper>
+    </Wrapper.SECTION>
   );
 }

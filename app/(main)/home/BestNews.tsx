@@ -4,7 +4,6 @@ import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { Socket, io } from 'socket.io-client';
 
-import { EditableText } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
 interface IProps {
@@ -71,30 +70,30 @@ export default function BestNews(props: IProps) {
 
   if (connectionStatus === 'connecting') {
     return (
-      <Wrapper title="애플 실시간 시세">
+      <Wrapper.SECTION text="애플 실시간 시세">
         <div>실시간 데이터 연결 중...</div>
-      </Wrapper>
+      </Wrapper.SECTION>
     );
   }
 
   if (connectionStatus === 'error') {
     return (
-      <Wrapper title="애플 실시간 시세">
+      <Wrapper.SECTION text="애플 실시간 시세">
         <div className="text-red-500">연결 오류가 발생했습니다.</div>
-      </Wrapper>
+      </Wrapper.SECTION>
     );
   }
 
   if (!priceData) {
     return (
-      <Wrapper title="애플 실시간 시세">
+      <Wrapper.SECTION text="애플 실시간 시세">
         <div>데이터 수신 대기 중...</div>
-      </Wrapper>
+      </Wrapper.SECTION>
     );
   }
 
   return (
-    <Wrapper title="애플 실시간 시세">
+    <Wrapper.SECTION text="애플 실시간 시세">
       <div className="flex flex-col gap-2">
         <div className="text-green-500 text-sm">🟢 실시간 연결됨</div>
         <p>심볼: {priceData.symbol}</p>
@@ -105,6 +104,6 @@ export default function BestNews(props: IProps) {
         <p>매수 잔고: {priceData.buyBalance}</p>
         <p>매도 잔고: {priceData.sellBalance}</p>
       </div>
-    </Wrapper>
+    </Wrapper.SECTION>
   );
 }

@@ -20,20 +20,18 @@ export default async function BoardDetailPage(props: IProps) {
 
   if (!success || !data) {
     return (
-      <Wrapper>
+      <Wrapper.SECTION>
         <Text.HEADING text="게시판 불러오는데 실패했습니다." />
-      </Wrapper>
+      </Wrapper.SECTION>
     );
   }
 
   return (
-    <div className="flex flex-col gap-4">
-      <Text.SUBTITLE text="게시글" />
-
+    <Wrapper.MAIN text="게시글">
       <div className="flex flex-col gap-2">
         <BoardDetail board={data} my={my} />
         <BoardComment id={id} my={my} />
       </div>
-    </div>
+    </Wrapper.MAIN>
   );
 }

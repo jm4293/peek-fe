@@ -6,7 +6,7 @@ import { BiComment, BiHeart } from 'react-icons/bi';
 
 import { Thumbnail } from '@/components/image';
 import { InfinityList } from '@/components/infinity-list';
-import { EditableText, Text } from '@/components/text';
+import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
 import { useQueryParams } from '@/hooks/queryParams';
@@ -46,16 +46,16 @@ export default function BoardList() {
 
     return (
       <li key={id}>
-        <Wrapper>
+        <Wrapper.SECTION>
           <div className="flex flex-col gap-1" onClick={() => clickHandler(id)}>
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-2">
                 <Text.PARAGRAPH text={`[${category.name}]`} color="gray" />
-                <EditableText.HEADING text={title} />
+                <Text.HEADING text={title} />
               </div>
               <div className="flex items-center gap-1">
                 <Thumbnail thumbnail={userAccount.user.thumbnail} w={18} />
-                <EditableText.PARAGRAPH text={userAccount.user.nickname} color="gray" />
+                <Text.PARAGRAPH text={userAccount.user.nickname} />
               </div>
             </div>
 
@@ -63,27 +63,27 @@ export default function BoardList() {
               <div className="flex gap-2">
                 <div className="flex items-center gap-1">
                   <BiHeart color="#666666" />
-                  <EditableText.PARAGRAPH text={String(likeCount)} color="gray" />
+                  <Text.PARAGRAPH text={String(likeCount)} color="gray" />
                 </div>
                 <div className="flex items-center gap-1">
                   <BiComment color="#666666" />
-                  <EditableText.PARAGRAPH text={String(commentCount)} color="gray" />
+                  <Text.PARAGRAPH text={String(commentCount)} color="gray" />
                 </div>
               </div>
 
-              <EditableText.CAPTION text={Dayjs.of(createdAt).formatYYMMDDHHmm()} color="gray" />
+              <Text.CAPTION text={Dayjs.of(createdAt).formatYYMMDDHHmm()} color="gray" />
             </div>
           </div>
-        </Wrapper>
+        </Wrapper.SECTION>
       </li>
     );
   };
 
   if (list.length === 0) {
     return (
-      <Wrapper>
-        <EditableText.HEADING text="게시글이 없습니다." />
-      </Wrapper>
+      <Wrapper.SECTION>
+        <Text.HEADING text="게시글이 없습니다." />
+      </Wrapper.SECTION>
     );
   }
 

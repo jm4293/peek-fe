@@ -3,8 +3,8 @@
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
-import { EditableButton } from '@/components/button';
-import { EditableInput } from '@/components/input';
+import { Button } from '@/components/button';
+import { Input } from '@/components/input';
 import { Textarea } from '@/components/textarea';
 import { Wrapper } from '@/components/wrapper';
 
@@ -43,10 +43,10 @@ export default function BoardModify(props: IProps) {
   };
 
   return (
-    <Wrapper>
+    <Wrapper.SECTION>
       <div className="flex flex-col gap-8">
         <div className="col-span-5 flex flex-col gap-4">
-          <EditableInput.TEXT
+          <Input
             title="제목"
             name="title"
             value={title}
@@ -65,10 +65,10 @@ export default function BoardModify(props: IProps) {
         </div>
 
         <div className="flex justify-end gap-2">
-          <EditableButton.OUTLINE text="취소" onClick={() => router.back()} />
-          <EditableButton.CONTAINER text="수정하기" onClick={clickHandler} />
+          <Button.OUTLINE text="취소" onClick={() => router.back()} />
+          <Button.CONTAINER text="수정하기" onClick={clickHandler} />
         </div>
       </div>
-    </Wrapper>
+    </Wrapper.SECTION>
   );
 }

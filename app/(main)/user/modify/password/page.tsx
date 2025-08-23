@@ -17,19 +17,17 @@ export default async function ModifyPasswordPage() {
 
   if (my.userAccountType !== UserAccountTypeEnum.EMAIL) {
     return (
-      <div className="flex flex-col gap-4">
-        <Text.SUBTITLE text="비밀번호 변경" />
-        <Wrapper>
+      <Wrapper.MAIN text="비밀번호 변경">
+        <Wrapper.SECTION>
           <Text.HEADING text="이메일 회원만 비밀번호 변경이 가능합니다." />
-        </Wrapper>
-      </div>
+        </Wrapper.SECTION>
+      </Wrapper.MAIN>
     );
   }
 
   return (
-    <div className="flex flex-col gap-4">
-      <Text.SUBTITLE text="비밀번호 변경" />
+    <Wrapper.MAIN text="비밀번호 변경">
       <ModifyPassword />
-    </div>
+    </Wrapper.MAIN>
   );
 }

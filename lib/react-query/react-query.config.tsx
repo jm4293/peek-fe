@@ -42,14 +42,13 @@ export default function QueryProvider(props: IProps) {
                 <p>{handleError(error)}</p>
                 <button onClick={resetErrorBoundary}>재시도</button>
               </div>
-            )}
-          >
+            )}>
             {children}
           </ErrorBoundary>
         )}
       </QueryErrorResetBoundary>
 
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   );
 }

@@ -1,19 +1,18 @@
-interface IProps {
+'use client';
+
+import { ButtonHTMLAttributes } from 'react';
+
+interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
-  className?: string;
-  type?: 'submit' | 'button';
-  disabled?: boolean;
+  color?: 'default' | 'danger';
 }
 
 const CONTAINER = (props: IProps) => {
-  const { text, type = 'button', className, disabled } = props;
+  const { text, color = 'default', className, ...rest } = props;
 
   return (
-    <button
-      className={`w-full px-2 py-4 bg-[#5A4FCF] hover:bg-[#786DE8] disabled:bg-[#A7A3D3] ${className}`}
-      type={type}
-      disabled={disabled}>
-      <strong className="text-base font-normal text-white whitespace-nowrap hover:text-white disabled:text-[#A7A3D3] disabled:cursor-not-allowed">
+    <button className={`border-none bg-[#5A4FCF] hover:bg-[#786DE8] disabled:bg-[#A7A3D3] ${className}`} {...rest}>
+      <strong className={`text-white disabled:text-[#A7A3D3] whitespace-nowrap disabled:cursor-not-allowed`}>
         {text}
       </strong>
     </button>
@@ -21,14 +20,13 @@ const CONTAINER = (props: IProps) => {
 };
 
 const OUTLINE = (props: IProps) => {
-  const { text, type = 'button', className, disabled } = props;
+  const { text, color = 'default', className, ...rest } = props;
 
   return (
     <button
-      className={`w-full px-2 py-4 border border-solid border-[#5A4FCF] bg-white hover:bg-[#F0F0FF] disabled:bg-[#F0F0FF] ${className}`}
-      type={type}
-      disabled={disabled}>
-      <strong className="text-base font-normal text-[#5A4FCF] whitespace-nowrap hover:text-[#5A4FCF] disabled:text-[#A7A3D3] disabled:cursor-not-allowed">
+      className={`border border-solid border-[#5A4FCF] bg-white hover:bg-[#F0F0FF] disabled:bg-[#F0F0FF] ${className}`}
+      {...rest}>
+      <strong className={`text-[#5A4FCF] disabled:text-[#A7A3D3] whitespace-nowrap disabled:cursor-not-allowed`}>
         {text}
       </strong>
     </button>

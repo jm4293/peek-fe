@@ -22,7 +22,7 @@ export const CheckBox = (props: IProps) => {
         onChange={onChange}
       />
       <label htmlFor={name}>
-        <Text.HEADING text={title} />
+        <Text.HEADING text={title} className="whitespace-nowrap" />
       </label>
     </div>
   );

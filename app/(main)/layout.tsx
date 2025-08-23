@@ -12,9 +12,9 @@ export default async function Layout(props: IProps) {
   const { data: my } = await myAction();
 
   return (
-    <div className="layout">
+    <div className="relative min-h-screen">
       <Header my={my} />
-      <main>{children}</main>
+      <main className="min-w-64 h-screen pt-20 pb-16 bg-theme-bg-main">{children}</main>
     </div>
   );
 }

@@ -1,13 +1,11 @@
-import { Text } from '@/components/text';
+import { Wrapper } from '@/components/wrapper';
 
 import MineBoardCommentList from './MineBoardCommentList';
 
 export default function UserBoardCommentPage() {
   return (
-    <div className="flex flex-col gap-4">
-      <Text.SUBTITLE text="작성한 게시글 댓글" />
-
+    <Wrapper.MAIN text="작성한 게시글 댓글">
       <MineBoardCommentList />
-    </div>
+    </Wrapper.MAIN>
   );
 }

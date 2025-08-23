@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 import { IoIosClose } from 'react-icons/io';
 import { PiHamburger } from 'react-icons/pi';
 
-import { BackButton } from '@/components/button';
+import { BackButton, ThemeSwitcher } from '@/components/button';
 import { Thumbnail } from '@/components/image';
 import { Text } from '@/components/text';
 
@@ -17,10 +17,15 @@ interface IProps {
 }
 
 const menuItems = [
-  { name: '홈', path: '/home' },
-  { name: '주식', path: '/stock' },
-  { name: '게시판', path: '/board' },
+  { name: 'Home', path: '/home' },
+  { name: 'Stock', path: '/stock' },
+  { name: 'Board', path: '/board' },
+  { name: 'MyPage', path: '/user' },
 ];
+
+const Logo = () => {
+  return <Text.TITLE text="PEEK" />;
+};
 
 export function Header(props: IProps) {
   const { my } = props;
@@ -75,8 +80,8 @@ export function Header(props: IProps) {
 
   if (isMobile === null) {
     return (
-      <header>
-        <strong>PEEK</strong>
+      <header className="bg-theme-bg-header">
+        <Logo />
       </header>
     );
   }
@@ -84,10 +89,12 @@ export function Header(props: IProps) {
   if (isMobile) {
     return (
       <>
-        <header>
-          <div className="w-full flex justify-between items-center">
-            <BackButton />
-            <strong>PEEK</strong>
+        <header className="justify-between px-4 bg-theme-bg-header">
+          <BackButton />
+
+          <Logo />
+
+          <div className="flex items-center gap-2">
             <PiHamburger size={24} onClick={toggleMenu} />
           </div>
         </header>
@@ -95,8 +102,8 @@ export function Header(props: IProps) {
         {isMenuOpen && <div className="fixed inset-0 bg-black bg-opacity-50 z-40" onClick={closeMenu} />}
 
         <div
-          className={`fixed top-0 right-0 h-full w-60 bg-white shadow-lg transform transition-transform duration-300 ease-in-out z-50 ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-          <div className="flex flex-col h-full">
+          className={`fixed top-0 right-0 h-full w-60 shadow-lg transform transition-transform duration-300 ease-in-out z-50 bg-theme-bg-header ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+          <div className="relative h-full flex flex-col">
             <div className="flex justify-between items-center p-4 border-b">
               {!!my ? (
                 <Link href="/user" onClick={closeMenu} className="flex items-center gap-2">
@@ -118,6 +125,10 @@ export function Header(props: IProps) {
                 </Link>
               ))}
             </div>
+
+            <div className="absolute bottom-4 right-4">
+              <ThemeSwitcher />
+            </div>
           </div>
         </div>
       </>
@@ -126,10 +137,14 @@ export function Header(props: IProps) {
 
   return (
     <header
-      className={`flex justify-center transition-transform duration-500 ease-in-out ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
-      <div className={`${isMobile ? 'w-full' : 'w-3/4'} flex justify-between`}>
+      className={`
+        bg-theme-bg-header
+        transition-transform duration-500 ease-in-out
+        ${isVisible ? 'translate-y-0' : '-translate-y-full'}
+      `}>
+      <div className="w-3/4 flex justify-between">
         <div className="flex items-center gap-8">
-          <strong>PEEK</strong>
+          <Logo />
 
           <div className="flex items-center gap-4">
             {menuItems.map((item) => (
@@ -140,16 +155,22 @@ export function Header(props: IProps) {
           </div>
         </div>
 
-        {!!my ? (
-          <Link href="/user" className="flex items-center gap-2">
-            <Thumbnail thumbnail={my.user.thumbnail} w={24} />
-            <Text.HEADING text={my.user.nickname} />
-          </Link>
-        ) : (
-          <Link href="/auth/login">
-            <Text.HEADING text="로그인" />
-          </Link>
-        )}
+        <div className="flex items-center gap-4">
+          <ThemeSwitcher />
+
+          <div className="flex items-center gap-2">
+            {!!my ? (
+              <Link href="/user" className="flex items-center gap-2">
+                <Thumbnail thumbnail={my.user.thumbnail} />
+                <Text.HEADING text={my.user.nickname} />
+              </Link>
+            ) : (
+              <Link href="/auth/login">
+                <Text.HEADING text="로그인" />
+              </Link>
+            )}
+          </div>
+        </div>
       </div>
     </header>
   );

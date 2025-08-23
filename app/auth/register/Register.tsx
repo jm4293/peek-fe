@@ -5,8 +5,8 @@ import duration from 'dayjs/plugin/duration';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState, useTransition } from 'react';
 
-import { EditableButton } from '@/components/button';
-import { CheckBox, EditableInput } from '@/components/input';
+import { Button } from '@/components/button';
+import { CheckBox, Input } from '@/components/input';
 import { Text } from '@/components/text';
 
 import { useInput } from '@/hooks/input';
@@ -166,11 +166,12 @@ export default function Register() {
   }, [checkEmail]);
 
   return (
-    <section className="w-full flex flex-col gap-8">
-      <div className="flex flex-col gap-2">
+    <section className="w-full flex flex-col gap-12">
+      <div className="flex flex-col gap-4">
         <div className="grid grid-cols-3 gap-2">
-          <EditableInput.EMAIL
-            className="col-span-2"
+          <Input
+            type="email"
+            className="w-full col-span-2"
             title="이메일"
             name="email"
             value={value.email}
@@ -179,7 +180,7 @@ export default function Register() {
             disabled={checkEmail !== 1}
             required
           />
-          <EditableButton.CONTAINER
+          <Button.CONTAINER
             className="mt-6"
             text={checkEmailMutation.isPending ? '코드 전송 중' : '이메일 인증'}
             onClick={handleCheckEmail}
@@ -188,7 +189,7 @@ export default function Register() {
         </div>
         {checkEmail !== 1 && (
           <div className="grid grid-cols-3 gap-2">
-            <EditableInput.TEXT
+            <Input
               className="col-span-2"
               title="인증코드"
               name="code"
@@ -200,8 +201,8 @@ export default function Register() {
               disabled={checkEmail === 3}
               required>
               <Text.PARAGRAPH text={dayjs.duration(count, 'seconds').format('m:ss')} />
-            </EditableInput.TEXT>
-            <EditableButton.CONTAINER
+            </Input>
+            <Button.CONTAINER
               className="mt-6"
               text={checkEmail === 3 ? '확인 완료' : '코드 확인'}
               onClick={handleCheckCode}
@@ -210,7 +211,8 @@ export default function Register() {
           </div>
         )}
 
-        <EditableInput.PASSWORD
+        <Input
+          type="password"
           title="비밀번호"
           name="password"
           value={value.password}
@@ -218,7 +220,8 @@ export default function Register() {
           placeholder="비밀번호"
           required
         />
-        <EditableInput.PASSWORD
+        <Input
+          type="password"
           title="비밀번호 확인"
           name="passwordConfirm"
           value={passwordConfirm}
@@ -228,8 +231,8 @@ export default function Register() {
         />
       </div>
 
-      <div className="flex flex-col gap-2">
-        <EditableInput.TEXT
+      <div className="flex flex-col gap-4">
+        <Input
           title="닉네임"
           name="nickname"
           value={value.nickname}
@@ -237,15 +240,8 @@ export default function Register() {
           placeholder="닉네임"
           required
         />
-        <EditableInput.TEXT
-          title="이름"
-          name="name"
-          value={value.name}
-          onChange={onChange}
-          placeholder="이름"
-          required
-        />
-        {/* <EditableInput.TEXT
+        <Input title="이름" name="name" value={value.name} onChange={onChange} placeholder="이름" required />
+        {/* <Input
           title="생년월일 8자리"
           name="birthdate"
           value={value.birthdate}
@@ -253,20 +249,20 @@ export default function Register() {
           placeholder="생년월일 8자리"
           optional
         /> */}
-      </div>
 
-      <div className="flex justify-end">
-        <CheckBox title="정책에 동의합니다" name="policy" checked={value.policy} onChange={onChange} />
+        <div className="flex justify-end">
+          <CheckBox title="정책에 동의합니다" name="policy" checked={value.policy} onChange={onChange} />
+        </div>
       </div>
 
       <div className="w-full flex gap-2">
-        <EditableButton.OUTLINE
+        <Button.OUTLINE
           text="뒤로가기"
           onClick={() => {
             router.push('/auth/login');
           }}
         />
-        <EditableButton.CONTAINER type="submit" text="회원가입" onClick={handleSubmit} disabled={isPending} />
+        <Button.CONTAINER type="submit" text="회원가입" onClick={handleSubmit} disabled={isPending} />
       </div>
     </section>
   );

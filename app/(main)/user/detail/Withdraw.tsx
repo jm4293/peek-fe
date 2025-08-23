@@ -4,7 +4,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useTransition } from 'react';
 
-import { EditableText } from '@/components/text';
+import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
 import { useToast } from '@/hooks/modal';
@@ -46,8 +46,10 @@ export default function UserWithdraw() {
   };
 
   return (
-    <Wrapper>
-      <EditableText.HEADING text="탈퇴하기" color="red" onClick={withdrawHandler} />
-    </Wrapper>
+    <Wrapper.SECTION>
+      <div className="cursor-pointer" onClick={withdrawHandler}>
+        <Text.HEADING text="탈퇴하기" color="red" />
+      </div>
+    </Wrapper.SECTION>
   );
 }

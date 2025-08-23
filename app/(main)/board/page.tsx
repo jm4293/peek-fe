@@ -17,16 +17,16 @@ export default async function BoardPage() {
 
   if (!data) {
     return (
-      <Wrapper>
-        <Text.HEADING text="게시판 카테고리 목록을 불러오는데 실패했습니다." />
-      </Wrapper>
+      <Wrapper.MAIN text="게시판">
+        <Wrapper.SECTION>
+          <Text.HEADING text="게시판 카테고리 목록을 불러오는데 실패했습니다." />
+        </Wrapper.SECTION>
+      </Wrapper.MAIN>
     );
   }
 
   return (
-    <div className="flex flex-col gap-4">
-      <Text.SUBTITLE text="게시판" />
-
+    <Wrapper.MAIN text="게시판">
       <div className="flex flex-col gap-2">
         <BoardCategory stockCategoryList={data} />
         <BoardList />
@@ -37,6 +37,6 @@ export default async function BoardPage() {
           <BoardRegisterSvg />
         </Link>
       )}
-    </div>
+    </Wrapper.MAIN>
   );
 }

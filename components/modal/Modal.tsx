@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 
 import { useModal } from '@/hooks/modal';
 
-import { EditableButton } from '../button';
+import { Button } from '../button';
 
 export const Modal = () => {
   const modalRoot = useRef<Element | null>(null);
@@ -47,13 +47,9 @@ export const Modal = () => {
 
         <div className="text-xl mb-6 whitespace-pre-wrap">{modal.content}</div>
 
-        {modal.onCancel && (
-          <EditableButton.OUTLINE text={modal.cancelText || '취소'} onClick={(e) => handleCancel(e)} />
-        )}
+        {modal.onCancel && <Button.OUTLINE text={modal.cancelText || '취소'} onClick={(e) => handleCancel(e)} />}
 
-        {modal.onConfirm && (
-          <EditableButton.CONTAINER text={modal.confirmText || '확인'} onClick={(e) => handleConfirm(e)} />
-        )}
+        {modal.onConfirm && <Button.CONTAINER text={modal.confirmText || '확인'} onClick={(e) => handleConfirm(e)} />}
       </div>
     </div>,
     modalRoot.current,

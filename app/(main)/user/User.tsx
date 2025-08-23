@@ -20,10 +20,10 @@ export default function User(props: IProps) {
 
   return (
     <div className="flex flex-col gap-2">
-      <Wrapper>
+      <Wrapper.SECTION>
         <Link href="/user/detail" className="py-1 flex items-center justify-between">
           <div className="w-full flex items-center gap-4">
-            <Thumbnail thumbnail={my.user.thumbnail} />
+            <Thumbnail thumbnail={my.user.thumbnail} w={40} />
             <div>
               <Text.HEADING text={my.user.nickname} />
               <div className="flex items-center gap-2">
@@ -35,30 +35,33 @@ export default function User(props: IProps) {
           </div>
           <MdOutlineArrowForwardIos />
         </Link>
-      </Wrapper>
+      </Wrapper.SECTION>
 
-      <Wrapper title="최근 기록">
-        <Link href="" className="flex items-center justify-between">
-          <Text.PARAGRAPH text="검색 종목" />
-          <MdOutlineArrowForwardIos />
-        </Link>
+      <Wrapper.SECTION text="최근 기록">
+        <div className="flex flex-col gap-4">
+          <Link href="" className="flex items-center justify-between">
+            <Text.HEADING text="검색 종목" />
+            <MdOutlineArrowForwardIos />
+          </Link>
+          <Link href="" className="flex items-center justify-between">
+            <Text.HEADING text="즐겨찾기 종목" />
+            <MdOutlineArrowForwardIos />
+          </Link>
+        </div>
+      </Wrapper.SECTION>
 
-        <Link href="" className="flex items-center justify-between">
-          <Text.PARAGRAPH text="즐겨찾기 종목" />
-          <MdOutlineArrowForwardIos />
-        </Link>
-      </Wrapper>
-
-      <Wrapper title="게시판">
-        <Link href="/user/board" className="flex items-center justify-between">
-          <Text.PARAGRAPH text="작성한 게시글" />
-          <MdOutlineArrowForwardIos />
-        </Link>
-        <Link href="/user/board/comment" className="flex items-center justify-between">
-          <Text.PARAGRAPH text="작성한 게시글 댓글" />
-          <MdOutlineArrowForwardIos />
-        </Link>
-      </Wrapper>
+      <Wrapper.SECTION text="게시판">
+        <div className="flex flex-col gap-4">
+          <Link href="/user/board" className="flex items-center justify-between">
+            <Text.HEADING text="작성한 게시글" />
+            <MdOutlineArrowForwardIos />
+          </Link>
+          <Link href="/user/board/comment" className="flex items-center justify-between">
+            <Text.HEADING text="작성한 게시글 댓글" />
+            <MdOutlineArrowForwardIos />
+          </Link>
+        </div>
+      </Wrapper.SECTION>
 
       <UserLogout />
     </div>

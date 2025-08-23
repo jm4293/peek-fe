@@ -16,16 +16,15 @@ export default async function BoardModifyPage(props: IProps) {
 
   if (!data) {
     return (
-      <Wrapper>
+      <Wrapper.SECTION>
         <Text.HEADING text="게시판 불러오는데 실패했습니다." />
-      </Wrapper>
+      </Wrapper.SECTION>
     );
   }
 
   return (
-    <div className="flex flex-col gap-4">
-      <Text.SUBTITLE text="게시글 수정" />
+    <Wrapper.MAIN text="게시글 수정">
       <BoardModify board={data} id={id} />
-    </div>
+    </Wrapper.MAIN>
   );
 }

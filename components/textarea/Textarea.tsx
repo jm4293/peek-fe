@@ -1,21 +1,18 @@
 'use client';
 
-import { useRef } from 'react';
+import { TextareaHTMLAttributes, useRef } from 'react';
 
 import { Text } from '../text/Text';
 
-interface IProps {
+interface IProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   title: string;
-  value?: string;
-  defaultValue?: string;
   onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   name?: string;
   placeholder?: string;
-  disabled?: boolean;
   color?: 'gray' | 'green';
   optional?: boolean;
   className?: string;
-  required?: boolean;
+  children?: React.ReactNode;
 }
 
 const borderColor = {
@@ -24,19 +21,7 @@ const borderColor = {
 };
 
 export const Textarea = (props: IProps) => {
-  const {
-    title,
-    value,
-    defaultValue,
-    onChange,
-    name = '',
-    placeholder = '',
-    disabled = false,
-    color = 'gray',
-    optional = false,
-    className,
-    required = false,
-  } = props;
+  const { title, onChange, name = '', placeholder = '', color = 'gray', optional = false, className, ...rest } = props;
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -49,7 +34,7 @@ export const Textarea = (props: IProps) => {
   };
 
   return (
-    <div className="w-full flex flex-col gap-1">
+    <div className="w-full flex flex-col gap-2">
       <label className="pl-2" htmlFor={name}>
         <Text.HEADING text={title} />
       </label>
@@ -57,14 +42,10 @@ export const Textarea = (props: IProps) => {
       <textarea
         id={name}
         ref={textareaRef}
-        name={name}
-        className={`min-h-[20vh] max-h-[60vh] ${borderColor[color]} ${className}`}
-        value={value}
-        defaultValue={defaultValue}
+        className={`border-theme-txt-gray  min-h-[20vh] max-h-[60vh] ${borderColor[color]} ${className}`}
         onChange={handleInput}
         placeholder={`${optional ? '[선택] ' : ''}${placeholder}`}
-        disabled={disabled}
-        required={required}
+        {...rest}
       />
     </div>
   );

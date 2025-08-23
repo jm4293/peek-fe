@@ -3,8 +3,7 @@
 import { useRouter } from 'next/navigation';
 
 import { Thumbnail } from '@/components/image';
-import { EditableText, Text } from '@/components/text';
-import PreText from '@/components/text/PreText';
+import { PreText, Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
 import { IBoardModel, useBoardMutation } from '@/services/board';
@@ -35,8 +34,8 @@ export default function BoardDetail(props: IProps) {
   };
 
   return (
-    <Wrapper>
-      <div className="flex flex-col gap-2">
+    <>
+      <Wrapper.SECTION>
         <div className="flex flex-col gap-1">
           <div className="flex justify-between items-center gap-2">
             <div className="flex items-center gap-2">
@@ -45,7 +44,7 @@ export default function BoardDetail(props: IProps) {
             </div>
             <div className="flex items-center gap-1">
               <Thumbnail thumbnail={board.userAccount.user.thumbnail} w={18} />
-              <Text.PARAGRAPH text={board.userAccount.user.nickname} color="gray" />
+              <Text.PARAGRAPH text={board.userAccount.user.nickname} />
             </div>
           </div>
 
@@ -53,18 +52,23 @@ export default function BoardDetail(props: IProps) {
             <Text.CAPTION text={Dayjs.of(board.createdAt).formatMMDDHHmm()} color="gray" />
           </div>
         </div>
+      </Wrapper.SECTION>
+      <Wrapper.SECTION>
+        <div className="flex flex-col gap-4">
+          <PreText text={board.article.content} />
 
-        <div className="border-[0.5px]" />
-
-        <PreText text={board.article.content} />
-
-        {board.userAccount.email === my?.email && (
-          <div className="flex justify-end gap-2">
-            <EditableText.PARAGRAPH text="수정" color="blue" onClick={modifyClickHandler} />
-            <EditableText.PARAGRAPH text="삭제" color="red" onClick={deleteClickHandler} />
-          </div>
-        )}
-      </div>
-    </Wrapper>
+          {board.userAccount.email === my?.email && (
+            <div className="flex items-center justify-end gap-2">
+              <div className="cursor-pointer" onClick={modifyClickHandler}>
+                <Text.PARAGRAPH text="수정" color="blue" />
+              </div>
+              <div className="cursor-pointer" onClick={deleteClickHandler}>
+                <Text.PARAGRAPH text="삭제" color="red" />
+              </div>
+            </div>
+          )}
+        </div>
+      </Wrapper.SECTION>
+    </>
   );
 }

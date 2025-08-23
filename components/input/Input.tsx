@@ -1,105 +1,38 @@
+'use client';
+
+import { InputHTMLAttributes } from 'react';
+
 import { Text } from '@/components/text';
 
-interface IProps {
+interface IProps extends InputHTMLAttributes<HTMLInputElement> {
   title: string;
-  name: string;
-  defaultValue?: string;
-  className?: string;
+  name?: string;
   placeholder?: string;
-  disabled?: boolean;
   isOptional?: boolean;
-  minLength?: number;
-  maxLength?: number;
-  required?: boolean;
+  isError?: boolean;
+  className?: string;
+  children?: React.ReactNode;
 }
 
-const TEXT = (props: IProps) => {
-  const { title, name, className, placeholder, isOptional, ...rest } = props;
+export const Input = (props: IProps) => {
+  const { title, name, className, placeholder, isOptional, isError, children, ...rest } = props;
 
   return (
-    <div className="w-full flex flex-col gap-2">
+    <div className={`w-full flex flex-col gap-2 ${className}`}>
       <label className="pl-2" htmlFor={name}>
-        <Text.PARAGRAPH text={title} />
+        <Text.HEADING text={title} />
       </label>
 
-      <input
-        type="text"
-        id={name}
-        className={`w-full border border-gray-300 ${className}`}
-        name={name}
-        placeholder={`${placeholder} ${isOptional ? '[선택] ' : ''}`}
-        {...rest}
-      />
+      <div className="relative">
+        <input
+          id={name}
+          className={`border-theme-txt-gray ${isError ? 'border-red-500' : ''} ${children ? 'pr-16' : ''}`}
+          name={name}
+          placeholder={`${placeholder} ${isOptional ? '[선택] ' : ''}`}
+          {...rest}
+        />
+        <div className="absolute right-4 bottom-1/2 translate-y-1/2">{children}</div>
+      </div>
     </div>
   );
-};
-
-const EMAIL = (props: IProps) => {
-  const { title, name, className, placeholder, isOptional, ...rest } = props;
-
-  return (
-    <div className="w-full flex flex-col gap-2">
-      <label className="pl-2" htmlFor={name}>
-        <Text.PARAGRAPH text={title} />
-      </label>
-
-      <input
-        type="email"
-        id={name}
-        className={`w-full border border-gray-300 ${className}`}
-        name={name}
-        placeholder={`${placeholder} ${isOptional ? '[선택] ' : ''}`}
-        {...rest}
-      />
-    </div>
-  );
-};
-
-const NUMBER = (props: IProps) => {
-  const { title, name, className, placeholder, isOptional, ...rest } = props;
-
-  return (
-    <div className="w-full flex flex-col gap-2">
-      <label className="pl-2" htmlFor={name}>
-        <Text.PARAGRAPH text={title} />
-      </label>
-
-      <input
-        type="number"
-        id={name}
-        className={`w-full border border-gray-300 ${className}`}
-        name={name}
-        placeholder={`${placeholder} ${isOptional ? '[선택] ' : ''}`}
-        {...rest}
-      />
-    </div>
-  );
-};
-
-const PASSWORD = (props: IProps) => {
-  const { title, name, className, placeholder, isOptional, ...rest } = props;
-
-  return (
-    <div className="w-full flex flex-col gap-2">
-      <label className="pl-2" htmlFor={name}>
-        <Text.PARAGRAPH text={title} />
-      </label>
-
-      <input
-        type="password"
-        id={name}
-        className={`w-full border border-gray-300 ${className}`}
-        name={name}
-        placeholder={`${placeholder} ${isOptional ? '[선택] ' : ''}`}
-        {...rest}
-      />
-    </div>
-  );
-};
-
-export const Input = {
-  TEXT,
-  EMAIL,
-  NUMBER,
-  PASSWORD,
 };

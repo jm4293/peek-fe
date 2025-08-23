@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import { InfinityList } from '@/components/infinity-list';
-import { EditableText } from '@/components/text';
+import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
 import { IBoardCommentModel, useBoardCommentListMineQuery } from '@/services/board';
@@ -39,31 +39,31 @@ export default function MineBoardCommentList() {
 
     return (
       <li key={id}>
-        <Wrapper>
+        <Wrapper.SECTION>
           <div className="flex flex-col gap-1" onClick={() => clickHandler(board.id)}>
             <div className="flex items-center gap-2">
-              <EditableText.PARAGRAPH text={`[${board.category.name}]`} color="gray" />
-              <EditableText.PARAGRAPH text={board.title} />
+              <Text.PARAGRAPH text={`[${board.category.name}]`} color="gray" />
+              <Text.PARAGRAPH text={board.title} />
             </div>
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-1">
-                <EditableText.PARAGRAPH text="댓글:" />
-                <EditableText.PARAGRAPH text={content} />
+                <Text.PARAGRAPH text="댓글:" />
+                <Text.PARAGRAPH text={content} />
               </div>
 
-              <EditableText.CAPTION text={Dayjs.of(createdAt).formatYYMMDDHHmm()} color="gray" />
+              <Text.CAPTION text={Dayjs.of(createdAt).formatYYMMDDHHmm()} color="gray" />
             </div>
           </div>
-        </Wrapper>
+        </Wrapper.SECTION>
       </li>
     );
   };
 
   if (list.length === 0) {
     return (
-      <Wrapper>
-        <EditableText.HEADING text="작성한 게시글 댓글이 없습니다." />
-      </Wrapper>
+      <Wrapper.SECTION>
+        <Text.HEADING text="작성한 게시글 댓글이 없습니다." />
+      </Wrapper.SECTION>
     );
   }
 

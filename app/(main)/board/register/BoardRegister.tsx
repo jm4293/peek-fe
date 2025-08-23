@@ -3,9 +3,10 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-import { EditableButton } from '@/components/button';
-import { EditableInput } from '@/components/input';
-import { EditableText } from '@/components/text';
+import { Button } from '@/components/button';
+import { Input } from '@/components/input';
+import { Clickable } from '@/components/interactive';
+import { Text } from '@/components/text';
 import { Textarea } from '@/components/textarea';
 import { Wrapper } from '@/components/wrapper';
 
@@ -58,43 +59,56 @@ export default function BoardRegister(props: IProps) {
   };
 
   return (
-    <Wrapper>
-      <div className="flex flex-col gap-8">
-        <div className="flex flex-col gap-4">
-          <div className="flex gap-4">
-            {stockCategoryList?.map((el) => (
-              <EditableText.HEADING
-                key={el.id}
-                text={el.name}
-                color={`${category === el.id ? 'black' : 'gray'}`}
-                onClick={() => setCategory(el.id)}
-              />
-            ))}
+    <>
+      <Wrapper.SECTION text="카테고리">
+        <div className="flex items-center gap-4">
+          {stockCategoryList.reduce<React.ReactNode[]>((acc, cur) => {
+            if (category === cur.id) {
+              acc.push(
+                <Clickable key={cur.id} onClick={() => setCategory(cur.id)}>
+                  <Text.HEADING text={cur.enName} color={category === cur.id ? 'default' : 'gray'} />
+                </Clickable>,
+              );
+            } else {
+              acc.push(
+                <Clickable key={cur.id} onClick={() => setCategory(cur.id)}>
+                  <Text.PARAGRAPH text={cur.enName} color={category === cur.id ? 'default' : 'gray'} />
+                </Clickable>,
+              );
+            }
+
+            return acc;
+          }, [])}
+        </div>
+      </Wrapper.SECTION>
+
+      <Wrapper.SECTION>
+        <div className="flex flex-col gap-12">
+          <div className="flex flex-col gap-4">
+            <Input
+              title="제목"
+              name="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="제목을 입력해주세요"
+              required
+            />
+            <Textarea
+              title="내용"
+              name="content"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              placeholder="내용을 입력해주세요"
+              required
+            />
           </div>
 
-          <EditableInput.TEXT
-            title="제목"
-            name="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="제목을 입력해주세요"
-            required
-          />
-          <Textarea
-            title="내용"
-            name="content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            placeholder="내용을 입력해주세요"
-            required
-          />
+          <div className="flex justify-end gap-2">
+            <Button.OUTLINE text="취소" onClick={() => router.back()} />
+            <Button.CONTAINER text="등록하기" onClick={clickHandler} disabled={createBoardMutation.isPending} />
+          </div>
         </div>
-
-        <div className="flex justify-end gap-2">
-          <EditableButton.OUTLINE text="취소" onClick={() => router.back()} />
-          <EditableButton.CONTAINER text="등록하기" onClick={clickHandler} disabled={createBoardMutation.isPending} />
-        </div>
-      </div>
-    </Wrapper>
+      </Wrapper.SECTION>
+    </>
   );
 }

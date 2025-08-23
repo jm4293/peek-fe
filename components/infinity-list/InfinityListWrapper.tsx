@@ -16,12 +16,12 @@ export const InfinityListWrapper = (props: IProps) => {
 
   return (
     <div className="w-full flex flex-col gap-4">
-      <Wrapper>
+      <Wrapper.SECTION>
         <div className="flex justify-between items-center">
           <div>{title && title}</div>
           <Text.PARAGRAPH text={`${String(total)}개`} />
         </div>
-      </Wrapper>
+      </Wrapper.SECTION>
 
       <>{children}</>
     </div>

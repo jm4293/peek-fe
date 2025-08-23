@@ -1,6 +1,8 @@
 import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 
+import { ThemeProvider } from '@/app/providers';
+
 import { Modal, Toast } from '@/components/modal';
 
 import { NetworkError } from '@/lib/network-error';
@@ -37,26 +39,24 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="ko" suppressHydrationWarning>
       <body>
-        <NetworkError>
-          <QueryProvider>
-            {/*<MessagingConfig>*/}
-            {children}
-            {/*</MessagingConfig>*/}
-          </QueryProvider>
-        </NetworkError>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <NetworkError>
+            <QueryProvider>
+              {/*<MessagingConfig>*/}
+              {children}
+              {/*</MessagingConfig>*/}
+            </QueryProvider>
+          </NetworkError>
 
-        <Modal />
-        <Toast />
+          <Modal />
+          <Toast />
 
-        <div id="modal-root" />
-        <div id="toast-root" />
+          <div id="modal-root" />
+          <div id="toast-root" />
+        </ThemeProvider>
       </body>
 
       <GoogleAnalytics gaId={String(process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS)} />
     </html>
   );
-}
-
-{
-  /* <meta name="google-site-verification" content="uJW_8OCDzvQJqQgfYwsslu44VsruK8gm346PCn8lVKE" /> */
 }

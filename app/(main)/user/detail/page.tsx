@@ -19,31 +19,44 @@ export default async function UserDetailPage() {
   }
 
   return (
-    <div className="flex flex-col gap-4">
-      <Text.SUBTITLE text="회원 상세" />
-
+    <Wrapper.MAIN text="유저 상세">
       <div className="flex flex-col gap-2">
-        <Wrapper>
-          <Text.HEADING text={`계정 타입: ${userAccountTypeDescription[my.userAccountType]}`} />
-          <Text.HEADING text={`이메일: ${my.email}`} />
-          <Text.HEADING text={`이름: ${my.user.name}`} />
-          <Text.HEADING text={`닉네임: ${my.user.nickname}`} />
-          {/* <Text.HEADING text={`생년월일: ${my.user.birth || '-'}`} /> */}
-        </Wrapper>
+        <Wrapper.SECTION text="상세">
+          <div className="flex items-end gap-2">
+            <Text.PARAGRAPH text="가입경로:" />
+            <Text.HEADING text={`${userAccountTypeDescription[my.userAccountType]}`} />
+          </div>
+          <div className="flex items-end gap-2">
+            <Text.PARAGRAPH text="이메일:" />
+            <Text.HEADING text={`${my.email}`} />
+          </div>
+          <div className="flex items-end gap-2">
+            <Text.PARAGRAPH text="이름:" />
+            <Text.HEADING text={`${my.user.name}`} />
+          </div>
+          <div className="flex items-end gap-2">
+            <Text.PARAGRAPH text="닉네임:" />
+            <Text.HEADING text={`${my.user.nickname}`} />
+          </div>
+          {/* <div className="flex items-end gap-2">
+            <Text.PARAGRAPH text="생년월일:" />
+            <Text.HEADING text={`${my.user.birth || '-'}`} />
+          </div> */}
+        </Wrapper.SECTION>
 
-        <Wrapper>
+        <Wrapper.SECTION text="변경">
           <Link href="/user/modify" className="flex items-center justify-between">
-            <Text.PARAGRAPH text="회원 정보 변경" />
+            <Text.HEADING text="유저정보 변경" />
             <MdOutlineArrowForwardIos />
           </Link>
           <Link href="/user/modify/password" className="flex items-center justify-between">
-            <Text.PARAGRAPH text="비밀번호 변경" />
+            <Text.HEADING text="비밀번호 변경" />
             <MdOutlineArrowForwardIos />
           </Link>
-        </Wrapper>
+        </Wrapper.SECTION>
 
         <UserWithdraw />
       </div>
-    </div>
+    </Wrapper.MAIN>
   );
 }

@@ -5,8 +5,9 @@ import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState, useTransition } from 'react';
 
-import { EditableButton } from '@/components/button';
-import { EditableInput } from '@/components/input';
+import { Button } from '@/components/button';
+import { Input } from '@/components/input';
+import { Text } from '@/components/text';
 
 import { useInput } from '@/hooks/input';
 import { useToast } from '@/hooks/modal';
@@ -67,30 +68,48 @@ export default function Login() {
 
   return (
     <section className="flex flex-col gap-8">
-      <div className="w-full flex flex-col gap-4">
-        <EditableInput.EMAIL
-          title="이메일"
-          name="email"
-          value={value.email}
-          onChange={onChange}
-          placeholder="이메일"
-          isError={isError}
-          required
-        />
-        <EditableInput.PASSWORD
-          title="비밀번호"
-          name="password"
-          value={value.password}
-          onChange={onChange}
-          placeholder="비밀번호"
-          onKeyDown={keyDownHandler}
-          isError={isError}
-          required
-        />
+      <div className="flex flex-col gap-12">
+        <div className="w-full flex flex-col gap-4">
+          <Input
+            title="이메일"
+            name="email"
+            value={value.email}
+            onChange={onChange}
+            placeholder="이메일"
+            isError={isError}
+            required
+          />
+          <Input
+            type="password"
+            title="비밀번호"
+            name="password"
+            value={value.password}
+            onChange={onChange}
+            placeholder="비밀번호"
+            onKeyDown={keyDownHandler}
+            isError={isError}
+            required
+          />
+        </div>
+
+        <Button.CONTAINER text="로그인" onClick={clickHandler} disabled={isPending} />
       </div>
+
+      <div className="flex justify-center items-center gap-8">
+        <Link href="">
+          <Text.HEADING text="아이디 찾기" />
+        </Link>
+        <span>|</span>
+        <Link href="">
+          <Text.HEADING text="비밀번호 찾기" />
+        </Link>
+        <span>|</span>
+        <Link href="/auth/register">
+          <Text.HEADING text="회원가입" />
+        </Link>
+      </div>
+
       <div className="flex flex-col items-center mt-8 gap-4">
-        <EditableButton.CONTAINER text="로그인" onClick={clickHandler} disabled={isPending} className="w-[220px]" />
-        <EditableButton.OUTLINE text="회원가입" onClick={() => router.push('/auth/register')} className="w-[220px]" />
         <Link
           href={`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_APP_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL}&response_type=code`}>
           <Image src="/kakao_login.png" alt="Kakao Login" width={220} height={40} />

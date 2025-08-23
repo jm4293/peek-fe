@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { BiComment, BiHeart } from 'react-icons/bi';
 
 import { InfinityList } from '@/components/infinity-list';
-import { EditableText } from '@/components/text';
+import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
 import { IBoardModel, useMineBoardList } from '@/services/board';
@@ -34,12 +34,12 @@ export default function MineBoardList() {
 
     return (
       <li key={id}>
-        <Wrapper>
+        <Wrapper.SECTION>
           <div className="flex flex-col gap-1" onClick={() => clickHandler(id)}>
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-2">
-                <EditableText.PARAGRAPH text={`[${category.name}]`} color="gray" />
-                <EditableText.HEADING text={title} />
+                <Text.PARAGRAPH text={`[${category.name}]`} color="gray" />
+                <Text.HEADING text={title} />
               </div>
             </div>
 
@@ -47,27 +47,27 @@ export default function MineBoardList() {
               <div className="flex gap-2">
                 <div className="flex items-center gap-1">
                   <BiHeart color="#666666" />
-                  <EditableText.PARAGRAPH text={String(likeCount)} color="gray" />
+                  <Text.PARAGRAPH text={String(likeCount)} color="gray" />
                 </div>
                 <div className="flex items-center gap-1">
                   <BiComment color="#666666" />
-                  <EditableText.PARAGRAPH text={String(commentCount)} color="gray" />
+                  <Text.PARAGRAPH text={String(commentCount)} color="gray" />
                 </div>
               </div>
 
-              <EditableText.PARAGRAPH text={Dayjs.of(createdAt).formatYYMMDDHHmm()} color="gray" />
+              <Text.PARAGRAPH text={Dayjs.of(createdAt).formatYYMMDDHHmm()} color="gray" />
             </div>
           </div>
-        </Wrapper>
+        </Wrapper.SECTION>
       </li>
     );
   };
 
   if (list.length === 0) {
     return (
-      <Wrapper>
-        <EditableText.HEADING text="작성한 게시글이 없습니다." />
-      </Wrapper>
+      <Wrapper.SECTION>
+        <Text.HEADING text="작성한 게시글이 없습니다." />
+      </Wrapper.SECTION>
     );
   }
 

@@ -3,7 +3,7 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
-import { EditableText } from '@/components/text';
+import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
 import { useToast } from '@/hooks/modal';
@@ -37,8 +37,10 @@ export default function UserLogout() {
   };
 
   return (
-    <Wrapper>
-      <EditableText.HEADING text="로그아웃" color="red" onClick={logoutHandler} />
-    </Wrapper>
+    <Wrapper.SECTION>
+      <div className="cursor-pointer" onClick={logoutHandler}>
+        <Text.HEADING text="로그아웃" color="red" />
+      </div>
+    </Wrapper.SECTION>
   );
 }
