@@ -113,8 +113,8 @@ export default function Login() {
       </div>
 
       <div className="flex justify-center items-center mt-8 gap-8">
-        <ButtonNaver />
         <ButtonKakao />
+        <ButtonNaver />
         <ButtonGoogle />
       </div>
     </section>

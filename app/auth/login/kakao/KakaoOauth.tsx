@@ -55,8 +55,8 @@ export default function KakaoOauth() {
       <div className="text-center flex flex-col gap-4">
         <Text.HEADING text="카카오 로그인중..." />
 
-        <LineSkeleton height={2} />
-        <LineSkeleton height={2} />
+        <LineSkeleton h={2} />
+        <LineSkeleton h={2} />
       </div>
     </>
   );

@@ -43,7 +43,7 @@ export const InfinityList = (props: IProps) => {
     <ol className="w-full flex flex-col gap-2">
       {children}
       <div ref={loadMoreRef} className="flex justify-center items-center">
-        {isFetchingNextPage && <LineSkeleton height={2} />}
+        {isFetchingNextPage && <LineSkeleton h={2} />}
       </div>
     </ol>
   );

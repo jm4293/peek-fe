@@ -62,11 +62,11 @@ export default function BoardList() {
             <div className="flex justify-between items-center">
               <div className="flex gap-2">
                 <div className="flex items-center gap-1">
-                  <BiHeart color="#666666" />
+                  <BiHeart color="#8b8b8e" />
                   <Text.PARAGRAPH text={String(likeCount)} color="gray" />
                 </div>
                 <div className="flex items-center gap-1">
-                  <BiComment color="#666666" />
+                  <BiComment color="#8b8b8e" />
                   <Text.PARAGRAPH text={String(commentCount)} color="gray" />
                 </div>
               </div>

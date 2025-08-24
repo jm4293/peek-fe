@@ -171,7 +171,7 @@ export default function BoardComment(props: IProps) {
 
           {hasNextPage && (
             <button onClick={() => fetchNextPage()} disabled={isFetchingNextPage}>
-              {isFetchingNextPage ? <LineSkeleton text="로딩" /> : '더보기'}
+              {isFetchingNextPage ? <LineSkeleton h={2} /> : '더보기'}
             </button>
           )}
         </div>

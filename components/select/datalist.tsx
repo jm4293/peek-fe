@@ -11,7 +11,7 @@ export const Datalist = (props: IProps) => {
   const { name, optionList, value, onChange } = props;
 
   if (!optionList) {
-    return <LineSkeleton height={2} />;
+    return <LineSkeleton h={2} />;
   }
 
   return (
