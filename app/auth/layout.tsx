@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import { BackButton, ThemeSwitcher } from '@/components/button';
 import { Text } from '@/components/text';
 
@@ -17,7 +19,9 @@ export default function Layout(props: IProps) {
           </div>
 
           <div className="text-center">
-            <Text.TITLE text="PEEK" />
+            <Link href="/home">
+              <Text.TITLE text="PEEK" />
+            </Link>
           </div>
 
           <div className="flex justify-end">

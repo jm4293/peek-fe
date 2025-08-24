@@ -49,8 +49,6 @@ html.dark {
 }
 
 header {
-  /* background-color: white; */
-  /* padding: 0 1rem; */
   position: fixed;
   width: 100vw;
   min-width: 256px;

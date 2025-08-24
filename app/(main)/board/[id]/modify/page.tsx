@@ -23,7 +23,7 @@ export default async function BoardModifyPage(props: IProps) {
   }
 
   return (
-    <Wrapper.MAIN text="게시글 수정">
+    <Wrapper.MAIN text="Board">
       <BoardModify board={data} id={id} />
     </Wrapper.MAIN>
   );

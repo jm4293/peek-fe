@@ -24,7 +24,11 @@ const menuItems = [
 ];
 
 const Logo = () => {
-  return <Text.TITLE text="PEEK" />;
+  return (
+    <Link href="/home">
+      <Text.TITLE text="PEEK" />
+    </Link>
+  );
 };
 
 export function Header(props: IProps) {

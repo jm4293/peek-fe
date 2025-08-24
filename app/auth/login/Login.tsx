@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState, useTransition } from 'react';
@@ -13,6 +12,10 @@ import { useInput } from '@/hooks/input';
 import { useToast } from '@/hooks/modal';
 
 import { ILoginEmailDto, signinEmailAction } from '@/services/auth';
+
+import { ButtonGoogle } from './ButtonGoogle';
+import { ButtonKakao } from './ButtonKakao';
+import { ButtonNaver } from './ButtonNaver';
 
 const initialFormData: ILoginEmailDto = {
   email: '',
@@ -109,19 +112,10 @@ export default function Login() {
         </Link>
       </div>
 
-      <div className="flex flex-col items-center mt-8 gap-4">
-        <Link
-          href={`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_APP_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URL}&response_type=code`}>
-          <Image src="/kakao_login.png" alt="Kakao Login" width={220} height={40} />
-        </Link>
-        <Link
-          href={`https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${process.env.NEXT_PUBLIC_NAVER_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_NAVER_REDIRECT_URL}&state=peek`}>
-          <Image src="/naver_login.png" alt="Naver Login" width={220} height={40} />
-        </Link>
-        <Link
-          href={`https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_REDIRECT_URL}&response_type=token&scope=openid email profile&include_granted_scopes=true`}>
-          <Image src="/google_login.png" alt="Google Login" width={220} height={40} />
-        </Link>
+      <div className="flex justify-center items-center mt-8 gap-8">
+        <ButtonNaver />
+        <ButtonKakao />
+        <ButtonGoogle />
       </div>
     </section>
   );

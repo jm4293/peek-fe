@@ -17,7 +17,7 @@ export default async function BoardRegisterPage() {
   }
 
   return (
-    <Wrapper.MAIN text="게시글 등록">
+    <Wrapper.MAIN text="Board">
       <BoardRegister stockCategoryList={data} />
     </Wrapper.MAIN>
   );

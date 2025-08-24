@@ -17,7 +17,7 @@ export default async function BoardPage() {
 
   if (!data) {
     return (
-      <Wrapper.MAIN text="게시판">
+      <Wrapper.MAIN text="Board">
         <Wrapper.SECTION>
           <Text.HEADING text="게시판 카테고리 목록을 불러오는데 실패했습니다." />
         </Wrapper.SECTION>
@@ -26,7 +26,7 @@ export default async function BoardPage() {
   }
 
   return (
-    <Wrapper.MAIN text="게시판">
+    <Wrapper.MAIN text="Board">
       <div className="flex flex-col gap-2">
         <BoardCategory stockCategoryList={data} />
         <BoardList />
