@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
@@ -31,6 +33,11 @@ export default async function BoardDetailPage(props: IProps) {
       <div className="flex flex-col gap-2">
         <BoardDetail board={data} my={my} />
         <BoardComment id={id} my={my} />
+        <Link
+          href="/board"
+          className={`py-4 flex justify-center rounded-lg border-none bg-[#5A4FCF] hover:bg-[#786DE8] disabled:bg-[#A7A3D3]`}>
+          <h3 className={`text-white whitespace-nowrap text-base font-medium`}>목록으로</h3>
+        </Link>
       </div>
     </Wrapper.MAIN>
   );

@@ -22,19 +22,19 @@ export default async function UserDetailPage() {
     <Wrapper.MAIN text="유저 상세">
       <div className="flex flex-col gap-2">
         <Wrapper.SECTION text="상세">
-          <div className="flex items-end gap-2">
+          <div className="flex items-center gap-2">
             <Text.PARAGRAPH text="가입경로:" />
             <Text.HEADING text={`${userAccountTypeDescription[my.userAccountType]}`} />
           </div>
-          <div className="flex items-end gap-2">
+          <div className="flex items-center gap-2">
             <Text.PARAGRAPH text="이메일:" />
             <Text.HEADING text={`${my.email}`} />
           </div>
-          <div className="flex items-end gap-2">
+          <div className="flex items-center gap-2">
             <Text.PARAGRAPH text="이름:" />
             <Text.HEADING text={`${my.user.name}`} />
           </div>
-          <div className="flex items-end gap-2">
+          <div className="flex items-center gap-2">
             <Text.PARAGRAPH text="닉네임:" />
             <Text.HEADING text={`${my.user.nickname}`} />
           </div>
