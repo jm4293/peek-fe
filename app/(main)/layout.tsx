@@ -13,7 +13,7 @@ export default async function Layout(props: IProps) {
 
   return (
     <div className="layout">
-      <Header my={my} />
+      {/* <Header my={my} /> */}
       <main>{children}</main>
     </div>
   );
