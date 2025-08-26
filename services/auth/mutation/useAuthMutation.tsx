@@ -36,10 +36,10 @@ export const useAuthMutation = () => {
       const { userAccountType } = variables;
 
       openToast({ type: 'success', message: `${userAccountTypeDescription[userAccountType]} 로그인에 성공했습니다.` });
-      router.push('/home');
+      router.replace('/home');
     },
-    onError: () => {
-      router.push('/auth/login');
+    onError: (err) => {
+      router.replace('/auth/login');
     },
   });
 
@@ -66,7 +66,7 @@ export const useAuthMutation = () => {
 
   const signoutMutation = useMutation({
     mutationFn: () => AuthApi.logout(),
-    onSuccess: async () => {
+    onSuccess: () => {
       // const firebase_messaging = getMessaging();
       // await deleteToken(firebase_messaging);
 

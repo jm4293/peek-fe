@@ -16,26 +16,24 @@ export default function GoogleOauth() {
   const { oauthSignInMutation } = useAuthMutation();
 
   useEffect(() => {
-    (() => {
-      const hash = window.location.hash;
+    const hash = window.location.hash;
 
-      const params = new URLSearchParams(hash.substring(1));
+    const params = new URLSearchParams(hash.substring(1));
 
-      const token = params.get('access_token');
-      const tokenType = params.get('token_type');
-      const expire = params.get('expires_in');
+    const token = params.get('access_token');
+    const tokenType = params.get('token_type');
+    const expire = params.get('expires_in');
 
-      if (token) {
-        oauthSignInMutation.mutate({
-          token,
-          userAccountType: UserAccountTypeEnum.GOOGLE,
-          tokenType,
-          expire: expire ? Number(expire) : null,
-        });
-      } else {
-        router.push('/auth/login');
-      }
-    })();
+    if (token) {
+      oauthSignInMutation.mutate({
+        token,
+        userAccountType: UserAccountTypeEnum.GOOGLE,
+        tokenType,
+        expire: expire ? Number(expire) : null,
+      });
+    } else {
+      router.replace('/auth/login');
+    }
   }, []);
 
   return (

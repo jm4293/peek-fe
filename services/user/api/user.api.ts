@@ -1,9 +1,14 @@
 import AXIOS from '@/lib/axios';
 
 import {
+  ICheckEmailCodeDto,
+  ICheckEmailCodeRes,
+  ICheckEmailDto,
+  ICheckEmailRes,
   IMyInfoRes,
   IReadNotificationDto,
   IRegisterPushTokenDto,
+  IResetPasswordDto,
   IUpdateUserDto,
   IUpdateUserPasswordDto,
   IUpdateUserThumbnailDto,
@@ -23,6 +28,24 @@ class UserApi extends AXIOS {
 
   async updateThumbnail(dto: IUpdateUserThumbnailDto) {
     return await this.patch<null, IUpdateUserThumbnailDto>({ url: `${this._baseURL}/thumbnail`, data: dto });
+  }
+
+  async checkEmail(dto: ICheckEmailDto) {
+    return await this.post<ICheckEmailRes, ICheckEmailDto>({
+      url: `${this._baseURL}/check-email`,
+      data: dto,
+    });
+  }
+
+  async checkEmailCode(dto: ICheckEmailCodeDto) {
+    return await this.post<ICheckEmailCodeRes, ICheckEmailCodeDto>({
+      url: `${this._baseURL}/check-email-code`,
+      data: dto,
+    });
+  }
+
+  async resetPassword(dto: IResetPasswordDto) {
+    return await this.patch<null, IResetPasswordDto>({ url: `${this._baseURL}/password/reset`, data: dto });
   }
 
   async updatePassword(dto: IUpdateUserPasswordDto) {

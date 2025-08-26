@@ -3,16 +3,18 @@
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState, useTransition } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Button } from '@/components/button';
-import { CheckBox, Input } from '@/components/input';
+import { Input } from '@/components/input';
 import { Text } from '@/components/text';
 
 import { useInput } from '@/hooks/input';
 import { useModal, useToast } from '@/hooks/modal';
 
-import { ISignUpDto, signupEmailAction, useAuthMutation } from '@/services/auth';
+import { useUserMutation } from '@/services/user';
+
+import { useResetPasswordProvider } from './EmailProvider';
 
 dayjs.extend(duration);
 
@@ -21,30 +23,25 @@ const validateEmail = (email: string): boolean => {
   return emailRegex.test(email);
 };
 
-const initialFormData: ISignUpDto = {
-  nickname: '',
-  name: '',
-  policy: false,
-  birthdate: '',
+const initialFormData = {
   email: '',
-  password: '',
 };
 
-export default function Register() {
+export default function VerifyEmail() {
   const router = useRouter();
 
-  const [isPending, startTransition] = useTransition();
+  const { setEmail, setRandomCode } = useResetPasswordProvider();
+
   const { openModal, closeModal } = useModal();
   const { openToast } = useToast();
 
   const [checkEmail, setCheckEmail] = useState<number>(1);
-  const [passwordConfirm, setPasswordConfirm] = useState('');
   const [code, setCode] = useState('');
   const [count, setCount] = useState(300);
 
   const [value, onChange] = useInput({ ...initialFormData });
 
-  const { checkEmailMutation, checkEmailCodeMutation } = useAuthMutation();
+  const { checkEmailMutation, checkEmailCodeMutation } = useUserMutation();
 
   const handleCheckEmail = async () => {
     if (!value.email || !value.email.trim()) {
@@ -85,62 +82,17 @@ export default function Register() {
       { email: value.email, code },
       {
         onSuccess: (res) => {
-          const { success, message } = res.data;
+          const { success, message, code } = res.data;
 
-          if (!success) {
-            openToast({ message, type: 'error' });
-            return;
-          }
-
-          openToast({ message, type: 'success' });
+          setRandomCode(code);
           setCheckEmail(3);
+        },
+        onError: (err: any) => {
+          const { message } = err.response.data;
+          openToast({ message, type: 'error' });
         },
       },
     );
-  };
-
-  const handleSubmit = async () => {
-    if (checkEmail !== 3) {
-      openModal({ content: '이메일 인증을 완료해 주세요.', onConfirm: closeModal });
-      return;
-    }
-
-    if (!value.password || !value.password.trim()) {
-      openModal({ content: '비밀번호를 입력해주세요.', onConfirm: closeModal });
-      return;
-    }
-
-    if (value.password !== passwordConfirm) {
-      openModal({ content: '비밀번호가 일치하지 않습니다.', onConfirm: closeModal });
-      return;
-    }
-
-    if (!value.nickname || !value.nickname.trim()) {
-      openModal({ content: '닉네임을 입력해주세요.', onConfirm: closeModal });
-      return;
-    }
-
-    if (!value.name || !value.name.trim()) {
-      openModal({ content: '이름을 입력해주세요.', onConfirm: closeModal });
-      return;
-    }
-
-    if (!value.policy) {
-      openModal({ content: '정책에 동의해주세요.', onConfirm: closeModal });
-      return;
-    }
-
-    startTransition(async () => {
-      const { success } = await signupEmailAction(value);
-
-      if (!success) {
-        openToast({ type: 'error', message: '회원가입에 실패했습니다. 다시 시도해주세요.' });
-        return;
-      }
-
-      openToast({ type: 'success', message: '회원가입이 완료되었습니다.' });
-      router.push(`/auth/login?email=${value.email}`);
-    });
   };
 
   useEffect(() => {
@@ -211,49 +163,6 @@ export default function Register() {
             />
           </div>
         )}
-
-        <Input
-          type="password"
-          title="비밀번호"
-          name="password"
-          value={value.password}
-          onChange={onChange}
-          placeholder="비밀번호"
-          required
-        />
-        <Input
-          type="password"
-          title="비밀번호 확인"
-          name="passwordConfirm"
-          value={passwordConfirm}
-          onChange={(e) => setPasswordConfirm(e.target.value)}
-          placeholder="비밀번호 확인"
-          required
-        />
-      </div>
-
-      <div className="flex flex-col gap-4">
-        <Input
-          title="닉네임"
-          name="nickname"
-          value={value.nickname}
-          onChange={onChange}
-          placeholder="닉네임"
-          required
-        />
-        <Input title="이름" name="name" value={value.name} onChange={onChange} placeholder="이름" required />
-        {/* <Input
-          title="생년월일 8자리"
-          name="birthdate"
-          value={value.birthdate}
-          onChange={onChange}
-          placeholder="생년월일 8자리"
-          optional
-        /> */}
-
-        <div className="flex justify-end">
-          <CheckBox title="정책에 동의합니다" name="policy" checked={value.policy} onChange={onChange} />
-        </div>
       </div>
 
       <div className="w-full flex gap-2">
@@ -263,7 +172,15 @@ export default function Register() {
             router.push('/auth/login');
           }}
         />
-        <Button.CONTAINER text="회원가입" onClick={handleSubmit} disabled={isPending} />
+        <Button.CONTAINER
+          type="submit"
+          text="다음"
+          onClick={() => {
+            setEmail(value.email);
+            router.push('/auth/find/password/reset', { scroll: true });
+          }}
+          disabled={checkEmail !== 3}
+        />
       </div>
     </section>
   );

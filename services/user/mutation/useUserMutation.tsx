@@ -6,8 +6,10 @@ import { useRouter } from 'next/navigation';
 
 import { useModal, useToast } from '@/hooks/modal';
 
+import { ICheckEmailCodeDto, ICheckEmailDto } from '@/services/auth';
 import UserApi, {
   IReadNotificationDto,
+  IResetPasswordDto,
   IUpdateUserDto,
   IUpdateUserPasswordDto,
   IUpdateUserThumbnailDto,
@@ -39,20 +41,35 @@ export const useUserMutation = () => {
     },
   });
 
+  const checkEmailMutation = useMutation({
+    mutationFn: (dto: ICheckEmailDto) => UserApi.checkEmail(dto),
+  });
+
+  const checkEmailCodeMutation = useMutation({
+    mutationFn: (dto: ICheckEmailCodeDto) => UserApi.checkEmailCode(dto),
+  });
+
+  const resetPasswordMutation = useMutation({
+    mutationFn: (dto: IResetPasswordDto) => UserApi.resetPassword(dto),
+    onSuccess: (_, variables) => {
+      const { email } = variables;
+
+      openToast({ message: '비밀번호 재설정이 완료되었습니다.', type: 'success' });
+      router.replace(`/auth/login?email=${email}`);
+    },
+  });
+
   const updatePasswordMutation = useMutation({
     mutationFn: (dto: IUpdateUserPasswordDto) => UserApi.updatePassword(dto),
     onSuccess: async () => {
       await queryClient.refetchQueries({ queryKey: QueryKeys.user.myInfo() });
-      openToast({ message: '비밀번호 변경 완료', type: 'success' });
+      openToast({ message: '비밀번호가 변경되었습니다.', type: 'success' });
       router.push('/user');
     },
     onError: (err: any) => {
       const { message } = err.response.data;
 
-      openModal({
-        content: message,
-        onConfirm: closeModal,
-      });
+      openModal({ content: message, onConfirm: closeModal });
     },
   });
 
@@ -92,6 +109,9 @@ export const useUserMutation = () => {
   return {
     updateUserMutation,
     updateThumbnailMutation,
+    checkEmailMutation,
+    checkEmailCodeMutation,
+    resetPasswordMutation,
     updatePasswordMutation,
     withdrawMutation,
     readNotificationMutation,

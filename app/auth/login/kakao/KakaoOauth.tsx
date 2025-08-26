@@ -16,22 +16,20 @@ export default function KakaoOauth() {
   const { oauthSignInMutation } = useAuthMutation();
 
   useEffect(() => {
-    (() => {
-      const queryParams = new URLSearchParams(window.location.search);
+    const queryParams = new URLSearchParams(window.location.search);
 
-      const token = queryParams.get('code');
+    const token = queryParams.get('code');
 
-      if (token) {
-        oauthSignInMutation.mutate({
-          token,
-          userAccountType: UserAccountTypeEnum.GOOGLE,
-          tokenType: null,
-          expire: null,
-        });
-      } else {
-        router.push('/auth/login');
-      }
-    })();
+    if (token) {
+      oauthSignInMutation.mutate({
+        token,
+        userAccountType: UserAccountTypeEnum.KAKAO,
+        tokenType: null,
+        expire: null,
+      });
+    } else {
+      router.replace('/auth/login');
+    }
   }, []);
 
   return (

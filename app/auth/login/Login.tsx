@@ -95,7 +95,7 @@ export default function Login() {
           <Text.HEADING text="아이디 찾기" />
         </Link>
         <span>|</span>
-        <Link href="">
+        <Link href="/auth/find/password">
           <Text.HEADING text="비밀번호 찾기" />
         </Link>
         <span>|</span>
