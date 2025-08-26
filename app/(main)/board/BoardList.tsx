@@ -32,7 +32,7 @@ export default function BoardList() {
   } = useBoardList({ category: category ? Number(category) : undefined });
 
   const clickHandler = (id: number) => {
-    router.push(`/board/${id}`);
+    router.push(`/board/${id}`, { scroll: true });
   };
 
   useEffect(() => {

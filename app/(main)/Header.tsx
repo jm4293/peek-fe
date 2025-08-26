@@ -25,7 +25,7 @@ const menuItems = [
 
 const Logo = () => {
   return (
-    <Link href="/home">
+    <Link href="/home" scroll={true}>
       <Text.TITLE text="PEEK" />
     </Link>
   );
@@ -110,12 +110,12 @@ export function Header(props: IProps) {
           <div className="relative h-full flex flex-col">
             <div className="flex justify-between items-center p-4 border-b">
               {!!my ? (
-                <Link href="/user" onClick={closeMenu} className="flex items-center gap-2">
+                <Link href="/user" onClick={closeMenu} className="flex items-center gap-2" scroll={true}>
                   <Thumbnail thumbnail={my.user.thumbnail} w={24} />
                   <Text.HEADING text={my.user.nickname} />
                 </Link>
               ) : (
-                <Link href="/auth/login" onClick={closeMenu}>
+                <Link href="/auth/login" onClick={closeMenu} scroll={true}>
                   <Text.HEADING text="로그인" />
                 </Link>
               )}
@@ -124,7 +124,7 @@ export function Header(props: IProps) {
 
             <div className="flex flex-col p-4 gap-4">
               {menuItems.map((item) => (
-                <Link key={item.name} href={item.path} onClick={closeMenu}>
+                <Link key={item.name} href={item.path} onClick={closeMenu} scroll={true}>
                   <Text.HEADING text={item.name} />
                 </Link>
               ))}
@@ -152,7 +152,7 @@ export function Header(props: IProps) {
 
           <div className="flex items-center gap-4">
             {menuItems.map((item) => (
-              <Link key={item.name} href={item.path}>
+              <Link key={item.name} href={item.path} scroll={true}>
                 <Text.HEADING text={item.name} />
               </Link>
             ))}
@@ -164,12 +164,12 @@ export function Header(props: IProps) {
 
           <div className="flex items-center gap-2">
             {!!my ? (
-              <Link href="/user" className="flex items-center gap-2">
+              <Link href="/user" className="flex items-center gap-2" scroll={true}>
                 <Thumbnail thumbnail={my.user.thumbnail} />
                 <Text.HEADING text={my.user.nickname} />
               </Link>
             ) : (
-              <Link href="/auth/login">
+              <Link href="/auth/login" scroll={true}>
                 <Text.HEADING text="로그인" />
               </Link>
             )}
