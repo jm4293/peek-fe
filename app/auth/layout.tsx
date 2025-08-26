@@ -13,7 +13,7 @@ export default function Layout(props: IProps) {
   return (
     <div className="h-screen flex justify-center bg-theme-bg-section">
       <div className="w-[720px] overflow-y-auto bg-theme-bg-main">
-        <div className="w-full h-16 grid grid-cols-3 items-center px-4 bg-theme-bg-header">
+        <header className="grid grid-cols-3 items-center bg-theme-bg-header">
           <div className="flex justify-start">
             <BackButton />
           </div>
@@ -27,7 +27,7 @@ export default function Layout(props: IProps) {
           <div className="flex justify-end">
             <ThemeSwitcher />
           </div>
-        </div>
+        </header>
 
         <div className="px-4 py-8">{children}</div>
       </div>

@@ -93,7 +93,7 @@ export function Header(props: IProps) {
   if (isMobile) {
     return (
       <>
-        <header className="justify-between px-4 bg-theme-bg-header">
+        <header className="justify-between bg-theme-bg-header">
           <BackButton />
 
           <Logo />
