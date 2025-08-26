@@ -1,6 +1,6 @@
 import AXIOS from '@/lib/axios';
 
-import { IStockListDto, IStockListRes, IStockTokenRes } from '@/services/stock';
+import { ICodeKoreanListRes, IGetCodeKoreanListDto, IStockTokenRes } from '@/services/stock';
 
 class StockApi extends AXIOS {
   private readonly _baseURL = '/stock';
@@ -9,8 +9,11 @@ class StockApi extends AXIOS {
     return await this.get<IStockTokenRes, null>({ url: `${this._baseURL}/token` });
   }
 
-  async getStockList(dto: IStockListDto) {
-    return await this.get<IStockListRes, IStockListDto>({ url: `${this._baseURL}`, params: dto });
+  async getCodeKoreanList(dto: IGetCodeKoreanListDto) {
+    return await this.get<ICodeKoreanListRes, IGetCodeKoreanListDto>({
+      url: `${this._baseURL}/code/korean`,
+      params: dto,
+    });
   }
 
   async getStockDetail(code: string) {

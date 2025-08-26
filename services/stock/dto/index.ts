@@ -1,1 +1,1 @@
-export * from './stock-list.dto';
+export * from './get-code-korean-list.dto';

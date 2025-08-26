@@ -14,5 +14,6 @@ export class QueryKeys {
 
   static stock = {
     token: () => ['stock', 'token'],
+    koreanList: () => ['stock', 'korean-list'],
   };
 }
