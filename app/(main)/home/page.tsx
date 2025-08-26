@@ -20,24 +20,24 @@ export default async function HomePage() {
     );
   }
 
-  return (
-    <Wrapper.MAIN text="메인">
-      <div className="flex gap-2">
-        <div className="w-full flex flex-col gap-2">
-          <BestNews token={data!} />
-          {/* <BestWeekend /> */}
-        </div>
-
-        <div className="w-full">
-          <Chart />
-        </div>
-      </div>
-    </Wrapper.MAIN>
-  );
-
   // return (
   //   <Wrapper.MAIN text="메인">
-  //     <BestWeekend />
+  //     <div className="flex gap-2">
+  //       <div className="w-full flex flex-col gap-2">
+  //         <BestNews token={data!} />
+  //         {/* <BestWeekend /> */}
+  //       </div>
+
+  //       <div className="w-full">
+  //         <Chart />
+  //       </div>
+  //     </div>
   //   </Wrapper.MAIN>
   // );
+
+  return (
+    <Wrapper.MAIN text="메인">
+      <BestWeekend />
+    </Wrapper.MAIN>
+  );
 }

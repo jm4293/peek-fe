@@ -1,7 +1,7 @@
-import { IStockCategoryModel } from '../model';
+import { IStockCompanyModel } from '../model';
 
 export interface ICodeKoreanListRes {
-  codeList: IStockCategoryModel[];
+  codeList: IStockCompanyModel[];
   total: number;
   // nextPage: number | null;
 }

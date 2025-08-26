@@ -1,1 +1,2 @@
-export * from './board-category.model';
+export * from './stock-category.model';
+export * from './stock-company.model';

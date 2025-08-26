@@ -5,15 +5,13 @@ import { useState } from 'react';
 
 import { useDebounce } from '@/hooks/useDebounce';
 
-import { useStockListQuery } from '@/services/stock';
-
 export default function StockSearch() {
   const router = useRouter();
 
   const [searchText, setSearchText] = useState('');
   const { debouncedText, isPending } = useDebounce({ text: searchText, delay: 400 });
 
-  const { data, isSuccess, isLoading } = useStockListQuery({ text: debouncedText });
+  // const { data, isSuccess, isLoading } = useStockListQuery({ text: debouncedText });
 
   const clickHandler = (params: { event: React.MouseEvent<HTMLDivElement, MouseEvent>; index: number }) => {
     const { event, index } = params;
@@ -28,10 +26,10 @@ export default function StockSearch() {
   };
 
   const renderRow = (index: number) => {
-    if (!isSuccess) {
-      return null;
-    }
-
+    // if (!isSuccess) {
+    //   return null;
+    // }
+    //
     // const { stocks } = data;
     //
     // return (
