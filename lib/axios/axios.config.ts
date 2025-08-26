@@ -50,38 +50,48 @@ export default class AXIOS {
         return response;
       },
       async (error) => {
-        if (error.response?.status === 302) {
+        if (error.status === 302) {
           // const { redirect } = error.response.data;
           // window.location.href = redirect;
         }
 
-        if (error.response?.status === 400) {
+        if (error.status === 400) {
           // const { message } = error.response.data;
           // if (message) {
           //   alert(message);
           // }
         }
 
-        if (error.response?.status === 401) {
+        if (error.status === 401) {
           const refreshInstance = axios.create({
             baseURL: `${process.env.NEXT_PUBLIC_API_URL}`,
             headers: { 'Content-Type': 'application/json' },
             withCredentials: true,
           });
 
-          await refreshInstance.post('/auth/refresh', {});
+          try {
+            await refreshInstance.post('/auth/refresh', {});
 
-          const originalRequest = error.config;
+            const originalRequest = error.config;
 
-          return this._axiosInstance(originalRequest);
+            return this._axiosInstance(originalRequest);
+          } catch (err: any) {
+            if (err.status === 403) {
+              LocalStorage.clear();
+              SessionStorage.clear();
+
+              alert('로그인 세션이 만료되었습니다. 다시 로그인 해주세요.');
+              window.location.href = '/home';
+            }
+          }
         }
 
-        if (error.response?.status === 403) {
+        if (error.status === 403) {
           LocalStorage.clear();
           SessionStorage.clear();
 
-          alert('로그인이 필요합니다.');
-          window.location.href = '/login';
+          alert('로그인 세션이 만료되었습니다. 다시 로그인 해주세요.');
+          window.location.href = '/home';
         }
 
         return Promise.reject(error);
