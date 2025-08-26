@@ -21,7 +21,7 @@ export default function UserWithdraw() {
   return (
     <Wrapper.SECTION>
       <div className="cursor-pointer" onClick={withdrawHandler}>
-        <Text.HEADING text={`${withdrawMutation.isPending ? '탈퇴중...' : '탈퇴하기'}`} color="red" />
+        <Text.HEADING text="탈퇴하기" color="red" />
       </div>
     </Wrapper.SECTION>
   );

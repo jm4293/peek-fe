@@ -13,7 +13,7 @@ export default function Layout(props: IProps) {
   return (
     <div className="h-screen flex justify-center bg-theme-bg-section">
       <div className="w-[720px] overflow-y-auto bg-theme-bg-main">
-        <header className="grid grid-cols-3 items-center bg-theme-bg-header">
+        <header className="w-full static grid grid-cols-3 items-center bg-theme-bg-header">
           <div className="flex justify-start">
             <BackButton />
           </div>

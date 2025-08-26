@@ -10,14 +10,14 @@ export default async function UserPage() {
 
   if (!my) {
     return (
-      <Wrapper.MAIN text="MyPage">
+      <Wrapper.MAIN text="마이페이지">
         <NotAuth />
       </Wrapper.MAIN>
     );
   }
 
   return (
-    <Wrapper.MAIN text="MyPage">
+    <Wrapper.MAIN text="마이페이지">
       <User my={my} />
     </Wrapper.MAIN>
   );

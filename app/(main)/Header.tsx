@@ -17,10 +17,10 @@ interface IProps {
 }
 
 const menuItems = [
-  { name: 'Home', path: '/home' },
-  { name: 'Stock', path: '/stock' },
-  { name: 'Board', path: '/board' },
-  { name: 'MyPage', path: '/user' },
+  { name: '메인', path: '/home' },
+  { name: '주식', path: '/stock' },
+  { name: '게시판', path: '/board' },
+  { name: '마이페이지', path: '/user' },
 ];
 
 const Logo = () => {

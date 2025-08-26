@@ -11,7 +11,7 @@ const MAIN = (props: IProps) => {
 
   return (
     <div className="flex flex-col gap-4">
-      <Text.TITLE text={text} className="pl-4" />
+      <Text.TITLE text={text} />
       {children}
     </div>
   );

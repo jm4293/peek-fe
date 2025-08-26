@@ -87,11 +87,11 @@ export default function BoardComment(props: IProps) {
 
           {isSuccess ? (
             data.total > 0 ? (
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col">
                 {data.boardComments.map((boardComment) => (
-                  <div key={boardComment.id}>
+                  <div key={boardComment.id} className="border-b py-2">
                     <div
-                      className="flex justify-between items-center cursor-pointer"
+                      className="flex justify-between items-center cursor-pointer "
                       onClick={() => {
                         setReplyComment('');
                         setIsReply(isReply === boardComment.id ? -1 : boardComment.id);

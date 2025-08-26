@@ -9,6 +9,10 @@ export default function UserLogout() {
   const { signoutMutation } = useAuthMutation();
 
   const logoutHandler = async () => {
+    if (signoutMutation.isPending) {
+      return;
+    }
+
     if (confirm('로그아웃 하시겠습니까?')) {
       signoutMutation.mutate();
     }
