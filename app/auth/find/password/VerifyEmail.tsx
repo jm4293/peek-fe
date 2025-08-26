@@ -68,6 +68,10 @@ export default function VerifyEmail() {
           openToast({ message: '이메일 인증코드를 전송했습니다.', type: 'success' });
           setCheckEmail(2);
         },
+        onError: (err: any) => {
+          const { message } = err.response.data;
+          openToast({ message, type: 'error' });
+        },
       },
     );
   };
