@@ -1,109 +1,114 @@
 'use client';
 
-import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { Socket, io } from 'socket.io-client';
 
-import { Wrapper } from '@/components/wrapper';
-
-interface IProps {
-  token: string;
+interface StockData {
+  stock_code: string;
+  time: string;
+  price: string;
+  prev_sign: string;
+  prev: string;
+  volume: string;
 }
 
-export default function BestNews(props: IProps) {
-  const { token } = props;
-
-  const [priceData, setPriceData] = useState<Record<string, any> | null>(null);
+export default function StockRealtime() {
+  const [socket, setSocket] = useState<Socket | null>(null);
   const [connectionStatus, setConnectionStatus] = useState<'connecting' | 'connected' | 'error' | 'closed'>(
     'connecting',
   );
-  const [socket, setSocket] = useState<Socket | null>(null);
+  const [subscribedStock, setSubscribedStock] = useState<string | null>(null);
+  const [stockData, setStockData] = useState<StockData | null>(null);
+  const [inputStockCode, setInputStockCode] = useState<string>('');
 
   useEffect(() => {
-    // 환경에 따른 서버 URL 설정
     const serverUrl =
       process.env.NODE_ENV === 'production'
-        ? 'https://api.peek.run' // 프로덕션 백엔드 URL
-        : 'http://localhost:42930'; // 개발 백엔드 URL
+        ? 'https://api.peek.run' // 실제 서버 주소로 변경
+        : 'http://localhost:42930';
 
-    const newSocket = io(`${serverUrl}/kis-websocket`, {
-      transports: ['websocket'],
-    });
+    // 네임스페이스 '/realtime' 연결
+    const newSocket = io(`${serverUrl}/realtime`, { transports: ['websocket'] });
 
     setSocket(newSocket);
 
     newSocket.on('connect', () => {
       setConnectionStatus('connected');
-
-      // 구독 요청
-      newSocket.emit('subscribe', { token, symbol: 'DNASAAPL' });
     });
-
-    newSocket.on('subscribed', (data) => {});
-
-    newSocket.on('price-update', (data) => {
-      setPriceData(data);
-    });
-
-    newSocket.on('kis-connected', () => {});
-
-    newSocket.on('kis-error', (error) => {
-      setConnectionStatus('error');
-    });
-
-    newSocket.on('kis-disconnected', () => {});
 
     newSocket.on('disconnect', () => {
       setConnectionStatus('closed');
     });
 
-    newSocket.on('connect_error', (error) => {
+    newSocket.on('connect_error', () => {
       setConnectionStatus('error');
     });
 
+    newSocket.on('stock_data', (StockData) => {
+      setStockData(StockData);
+    });
+
     return () => {
-      // 구독 해제
-      newSocket.emit('unsubscribe', { token, symbol: 'DNASAAPL' });
+      if (subscribedStock) {
+        newSocket.emit('unsubscribe_stock'); // 구독 해제 요청
+      }
       newSocket.disconnect();
     };
-  }, [token]);
+  }, []);
 
-  if (connectionStatus === 'connecting') {
-    return (
-      <Wrapper.SECTION text="애플 실시간 시세">
-        <div>실시간 데이터 연결 중...</div>
-      </Wrapper.SECTION>
-    );
-  }
+  const handleSubscribe = () => {
+    if (!socket) return;
 
-  if (connectionStatus === 'error') {
-    return (
-      <Wrapper.SECTION text="애플 실시간 시세">
-        <div className="text-red-500">연결 오류가 발생했습니다.</div>
-      </Wrapper.SECTION>
-    );
-  }
+    if (!inputStockCode.trim()) return alert('종목 코드를 입력해주세요.');
 
-  if (!priceData) {
-    return (
-      <Wrapper.SECTION text="애플 실시간 시세">
-        <div>데이터 수신 대기 중...</div>
-      </Wrapper.SECTION>
-    );
-  }
+    // 구독 요청
+    socket.emit('subscribe_stock', { stock_code: inputStockCode.trim() });
+    setSubscribedStock(inputStockCode.trim());
+    setStockData(null);
+  };
+
+  const handleUnsubscribe = () => {
+    if (!socket) return;
+
+    socket.emit('unsubscribe_stock');
+    setSubscribedStock(null);
+    setStockData(null);
+  };
 
   return (
-    <Wrapper.SECTION text="애플 실시간 시세">
-      <div className="flex flex-col gap-2">
-        <div className="text-green-500 text-sm">🟢 실시간 연결됨</div>
-        <p>심볼: {priceData.symbol}</p>
-        <p>로컬 시간: {dayjs(priceData.localDate + ' ' + priceData.localTime).format('YYYY-MM-DD HH:mm:ss')}</p>
-        <p>한국 시간: {dayjs(priceData.koreanDate + ' ' + priceData.koreanTime).format('YYYY-MM-DD HH:mm:ss')}</p>
-        <p>매수 호가: {priceData.bidPrice}</p>
-        <p>매도 호가: {priceData.askPrice}</p>
-        <p>매수 잔고: {priceData.buyBalance}</p>
-        <p>매도 잔고: {priceData.sellBalance}</p>
+    <div>
+      <h2>실시간 종목 시세 구독</h2>
+      <input
+        type="text"
+        placeholder="종목 코드 입력 (예: AAPL)"
+        value={inputStockCode}
+        onChange={(e) => setInputStockCode(e.target.value.toUpperCase())}
+      />
+      <button onClick={handleSubscribe} disabled={connectionStatus !== 'connected'}>
+        구독 시작
+      </button>
+      <button onClick={handleUnsubscribe} disabled={!subscribedStock}>
+        구독 해제
+      </button>
+
+      <div>
+        <p>연결 상태: {connectionStatus}</p>
+        {subscribedStock && <p>구독 중: {subscribedStock}</p>}
+
+        {stockData ? (
+          <div>
+            <p>종목코드: {stockData.stock_code}</p>
+            <p>시간: {stockData.time}</p>
+            <p>가격: {stockData.price}</p>
+            <p>
+              직전 변동: {stockData.prev_sign} {stockData.prev}
+            </p>
+            <p>거래량: {stockData.volume}</p>
+          </div>
+        ) : (
+          <p>데이터 수신 대기 중...</p>
+        )}
       </div>
-    </Wrapper.SECTION>
+    </div>
   );
 }
