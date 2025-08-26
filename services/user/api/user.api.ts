@@ -29,6 +29,10 @@ class UserApi extends AXIOS {
     return await this.patch<null, IUpdateUserPasswordDto>({ url: `${this._baseURL}/password`, data: dto });
   }
 
+  async withdraw() {
+    return await this.delete<null, null>({ url: `${this._baseURL}` });
+  }
+
   async postRegisterPushToken(dto: IRegisterPushTokenDto) {
     return await this.post<null, IRegisterPushTokenDto>({ url: `${this._baseURL}/push-token`, data: dto });
   }

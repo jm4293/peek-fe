@@ -1,8 +1,12 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
-import AuthApi, { ICheckEmailCodeDto, ICheckEmailDto } from '@/services/auth';
+import { useToast } from '@/hooks/modal';
+
+import AuthApi, { ICheckEmailCodeDto, ICheckEmailDto, ILoginEmailDto, ILoginOauthDto } from '@/services/auth';
 import UserApi from '@/services/user';
+
+import { userAccountTypeDescription } from '@/shared/enum/user';
 
 import { LocalStorage } from '@/utils/localStorage';
 import { SessionStorage } from '@/utils/sessionStorage';
@@ -11,19 +15,33 @@ export const useAuthMutation = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
 
-  // const signInMutation = useMutation({
-  //   mutationFn: (dto: ILoginEmailDto) => AuthApi.signInEmail(dto),
-  //   onSuccess: (res) => {
-  //     router.push('/home');
-  //   },
-  // });
+  const { openToast } = useToast();
 
-  // const googleSignInMutation = useMutation({
-  //   mutationFn: (dto: ILoginOauthDto) => AuthApi.signInOauth(dto),
-  //   onSuccess: (res) => {
-  //     router.push('/home');
-  //   },
-  // });
+  const signInMutation = useMutation({
+    mutationFn: (dto: ILoginEmailDto) => AuthApi.signInEmail(dto),
+    onSuccess: () => {
+      openToast({ type: 'success', message: '로그인에 성공했습니다.' });
+      router.push('/home');
+    },
+    onError: (err: any) => {
+      const { message } = err.response.data;
+
+      openToast({ type: 'error', message: message || '로그인에 실패했습니다. 다시 시도해주세요.' });
+    },
+  });
+
+  const oauthSignInMutation = useMutation({
+    mutationFn: (dto: ILoginOauthDto) => AuthApi.signInOauth(dto),
+    onSuccess: (_, variables) => {
+      const { userAccountType } = variables;
+
+      openToast({ type: 'success', message: `${userAccountTypeDescription[userAccountType]} 로그인에 성공했습니다.` });
+      router.push('/home');
+    },
+    onError: () => {
+      router.push('/auth/login');
+    },
+  });
 
   const checkEmailMutation = useMutation({
     mutationFn: (dto: ICheckEmailDto) => AuthApi.checkEmail(dto),
@@ -46,46 +64,48 @@ export const useAuthMutation = () => {
     mutationFn: (token: string) => UserApi.postRegisterPushToken({ pushToken: token }),
   });
 
-  // const logoutMutation = useMutation({
-  //   mutationFn: () => AuthApi.logout(),
-  //   onSuccess: async () => {
-  //     queryClient.clear();
+  const signoutMutation = useMutation({
+    mutationFn: () => AuthApi.logout(),
+    onSuccess: async () => {
+      // const firebase_messaging = getMessaging();
+      // await deleteToken(firebase_messaging);
 
-  //     // const firebase_messaging = getMessaging();
-  //     // await deleteToken(firebase_messaging);
+      // if ('serviceWorker' in navigator) {
+      //   const registrations = await navigator.serviceWorker.getRegistrations();
+      //
+      //   navigator.serviceWorker.addEventListener('message', (event) => {
+      //     if (event.data && event.data.type === 'TERMINATED') {
+      //       console.log('Service worker has been terminated.');
+      //     }
+      //   });
+      //
+      //   for (const registration of registrations) {
+      //     if (registration.active) {
+      //       registration.active.postMessage({ type: 'TERMINATE' });
+      //     }
+      //     await registration.unregister();
+      //   }
+      // }
 
-  //     // if ('serviceWorker' in navigator) {
-  //     //   const registrations = await navigator.serviceWorker.getRegistrations();
-  //     //
-  //     //   navigator.serviceWorker.addEventListener('message', (event) => {
-  //     //     if (event.data && event.data.type === 'TERMINATED') {
-  //     //       console.log('Service worker has been terminated.');
-  //     //     }
-  //     //   });
-  //     //
-  //     //   for (const registration of registrations) {
-  //     //     if (registration.active) {
-  //     //       registration.active.postMessage({ type: 'TERMINATE' });
-  //     //     }
-  //     //     await registration.unregister();
-  //     //   }
-  //     // }
-
-  //     LocalStorage.clear();
-  //     SessionStorage.clear();
-  //     // axios.defaults.headers.common = {};
-
-  //     router.push('/guest');
-  //   },
-  // });
+      queryClient.clear();
+      LocalStorage.clear();
+      SessionStorage.clear();
+      openToast({ type: 'success', message: '로그아웃에 성공했습니다.' });
+      router.push('/home');
+      router.refresh();
+    },
+    onError: () => {
+      openToast({ type: 'error', message: '로그아웃에 실패했습니다. 다시 시도해주세요.' });
+    },
+  });
 
   return {
-    // signInMutation,
-    // googleSignInMutation,
+    signInMutation,
+    oauthSignInMutation,
     checkEmailMutation,
     checkEmailCodeMutation,
     // signUpMutation,
-    // logoutMutation,
+    signoutMutation,
     registerMessagingTokenMutation,
   };
 };

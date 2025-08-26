@@ -1,8 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState, useTransition } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 import { Button } from '@/components/button';
 import { Input } from '@/components/input';
@@ -11,7 +11,7 @@ import { Text } from '@/components/text';
 import { useInput } from '@/hooks/input';
 import { useToast } from '@/hooks/modal';
 
-import { ILoginEmailDto, signinEmailAction } from '@/services/auth';
+import { ILoginEmailDto, useAuthMutation } from '@/services/auth';
 
 import { ButtonGoogle } from './ButtonGoogle';
 import { ButtonKakao } from './ButtonKakao';
@@ -23,14 +23,13 @@ const initialFormData: ILoginEmailDto = {
 };
 
 export default function Login() {
-  const router = useRouter();
   const searchParams = useSearchParams();
 
-  const [isPending, startTransition] = useTransition();
   const { openToast } = useToast();
 
   const [isError, setIsError] = useState<boolean>(false);
 
+  const { signInMutation } = useAuthMutation();
   const [value, onChange, init] = useInput({ ...initialFormData });
 
   const clickHandler = () => {
@@ -42,16 +41,9 @@ export default function Login() {
 
     setIsError(false);
 
-    startTransition(async () => {
-      const { success } = await signinEmailAction(value);
-
-      if (!success) {
-        openToast({ type: 'error', message: '로그인에 실패했습니다. 다시 시도해주세요.' });
-        return;
-      }
-
-      openToast({ type: 'success', message: '로그인에 성공했습니다.' });
-      router.push('/home');
+    signInMutation.mutate({
+      email: value.email,
+      password: value.password,
     });
   };
 
@@ -95,7 +87,7 @@ export default function Login() {
           />
         </div>
 
-        <Button.CONTAINER text="로그인" onClick={clickHandler} disabled={isPending} />
+        <Button.CONTAINER text="로그인" onClick={clickHandler} disabled={signInMutation.isPending} />
       </div>
 
       <div className="flex justify-center items-center gap-4">

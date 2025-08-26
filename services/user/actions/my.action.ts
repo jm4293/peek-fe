@@ -58,11 +58,7 @@ export const myAction = async (): Promise<MyActionResult> => {
     }).json();
 
     return { success: true, data: my };
-  } catch (error: unknown) {
-    if (error instanceof Error) {
-      return { success: false, data: null };
-    }
-
+  } catch (error: any) {
     return { success: false, data: null };
   }
 };
