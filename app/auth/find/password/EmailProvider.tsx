@@ -1,28 +1,27 @@
 'use client';
 
-import { createContext, useContext, useState } from 'react';
+import { Dispatch, SetStateAction, createContext, useContext, useState } from 'react';
 
-interface IProps {
-  children: React.ReactNode;
+interface ContextType {
+  email: string;
+  randomCode: string;
+  setEmail: Dispatch<SetStateAction<string>>;
+  setRandomCode: Dispatch<SetStateAction<string>>;
 }
 
-const EmailContext = createContext<{
-  email: string | null;
-  randomCode: string | null;
-  setEmail: React.Dispatch<React.SetStateAction<string>>;
-  setRandomCode: React.Dispatch<React.SetStateAction<string>>;
-}>({
-  email: null,
-  randomCode: null,
-  setEmail: () => {},
-  setRandomCode: () => {},
-});
+const EmailContext = createContext<ContextType | undefined>(undefined);
 
-export const useResetPasswordProvider = () => useContext(EmailContext);
+export const useResetPasswordProvider = () => {
+  const ctx = useContext(EmailContext);
 
-export function EmailProvider(props: IProps) {
-  const { children } = props;
+  if (!ctx) {
+    throw new Error('useResetPasswordProvider는 EmailProvider 내부에서 사용해야 합니다.');
+  }
 
+  return ctx;
+};
+
+export function EmailProvider({ children }: { children: React.ReactNode }) {
   const [email, setEmail] = useState('');
   const [randomCode, setRandomCode] = useState('');
 
