@@ -11,7 +11,7 @@ export const useStockCodeKoreanList = (props: IProps) => {
   const { text, kind } = props;
 
   return useInfiniteQuery({
-    queryKey: QueryKeys.stock.koreanList(),
+    queryKey: QueryKeys.stock.koreanList(text),
     queryFn: ({ pageParam }) => StockApi.getStockCodeKoreanList({ ...props, page: pageParam }),
     getNextPageParam: (lastPage) => {
       const { nextPage } = lastPage.data;

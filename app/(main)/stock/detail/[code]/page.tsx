@@ -4,7 +4,7 @@ interface IProps {
   params: Promise<{ code: string }>;
 }
 
-export default async function Page(props: IProps) {
+export default async function StockDetailPage(props: IProps) {
   const { code } = await props.params;
 
   return (
