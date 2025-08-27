@@ -12,6 +12,7 @@ export const QueryKeys = {
   },
   stock: {
     token: () => ['stock', 'token'],
-    koreanList: (text?: string) => ['stock', 'korean-list', text],
+    stockKorean: (code: string) => ['stock', 'korean', code],
+    stockKoreanList: (text?: string) => ['stock', 'korean-list', text],
   },
 };

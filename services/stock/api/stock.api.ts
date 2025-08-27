@@ -1,6 +1,12 @@
 import AXIOS from '@/lib/axios';
 
-import { IGetCodeKoreanListDto, IStockCodeKoreanListRes, IStockTokenRes } from '@/services/stock';
+import {
+  IGetStockKoreanDto,
+  IGetStockKoreanListDto,
+  IStockKoreanListRes,
+  IStockKoreanRes,
+  IStockTokenRes,
+} from '@/services/stock';
 
 class StockApi extends AXIOS {
   private readonly _baseURL = '/stock';
@@ -9,9 +15,17 @@ class StockApi extends AXIOS {
     return await this.get<IStockTokenRes, null>({ url: `${this._baseURL}/token` });
   }
 
-  async getStockCodeKoreanList(dto: IGetCodeKoreanListDto) {
-    return await this.get<IStockCodeKoreanListRes, IGetCodeKoreanListDto>({
-      url: `${this._baseURL}/code/korean`,
+  async getStockKorean(dto: IGetStockKoreanDto) {
+    const { code } = dto;
+
+    return await this.get<IStockKoreanRes, IGetStockKoreanDto>({
+      url: `${this._baseURL}/korean/${code}`,
+    });
+  }
+
+  async getStockKoreanList(dto: IGetStockKoreanListDto) {
+    return await this.get<IStockKoreanListRes, IGetStockKoreanListDto>({
+      url: `${this._baseURL}/korean`,
       params: dto,
     });
   }

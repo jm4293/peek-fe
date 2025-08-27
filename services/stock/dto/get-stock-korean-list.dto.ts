@@ -1,6 +1,6 @@
 import { StockCategoryEnum } from '@/shared/enum/stock';
 
-export interface IGetCodeKoreanListDto {
+export interface IGetStockKoreanListDto {
   page: number;
   kind?: StockCategoryEnum;
   text?: string;
