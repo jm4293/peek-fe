@@ -1,7 +1,4 @@
-import Link from 'next/link';
-
-import { BackButton, ThemeSwitcher } from '@/components/button';
-import { Text } from '@/components/text';
+import { Header } from '../(main)/Header';
 
 interface IProps {
   children: React.ReactNode;
@@ -11,26 +8,9 @@ export default function Layout(props: IProps) {
   const { children } = props;
 
   return (
-    <div className="h-screen flex justify-center bg-theme-bg-section">
-      <div className="w-[720px] overflow-y-auto bg-theme-bg-main">
-        <header className="w-full static grid grid-cols-3 items-center bg-theme-bg-header">
-          <div className="flex justify-start">
-            <BackButton />
-          </div>
-
-          <div className="text-center">
-            <Link href="/home">
-              <Text.TITLE text="PEEK" />
-            </Link>
-          </div>
-
-          <div className="flex justify-end">
-            <ThemeSwitcher />
-          </div>
-        </header>
-
-        <div className="px-4 py-8">{children}</div>
-      </div>
+    <div className="relative min-h-screen">
+      <Header my={null} />
+      <main className="min-w-64 min-h-screen pt-20 pb-16 bg-theme-bg-main">{children}</main>
     </div>
   );
 }
