@@ -40,7 +40,7 @@ export const InfinityList = (props: IProps) => {
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   return (
-    <ol className="w-full flex flex-col gap-2">
+    <ol className="w-full flex flex-col gap-2 py-2 max-h-[70vh] overflow-y-auto">
       {children}
       <div ref={loadMoreRef} className="flex justify-center items-center">
         {isFetchingNextPage && <LineSkeleton h={2} />}

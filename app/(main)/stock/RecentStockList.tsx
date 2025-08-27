@@ -1,6 +1,6 @@
 'use client';
 
-import { LocalStorage } from '@/utils';
+import { Dayjs, LocalStorage } from '@/utils';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
@@ -19,7 +19,7 @@ export default function RecentStockList(props: IProps) {
   const { children } = props;
   const router = useRouter();
 
-  const [searches, setSearches] = useState<IStockCompanyModel[]>([]);
+  const [searches, setSearches] = useState<(IStockCompanyModel & { timestamp: Date })[]>([]);
 
   const handleClick = (item: IStockCompanyModel) => {
     router.push(`/stock/detail/${item.code}`);
@@ -53,13 +53,19 @@ export default function RecentStockList(props: IProps) {
         <Text.HEADING text="최근 검색한 종목" />
         {children}
       </div>
-      <ul className="flex gap-2 flex-nowrap overflow-x-auto">
-        {searches.map((item: IStockCompanyModel) => (
+      <ul className="flex gap-4 flex-nowrap overflow-x-auto">
+        {searches.map((item) => (
           <li
             key={item.id}
-            className="flex items-center gap-2 whitespace-nowrap rounded-lg px-4 py-2 shadow text-center bg-theme-bg-main"
+            className="flex items-center gap-2 whitespace-nowrap rounded-lg px-2 py-1 shadow text-center bg-theme-bg-main"
             onClick={() => handleClick(item)}>
-            <Text.HEADING text={item.companyName} />
+            <div>
+              <div className="flex flex-col text-end">
+                <Text.HEADING text={item.companyName} />
+                <Text.CAPTION text={Dayjs.of(item.timestamp).formatMMDD()} />
+              </div>
+            </div>
+
             <IoMdClose onClick={(event) => handleRemove(event, item.id)} />
           </li>
         ))}

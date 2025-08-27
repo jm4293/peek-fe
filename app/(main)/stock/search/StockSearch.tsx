@@ -13,7 +13,7 @@ import { Wrapper } from '@/components/wrapper';
 
 import { useDebounce } from '@/hooks/useDebounce';
 
-import { IStockCompanyModel, useStockCodeKoreanList } from '@/services/stock';
+import { IStockCompanyModel, useStockKoreanList } from '@/services/stock';
 
 import { LocalStorageKey } from '@/shared/constant/local-storage-key';
 
@@ -29,7 +29,7 @@ export default function StockSearch() {
 
   // const { data, isSuccess, isLoading } = useStockListQuery({ text: debouncedText });
 
-  const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isSuccess, isLoading } = useStockCodeKoreanList({
+  const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isSuccess, isLoading } = useStockKoreanList({
     text: debouncedText,
   });
 
@@ -76,16 +76,6 @@ export default function StockSearch() {
     );
   };
 
-  if (!isSuccess) {
-    return (
-      <>
-        <LineSkeleton h={2} />
-        <LineSkeleton h={2} />
-        <LineSkeleton h={2} />
-      </>
-    );
-  }
-
   return (
     <div className="flex flex-col gap-4">
       <Input
@@ -103,11 +93,11 @@ export default function StockSearch() {
           <LineSkeleton h={2} />
           <LineSkeleton h={2} />
         </div>
-      ) : data?.stockCodeList.length > 0 ? (
+      ) : data!.stockKoreanList.length > 0 ? (
         <div className="flex flex-col gap-2">
           <Text.CAPTION text={`총: ${data?.total}건`} className="text-end" />
           <InfinityList hasNextPage={hasNextPage} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage}>
-            {data!.stockCodeList.map(renderItem)}
+            {data!.stockKoreanList.map(renderItem)}
           </InfinityList>
         </div>
       ) : (
