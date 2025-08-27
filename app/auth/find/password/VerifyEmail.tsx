@@ -147,6 +147,7 @@ export default function VerifyEmail() {
         {checkEmail !== 1 && (
           <div className="grid grid-cols-3 gap-2">
             <Input
+              type="number"
               className="col-span-2"
               title="인증코드"
               name="code"

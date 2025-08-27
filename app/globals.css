@@ -42,11 +42,12 @@ html.dark {
   display: none;
 }
 
-@supports (-webkit-touch-callout: none) {
+/* @supports (-webkit-touch-callout: none) {
   * {
+    min-height: -webkit-fill-available;
     height: -webkit-fill-available;
   }
-}
+} */
 
 header {
   position: fixed;
