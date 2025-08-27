@@ -1,2 +1,2 @@
-export * from './useCodeKoreanList';
+export * from './useStockCodeKoreanList';
 export * from './useStockToken';

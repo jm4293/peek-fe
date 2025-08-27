@@ -1,28 +1,36 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+import { InfinityList } from '@/components/infinity-list';
+import { VirtualTable } from '@/components/table';
+import { Text } from '@/components/text';
+import { Wrapper } from '@/components/wrapper';
 
 import { useDebounce } from '@/hooks/useDebounce';
 
+import { IStockCompanyModel, useStockCodeKoreanList } from '@/services/stock';
+
+import { useStockProvider } from '../StockCodeProvider';
+
 export default function StockSearch() {
   const router = useRouter();
+
+  const { setStock } = useStockProvider();
+
+  const [list, setList] = useState<IStockCompanyModel[]>([]);
+
+  const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isSuccess } = useStockCodeKoreanList({});
 
   const [searchText, setSearchText] = useState('');
   const { debouncedText, isPending } = useDebounce({ text: searchText, delay: 400 });
 
   // const { data, isSuccess, isLoading } = useStockListQuery({ text: debouncedText });
 
-  const clickHandler = (params: { event: React.MouseEvent<HTMLDivElement, MouseEvent>; index: number }) => {
-    const { event, index } = params;
-
-    event.stopPropagation();
-
-    // if (!data) {
-    //   return;
-    // }
-    //
-    // router.push(`/stock/detail/${data.stocks[index].code}`);
+  const clickHandler = (item: IStockCompanyModel) => {
+    setStock(item);
+    router.push('/stock');
   };
 
   const renderRow = (index: number) => {
@@ -77,5 +85,41 @@ export default function StockSearch() {
   //   </div>
   // );
 
-  return <></>;
+  useEffect(() => {
+    if (isSuccess && data) {
+      setList(data.stockCodeList);
+    }
+  }, [isSuccess, data]);
+
+  const renderItem = (item: IStockCompanyModel) => {
+    const { id, companyName } = item;
+
+    return (
+      <li key={id}>
+        <Wrapper.SECTION>
+          <div className="flex flex-col gap-1" onClick={() => clickHandler(item)}>
+            <div className="flex justify-between items-center">
+              <div className="flex items-center gap-2">
+                <Text.HEADING text={companyName} />
+              </div>
+            </div>
+          </div>
+        </Wrapper.SECTION>
+      </li>
+    );
+  };
+
+  if (list.length === 0) {
+    return (
+      <Wrapper.SECTION>
+        <Text.HEADING text="검색된 종목이 없습니다." />
+      </Wrapper.SECTION>
+    );
+  }
+
+  return (
+    <InfinityList hasNextPage={hasNextPage} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage}>
+      {list.map(renderItem)}
+    </InfinityList>
+  );
 }
