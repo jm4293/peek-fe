@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import stockApi from '@/services/stock';
 
-import { QueryKeys } from '@/shared/query-key';
+import { QueryKeys } from '@/shared/constant/query-key';
 
 export const useStockToken = () => {
   return useQuery({

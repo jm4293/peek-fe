@@ -15,7 +15,7 @@ import UserApi, {
   IUpdateUserThumbnailDto,
 } from '@/services/user';
 
-import { QueryKeys } from '@/shared/query-key';
+import { QueryKeys } from '@/shared/constant/query-key';
 
 export const useUserMutation = () => {
   const queryClient = useQueryClient();

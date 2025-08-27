@@ -2,7 +2,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 
 import BoardApi, { IBoardCommentListRes } from '@/services/board';
 
-import { QueryKeys } from '@/shared/query-key';
+import { QueryKeys } from '@/shared/constant/query-key';
 
 export const useBoardCommentListMineQuery = () => {
   return useInfiniteQuery({

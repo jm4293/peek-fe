@@ -5,7 +5,7 @@ import { useToast } from '@/hooks/modal';
 import { ICreateBoardCommentDto, IDeleteBoardCommentDto, IUpdateBoardCommentDto } from '@/services/board';
 import BoardApi from '@/services/board/api/board.api';
 
-import { QueryKeys } from '@/shared/query-key';
+import { QueryKeys } from '@/shared/constant/query-key';
 
 export const useBoardCommentMutation = () => {
   const queryClient = useQueryClient();

@@ -1,19 +1,17 @@
-export class QueryKeys {
-  static user = {
+export const QueryKeys = {
+  user: {
     myInfo: () => ['my-info'],
     all: () => ['user'],
-  };
-
-  static board = {
+  },
+  board: {
     detail: (boardId: string) => ['board', 'detail', boardId],
     list: (category?: number) => ['board', 'list', category],
     commentList: (boardId: string) => ['board', 'comment', boardId],
     mineList: () => ['board', 'list-mine'],
     mineCommentList: () => ['board', 'comment', 'mine'],
-  };
-
-  static stock = {
+  },
+  stock: {
     token: () => ['stock', 'token'],
     koreanList: () => ['stock', 'korean-list'],
-  };
-}
+  },
+};

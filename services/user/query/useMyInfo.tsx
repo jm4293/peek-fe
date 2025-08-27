@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import UserApi from '@/services/user';
 
 import { QUERY_STALE_TIME_ONE } from '@/shared/constant/expire-time';
-import { QueryKeys } from '@/shared/query-key';
+import { QueryKeys } from '@/shared/constant/query-key';
 
 export const useMyInfo = () => {
   return useQuery({
