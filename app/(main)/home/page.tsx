@@ -1,24 +1,22 @@
 import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
-import { getStockToken } from '@/services/stock';
-
 import BestNews from './BestNews';
 import BestWeekend from './best-weekend';
 import Chart from './chart';
 
 export default async function HomePage() {
-  const { success, data } = await getStockToken();
+  // const { success, data } = await getStockToken();
 
-  if (!success) {
-    return (
-      <Wrapper.MAIN text="메인">
-        <Wrapper.SECTION>
-          <Text.HEADING text="문제가 발생했습니다." />
-        </Wrapper.SECTION>
-      </Wrapper.MAIN>
-    );
-  }
+  // if (!success) {
+  //   return (
+  //     <Wrapper.MAIN text="메인">
+  //       <Wrapper.SECTION>
+  //         <Text.HEADING text="문제가 발생했습니다." />
+  //       </Wrapper.SECTION>
+  //     </Wrapper.MAIN>
+  //   );
+  // }
 
   // return (
   //   <Wrapper.MAIN text="메인">
