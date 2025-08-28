@@ -56,12 +56,12 @@ export default function StockIndex() {
       setLoading(false);
     });
 
-    socket.on('0001', (data) => {
-      setKospi(data);
+    socket.on('0001', (data: IIndex) => {
+      setKospi(data.prpr_nmix ? data : null);
     });
 
-    socket.on('1001', (data) => {
-      setKosdaq(data);
+    socket.on('1001', (data: IIndex) => {
+      setKosdaq(data.prpr_nmix ? data : null);
     });
 
     socket.on('disconnect', () => {});
