@@ -3,8 +3,12 @@
 import { useDeviceLayout } from '@/hooks';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
+import { AiOutlineStock } from 'react-icons/ai';
+import { BsClipboardData } from 'react-icons/bs';
 import { IoIosClose } from 'react-icons/io';
+import { PiUserCircleLight } from 'react-icons/pi';
 import { PiHamburger } from 'react-icons/pi';
+import { RiHome9Line } from 'react-icons/ri';
 
 import { BackButton, ThemeSwitcher } from '@/components/button';
 import { Thumbnail } from '@/components/image';
@@ -17,10 +21,10 @@ interface IProps {
 }
 
 const menuItems = [
-  { name: '메인', path: '/home' },
-  { name: '주식', path: '/stock' },
-  { name: '게시판', path: '/board' },
-  { name: '마이페이지', path: '/user' },
+  { name: '메인', path: '/home', icon: <RiHome9Line /> },
+  { name: '주식', path: '/stock', icon: <AiOutlineStock /> },
+  { name: '게시판', path: '/board', icon: <BsClipboardData /> },
+  { name: '마이페이지', path: '/user', icon: <PiUserCircleLight /> },
 ];
 
 const Logo = () => {
@@ -106,9 +110,9 @@ export function Header(props: IProps) {
         {isMenuOpen && <div className="fixed inset-0 bg-black bg-opacity-50 z-40" onClick={closeMenu} />}
 
         <div
-          className={`fixed top-0 right-0 h-full w-60 shadow-lg transform transition-transform duration-300 ease-in-out z-50 bg-theme-bg-header ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+          className={`fixed top-0 right-0 h-full w-60 shadow-lg transform transition-transform duration-300 ease-in-out z-50 bg-theme-bg-header rounded-tl-2xl rounded-bl-2xl ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
           <div className="relative h-full flex flex-col">
-            <div className="flex justify-between items-center p-4 border-b">
+            <div className="flex justify-between items-center p-4">
               {!!my ? (
                 <Link href="/user" onClick={closeMenu} className="flex items-center gap-2" scroll={true}>
                   <Thumbnail thumbnail={my.user.thumbnail} w={24} />
@@ -124,7 +128,13 @@ export function Header(props: IProps) {
 
             <div className="flex flex-col p-4 gap-4">
               {menuItems.map((item) => (
-                <Link key={item.name} href={item.path} onClick={closeMenu} scroll={true}>
+                <Link
+                  key={item.name}
+                  href={item.path}
+                  onClick={closeMenu}
+                  scroll={true}
+                  className="flex items-center gap-2">
+                  {item.icon}
                   <Text.HEADING text={item.name} />
                 </Link>
               ))}
