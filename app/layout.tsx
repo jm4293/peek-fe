@@ -8,6 +8,9 @@ import { Modal, Toast } from '@/components/modal';
 import { NetworkError } from '@/lib/network-error';
 import QueryProvider from '@/lib/react-query/react-query.config';
 
+import { myAction } from '@/services/user';
+
+import { Header } from './Header';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -35,7 +38,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const { data: my } = await myAction();
+
   return (
     <html lang="ko" suppressHydrationWarning>
       <body>
@@ -43,7 +48,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <NetworkError>
             <QueryProvider>
               {/*<MessagingConfig>*/}
-              {children}
+              <div className="relative min-h-screen">
+                <Header my={my} />
+                <main className="bg-theme-bg-main">
+                  <div className="m-auto max-w-screen-xl">{children}</div>
+                </main>
+              </div>
               {/*</MessagingConfig>*/}
             </QueryProvider>
           </NetworkError>

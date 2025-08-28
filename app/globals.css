@@ -19,7 +19,6 @@
 html.dark {
   --bg-header: #1b1b1d;
   --bg-main: #1f1f22;
-  /* --bg-section: #242427; */
   --bg-section: #1b1b1d;
   --bg-blue: #202329;
 
@@ -61,13 +60,6 @@ header {
   z-index: 30;
 }
 
-main {
-  /* min-width: 256px;
-  background-color: #f2f2f5;
-  margin-top: 4.6rem;
-  margin-bottom: 4rem; */
-}
-
 input,
 button,
 textarea,
@@ -95,43 +87,25 @@ button {
   padding: 1rem;
 }
 
-.layout {
-  /* display: flex;
-  flex-direction: column; */
+main {
+  min-width: 256px;
+  min-height: 100vh;
 }
 
 @media screen and (max-width: 767px) {
-  .layout {
-  }
-
-  header {
-  }
-
   main {
-    padding: 0 1rem;
+    padding: 5rem 1rem 4rem 1rem;
   }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
-  .layout {
-  }
-
-  header {
-  }
-
   main {
-    padding: 0 2rem;
+    padding: 5rem 2rem 4rem 2rem;
   }
 }
 
 @media screen and (min-width: 1024px) {
-  .layout {
-  }
-
-  header {
-  }
-
   main {
-    padding: 0 12rem;
+    padding: 5rem 12rem 4rem 12rem;
   }
 }
