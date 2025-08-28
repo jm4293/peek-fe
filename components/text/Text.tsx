@@ -2,6 +2,7 @@ interface IProps {
   text: string;
   className?: string;
   color?: 'default' | 'gray' | 'blue' | 'red';
+  nowrap?: boolean;
 }
 
 const textColor = {
@@ -12,28 +13,44 @@ const textColor = {
 };
 
 const TITLE = (props: IProps) => {
-  const { className, text, color = 'default' } = props;
-  return <h1 className={`${textColor[color]} text-xl font-semibold ${className}`}>{text}</h1>;
+  const { className, text, color = 'default', nowrap } = props;
+  return (
+    <h1 className={`${textColor[color]} text-xl font-semibold ${className} ${nowrap ? 'whitespace-nowrap' : ''}`}>
+      {text}
+    </h1>
+  );
 };
 
 const SUBTITLE = (props: IProps) => {
-  const { className, text, color = 'default' } = props;
-  return <h2 className={`${textColor[color]} text-lg font-medium ${className}`}>{text}</h2>;
+  const { className, text, color = 'default', nowrap } = props;
+  return (
+    <h2 className={`${textColor[color]} text-lg font-medium ${className} ${nowrap ? 'whitespace-nowrap' : ''}`}>
+      {text}
+    </h2>
+  );
 };
 
 const HEADING = (props: IProps) => {
-  const { className, text, color = 'default' } = props;
-  return <h3 className={`${textColor[color]} text-base font-medium ${className}`}>{text}</h3>;
+  const { className, text, color = 'default', nowrap } = props;
+  return (
+    <h3 className={`${textColor[color]} text-base font-medium ${className} ${nowrap ? 'whitespace-nowrap' : ''}`}>
+      {text}
+    </h3>
+  );
 };
 
 const PARAGRAPH = (props: IProps) => {
-  const { className, text, color = 'default' } = props;
-  return <p className={`${textColor[color]} text-sm ${className}`}>{text}</p>;
+  const { className, text, color = 'default', nowrap } = props;
+  return <p className={`${textColor[color]} text-sm ${className} ${nowrap ? 'whitespace-nowrap' : ''}`}>{text}</p>;
 };
 
 const CAPTION = (props: IProps) => {
-  const { className, text, color = 'default' } = props;
-  return <span className={`${textColor[color]} text-xs italic ${className}`}>{text}</span>;
+  const { className, text, color = 'default', nowrap } = props;
+  return (
+    <span className={`${textColor[color]} text-xs italic ${className} ${nowrap ? 'whitespace-nowrap' : ''}`}>
+      {text}
+    </span>
+  );
 };
 
 export const Text = {
