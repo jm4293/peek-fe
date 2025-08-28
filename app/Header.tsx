@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { AiOutlineStock } from 'react-icons/ai';
 import { IoIosClose } from 'react-icons/io';
+import { MdOutlineArrowForwardIos } from 'react-icons/md';
 import { MdOutlineDashboard } from 'react-icons/md';
 import { RiHome9Line } from 'react-icons/ri';
 import { RiUserSettingsLine } from 'react-icons/ri';
@@ -99,12 +100,8 @@ export function Header(props: IProps) {
       <>
         <header className="justify-between bg-theme-bg-header">
           <BackButton />
-
           <Logo />
-
-          <div className="flex items-center gap-2">
-            <RxHamburgerMenu size={24} onClick={toggleMenu} />
-          </div>
+          <RxHamburgerMenu size={24} onClick={toggleMenu} />
         </header>
 
         {isMenuOpen && <div className="fixed inset-0 bg-black bg-opacity-50 z-40" onClick={closeMenu} />}
@@ -128,15 +125,15 @@ export function Header(props: IProps) {
 
             <div className="flex flex-col p-4 gap-4">
               {menuItems.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.path}
-                  onClick={closeMenu}
-                  scroll={true}
-                  className="flex items-center gap-2">
-                  {item.icon}
-                  <Text.HEADING text={item.name} />
-                </Link>
+                <div key={item.name} className="flex justify-between items-center">
+                  <div className="flex items-center">
+                    <Link href={item.path} onClick={closeMenu} scroll={true} className="flex items-center gap-2">
+                      {item.icon}
+                      <Text.HEADING text={item.name} />
+                    </Link>
+                  </div>
+                  <MdOutlineArrowForwardIos />
+                </div>
               ))}
             </div>
 

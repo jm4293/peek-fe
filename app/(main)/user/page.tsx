@@ -1,7 +1,12 @@
+import Link from 'next/link';
+import { MdOutlineArrowForwardIos } from 'react-icons/md';
+
+import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
 import { myAction } from '@/services/user';
 
+import UserLogout from './Logout';
 import NotAuth from './NotAuth';
 import User from './User';
 
@@ -18,7 +23,33 @@ export default async function UserPage() {
 
   return (
     <Wrapper.MAIN text="마이페이지">
-      <User my={my} />
+      <div className="flex flex-col gap-2">
+        <User my={my} />
+
+        <Wrapper.SECTION text="기록">
+          <div className="flex flex-col gap-4">
+            <Link href="" className="flex items-center justify-between">
+              <Text.HEADING text="즐겨찾기 종목" />
+              <MdOutlineArrowForwardIos />
+            </Link>
+          </div>
+        </Wrapper.SECTION>
+
+        <Wrapper.SECTION text="게시판">
+          <div className="flex flex-col gap-4">
+            <Link href="/user/board" className="flex items-center justify-between">
+              <Text.HEADING text="작성한 게시글" />
+              <MdOutlineArrowForwardIos />
+            </Link>
+            <Link href="/user/board/comment" className="flex items-center justify-between">
+              <Text.HEADING text="작성한 게시글 댓글" />
+              <MdOutlineArrowForwardIos />
+            </Link>
+          </div>
+        </Wrapper.SECTION>
+
+        <UserLogout />
+      </div>
     </Wrapper.MAIN>
   );
 }
