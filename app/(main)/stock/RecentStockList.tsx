@@ -53,17 +53,15 @@ export default function RecentStockList(props: IProps) {
         <Text.HEADING text="최근 검색한 종목" />
         {children}
       </div>
-      <ul className="flex gap-4 flex-nowrap overflow-x-auto">
+      <ul className="flex items-center gap-4 flex-nowrap overflow-x-auto">
         {searches.map((item) => (
           <li
             key={item.id}
-            className="flex items-center gap-2 whitespace-nowrap rounded-lg px-2 py-1 shadow text-center bg-theme-bg-main"
+            className="flex items-center gap-2 rounded-lg px-2 py-1 bg-theme-bg-main"
             onClick={() => handleClick(item)}>
-            <div>
-              <div className="flex flex-col text-end">
-                <Text.HEADING text={item.companyName} />
-                <Text.CAPTION text={Dayjs.of(item.timestamp).formatMMDD()} />
-              </div>
+            <div className="flex flex-col text-end">
+              <Text.HEADING text={item.companyName} nowrap />
+              <Text.CAPTION text={Dayjs.of(item.timestamp).formatMMDD()} nowrap />
             </div>
 
             <IoMdClose onClick={(event) => handleRemove(event, item.id)} />

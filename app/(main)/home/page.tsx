@@ -1,9 +1,6 @@
-import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
-import BestNews from './BestNews';
-import BestWeekend from './best-weekend';
-import Chart from './chart';
+import StockIndex from './StockIndex';
 
 export default async function HomePage() {
   // const { success, data } = await getStockToken();
@@ -35,7 +32,7 @@ export default async function HomePage() {
 
   return (
     <Wrapper.MAIN text="메인">
-      <BestWeekend />
+      <StockIndex />
     </Wrapper.MAIN>
   );
 }

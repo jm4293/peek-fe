@@ -28,13 +28,13 @@ export default function BoardCategory(props: IProps) {
             if (category === String(cur.id)) {
               acc.push(
                 <Clickable key={cur.id} onClick={() => handleCategoryClick(cur)}>
-                  <Text.HEADING text={cur.enName} color={category === String(cur.id) ? 'default' : 'gray'} />
+                  <Text.HEADING text={cur.name} color={category === String(cur.id) ? 'default' : 'gray'} />
                 </Clickable>,
               );
             } else {
               acc.push(
                 <Clickable key={cur.id} onClick={() => handleCategoryClick(cur)}>
-                  <Text.PARAGRAPH text={cur.enName} color={category === String(cur.id) ? 'default' : 'gray'} />
+                  <Text.PARAGRAPH text={cur.name} color={category === String(cur.id) ? 'default' : 'gray'} />
                 </Clickable>,
               );
             }
