@@ -125,13 +125,18 @@ export function Header(props: IProps) {
 
             <div className="flex flex-col p-4 gap-4">
               {menuItems.map((item) => (
-                <div key={item.name} className="flex justify-between items-center" onClick={closeMenu}>
-                  <Link href={item.path} scroll={true} className="flex items-center gap-2">
+                <Link
+                  key={item.name}
+                  href={item.path}
+                  scroll={true}
+                  className="flex justify-between items-center"
+                  onClick={closeMenu}>
+                  <div className="flex items-center gap-2">
                     {item.icon}
                     <Text.HEADING text={item.name} />
-                  </Link>
+                  </div>
                   <MdOutlineArrowForwardIos />
-                </div>
+                </Link>
               ))}
             </div>
 
