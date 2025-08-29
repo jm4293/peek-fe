@@ -15,8 +15,8 @@ interface IIndex {
   bstp_nmix_prdy_vrss: string; // 업종 지수 전일 대비
   acml_vol: string; // 누적 거래량
   acml_tr_pbmn: string; // 누적 거래 대금
-  //   pcas_vol: string ; // 건별 거래량
-  //   pcas_tr_pbmn: string ; // 건별 거래 대금
+  pcas_vol: string; // 건별 거래량
+  pcas_tr_pbmn: string; // 건별 거래 대금
   prdy_ctrt: string; // 전일 대비율
   oprc_nmix: string; // 시가 지수
   nmix_hgpr: string; // 지수 최고가
@@ -35,9 +35,9 @@ interface IIndex {
   stnr_issu_cnt: string; // 보합 종목 수
   down_issu_cnt: string; // 하락 종목 수
   lslm_issu_cnt: string; // 하한 종목 수
-  //   qtqt_ascn_issu_cnt: string ; // 기세 상승 종목수
-  //   qtqt_down_issu_cnt: string ; // 기세 하락 종목수
-  //   tick_vrss: string ; // TICK대비
+  qtqt_ascn_issu_cnt: string; // 기세 상승 종목수
+  qtqt_down_issu_cnt: string; // 기세 하락 종목수
+  tick_vrss: string; // TICK대비
 }
 
 export default function StockIndex() {
@@ -46,7 +46,7 @@ export default function StockIndex() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const serverUrl = process.env.NODE_ENV === 'production' ? 'https://api.peek.run' : 'http://localhost:42930';
+    const serverUrl = process.env.NEXT_PUBLIC_API_URL;
 
     const socket = io(`${serverUrl}/kis/korean/index`, {
       transports: ['websocket'],
@@ -107,21 +107,28 @@ export default function StockIndex() {
 
                 <div className="flex items-center gap-1">
                   <Text.PARAGRAPH
-                    text={`${kospi.prdy_vrss_sign === '2' ? '+' : kospi.prdy_vrss_sign === '5' ? '-' : ''}${kospi.oprc_vrss_nmix_prpr}`}
+                    text={`${kospi.bstp_nmix_prdy_vrss}`}
                     color={`${kospi.prdy_vrss_sign === '2' ? 'red' : kospi.prdy_vrss_sign === '5' ? 'blue' : 'default'}`}
+                    nowrap
                   />
                   <Text.PARAGRAPH
-                    text={`(${kospi.prdy_vrss_sign === '2' ? '+' : kospi.prdy_vrss_sign === '5' ? '-' : ''}${kospi.oprc_vrss_nmix_sign}%)`}
+                    text={`(${kospi.prdy_clpr_vrss_lwpr_rate}%)`}
                     color={`${kospi.prdy_vrss_sign === '2' ? 'red' : kospi.prdy_vrss_sign === '5' ? 'blue' : 'default'}`}
+                    nowrap
                   />
                 </div>
               </div>
-              <Text.CAPTION
-                text={
-                  kospi.bsop_hour.slice(0, 2) + ':' + kospi.bsop_hour.slice(2, 4) + ':' + kospi.bsop_hour.slice(4, 6)
-                }
-                className="text-end"
-              />
+              <div className="flex items-center gap-2">
+                <Text.PARAGRAPH text={`최고 ${kospi.nmix_hgpr}`} color="gray" nowrap />
+                <Text.PARAGRAPH text={`최저 ${kospi.nmix_lwpr}`} color="gray" nowrap />
+                <Text.CAPTION
+                  text={
+                    kospi.bsop_hour.slice(0, 2) + ':' + kospi.bsop_hour.slice(2, 4) + ':' + kospi.bsop_hour.slice(4, 6)
+                  }
+                  color="gray"
+                  nowrap
+                />
+              </div>
             </div>
           ) : (
             <div className="flex items-center gap-2">
@@ -144,21 +151,32 @@ export default function StockIndex() {
 
                 <div className="flex items-center gap-1">
                   <Text.PARAGRAPH
-                    text={`${kosdaq.prdy_vrss_sign === '2' ? '+' : kosdaq.prdy_vrss_sign === '5' ? '-' : ''}${kosdaq.oprc_vrss_nmix_prpr}`}
+                    text={`${kosdaq.bstp_nmix_prdy_vrss}`}
                     color={`${kosdaq.prdy_vrss_sign === '2' ? 'red' : kosdaq.prdy_vrss_sign === '5' ? 'blue' : 'default'}`}
+                    nowrap
                   />
                   <Text.PARAGRAPH
-                    text={`(${kosdaq.prdy_vrss_sign === '2' ? '+' : kosdaq.prdy_vrss_sign === '5' ? '-' : ''}${kosdaq.oprc_vrss_nmix_sign}%)`}
+                    text={`(${kosdaq.prdy_clpr_vrss_lwpr_rate}%)`}
                     color={`${kosdaq.prdy_vrss_sign === '2' ? 'red' : kosdaq.prdy_vrss_sign === '5' ? 'blue' : 'default'}`}
+                    nowrap
                   />
                 </div>
               </div>
-              <Text.CAPTION
-                text={
-                  kosdaq.bsop_hour.slice(0, 2) + ':' + kosdaq.bsop_hour.slice(2, 4) + ':' + kosdaq.bsop_hour.slice(4, 6)
-                }
-                className="text-end"
-              />
+              <div className="flex items-center gap-2">
+                <Text.PARAGRAPH text={`최고 ${kosdaq.nmix_hgpr}`} color="gray" nowrap />
+                <Text.PARAGRAPH text={`최저 ${kosdaq.nmix_lwpr}`} color="gray" nowrap />
+                <Text.CAPTION
+                  text={
+                    kosdaq.bsop_hour.slice(0, 2) +
+                    ':' +
+                    kosdaq.bsop_hour.slice(2, 4) +
+                    ':' +
+                    kosdaq.bsop_hour.slice(4, 6)
+                  }
+                  color="gray"
+                  nowrap
+                />
+              </div>
             </div>
           ) : (
             <div className="flex items-center gap-2">
