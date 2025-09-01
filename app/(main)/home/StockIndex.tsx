@@ -1,75 +1,15 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { io } from 'socket.io-client';
+import Link from 'next/link';
 
 import { LineSkeleton } from '@/components/skeleton';
 import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
-interface IIndex {
-  bstp_cls_code: string; // ResponseBodybstp_cls_code    #업종 구분 코드
-  bsop_hour: string; // 영업 시간
-  prpr_nmix: string; // 현재가 지수
-  prdy_vrss_sign: string; // 전일 대비 부호
-  bstp_nmix_prdy_vrss: string; // 업종 지수 전일 대비
-  acml_vol: string; // 누적 거래량
-  acml_tr_pbmn: string; // 누적 거래 대금
-  pcas_vol: string; // 건별 거래량
-  pcas_tr_pbmn: string; // 건별 거래 대금
-  prdy_ctrt: string; // 전일 대비율
-  oprc_nmix: string; // 시가 지수
-  nmix_hgpr: string; // 지수 최고가
-  nmix_lwpr: string; // 지수 최저가
-  oprc_vrss_nmix_prpr: string; // 시가 대비 지수 현재가
-  oprc_vrss_nmix_sign: string; // 시가 대비 지수 부호
-  hgpr_vrss_nmix_prpr: string; // 최고가 대비 지수 현재가
-  hgpr_vrss_nmix_sign: string; // 최고가 대비 지수 부호
-  lwpr_vrss_nmix_prpr: string; // 최저가 대비 지수 현재가
-  lwpr_vrss_nmix_sign: string; // 최저가 대비 지수 부호
-  prdy_clpr_vrss_oprc_rate: string; // 전일 종가 대비 시가2 비율
-  prdy_clpr_vrss_hgpr_rate: string; // 전일 종가 대비 최고가 비율
-  prdy_clpr_vrss_lwpr_rate: string; // 전일 종가 대비 최저가 비율
-  uplm_issu_cnt: string; // 상한 종목 수
-  ascn_issu_cnt: string; // 상승 종목 수
-  stnr_issu_cnt: string; // 보합 종목 수
-  down_issu_cnt: string; // 하락 종목 수
-  lslm_issu_cnt: string; // 하한 종목 수
-  qtqt_ascn_issu_cnt: string; // 기세 상승 종목수
-  qtqt_down_issu_cnt: string; // 기세 하락 종목수
-  tick_vrss: string; // TICK대비
-}
+import { useKoreanStockIndex } from '@/hooks/stock-index';
 
 export default function StockIndex() {
-  const [kospi, setKospi] = useState<IIndex | null>(null);
-  const [kosdaq, setKosdaq] = useState<IIndex | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const serverUrl = process.env.NEXT_PUBLIC_API_URL;
-
-    const socket = io(`${serverUrl}/kis/korean/index`, {
-      transports: ['websocket'],
-    });
-
-    socket.on('connect', () => {
-      setLoading(false);
-    });
-
-    socket.on('0001', (data: IIndex) => {
-      setKospi(data.prpr_nmix ? data : null);
-    });
-
-    socket.on('1001', (data: IIndex) => {
-      setKosdaq(data.prpr_nmix ? data : null);
-    });
-
-    socket.on('disconnect', () => {});
-
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
+  const { kospi, kosdaq, loading } = useKoreanStockIndex({ isKospi: true, isKosdaq: true });
 
   if (loading) {
     return (
@@ -85,15 +25,15 @@ export default function StockIndex() {
   }
 
   return (
-    <>
-      <Wrapper.SECTION>
-        <div className="flex justify-between items-center">
-          <Text.HEADING text="국내 지수" />
-          <Text.CAPTION text="10초마다 갱신됩니다." color="gray" className="text-end" />
-        </div>
+    <Wrapper.SECTION>
+      <div className="flex justify-between items-center">
+        <Text.HEADING text="국내 지수" />
+        <Text.CAPTION text="10초마다 갱신됩니다." color="gray" className="text-end" />
+      </div>
 
-        <div className="flex items-center gap-8 flex-nowrap overflow-x-auto">
-          {kospi ? (
+      <div className="flex items-center gap-8 flex-nowrap overflow-x-auto">
+        {kospi ? (
+          <Link href="/index/kospi">
             <div className="flex flex-col">
               <div className="flex items-center gap-2">
                 <Text.HEADING text="코스피" nowrap className="text-end" />
@@ -130,14 +70,16 @@ export default function StockIndex() {
                 />
               </div>
             </div>
-          ) : (
-            <div className="flex items-center gap-2">
-              <Text.HEADING text="코스피" nowrap />
-              <Text.PARAGRAPH text="데이터가 없습니다." color="gray" nowrap />
-            </div>
-          )}
+          </Link>
+        ) : (
+          <div className="flex items-center gap-2">
+            <Text.HEADING text="코스피" nowrap />
+            <Text.PARAGRAPH text="데이터가 없습니다." color="gray" nowrap />
+          </div>
+        )}
 
-          {kosdaq ? (
+        {kosdaq ? (
+          <Link href="/index/kosdaq">
             <div className="flex flex-col">
               <div className="flex items-center gap-2">
                 <Text.HEADING text="코스닥" nowrap className="text-end" />
@@ -178,14 +120,14 @@ export default function StockIndex() {
                 />
               </div>
             </div>
-          ) : (
-            <div className="flex items-center gap-2">
-              <Text.HEADING text="코스닥" nowrap />
-              <Text.PARAGRAPH text="데이터가 없습니다." color="gray" nowrap />
-            </div>
-          )}
-        </div>
-      </Wrapper.SECTION>
-    </>
+          </Link>
+        ) : (
+          <div className="flex items-center gap-2">
+            <Text.HEADING text="코스닥" nowrap />
+            <Text.PARAGRAPH text="데이터가 없습니다." color="gray" nowrap />
+          </div>
+        )}
+      </div>
+    </Wrapper.SECTION>
   );
 }
