@@ -32,6 +32,7 @@ export const useAuthMutation = () => {
 
       openToast({ type: 'success', message: '로그인에 성공했습니다.' });
       router.push('/home');
+      router.refresh();
     },
     onError: (err: any) => {
       const { message } = err.response.data;
@@ -51,6 +52,7 @@ export const useAuthMutation = () => {
 
       openToast({ type: 'success', message: `${userAccountTypeDescription[userAccountType]} 로그인에 성공했습니다.` });
       router.replace('/home');
+      router.refresh();
     },
     onError: (err) => {
       router.replace('/auth/login');
