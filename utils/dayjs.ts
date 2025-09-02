@@ -27,6 +27,22 @@ export class Dayjs {
     return dayjs(this.date).format('MM.DD HH:mm');
   }
 
+  formatMMDDHHmmss(): string {
+    if (!this.date) {
+      return '-';
+    }
+
+    return dayjs(this.date).format('MM.DD HH:mm:ss');
+  }
+
+  formatHHmmss(): string {
+    if (!this.date) {
+      return '-';
+    }
+
+    return dayjs(this.date).format('HH:mm:ss');
+  }
+
   formatYYMMDD(): string {
     if (!this.date) {
       return '-';
