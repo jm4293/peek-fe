@@ -3,7 +3,9 @@ import AXIOS from '@/lib/axios';
 import {
   IGetStockKoreanDto,
   IGetStockKoreanListDto,
+  IGetStockKoreanRankDto,
   IStockKoreanListRes,
+  IStockKoreanRankListRes,
   IStockKoreanRes,
   IStockTokenRes,
 } from '@/services/stock';
@@ -19,7 +21,7 @@ class StockApi extends AXIOS {
     const { code } = dto;
 
     return await this.get<IStockKoreanRes, IGetStockKoreanDto>({
-      url: `${this._baseURL}/korean/${code}`,
+      url: `${this._baseURL}/korean/detail/${code}`,
     });
   }
 
@@ -30,8 +32,11 @@ class StockApi extends AXIOS {
     });
   }
 
-  async getStockDetail(code: string) {
-    return await this.get({ url: `${this._baseURL}/${code}` });
+  async getStockKoreanRank(dto: IGetStockKoreanRankDto) {
+    return await this.get<IStockKoreanRankListRes, IGetStockKoreanRankDto>({
+      url: `${this._baseURL}/korean/rank`,
+      params: dto,
+    });
   }
 }
 

@@ -1,3 +1,5 @@
+import { StockRankEnum } from '@/shared/enum/stock';
+
 export const QueryKeys = {
   user: {
     myInfo: () => ['my-info'],
@@ -17,5 +19,6 @@ export const QueryKeys = {
     token: () => ['stock', 'token'],
     stockKorean: (code: string) => ['stock', 'korean', code],
     stockKoreanList: (text?: string) => ['stock', 'korean-list', text],
+    stockKoreanRankList: (type: StockRankEnum) => ['stock', 'korean-rank-list', type],
   },
 };
