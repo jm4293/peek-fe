@@ -39,26 +39,17 @@ export const StockKoreanIndex = () => {
               <div className="flex flex-col">
                 <div className="flex items-center gap-2">
                   <Text.HEADING text="코스피" nowrap className="text-end" />
-
                   <Text.HEADING
                     text={kospi.prpr_nmix}
                     color={`${kospi.prdy_vrss_sign === '2' ? 'red' : kospi.prdy_vrss_sign === '5' ? 'blue' : 'default'}`}
                     nowrap
                     className="text-end"
                   />
-
-                  <div className="flex items-center gap-1">
-                    <Text.PARAGRAPH
-                      text={`${kospi.bstp_nmix_prdy_vrss}`}
-                      color={`${kospi.prdy_vrss_sign === '2' ? 'red' : kospi.prdy_vrss_sign === '5' ? 'blue' : 'default'}`}
-                      nowrap
-                    />
-                    <Text.PARAGRAPH
-                      text={`(${kospi.prdy_clpr_vrss_lwpr_rate}%)`}
-                      color={`${kospi.prdy_vrss_sign === '2' ? 'red' : kospi.prdy_vrss_sign === '5' ? 'blue' : 'default'}`}
-                      nowrap
-                    />
-                  </div>
+                  <Text.PARAGRAPH
+                    text={`${kospi.bstp_nmix_prdy_vrss}(${kospi.prdy_clpr_vrss_lwpr_rate}%)`}
+                    color={`${kospi.prdy_vrss_sign === '2' ? 'red' : kospi.prdy_vrss_sign === '5' ? 'blue' : 'default'}`}
+                    nowrap
+                  />
                 </div>
                 <div className="flex items-center gap-2">
                   <Text.PARAGRAPH text={`최고 ${kospi.nmix_hgpr}`} color="gray" nowrap />
@@ -90,26 +81,17 @@ export const StockKoreanIndex = () => {
               <div className="flex flex-col">
                 <div className="flex items-center gap-2">
                   <Text.HEADING text="코스닥" nowrap className="text-end" />
-
                   <Text.HEADING
                     text={kosdaq.prpr_nmix}
                     color={`${kosdaq.prdy_vrss_sign === '2' ? 'red' : kosdaq.prdy_vrss_sign === '5' ? 'blue' : 'default'}`}
                     nowrap
                     className="text-end"
                   />
-
-                  <div className="flex items-center gap-1">
-                    <Text.PARAGRAPH
-                      text={`${kosdaq.bstp_nmix_prdy_vrss}`}
-                      color={`${kosdaq.prdy_vrss_sign === '2' ? 'red' : kosdaq.prdy_vrss_sign === '5' ? 'blue' : 'default'}`}
-                      nowrap
-                    />
-                    <Text.PARAGRAPH
-                      text={`(${kosdaq.prdy_clpr_vrss_lwpr_rate}%)`}
-                      color={`${kosdaq.prdy_vrss_sign === '2' ? 'red' : kosdaq.prdy_vrss_sign === '5' ? 'blue' : 'default'}`}
-                      nowrap
-                    />
-                  </div>
+                  <Text.PARAGRAPH
+                    text={`${kosdaq.bstp_nmix_prdy_vrss}(${kosdaq.prdy_clpr_vrss_lwpr_rate}%)`}
+                    color={`${kosdaq.prdy_vrss_sign === '2' ? 'red' : kosdaq.prdy_vrss_sign === '5' ? 'blue' : 'default'}`}
+                    nowrap
+                  />
                 </div>
                 <div className="flex items-center gap-2">
                   <Text.PARAGRAPH text={`최고 ${kosdaq.nmix_hgpr}`} color="gray" nowrap />

@@ -1,6 +1,7 @@
 'use client';
 
 import { Dayjs, LocalStorage } from '@/utils';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
@@ -11,12 +12,7 @@ import { IStockCompanyModel } from '@/services/stock';
 
 import { LocalStorageKey } from '@/shared/constant/local-storage-key';
 
-interface IProps {
-  children: React.ReactNode;
-}
-
-export default function RecentStockList(props: IProps) {
-  const { children } = props;
+export default function RecentStockList() {
   const router = useRouter();
 
   const [searches, setSearches] = useState<(IStockCompanyModel & { timestamp: Date })[]>([]);
@@ -42,7 +38,9 @@ export default function RecentStockList(props: IProps) {
     return (
       <div className="flex justify-between items-center">
         <Text.HEADING text="최근 검색한 종목이 없습니다." />
-        {children}
+        <Link href="/stock/search" className="flex justify-end">
+          <Text.HEADING text="종목 검색" color="blue" />
+        </Link>
       </div>
     );
   }
@@ -51,7 +49,10 @@ export default function RecentStockList(props: IProps) {
     <div className="flex flex-col gap-4">
       <div className="flex justify-between items-center">
         <Text.HEADING text="최근 검색한 종목" />
-        {children}
+
+        <Link href="/stock/search" className="flex justify-end">
+          <Text.HEADING text="종목 검색" color="blue" />
+        </Link>
       </div>
       <ul className="flex items-center gap-4 flex-nowrap overflow-x-auto">
         {searches.map((item) => (

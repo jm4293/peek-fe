@@ -9,10 +9,11 @@ interface IProps {
   isFetchingNextPage: boolean;
   fetchNextPage: () => void;
   children: JSX.Element | JSX.Element[];
+  maxHeight?: number;
 }
 
 export const InfinityList = (props: IProps) => {
-  const { fetchNextPage, hasNextPage, isFetchingNextPage, children } = props;
+  const { fetchNextPage, hasNextPage, isFetchingNextPage, children, maxHeight = 70 } = props;
 
   const observerRef = useRef<IntersectionObserver | null>(null);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
@@ -40,7 +41,7 @@ export const InfinityList = (props: IProps) => {
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   return (
-    <ol className="w-full flex flex-col gap-2 py-2 max-h-[70vh] overflow-y-auto">
+    <ol className={`w-full h-[${maxHeight}vh] flex flex-col gap-8 py-2 overflow-y-auto`}>
       {children}
       <div ref={loadMoreRef} className="flex justify-center items-center">
         {isFetchingNextPage && <LineSkeleton h={2} />}

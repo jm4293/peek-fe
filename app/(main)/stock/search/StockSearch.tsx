@@ -51,61 +51,70 @@ export default function StockSearch() {
 
     return (
       <li key={id}>
-        <Wrapper.SECTION>
-          <div className="flex flex-col gap-1" onClick={() => clickHandler(item)}>
-            <div className="flex justify-between items-center gap-4">
-              <div className="flex flex-col">
-                <Text.HEADING text={companyName} className="whitespace-nowrap" />
-                <Text.CAPTION text={code} color="gray" />
-              </div>
-              <div className="w-32 flex flex-col">
-                <Text.PARAGRAPH
-                  text={industry}
-                  className="text-end w-full overflow-hidden whitespace-nowrap text-ellipsis"
-                />
-                <Text.CAPTION
-                  text={products}
-                  color="gray"
-                  className="text-end w-full overflow-hidden whitespace-nowrap text-ellipsis"
-                />
-              </div>
+        <div className="flex flex-col gap-1" onClick={() => clickHandler(item)}>
+          <div className="flex justify-between items-center gap-4">
+            <div className="flex flex-col">
+              <Text.HEADING text={companyName} className="whitespace-nowrap" />
+              <Text.CAPTION text={code} color="gray" />
+            </div>
+            <div className="w-32 flex flex-col">
+              <Text.PARAGRAPH
+                text={industry}
+                className="text-end w-full overflow-hidden whitespace-nowrap text-ellipsis"
+              />
+              <Text.CAPTION
+                text={products}
+                color="gray"
+                className="text-end w-full overflow-hidden whitespace-nowrap text-ellipsis"
+              />
             </div>
           </div>
-        </Wrapper.SECTION>
+        </div>
       </li>
     );
   };
 
   return (
     <div className="flex flex-col gap-4">
-      <Input
-        title="종목 검색"
-        name="title"
-        value={searchText}
-        onChange={(e) => setSearchText(e.target.value)}
-        placeholder="종목명을 입력해주세요"
-        required
-      />
+      <div>
+        <Wrapper.SECTION>
+          <Input
+            title="종목 검색"
+            name="title"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+            placeholder="종목명을 입력해주세요"
+            required
+          />
+        </Wrapper.SECTION>
+      </div>
 
-      {isPending || isLoading ? (
-        <div className="flex flex-col gap-2">
-          <LineSkeleton h={2} />
-          <LineSkeleton h={2} />
-          <LineSkeleton h={2} />
-        </div>
-      ) : data!.stockKoreanList.length > 0 ? (
-        <div className="flex flex-col gap-2">
-          <Text.CAPTION text={`총: ${data?.total}건`} className="text-end" />
-          <InfinityList hasNextPage={hasNextPage} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage}>
-            {data!.stockKoreanList.map(renderItem)}
-          </InfinityList>
-        </div>
-      ) : (
-        <div className="flex flex-col gap-2">
-          <Text.CAPTION text={`총: ${data?.total}건`} className="text-end" />
-          <Text.HEADING text="검색된 종목이 없습니다." className="text-center" />
-        </div>
-      )}
+      <div>
+        {isPending || isLoading ? (
+          <div className="flex flex-col gap-2">
+            <LineSkeleton h={2} />
+            <LineSkeleton h={2} />
+            <LineSkeleton h={2} />
+          </div>
+        ) : (
+          <Wrapper.SECTION>
+            <Text.CAPTION text={`총: ${data?.total}건`} className="text-end" />
+
+            <hr />
+
+            {data!.stockKoreanList.length > 0 ? (
+              <InfinityList
+                hasNextPage={hasNextPage}
+                isFetchingNextPage={isFetchingNextPage}
+                fetchNextPage={fetchNextPage}>
+                {data!.stockKoreanList.map(renderItem)}
+              </InfinityList>
+            ) : (
+              <Text.HEADING text="검색된 종목이 없습니다." className="text-center" />
+            )}
+          </Wrapper.SECTION>
+        )}
+      </div>
     </div>
   );
 }
