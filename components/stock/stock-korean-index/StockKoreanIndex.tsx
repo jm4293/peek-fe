@@ -32,7 +32,7 @@ export const StockKoreanIndex = () => {
         <Text.CAPTION text="10초마다 갱신됩니다." color="gray" className="text-end" />
       </div>
 
-      <Marquee speed={20} pauseOnHover={true} gradient={true} gradientWidth={40}>
+      <Marquee speed={20} pauseOnHover={true} gradient={false} gradientWidth={40}>
         <div className="mx-12">
           {kospi ? (
             <Link href="/index/kospi">

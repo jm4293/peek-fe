@@ -22,7 +22,7 @@ export const Currency = () => {
       {isLoading ? (
         <LineSkeleton />
       ) : isSuccess && data.length > 0 ? (
-        <Marquee speed={20} pauseOnHover={true} gradient={true} gradientWidth={40}>
+        <Marquee speed={20} pauseOnHover={true} gradient={false} gradientWidth={40}>
           {data.map((item) => (
             <div key={item.id} className="flex flex-col mx-4">
               <div className="flex items-center gap-2">
