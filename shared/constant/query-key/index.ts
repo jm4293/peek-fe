@@ -10,6 +10,9 @@ export const QueryKeys = {
     mineList: () => ['board', 'list-mine'],
     mineCommentList: () => ['board', 'comment', 'mine'],
   },
+  currency: {
+    list: () => ['currency', 'list'],
+  },
   stock: {
     token: () => ['stock', 'token'],
     stockKorean: (code: string) => ['stock', 'korean', code],

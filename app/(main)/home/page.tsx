@@ -1,3 +1,4 @@
+import { Currency } from '@/components/stock/currency';
 import { Wrapper } from '@/components/wrapper';
 
 import StockIndex from './StockIndex';
@@ -33,6 +34,7 @@ export default async function HomePage() {
   return (
     <Wrapper.MAIN text="메인">
       <StockIndex />
+      <Currency />
     </Wrapper.MAIN>
   );
 }
