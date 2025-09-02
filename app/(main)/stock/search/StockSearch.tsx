@@ -102,16 +102,18 @@ export default function StockSearch() {
 
             <hr />
 
-            {data!.stockKoreanList.length > 0 ? (
-              <InfinityList
-                hasNextPage={hasNextPage}
-                isFetchingNextPage={isFetchingNextPage}
-                fetchNextPage={fetchNextPage}>
-                {data!.stockKoreanList.map(renderItem)}
-              </InfinityList>
-            ) : (
-              <Text.HEADING text="검색된 종목이 없습니다." className="text-center" />
-            )}
+            <div className="max-h-[70vh] overflow-y-auto">
+              {data!.stockKoreanList.length > 0 ? (
+                <InfinityList
+                  hasNextPage={hasNextPage}
+                  isFetchingNextPage={isFetchingNextPage}
+                  fetchNextPage={fetchNextPage}>
+                  {data!.stockKoreanList.map(renderItem)}
+                </InfinityList>
+              ) : (
+                <Text.HEADING text="검색된 종목이 없습니다." className="text-center" />
+              )}
+            </div>
           </Wrapper.SECTION>
         )}
       </div>
