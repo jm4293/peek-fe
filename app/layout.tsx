@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/app/providers';
 
 import { Modal, Toast } from '@/components/modal';
 
+import MessagingConfig from '@/lib/firebase/messaging.config';
 import { NetworkError } from '@/lib/network-error';
 import QueryProvider from '@/lib/react-query/react-query.config';
 
@@ -47,14 +48,14 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <NetworkError>
             <QueryProvider>
-              {/*<MessagingConfig>*/}
-              <div className="relative min-h-screen">
-                <Header my={my} />
-                <main className="bg-theme-bg-main">
-                  <div className="m-auto max-w-screen-xl">{children}</div>
-                </main>
-              </div>
-              {/*</MessagingConfig>*/}
+              <MessagingConfig>
+                <div className="relative min-h-screen">
+                  <Header my={my} />
+                  <main className="bg-theme-bg-main">
+                    <div className="m-auto max-w-screen-xl">{children}</div>
+                  </main>
+                </div>
+              </MessagingConfig>
             </QueryProvider>
           </NetworkError>
 

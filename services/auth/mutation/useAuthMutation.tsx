@@ -1,12 +1,15 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useAtomValue } from 'jotai';
 import { useRouter } from 'next/navigation';
 
 import { useToast } from '@/hooks/modal';
 
 import AuthApi, { ICheckEmailCodeDto, ICheckEmailDto, ILoginEmailDto, ILoginOauthDto } from '@/services/auth';
-import UserApi from '@/services/user';
+import { useUserMutation } from '@/services/user';
 
 import { userAccountTypeDescription } from '@/shared/enum/user';
+
+import { notificationTokenAtom } from '@/stores/notification-token.atom';
 
 import { LocalStorage } from '@/utils/localStorage';
 import { SessionStorage } from '@/utils/sessionStorage';
@@ -15,11 +18,18 @@ export const useAuthMutation = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
 
+  const notificationToken = useAtomValue(notificationTokenAtom);
+
   const { openToast } = useToast();
+  const { notificationTokenMutation } = useUserMutation();
 
   const signInMutation = useMutation({
     mutationFn: (dto: ILoginEmailDto) => AuthApi.signInEmail(dto),
-    onSuccess: () => {
+    onSuccess: async () => {
+      if (notificationToken) {
+        await notificationTokenMutation.mutateAsync(notificationToken);
+      }
+
       openToast({ type: 'success', message: '로그인에 성공했습니다.' });
       router.push('/home');
     },
@@ -32,8 +42,12 @@ export const useAuthMutation = () => {
 
   const oauthSignInMutation = useMutation({
     mutationFn: (dto: ILoginOauthDto) => AuthApi.signInOauth(dto),
-    onSuccess: (_, variables) => {
+    onSuccess: async (_, variables) => {
       const { userAccountType } = variables;
+
+      if (notificationToken) {
+        await notificationTokenMutation.mutateAsync(notificationToken);
+      }
 
       openToast({ type: 'success', message: `${userAccountTypeDescription[userAccountType]} 로그인에 성공했습니다.` });
       router.replace('/home');
@@ -59,10 +73,6 @@ export const useAuthMutation = () => {
   //     router.push(`/auth/login?email=${email}`);
   //   },
   // });
-
-  const registerMessagingTokenMutation = useMutation({
-    mutationFn: (token: string) => UserApi.postRegisterPushToken({ pushToken: token }),
-  });
 
   const signoutMutation = useMutation({
     mutationFn: () => AuthApi.logout(),
@@ -106,6 +116,5 @@ export const useAuthMutation = () => {
     checkEmailCodeMutation,
     // signUpMutation,
     signoutMutation,
-    registerMessagingTokenMutation,
   };
 };

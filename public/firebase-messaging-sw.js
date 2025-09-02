@@ -20,6 +20,6 @@ const messaging = firebase.messaging();
 messaging.onBackgroundMessage(async (payload) => {
   await self.registration.showNotification(payload.notification.title, {
     body: payload.notification.body,
-    icon: '/peek.png',
+    icon: '/peek-logo.png',
   });
 });

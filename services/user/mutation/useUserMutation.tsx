@@ -106,6 +106,10 @@ export const useUserMutation = () => {
     },
   });
 
+  const notificationTokenMutation = useMutation({
+    mutationFn: (token: string) => UserApi.postRegisterPushToken({ pushToken: token }),
+  });
+
   return {
     updateUserMutation,
     updateThumbnailMutation,
@@ -117,5 +121,6 @@ export const useUserMutation = () => {
     readNotificationMutation,
     readAllNotificationMutation,
     deleteNotificationMutation,
+    notificationTokenMutation,
   };
 };

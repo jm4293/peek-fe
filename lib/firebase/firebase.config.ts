@@ -1,3 +1,5 @@
+'use client';
+
 import { initializeApp } from 'firebase/app';
 import { Messaging, getMessaging, getToken } from 'firebase/messaging';
 
@@ -19,15 +21,9 @@ const app = initializeApp(firebaseConfig);
 
 let messaging: Messaging | null = null;
 
-if (typeof window !== 'undefined') {
-  // getMessaging()는 클라이언트에서만 사용할 수 있다.
-  // service worker 등록은 클라이언트에서만 가능
-  messaging = getMessaging(app);
-}
-
 export const requestForToken = async () => {
   if (!messaging) {
-    return;
+    messaging = getMessaging(app);
   }
 
   return await getToken(messaging, { vapidKey: web_push_token });
