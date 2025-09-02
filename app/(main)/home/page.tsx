@@ -1,7 +1,6 @@
 import { Currency } from '@/components/stock/currency';
+import { StockKoreanIndex } from '@/components/stock/stock-korean-index';
 import { Wrapper } from '@/components/wrapper';
-
-import StockIndex from './StockIndex';
 
 export default async function HomePage() {
   // const { success, data } = await getStockToken();
@@ -33,7 +32,7 @@ export default async function HomePage() {
 
   return (
     <Wrapper.MAIN text="메인">
-      <StockIndex />
+      <StockKoreanIndex />
       <Currency />
     </Wrapper.MAIN>
   );
