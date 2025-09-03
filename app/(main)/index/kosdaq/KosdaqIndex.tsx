@@ -29,38 +29,28 @@ export default function KosdaqIndex() {
         <Text.HEADING text="코스피" nowrap className="text-end" />
 
         <Text.HEADING
-          text={kosdaq?.prpr_nmix}
-          color={`${kosdaq?.prdy_vrss_sign === '2' ? 'red' : kosdaq?.prdy_vrss_sign === '5' ? 'blue' : 'default'}`}
+          text={kosdaq?.jisu}
+          color={`${kosdaq?.sign === '2' ? 'red' : kosdaq?.sign === '5' ? 'blue' : 'default'}`}
           nowrap
           className="text-end"
         />
-
-        <div className="flex items-center gap-1">
-          <Text.PARAGRAPH
-            text={`${kosdaq?.bstp_nmix_prdy_vrss}`}
-            color={`${kosdaq?.prdy_vrss_sign === '2' ? 'red' : kosdaq?.prdy_vrss_sign === '5' ? 'blue' : 'default'}`}
-            nowrap
-          />
-          <Text.PARAGRAPH
-            text={`(${kosdaq?.prdy_clpr_vrss_lwpr_rate}%)`}
-            color={`${kosdaq?.prdy_vrss_sign === '2' ? 'red' : kosdaq?.prdy_vrss_sign === '5' ? 'blue' : 'default'}`}
-            nowrap
-          />
-        </div>
+        <Text.PARAGRAPH
+          text={`${kosdaq.change}(${kosdaq.drate}%)`}
+          color={`${kosdaq.sign === '2' ? 'red' : kosdaq.sign === '5' ? 'blue' : 'default'}`}
+          nowrap
+        />
       </div>
       <div className="flex items-center gap-2">
-        <Text.PARAGRAPH text={`최고 ${kosdaq?.nmix_hgpr}`} color="gray" nowrap />
-        <Text.PARAGRAPH text={`최저 ${kosdaq?.nmix_lwpr}`} color="gray" nowrap />
+        <Text.PARAGRAPH text={`최고 ${kosdaq.highjisu}`} color="gray" nowrap />
+        <Text.PARAGRAPH text={`최저 ${kosdaq.lowjisu}`} color="gray" nowrap />
         <Text.CAPTION
-          text={
-            kosdaq?.bsop_hour.slice(0, 2) + ':' + kosdaq?.bsop_hour.slice(2, 4) + ':' + kosdaq?.bsop_hour.slice(4, 6)
-          }
+          text={kosdaq.time.slice(0, 2) + ':' + kosdaq.time.slice(2, 4) + ':' + kosdaq.time.slice(4, 6)}
           color="gray"
           nowrap
         />
       </div>
 
-      <ChartStockIndex data={kosdaq} />
+      {/* <ChartStockIndex data={kosdaq} /> */}
     </Wrapper.SECTION>
   );
 }

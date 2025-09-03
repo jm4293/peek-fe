@@ -29,36 +29,28 @@ export default function KospiIndex() {
         <Text.HEADING text="코스피" nowrap className="text-end" />
 
         <Text.HEADING
-          text={kospi?.prpr_nmix}
-          color={`${kospi?.prdy_vrss_sign === '2' ? 'red' : kospi?.prdy_vrss_sign === '5' ? 'blue' : 'default'}`}
+          text={kospi?.jisu}
+          color={`${kospi?.sign === '2' ? 'red' : kospi?.sign === '5' ? 'blue' : 'default'}`}
           nowrap
           className="text-end"
         />
-
-        <div className="flex items-center gap-1">
-          <Text.PARAGRAPH
-            text={`${kospi?.bstp_nmix_prdy_vrss}`}
-            color={`${kospi?.prdy_vrss_sign === '2' ? 'red' : kospi?.prdy_vrss_sign === '5' ? 'blue' : 'default'}`}
-            nowrap
-          />
-          <Text.PARAGRAPH
-            text={`(${kospi?.prdy_clpr_vrss_lwpr_rate}%)`}
-            color={`${kospi?.prdy_vrss_sign === '2' ? 'red' : kospi?.prdy_vrss_sign === '5' ? 'blue' : 'default'}`}
-            nowrap
-          />
-        </div>
+        <Text.PARAGRAPH
+          text={`${kospi.change}(${kospi.drate}%)`}
+          color={`${kospi.sign === '2' ? 'red' : kospi.sign === '5' ? 'blue' : 'default'}`}
+          nowrap
+        />
       </div>
       <div className="flex items-center gap-2">
-        <Text.PARAGRAPH text={`최고 ${kospi?.nmix_hgpr}`} color="gray" nowrap />
-        <Text.PARAGRAPH text={`최저 ${kospi?.nmix_lwpr}`} color="gray" nowrap />
+        <Text.PARAGRAPH text={`최고 ${kospi.highjisu}`} color="gray" nowrap />
+        <Text.PARAGRAPH text={`최저 ${kospi.lowjisu}`} color="gray" nowrap />
         <Text.CAPTION
-          text={kospi?.bsop_hour.slice(0, 2) + ':' + kospi?.bsop_hour.slice(2, 4) + ':' + kospi?.bsop_hour.slice(4, 6)}
+          text={kospi.time.slice(0, 2) + ':' + kospi.time.slice(2, 4) + ':' + kospi.time.slice(4, 6)}
           color="gray"
           nowrap
         />
       </div>
 
-      <ChartStockIndex data={kospi} />
+      {/* <ChartStockIndex data={kospi} /> */}
     </Wrapper.SECTION>
   );
 }
