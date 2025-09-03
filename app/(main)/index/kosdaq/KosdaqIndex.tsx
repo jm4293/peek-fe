@@ -25,32 +25,33 @@ export default function KosdaqIndex() {
 
   return (
     <Wrapper.SECTION>
-      <div className="flex items-center gap-2">
-        <Text.HEADING text="코스피" nowrap className="text-end" />
-
-        <Text.HEADING
-          text={kosdaq?.jisu}
-          color={`${kosdaq?.sign === '2' ? 'red' : kosdaq?.sign === '5' ? 'blue' : 'default'}`}
-          nowrap
-          className="text-end"
-        />
-        <Text.PARAGRAPH
-          text={`${kosdaq.change}(${kosdaq.drate}%)`}
-          color={`${kosdaq.sign === '2' ? 'red' : kosdaq.sign === '5' ? 'blue' : 'default'}`}
-          nowrap
-        />
+      <div>
+        <div className="flex items-center gap-2">
+          <Text.HEADING text="코스닥" nowrap className="text-end" />
+          <Text.HEADING
+            text={kosdaq.jisu}
+            color={`${kosdaq.sign === '2' ? 'red' : kosdaq.sign === '5' ? 'blue' : 'default'}`}
+            nowrap
+            className="text-end"
+          />
+          <Text.PARAGRAPH
+            text={`${kosdaq.change}(${kosdaq.drate}%)`}
+            color={`${kosdaq.sign === '2' ? 'red' : kosdaq.sign === '5' ? 'blue' : 'default'}`}
+            nowrap
+          />
+        </div>
+        <div className="flex items-center gap-2">
+          <Text.PARAGRAPH text={`최고 ${kosdaq.highjisu}`} color="gray" nowrap />
+          <Text.PARAGRAPH text={`최저 ${kosdaq.lowjisu}`} color="gray" nowrap />
+          <Text.CAPTION
+            text={kosdaq.time.slice(0, 2) + ':' + kosdaq.time.slice(2, 4) + ':' + kosdaq.time.slice(4, 6)}
+            color="gray"
+            nowrap
+          />
+        </div>
       </div>
-      <div className="flex items-center gap-2">
-        <Text.PARAGRAPH text={`최고 ${kosdaq.highjisu}`} color="gray" nowrap />
-        <Text.PARAGRAPH text={`최저 ${kosdaq.lowjisu}`} color="gray" nowrap />
-        <Text.CAPTION
-          text={kosdaq.time.slice(0, 2) + ':' + kosdaq.time.slice(2, 4) + ':' + kosdaq.time.slice(4, 6)}
-          color="gray"
-          nowrap
-        />
-      </div>
 
-      {/* <ChartStockIndex data={kosdaq} /> */}
+      {kosdaq && <ChartStockIndex data={kosdaq} />}
     </Wrapper.SECTION>
   );
 }

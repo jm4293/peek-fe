@@ -25,32 +25,33 @@ export default function KospiIndex() {
 
   return (
     <Wrapper.SECTION>
-      <div className="flex items-center gap-2">
-        <Text.HEADING text="코스피" nowrap className="text-end" />
-
-        <Text.HEADING
-          text={kospi?.jisu}
-          color={`${kospi?.sign === '2' ? 'red' : kospi?.sign === '5' ? 'blue' : 'default'}`}
-          nowrap
-          className="text-end"
-        />
-        <Text.PARAGRAPH
-          text={`${kospi.change}(${kospi.drate}%)`}
-          color={`${kospi.sign === '2' ? 'red' : kospi.sign === '5' ? 'blue' : 'default'}`}
-          nowrap
-        />
+      <div>
+        <div className="flex items-center gap-2">
+          <Text.HEADING text="코스닥" nowrap className="text-end" />
+          <Text.HEADING
+            text={kospi.jisu}
+            color={`${kospi.sign === '2' ? 'red' : kospi.sign === '5' ? 'blue' : 'default'}`}
+            nowrap
+            className="text-end"
+          />
+          <Text.PARAGRAPH
+            text={`${kospi.change}(${kospi.drate}%)`}
+            color={`${kospi.sign === '2' ? 'red' : kospi.sign === '5' ? 'blue' : 'default'}`}
+            nowrap
+          />
+        </div>
+        <div className="flex items-center gap-2">
+          <Text.PARAGRAPH text={`최고 ${kospi.highjisu}`} color="gray" nowrap />
+          <Text.PARAGRAPH text={`최저 ${kospi.lowjisu}`} color="gray" nowrap />
+          <Text.CAPTION
+            text={kospi.time.slice(0, 2) + ':' + kospi.time.slice(2, 4) + ':' + kospi.time.slice(4, 6)}
+            color="gray"
+            nowrap
+          />
+        </div>
       </div>
-      <div className="flex items-center gap-2">
-        <Text.PARAGRAPH text={`최고 ${kospi.highjisu}`} color="gray" nowrap />
-        <Text.PARAGRAPH text={`최저 ${kospi.lowjisu}`} color="gray" nowrap />
-        <Text.CAPTION
-          text={kospi.time.slice(0, 2) + ':' + kospi.time.slice(2, 4) + ':' + kospi.time.slice(4, 6)}
-          color="gray"
-          nowrap
-        />
-      </div>
 
-      {/* <ChartStockIndex data={kospi} /> */}
+      {kospi && <ChartStockIndex data={kospi} />}
     </Wrapper.SECTION>
   );
 }
