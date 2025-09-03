@@ -40,28 +40,22 @@ export const StockKoreanIndex = () => {
                 <div className="flex items-center gap-2">
                   <Text.HEADING text="코스피" nowrap className="text-end" />
                   <Text.HEADING
-                    text={kospi.prpr_nmix}
-                    color={`${kospi.prdy_vrss_sign === '2' ? 'red' : kospi.prdy_vrss_sign === '5' ? 'blue' : 'default'}`}
+                    text={kospi.jisu}
+                    color={`${kospi.sign === '2' ? 'red' : kospi.sign === '5' ? 'blue' : 'default'}`}
                     nowrap
                     className="text-end"
                   />
                   <Text.PARAGRAPH
-                    text={`${kospi.bstp_nmix_prdy_vrss}(${kospi.prdy_clpr_vrss_lwpr_rate}%)`}
-                    color={`${kospi.prdy_vrss_sign === '2' ? 'red' : kospi.prdy_vrss_sign === '5' ? 'blue' : 'default'}`}
+                    text={`${kospi.change}(${kospi.drate}%)`}
+                    color={`${kospi.sign === '2' ? 'red' : kospi.sign === '5' ? 'blue' : 'default'}`}
                     nowrap
                   />
                 </div>
                 <div className="flex items-center gap-2">
-                  <Text.PARAGRAPH text={`최고 ${kospi.nmix_hgpr}`} color="gray" nowrap />
-                  <Text.PARAGRAPH text={`최저 ${kospi.nmix_lwpr}`} color="gray" nowrap />
+                  <Text.PARAGRAPH text={`최고 ${kospi.highjisu}`} color="gray" nowrap />
+                  <Text.PARAGRAPH text={`최저 ${kospi.lowjisu}`} color="gray" nowrap />
                   <Text.CAPTION
-                    text={
-                      kospi.bsop_hour.slice(0, 2) +
-                      ':' +
-                      kospi.bsop_hour.slice(2, 4) +
-                      ':' +
-                      kospi.bsop_hour.slice(4, 6)
-                    }
+                    text={kospi.time.slice(0, 2) + ':' + kospi.time.slice(2, 4) + ':' + kospi.time.slice(4, 6)}
                     color="gray"
                     nowrap
                   />
@@ -82,28 +76,22 @@ export const StockKoreanIndex = () => {
                 <div className="flex items-center gap-2">
                   <Text.HEADING text="코스닥" nowrap className="text-end" />
                   <Text.HEADING
-                    text={kosdaq.prpr_nmix}
-                    color={`${kosdaq.prdy_vrss_sign === '2' ? 'red' : kosdaq.prdy_vrss_sign === '5' ? 'blue' : 'default'}`}
+                    text={kosdaq.jisu}
+                    color={`${kosdaq.sign === '2' ? 'red' : kosdaq.sign === '5' ? 'blue' : 'default'}`}
                     nowrap
                     className="text-end"
                   />
                   <Text.PARAGRAPH
-                    text={`${kosdaq.bstp_nmix_prdy_vrss}(${kosdaq.prdy_clpr_vrss_lwpr_rate}%)`}
-                    color={`${kosdaq.prdy_vrss_sign === '2' ? 'red' : kosdaq.prdy_vrss_sign === '5' ? 'blue' : 'default'}`}
+                    text={`${kosdaq.change}(${kosdaq.drate}%)`}
+                    color={`${kosdaq.sign === '2' ? 'red' : kosdaq.sign === '5' ? 'blue' : 'default'}`}
                     nowrap
                   />
                 </div>
                 <div className="flex items-center gap-2">
-                  <Text.PARAGRAPH text={`최고 ${kosdaq.nmix_hgpr}`} color="gray" nowrap />
-                  <Text.PARAGRAPH text={`최저 ${kosdaq.nmix_lwpr}`} color="gray" nowrap />
+                  <Text.PARAGRAPH text={`최고 ${kosdaq.highjisu}`} color="gray" nowrap />
+                  <Text.PARAGRAPH text={`최저 ${kosdaq.lowjisu}`} color="gray" nowrap />
                   <Text.CAPTION
-                    text={
-                      kosdaq.bsop_hour.slice(0, 2) +
-                      ':' +
-                      kosdaq.bsop_hour.slice(2, 4) +
-                      ':' +
-                      kosdaq.bsop_hour.slice(4, 6)
-                    }
+                    text={kosdaq.time.slice(0, 2) + ':' + kosdaq.time.slice(2, 4) + ':' + kosdaq.time.slice(4, 6)}
                     color="gray"
                     nowrap
                   />

@@ -19,7 +19,7 @@ export const useKoreanStockIndex = (props: IProps) => {
   useEffect(() => {
     const serverUrl = process.env.NEXT_PUBLIC_API_URL;
 
-    const socket = io(`${serverUrl}/kis/korean/index`, {
+    const socket = io(`${serverUrl}/ls/korean/index`, {
       transports: ['websocket'],
     });
 
@@ -29,13 +29,13 @@ export const useKoreanStockIndex = (props: IProps) => {
 
     if (isKospi) {
       socket.on(KOSPI_CODE, (data: IKoreanStockIndex) => {
-        setKospi(data.prpr_nmix ? data : null);
+        setKospi(data || null);
       });
     }
 
     if (isKosdaq) {
       socket.on(KOSDAQ_CODE, (data: IKoreanStockIndex) => {
-        setKosdaq(data.prpr_nmix ? data : null);
+        setKosdaq(data || null);
       });
     }
 
