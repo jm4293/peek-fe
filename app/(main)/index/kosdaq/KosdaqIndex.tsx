@@ -17,7 +17,7 @@ export default function KosdaqIndex() {
   if (!kosdaq) {
     return (
       <div className="flex items-center gap-2">
-        <Text.HEADING text="코스피" nowrap />
+        <Text.HEADING text="코스닥" nowrap />
         <Text.PARAGRAPH text="데이터가 없습니다." color="gray" nowrap />
       </div>
     );

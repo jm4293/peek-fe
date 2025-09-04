@@ -27,7 +27,7 @@ export default function KospiIndex() {
     <Wrapper.SECTION>
       <div>
         <div className="flex items-center gap-2">
-          <Text.HEADING text="코스닥" nowrap className="text-end" />
+          <Text.HEADING text="코스피" nowrap className="text-end" />
           <Text.HEADING
             text={kospi.jisu}
             color={`${kospi.sign === '2' ? 'red' : kospi.sign === '5' ? 'blue' : 'default'}`}
