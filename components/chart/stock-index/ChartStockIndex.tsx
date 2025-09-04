@@ -29,6 +29,14 @@ const light = {
   },
   timeScale: {
     borderColor: '#e1e1e1',
+    timeVisible: true,
+    secondsVisible: false,
+    tickMarkFormatter: (time: number, tickMarkType: any, locale: string) => {
+      const date = new Date(time * 1000);
+      const hours = date.getHours().toString().padStart(2, '0');
+      const minutes = date.getMinutes().toString().padStart(2, '0');
+      return `${hours}:${minutes}`;
+    },
   },
 };
 
@@ -48,7 +56,15 @@ const dark = {
     borderColor: '#2a2a2e',
   },
   timeScale: {
-    borderColor: '#2a2a2e',
+    borderColor: '#e1e1e1',
+    timeVisible: true,
+    secondsVisible: false,
+    tickMarkFormatter: (time: number, tickMarkType: any, locale: string) => {
+      const date = new Date(time * 1000);
+      const hours = date.getHours().toString().padStart(2, '0');
+      const minutes = date.getMinutes().toString().padStart(2, '0');
+      return `${hours}:${minutes}`;
+    },
   },
 };
 
@@ -119,3 +135,5 @@ export const ChartStockIndex = (props: IProps) => {
 
   return <div ref={containerRef} />;
 };
+
+// https://tradingview.github.io/lightweight-charts/docs/series-types

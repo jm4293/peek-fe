@@ -16,7 +16,7 @@ export const StockKoreanIndex = () => {
     return (
       <Wrapper.SECTION>
         <div className="flex justify-between items-center">
-          <Text.PARAGRAPH text="지수" />
+          <Text.HEADING text="국내 지수" />
           <Text.CAPTION text="10초마다 갱신됩니다." color="gray" className="text-end" />
         </div>
 
