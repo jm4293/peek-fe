@@ -20,5 +20,6 @@ export const QueryKeys = {
     stockKorean: (code: string) => ['stock', 'korean', code],
     stockKoreanList: (text?: string) => ['stock', 'korean-list', text],
     stockKoreanRankList: (type: StockRankEnum) => ['stock', 'korean-rank-list', type],
+    stockKoreanIndexCandleList: (code: string) => ['stock', 'korean-index-candle-list', code],
   },
 };

@@ -5,8 +5,7 @@ import { LineSkeleton } from '@/components/skeleton';
 import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
-import { IStockKoreanRankModel } from '@/services/stock';
-import { useStockKoreanRankList } from '@/services/stock/query/useStockKoreanRankList';
+import { IStockKoreanRankModel, useStockKoreanRankList } from '@/services/stock';
 
 import { StockRankEnum } from '@/shared/enum/stock';
 
