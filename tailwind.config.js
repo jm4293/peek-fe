@@ -14,6 +14,7 @@ module.exports = {
         // 'dark-bg-2': '#1F1F22',
         // 'dark-txt-1': '#D0D0D4',
         // 'dark-txt-2': '#8B8B8E',
+        'theme-main-color': 'var(--main-color)',
 
         'theme-bg-header': 'var(--bg-header)',
         'theme-bg-main': 'var(--bg-main)',

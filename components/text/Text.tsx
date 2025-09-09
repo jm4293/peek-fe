@@ -1,7 +1,7 @@
 interface IProps {
   text: string;
   className?: string;
-  color?: 'default' | 'gray' | 'blue' | 'red';
+  color?: 'default' | 'gray' | 'blue' | 'red' | 'main';
   nowrap?: boolean;
 }
 
@@ -10,6 +10,7 @@ const textColor = {
   gray: 'text-theme-txt-gray',
   blue: 'text-theme-txt-blue',
   red: 'text-theme-txt-red',
+  main: 'text-theme-main-color',
 };
 
 const TITLE = (props: IProps) => {

@@ -19,8 +19,8 @@ export default function User(props: IProps) {
   return (
     <Wrapper.SECTION>
       <Link href="/user/detail" className="py-1 flex items-center justify-between">
-        <div className="w-full flex items-center gap-2">
-          <Thumbnail thumbnail={my.user.thumbnail} w={40} />
+        <div className="w-full flex items-center gap-4">
+          <Thumbnail thumbnail={my.user.thumbnail} />
           <div>
             <Text.HEADING text={my.user.nickname} />
             <div className="flex items-center gap-2">

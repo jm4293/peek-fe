@@ -9,8 +9,7 @@ import MessagingConfig from '@/lib/firebase/messaging.config';
 import { NetworkError } from '@/lib/network-error';
 import QueryProvider from '@/lib/react-query/react-query.config';
 
-import { myAction } from '@/services/user';
-
+import { Footer } from './Footer';
 import { Header } from './Header';
 import './globals.css';
 
@@ -40,8 +39,6 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const { data: my } = await myAction();
-
   return (
     <html lang="ko" suppressHydrationWarning>
       <body>
@@ -49,11 +46,12 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           <NetworkError>
             <QueryProvider>
               <MessagingConfig>
-                <div className="relative min-h-screen">
-                  <Header my={my} />
+                <div className="relative">
+                  <Header />
                   <main className="bg-theme-bg-main">
                     <div className="m-auto max-w-screen-xl">{children}</div>
                   </main>
+                  <Footer />
                 </div>
               </MessagingConfig>
             </QueryProvider>

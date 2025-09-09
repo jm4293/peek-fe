@@ -43,7 +43,7 @@ export default function BoardDetail(props: IProps) {
               <Text.HEADING text={board.title} />
             </div>
             <div className="flex items-center gap-1">
-              <Thumbnail thumbnail={board.userAccount.user.thumbnail} w={18} />
+              <Thumbnail thumbnail={board.userAccount.user.thumbnail} />
               <Text.PARAGRAPH text={board.userAccount.user.nickname} />
             </div>
           </div>

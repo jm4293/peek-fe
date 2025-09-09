@@ -1,13 +1,13 @@
+import { CircleUser } from 'lucide-react';
 import Image from 'next/image';
-import { PiUserCircleLight } from 'react-icons/pi';
 
 interface IProps {
   thumbnail: string | null;
-  w?: number;
+  size?: number;
 }
 
 export const Thumbnail = (props: IProps) => {
-  const { thumbnail, w = 24 } = props;
+  const { thumbnail, size = 24 } = props;
 
   return (
     <>
@@ -15,12 +15,12 @@ export const Thumbnail = (props: IProps) => {
         <Image
           src={`${process.env.NEXT_PUBLIC_IMAGE_HOST}/THUMBNAIL/${thumbnail}`}
           alt="thumbnail"
-          width={w}
-          height={w}
+          width={size}
+          height={size}
           className="rounded-full"
         />
       ) : (
-        <PiUserCircleLight size={w} />
+        <CircleUser size={size} />
       )}
     </>
   );

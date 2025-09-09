@@ -54,7 +54,7 @@ export default function BoardList() {
                 <Text.HEADING text={title} />
               </div>
               <div className="flex items-center gap-1">
-                <Thumbnail thumbnail={userAccount.user.thumbnail} w={18} />
+                <Thumbnail thumbnail={userAccount.user.thumbnail} />
                 <Text.PARAGRAPH text={userAccount.user.nickname} />
               </div>
             </div>

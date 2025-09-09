@@ -100,7 +100,7 @@ export default function BoardComment(props: IProps) {
 
                       <div className="flex justify-between items-center gap-2">
                         <div className="flex items-center gap-1">
-                          <Thumbnail thumbnail={boardComment.userAccount.user.thumbnail} w={18} />
+                          <Thumbnail thumbnail={boardComment.userAccount.user.thumbnail} />
                           <Text.PARAGRAPH text={boardComment.userAccount.user.nickname} />
                         </div>
 
@@ -124,7 +124,7 @@ export default function BoardComment(props: IProps) {
 
                           <div className="flex items-center gap-2">
                             <div className="flex items-center gap-1">
-                              <Thumbnail thumbnail={reply.userAccount.user.thumbnail} w={18} />
+                              <Thumbnail thumbnail={reply.userAccount.user.thumbnail} />
                               <Text.PARAGRAPH text={reply.userAccount.user.nickname} />
                             </div>
 
