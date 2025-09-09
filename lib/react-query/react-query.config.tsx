@@ -18,7 +18,7 @@ export default function QueryProvider(props: IProps) {
     new QueryClient({
       defaultOptions: {
         queries: {
-          throwOnError: true,
+          throwOnError: false,
           networkMode: 'always',
           retry: 0,
         },
