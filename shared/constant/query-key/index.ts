@@ -1,3 +1,4 @@
+import { NoticeTypeEnum } from '@/shared/enum/notice';
 import { StockRankEnum } from '@/shared/enum/stock';
 
 export const QueryKeys = {
@@ -21,5 +22,8 @@ export const QueryKeys = {
     stockKoreanList: (text?: string) => ['stock', 'korean-list', text],
     stockKoreanRankList: (type: StockRankEnum) => ['stock', 'korean-rank-list', type],
     stockKoreanIndexCandleList: (code: string) => ['stock', 'korean-index-candle-list', code],
+  },
+  notice: {
+    list: (type?: NoticeTypeEnum) => ['notice', 'list', type],
   },
 };

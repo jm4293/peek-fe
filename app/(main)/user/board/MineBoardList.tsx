@@ -27,7 +27,7 @@ export default function MineBoardList() {
     if (isSuccess && boardList) {
       setList(boardList.boards);
     }
-  }, [isSuccess, boardList]);
+  }, [isSuccess]);
 
   const renderItem = (item: IBoardModel) => {
     const { id, category, title, createdAt, commentCount, likeCount } = item;

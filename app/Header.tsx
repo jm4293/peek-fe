@@ -59,13 +59,11 @@ export const Header = () => {
 
   if (isMobile) {
     return (
-      <>
-        <header className="flex justify-between items-center bg-theme-bg-header">
-          {pathname.split('/').length > 2 ? <BackButton /> : <div style={{ width: '24px' }} />}
-          <Logo />
-          <ThemeSwitcher />
-        </header>
-      </>
+      <header className="flex justify-between items-center bg-theme-bg-header">
+        {pathname.split('/').length > 2 ? <BackButton /> : <div style={{ width: '24px' }} />}
+        <Logo />
+        <ThemeSwitcher />
+      </header>
     );
   }
 
@@ -84,7 +82,7 @@ export const Header = () => {
           <div className="flex items-center gap-4">
             {menuItems.map((item) => (
               <Link key={item.name} href={item.path} scroll={true}>
-                <Text.HEADING text={item.name} color={pathname.startsWith(item.path) ? 'main' : 'default'} />
+                <Text.HEADING text={item.name} />
               </Link>
             ))}
           </div>
