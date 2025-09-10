@@ -19,7 +19,7 @@ export const useKoreanStockIndex = (props: IProps) => {
   useEffect(() => {
     const serverUrl = process.env.NEXT_PUBLIC_API_URL;
 
-    const socket = io(`${serverUrl}/ls/korean/index`, {
+    const socket = io(`${serverUrl}/kis/korean/index`, {
       transports: ['websocket'],
     });
 
