@@ -99,12 +99,14 @@ export default function BoardComment(props: IProps) {
                       <Text.HEADING text={boardComment.content} />
 
                       <div className="flex justify-between items-center gap-2">
-                        <div className="flex items-center gap-1">
-                          <Thumbnail thumbnail={boardComment.userAccount.user.thumbnail} />
-                          <Text.PARAGRAPH text={boardComment.userAccount.user.nickname} />
-                        </div>
+                        <div className="flex flex-col items-end gap-1">
+                          <div className="flex items-center gap-1">
+                            <Thumbnail thumbnail={boardComment.userAccount.user.thumbnail} size={16} />
+                            <Text.PARAGRAPH text={boardComment.userAccount.user.nickname} />
+                          </div>
 
-                        <Text.CAPTION text={Dayjs.of(boardComment.createdAt).formatMMDDHHmm()} color="gray" />
+                          <Text.CAPTION text={Dayjs.of(boardComment.createdAt).formatYYMMDDHHmm()} color="gray" />
+                        </div>
 
                         {boardComment.userAccount.email === my?.email && (
                           <div className="cursor-pointer" onClick={() => onDeleteCommentHandler(boardComment.id)}>
@@ -114,30 +116,34 @@ export default function BoardComment(props: IProps) {
                       </div>
                     </div>
 
-                    {boardComment.replies.length > 0 &&
-                      boardComment.replies.map((reply) => (
-                        <div key={reply.id} className="pl-2 flex justify-between items-center">
-                          <div className="flex items-center gap-1">
-                            <CornerDownRight />
-                            <Text.HEADING text={reply.content} />
-                          </div>
-
-                          <div className="flex items-center gap-2">
+                    <div className="flex flex-col gap-1 mt-1">
+                      {boardComment.replies.length > 0 &&
+                        boardComment.replies.map((reply) => (
+                          <div key={reply.id} className="flex justify-between items-center">
                             <div className="flex items-center gap-1">
-                              <Thumbnail thumbnail={reply.userAccount.user.thumbnail} />
-                              <Text.PARAGRAPH text={reply.userAccount.user.nickname} />
+                              <CornerDownRight />
+                              <Text.HEADING text={reply.content} />
                             </div>
 
-                            <Text.CAPTION text={Dayjs.of(reply.createdAt).formatMMDDHHmm()} color="gray" />
+                            <div className="flex items-center gap-2">
+                              <div className="flex flex-col items-end gap-1">
+                                <div className="flex items-center gap-1">
+                                  <Thumbnail thumbnail={reply.userAccount.user.thumbnail} size={16} />
+                                  <Text.PARAGRAPH text={reply.userAccount.user.nickname} />
+                                </div>
 
-                            {reply.userAccount.email === my?.email && (
-                              <div className="cursor-pointer" onClick={() => onDeleteCommentHandler(reply.id)}>
-                                <Text.PARAGRAPH text="삭제" color="red" />
+                                <Text.CAPTION text={Dayjs.of(reply.createdAt).formatYYMMDDHHmm()} color="gray" />
                               </div>
-                            )}
+
+                              {reply.userAccount.email === my?.email && (
+                                <div className="cursor-pointer" onClick={() => onDeleteCommentHandler(reply.id)}>
+                                  <Text.PARAGRAPH text="삭제" color="red" />
+                                </div>
+                              )}
+                            </div>
                           </div>
-                        </div>
-                      ))}
+                        ))}
+                    </div>
 
                     {isReply === boardComment.id && (
                       <Input

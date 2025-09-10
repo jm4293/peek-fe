@@ -43,13 +43,13 @@ export default function BoardDetail(props: IProps) {
               <Text.HEADING text={board.title} />
             </div>
             <div className="flex items-center gap-1">
-              <Thumbnail thumbnail={board.userAccount.user.thumbnail} />
+              <Thumbnail thumbnail={board.userAccount.user.thumbnail} size={16} />
               <Text.PARAGRAPH text={board.userAccount.user.nickname} />
             </div>
           </div>
 
           <div className="flex justify-end">
-            <Text.CAPTION text={Dayjs.of(board.createdAt).formatMMDDHHmm()} color="gray" />
+            <Text.CAPTION text={Dayjs.of(board.createdAt).formatYYMMDDHHmm()} color="gray" />
           </div>
         </div>
       </Wrapper.SECTION>

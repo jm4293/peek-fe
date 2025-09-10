@@ -54,7 +54,7 @@ export default function BoardList() {
                 <Text.HEADING text={title} />
               </div>
               <div className="flex items-center gap-1">
-                <Thumbnail thumbnail={userAccount.user.thumbnail} />
+                <Thumbnail thumbnail={userAccount.user.thumbnail} size={16} />
                 <Text.PARAGRAPH text={userAccount.user.nickname} />
               </div>
             </div>
@@ -62,11 +62,11 @@ export default function BoardList() {
             <div className="flex justify-between items-center">
               <div className="flex gap-2">
                 <div className="flex items-center gap-1">
-                  <Heart color="#8b8b8e" />
+                  <Heart color="#8b8b8e" size={16} />
                   <Text.PARAGRAPH text={String(likeCount)} color="gray" />
                 </div>
                 <div className="flex items-center gap-1">
-                  <MessageCircle color="#8b8b8e" />
+                  <MessageCircle color="#8b8b8e" size={16} />
                   <Text.PARAGRAPH text={String(commentCount)} color="gray" />
                 </div>
               </div>
