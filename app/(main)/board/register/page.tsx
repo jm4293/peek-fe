@@ -11,7 +11,7 @@ export default async function BoardRegisterPage() {
   if (!data) {
     return (
       <Wrapper.SECTION>
-        <Text.HEADING text="게시판 카테고리 목록을 불러오는데 실패했습니다." />
+        <Text.HEADING text="주식 카테고리 목록을 불러오는데 실패했습니다." />
       </Wrapper.SECTION>
     );
   }

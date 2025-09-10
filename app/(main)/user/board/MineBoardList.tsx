@@ -1,8 +1,8 @@
 'use client';
 
+import { Heart, MessageCircle } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { BiComment, BiHeart } from 'react-icons/bi';
 
 import { InfinityList } from '@/components/infinity-list';
 import { Text } from '@/components/text';
@@ -46,11 +46,11 @@ export default function MineBoardList() {
             <div className="flex justify-between items-center">
               <div className="flex gap-2">
                 <div className="flex items-center gap-1">
-                  <BiHeart color="#666666" />
+                  <Heart color="#8b8b8e" />
                   <Text.PARAGRAPH text={String(likeCount)} color="gray" />
                 </div>
                 <div className="flex items-center gap-1">
-                  <BiComment color="#666666" />
+                  <MessageCircle color="#8b8b8e" />
                   <Text.PARAGRAPH text={String(commentCount)} color="gray" />
                 </div>
               </div>

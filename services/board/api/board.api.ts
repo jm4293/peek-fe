@@ -16,7 +16,6 @@ import {
 class BoardApi extends AXIOS {
   private readonly _baseURL = '/board';
 
-  // 게시판
   async getBoardDetail(boardId: number) {
     return await this.get<IBoardDetailRes, null>({ url: `${this._baseURL}/${boardId}` });
   }
@@ -52,7 +51,6 @@ class BoardApi extends AXIOS {
     return await this.delete<null, null>({ url: `${this._baseURL}/${boardId}` });
   }
 
-  // 게시판 댓글
   async getBoardCommentList(params: IBoardCommentListDto) {
     const { boardId, page } = params;
 
@@ -93,7 +91,6 @@ class BoardApi extends AXIOS {
     return await this.delete<null, null>({ url: `${this._baseURL}/${boardId}/comment/${boardCommentId}` });
   }
 
-  // 게시판 좋아요(찜)
   async boardLike(boardSeq: number) {
     return await this.post<null, {}>({ url: `${this._baseURL}/${boardSeq}/like`, data: {} });
   }

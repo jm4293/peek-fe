@@ -14,16 +14,16 @@ export default async function BoardPage() {
 
   if (!data) {
     return (
-      <Wrapper.MAIN text="게시판">
+      <Wrapper.MAIN text="커뮤니티">
         <Wrapper.SECTION>
-          <Text.HEADING text="게시판 카테고리 목록을 불러오는데 실패했습니다." />
+          <Text.HEADING text="주식 카테고리 목록을 불러오는데 실패했습니다." />
         </Wrapper.SECTION>
       </Wrapper.MAIN>
     );
   }
 
   return (
-    <Wrapper.MAIN text="게시판">
+    <Wrapper.MAIN text="커뮤니티">
       <div className="flex flex-col gap-2">
         <BoardCategory stockCategoryList={data} />
         <BoardList />

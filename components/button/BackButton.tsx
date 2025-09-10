@@ -1,10 +1,10 @@
 'use client';
 
+import { ChevronLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { IoIosArrowBack } from 'react-icons/io';
 
 export const BackButton = () => {
   const router = useRouter();
 
-  return <IoIosArrowBack size={24} onClick={() => router.back()} />;
+  return <ChevronLeft onClick={() => router.back()} />;
 };

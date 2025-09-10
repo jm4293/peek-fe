@@ -19,7 +19,7 @@ export const Footer = () => {
   const menuItems = [
     { path: '/home', icon: House, label: '메인' },
     { path: '/stock', icon: ChartCandlestick, label: '주식' },
-    { path: '/board', icon: MessagesSquare, label: '게시판' },
+    { path: '/board', icon: MessagesSquare, label: '커뮤니티' },
     { path: '/user', icon: User, label: '내 정보' },
   ];
 

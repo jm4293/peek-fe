@@ -1,5 +1,5 @@
+import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
-import { MdOutlineArrowForwardIos } from 'react-icons/md';
 
 import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
@@ -30,20 +30,20 @@ export default async function UserPage() {
           <div className="flex flex-col gap-4">
             <Link href="" className="flex items-center justify-between">
               <Text.HEADING text="즐겨찾기 종목" />
-              <MdOutlineArrowForwardIos />
+              <ChevronRight />
             </Link>
           </div>
         </Wrapper.SECTION>
 
-        <Wrapper.SECTION text="게시판">
+        <Wrapper.SECTION text="커뮤니티">
           <div className="flex flex-col gap-4">
             <Link href="/user/board" className="flex items-center justify-between">
-              <Text.HEADING text="작성한 게시글" />
-              <MdOutlineArrowForwardIos />
+              <Text.HEADING text="작성한 커뮤니티 게시글" />
+              <ChevronRight />
             </Link>
             <Link href="/user/board/comment" className="flex items-center justify-between">
-              <Text.HEADING text="작성한 게시글 댓글" />
-              <MdOutlineArrowForwardIos />
+              <Text.HEADING text="작성한 커뮤니티 게시글 댓글" />
+              <ChevronRight />
             </Link>
           </div>
         </Wrapper.SECTION>

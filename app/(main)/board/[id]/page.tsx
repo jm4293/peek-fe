@@ -23,7 +23,7 @@ export default async function BoardDetailPage(props: IProps) {
   if (!success || !data) {
     return (
       <Wrapper.SECTION>
-        <Text.HEADING text="게시판 불러오는데 실패했습니다." />
+        <Text.HEADING text="게시글 불러오는데 실패했습니다." />
       </Wrapper.SECTION>
     );
   }

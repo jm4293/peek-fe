@@ -1,5 +1,5 @@
+import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
-import { MdOutlineArrowForwardIos } from 'react-icons/md';
 
 import { Thumbnail } from '@/components/image';
 import { Text } from '@/components/text';
@@ -30,7 +30,7 @@ export default function User(props: IProps) {
             </div>
           </div>
         </div>
-        <MdOutlineArrowForwardIos />
+        <ChevronRight />
       </Link>
     </Wrapper.SECTION>
   );

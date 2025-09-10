@@ -1,5 +1,5 @@
+import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
-import { MdOutlineArrowForwardIos } from 'react-icons/md';
 
 import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
@@ -47,11 +47,11 @@ export default async function UserDetailPage() {
         <Wrapper.SECTION text="변경">
           <Link href="/user/modify" className="flex items-center justify-between">
             <Text.HEADING text="유저정보 변경" />
-            <MdOutlineArrowForwardIos />
+            <ChevronRight />
           </Link>
           <Link href="/user/modify/password" className="flex items-center justify-between">
             <Text.HEADING text="비밀번호 변경" />
-            <MdOutlineArrowForwardIos />
+            <ChevronRight />
           </Link>
         </Wrapper.SECTION>
 

@@ -1,10 +1,10 @@
 'use client';
 
 import { Dayjs, LocalStorage } from '@/utils';
+import { X } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { IoMdClose } from 'react-icons/io';
 
 import { Text } from '@/components/text';
 
@@ -65,7 +65,7 @@ export default function RecentStockList() {
               <Text.CAPTION text={Dayjs.of(item.timestamp).formatMMDD()} nowrap />
             </div>
 
-            <IoMdClose onClick={(event) => handleRemove(event, item.id)} />
+            <X onClick={(event) => handleRemove(event, item.id)} />
           </li>
         ))}
       </ul>

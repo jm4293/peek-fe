@@ -11,7 +11,7 @@ import { Text } from '@/components/text';
 const menuItems = [
   { name: '메인', path: '/home' },
   { name: '주식', path: '/stock' },
-  { name: '게시판', path: '/board' },
+  { name: '커뮤니티', path: '/board' },
   { name: '내 정보', path: '/user' },
 ];
 

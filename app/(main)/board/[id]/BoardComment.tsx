@@ -1,7 +1,7 @@
 'use client';
 
+import { CornerDownRight } from 'lucide-react';
 import { useState } from 'react';
-import { BsArrowReturnRight } from 'react-icons/bs';
 
 import { Thumbnail } from '@/components/image';
 import { Input } from '@/components/input';
@@ -118,7 +118,7 @@ export default function BoardComment(props: IProps) {
                       boardComment.replies.map((reply) => (
                         <div key={reply.id} className="pl-2 flex justify-between items-center">
                           <div className="flex items-center gap-1">
-                            <BsArrowReturnRight color="#666666" />
+                            <CornerDownRight />
                             <Text.HEADING text={reply.content} />
                           </div>
 

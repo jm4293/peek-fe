@@ -1,8 +1,8 @@
 'use client';
 
+import { Heart, MessageCircle } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { BiComment, BiHeart } from 'react-icons/bi';
 
 import { Thumbnail } from '@/components/image';
 import { InfinityList } from '@/components/infinity-list';
@@ -62,11 +62,11 @@ export default function BoardList() {
             <div className="flex justify-between items-center">
               <div className="flex gap-2">
                 <div className="flex items-center gap-1">
-                  <BiHeart color="#8b8b8e" />
+                  <Heart color="#8b8b8e" />
                   <Text.PARAGRAPH text={String(likeCount)} color="gray" />
                 </div>
                 <div className="flex items-center gap-1">
-                  <BiComment color="#8b8b8e" />
+                  <MessageCircle color="#8b8b8e" />
                   <Text.PARAGRAPH text={String(commentCount)} color="gray" />
                 </div>
               </div>
