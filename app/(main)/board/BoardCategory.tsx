@@ -6,7 +6,7 @@ import { Wrapper } from '@/components/wrapper';
 
 import { useQueryParams } from '@/hooks/queryParams';
 
-import { IStockCategoryListRes, IStockCategoryModel } from '@/services/stock';
+import { IStockCategoryListRes } from '@/services/stock';
 
 interface IProps extends IStockCategoryListRes {}
 
@@ -16,43 +16,20 @@ export default function BoardCategory(props: IProps) {
   const { getQuery, setQuery } = useQueryParams();
   const category = getQuery('category');
 
-  const handleCategoryClick = (category: IStockCategoryModel) => {
-    setQuery('category', category.id.toString());
-  };
-
   return (
     <Wrapper.SECTION text="카테고리">
       <div className="flex items-center gap-4">
-        {stockCategoryList.reduce(
-          (acc, cur) => {
-            if (category === String(cur.id)) {
-              acc.push(
-                <Clickable key={cur.id} onClick={() => handleCategoryClick(cur)}>
-                  <Text.HEADING text={cur.name} color={category === String(cur.id) ? 'default' : 'gray'} />
-                </Clickable>,
-              );
-            } else {
-              acc.push(
-                <Clickable key={cur.id} onClick={() => handleCategoryClick(cur)}>
-                  <Text.PARAGRAPH text={cur.name} color={category === String(cur.id) ? 'default' : 'gray'} />
-                </Clickable>,
-              );
-            }
+        <Clickable key="all" onClick={() => setQuery('category', null)}>
+          <Text.HEADING text="전체" color={category === null ? 'default' : 'gray'} />
+        </Clickable>
 
-            return acc;
-          },
-          [
-            category === null ? (
-              <Clickable key="all" onClick={() => setQuery('category', null)}>
-                <Text.HEADING text="전체" color={category === null ? 'default' : 'gray'} />
-              </Clickable>
-            ) : (
-              <Clickable key="all" onClick={() => setQuery('category', null)}>
-                <Text.PARAGRAPH text="전체" color={category === null ? 'default' : 'gray'} />
-              </Clickable>
-            ),
-          ],
-        )}
+        {stockCategoryList.map((cur) => {
+          return (
+            <Clickable key={cur.id} onClick={() => setQuery('category', cur.id.toString())}>
+              <Text.HEADING text={cur.name} color={category === cur.id.toString() ? 'default' : 'gray'} />
+            </Clickable>
+          );
+        })}
       </div>
     </Wrapper.SECTION>
   );

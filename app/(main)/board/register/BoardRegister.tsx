@@ -62,23 +62,13 @@ export default function BoardRegister(props: IProps) {
     <>
       <Wrapper.SECTION text="카테고리">
         <div className="flex items-center gap-4">
-          {stockCategoryList.reduce<React.ReactNode[]>((acc, cur) => {
-            if (category === cur.id) {
-              acc.push(
-                <Clickable key={cur.id} onClick={() => setCategory(cur.id)}>
-                  <Text.HEADING text={cur.enName} color={category === cur.id ? 'default' : 'gray'} />
-                </Clickable>,
-              );
-            } else {
-              acc.push(
-                <Clickable key={cur.id} onClick={() => setCategory(cur.id)}>
-                  <Text.PARAGRAPH text={cur.enName} color={category === cur.id ? 'default' : 'gray'} />
-                </Clickable>,
-              );
-            }
-
-            return acc;
-          }, [])}
+          {stockCategoryList.map((cur) => {
+            return (
+              <Clickable key={cur.id} onClick={() => setCategory(cur.id)}>
+                <Text.HEADING text={cur.name} color={category === cur.id ? 'default' : 'gray'} />
+              </Clickable>
+            );
+          })}
         </div>
       </Wrapper.SECTION>
 

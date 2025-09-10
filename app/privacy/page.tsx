@@ -5,9 +5,9 @@ export default function PrivacyPolicyPage() {
   return (
     <Wrapper.SECTION>
       <div className="flex flex-col gap-8">
-        <div className="flex flex-col justify-center items-center">
-          <Text.HEADING text="개인정보 처리방침" />
-          <Text.PARAGRAPH text="PEEK은 이용자의 개인정보를 보호하기 위해 최선을 다하고 있습니다." color="gray" />
+        <div className="flex flex-col">
+          <Text.TITLE text="개인정보 처리방침" />
+          <Text.PARAGRAPH text="PEEK은 이용자의 개인정보를 보호하기 위해 최선을 다하고 있습니다." />
         </div>
 
         <section className="flex flex-col gap-4">
@@ -180,7 +180,7 @@ export default function PrivacyPolicyPage() {
           <Text.PARAGRAPH text="이 개인정보 처리방침은 시행일로부터 적용되며, 법령 및 방침에 따른 변경내용의 추가, 삭제 및 정정이 있는 경우에는 변경사항의 시행 7일 전부터 공지사항을 통하여 고지할 것입니다." />
         </section>
 
-        <div className="text-center pt-8 border-t">
+        <div className="text-right pt-4 border-t">
           <Text.CAPTION text="시행일: 2025년 9월 1일" color="gray" />
         </div>
       </div>
