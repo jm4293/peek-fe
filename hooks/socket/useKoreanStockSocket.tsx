@@ -1,4 +1,3 @@
-// hooks/useSocket.ts
 import { useEffect, useRef } from 'react';
 import { Socket, io } from 'socket.io-client';
 
@@ -25,34 +24,22 @@ export const useKoreanStockSocket = () => {
     const socket = socketRef.current;
 
     // 연결 성공 시
-    socket.on('connect', () => {
-      console.log('키움 주식 웹소켓 연결됨:', socket.id);
-    });
+    socket.on('connect', () => {});
 
     // 연결 해제 시
-    socket.on('disconnect', (reason) => {
-      console.log('키움 주식 웹소켓 연결 해제됨:', reason);
-    });
+    socket.on('disconnect', (reason) => {});
 
     // 연결 에러 처리
-    socket.on('connect_error', (error) => {
-      console.error('웹소켓 연결 에러:', error);
-    });
+    socket.on('connect_error', (error) => {});
 
     // 에러 처리
-    socket.on('error', (error) => {
-      console.error('웹소켓 에러:', error);
-    });
+    socket.on('error', (error) => {});
 
     // 구독 성공 응답
-    socket.on('subscribed', (data) => {
-      console.log('구독 성공:', data);
-    });
+    socket.on('subscribed', (data) => {});
 
     // 구독 해제 성공 응답
-    socket.on('unsubscribed', (data) => {
-      console.log('구독 해제 성공:', data);
-    });
+    socket.on('unsubscribed', (data) => {});
 
     return () => {
       socket.disconnect();
@@ -62,8 +49,6 @@ export const useKoreanStockSocket = () => {
   // 종목 구독 함수
   const subscribeStock = (symbol: string) => {
     if (socketRef.current) {
-      console.log('subscribeStock', symbol);
-
       socketRef.current.emit('subscribe_stock', { symbol });
     }
   };

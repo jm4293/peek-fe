@@ -1,4 +1,5 @@
 export * from './cookie';
 export * from './dayjs';
-export * from './localStorage';
-export * from './sessionStorage';
+export * from './local-storage';
+export * from './session-storage';
+export * from './sign-mark.util';

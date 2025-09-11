@@ -11,8 +11,8 @@ import { userAccountTypeDescription } from '@/shared/enum/user';
 
 import { notificationTokenAtom } from '@/stores/notification-token.atom';
 
-import { LocalStorage } from '@/utils/localStorage';
-import { SessionStorage } from '@/utils/sessionStorage';
+import { LocalStorage } from '@/utils/local-storage';
+import { SessionStorage } from '@/utils/session-storage';
 
 export const useAuthMutation = () => {
   const queryClient = useQueryClient();

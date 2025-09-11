@@ -2,8 +2,8 @@ import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 
 import { API_URL } from '@/shared/constant/api-url';
 
-import { LocalStorage } from '@/utils/localStorage';
-import { SessionStorage } from '@/utils/sessionStorage';
+import { LocalStorage } from '@/utils/local-storage';
+import { SessionStorage } from '@/utils/session-storage';
 
 interface IReq {
   url: string;

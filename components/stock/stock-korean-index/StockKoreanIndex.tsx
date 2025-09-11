@@ -1,5 +1,6 @@
 'use client';
 
+import { signMarkUtil } from '@/utils';
 import Link from 'next/link';
 import Marquee from 'react-fast-marquee';
 
@@ -8,6 +9,8 @@ import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
 import { useKoreanStockIndex } from '@/hooks/stock-index';
+
+import { StockPriceText } from '../stock-price';
 
 export const StockKoreanIndex = () => {
   const { kospi, kosdaq, loading } = useKoreanStockIndex({ isKospi: true, isKosdaq: true });
@@ -39,16 +42,17 @@ export const StockKoreanIndex = () => {
               <div className="flex flex-col">
                 <div className="flex items-center gap-2">
                   <Text.HEADING text="코스피" nowrap className="text-end" />
-                  <Text.HEADING
-                    text={kospi.jisu}
-                    color={`${kospi.sign === '2' ? 'red' : kospi.sign === '5' ? 'blue' : 'default'}`}
-                    nowrap
+                  <StockPriceText
+                    price={(+kospi.jisu).toLocaleString()}
+                    sign={kospi.sign}
+                    size="HEADING"
                     className="text-end"
                   />
-                  <Text.PARAGRAPH
-                    text={`${kospi.change}(${kospi.drate}%)`}
-                    color={`${kospi.sign === '2' ? 'red' : kospi.sign === '5' ? 'blue' : 'default'}`}
-                    nowrap
+                  <StockPriceText
+                    price={`${signMarkUtil(kospi.sign)}${kospi.change}(${kospi.drate}%)`}
+                    sign={kospi.sign}
+                    size="PARAGRAPH"
+                    className="text-end"
                   />
                 </div>
                 <div className="flex items-center gap-2">
@@ -75,16 +79,17 @@ export const StockKoreanIndex = () => {
               <div className="flex flex-col">
                 <div className="flex items-center gap-2">
                   <Text.HEADING text="코스닥" nowrap className="text-end" />
-                  <Text.HEADING
-                    text={kosdaq.jisu}
-                    color={`${kosdaq.sign === '2' ? 'red' : kosdaq.sign === '5' ? 'blue' : 'default'}`}
-                    nowrap
+                  <StockPriceText
+                    price={(+kosdaq.jisu).toLocaleString()}
+                    sign={kosdaq.sign}
+                    size="HEADING"
                     className="text-end"
                   />
-                  <Text.PARAGRAPH
-                    text={`${kosdaq.change}(${kosdaq.drate}%)`}
-                    color={`${kosdaq.sign === '2' ? 'red' : kosdaq.sign === '5' ? 'blue' : 'default'}`}
-                    nowrap
+                  <StockPriceText
+                    price={`${signMarkUtil(kosdaq.sign)}${kosdaq.change}(${kosdaq.drate}%)`}
+                    sign={kosdaq.sign}
+                    size="PARAGRAPH"
+                    className="text-end"
                   />
                 </div>
                 <div className="flex items-center gap-2">

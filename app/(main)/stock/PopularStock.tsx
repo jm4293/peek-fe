@@ -1,46 +1,37 @@
 'use client';
 
+import { LocalStorage, signMarkUtil } from '@/utils';
+import { useRouter } from 'next/navigation';
+
 import { InfinityList } from '@/components/infinity-list';
 import { LineSkeleton } from '@/components/skeleton';
+import { StockPriceText } from '@/components/stock/stock-price';
 import { Text } from '@/components/text';
-import { Wrapper } from '@/components/wrapper';
 
-import { IStockKoreanRankModel, useStockKoreanRankList } from '@/services/stock';
+import { IStockCompanyModel, IStockKoreanRankModel, useStockKoreanRankList } from '@/services/stock';
 
+import { LocalStorageKey } from '@/shared/constant/local-storage-key';
 import { StockRankEnum } from '@/shared/enum/stock';
 
-import { useStockProvider } from './StockCodeProvider';
-
-const signMark = (sign: string) => {
-  if (sign === '2') {
-    return '+';
-  }
-  if (sign === '5') {
-    return '-';
-  }
-
-  return '';
-};
-
-const signColor = (sign: string) => {
-  if (sign === '2') {
-    return 'red';
-  }
-  if (sign === '5') {
-    return 'blue';
-  }
-  return 'default';
-};
-
 export default function PopularStock() {
-  // const { stock } = useStockProvider();
-
-  // return <div>Popular Stock: {stock?.companyName || '선택된 종목이 없습니다.'}</div>;
+  const router = useRouter();
 
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isSuccess, isLoading, isFetching } =
     useStockKoreanRankList({
       type: StockRankEnum.MARKET_CAP_TOP,
     });
+
+  const clickHandler = (item: IStockKoreanRankModel) => {
+    const stored = LocalStorage.getItem(LocalStorageKey.recentStock);
+    const searches = stored ? JSON.parse(stored) : [];
+
+    const filtered = searches.filter((el: IStockCompanyModel) => el.code !== item.shcode);
+    const updated = [{ code: item.shcode, companyName: item.hname, timestamp: Date.now() }, ...filtered].slice(0, 10);
+
+    LocalStorage.setItem(LocalStorageKey.recentStock, JSON.stringify(updated));
+
+    router.push(`/stock/detail/${item.shcode}`);
+  };
 
   if (isLoading) {
     return <LineSkeleton />;
@@ -54,7 +45,7 @@ export default function PopularStock() {
     const { shcode, hname, price, sign, change, diff, volume, total } = item;
 
     return (
-      <li key={shcode}>
+      <li key={shcode} onClick={() => clickHandler(item)}>
         <div className="flex items-center gap-2">
           <div>
             <Text.HEADING text={`${index + 1}.`} />
@@ -63,26 +54,16 @@ export default function PopularStock() {
           <div className="w-full flex justify-between items-center">
             <div className="flex flex-col">
               <Text.HEADING text={hname} className="whitespace-nowrap" />
-              <Text.CAPTION text={String(shcode)} color="gray" />
+              <Text.CAPTION text={shcode} color="gray" />
             </div>
             <div className="flex flex-col">
-              <Text.HEADING text={String(price.toLocaleString())} color={signColor(sign)} nowrap className="text-end" />
-              <Text.PARAGRAPH
-                text={`${signMark(sign)}${change.toLocaleString()}(${diff}%)`}
-                color={signColor(sign)}
-                nowrap
+              <StockPriceText price={String(price.toLocaleString())} sign={sign} size="HEADING" className="text-end" />
+              <StockPriceText
+                price={`${signMarkUtil(sign)}${String(change.toLocaleString())}(${diff}%)`}
+                sign={sign}
+                size="PARAGRAPH"
+                className="text-end"
               />
-
-              {/* <div className="flex justify-end items-center gap-2">
-                <div className="flex flex-col items-end">
-                  <Text.PARAGRAPH text="거래량" />
-                  <Text.CAPTION text={String(volume.toLocaleString())} color="gray" />
-                </div>
-                <div className="flex flex-col items-end">
-                  <Text.PARAGRAPH text="시가총액" />
-                  <Text.CAPTION text={`${String(total.toLocaleString())}`} color="gray" />
-                </div>
-              </div> */}
             </div>
           </div>
         </div>

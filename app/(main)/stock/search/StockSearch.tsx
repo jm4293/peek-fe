@@ -37,7 +37,7 @@ export default function StockSearch() {
     const stored = LocalStorage.getItem(LocalStorageKey.recentStock);
     const searches = stored ? JSON.parse(stored) : [];
 
-    const filtered = searches.filter((el: IStockCompanyModel) => el.id !== item.id);
+    const filtered = searches.filter((el: IStockCompanyModel) => el.code !== item.code);
     const updated = [{ ...item, timestamp: Date.now() }, ...filtered].slice(0, 10);
 
     LocalStorage.setItem(LocalStorageKey.recentStock, JSON.stringify(updated));

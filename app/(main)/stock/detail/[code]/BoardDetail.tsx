@@ -36,8 +36,6 @@ export default function BoardDetail(props: IProps) {
         timestamp: Date;
       }) => {
         setStockData(data);
-        // eslint-disable-next-line no-console
-        console.log(data);
       };
 
       onStockUpdate(symbol, handleStockUpdate);
