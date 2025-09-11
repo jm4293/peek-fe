@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { Button } from '@/components/button';
 import { Input } from '@/components/input';
 import { Text } from '@/components/text';
+import { Wrapper } from '@/components/wrapper';
 
 import { useInput } from '@/hooks/input';
 import { useToast } from '@/hooks/modal';
@@ -62,7 +63,7 @@ export default function Login() {
   }, []);
 
   return (
-    <section className="flex flex-col gap-8">
+    <Wrapper.SECTION>
       <div className="flex flex-col gap-12">
         <div className="w-full flex flex-col gap-4">
           <Input
@@ -109,6 +110,6 @@ export default function Login() {
         <ButtonNaver />
         <ButtonGoogle />
       </div>
-    </section>
+    </Wrapper.SECTION>
   );
 }

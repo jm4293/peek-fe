@@ -16,7 +16,7 @@ export const Currency = () => {
     <Wrapper.SECTION>
       <div className="flex justify-between items-center">
         <Text.HEADING text="환율" />
-        <Text.CAPTION text="5분마다 갱신됩니다." color="gray" className="text-end" />
+        <Text.CAPTION text="1분마다 갱신됩니다." color="gray" className="text-end" />
       </div>
 
       {isLoading ? (

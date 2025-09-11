@@ -24,10 +24,8 @@ export default async function BoardPage() {
 
   return (
     <Wrapper.MAIN text="커뮤니티">
-      <div className="flex flex-col gap-2">
-        <BoardCategory stockCategoryList={data} />
-        <BoardList />
-      </div>
+      <BoardCategory stockCategoryList={data} />
+      <BoardList />
 
       <BoardRegisterButton isAuth={isAuth} />
     </Wrapper.MAIN>

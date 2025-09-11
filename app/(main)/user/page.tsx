@@ -29,36 +29,34 @@ export default async function UserPage() {
 
   return (
     <Wrapper.MAIN text="마이페이지">
-      <div className="flex flex-col gap-2">
-        <User my={my} />
+      <User my={my} />
 
-        <Wrapper.SECTION text="기록">
-          <Link href="" className="flex items-center justify-between">
-            <Text.HEADING text="즐겨찾기 종목" />
-            <ChevronRight />
-          </Link>
-        </Wrapper.SECTION>
+      <Wrapper.SECTION text="기록">
+        <Link href="" className="flex items-center justify-between">
+          <Text.HEADING text="즐겨찾기 종목" />
+          <ChevronRight />
+        </Link>
+      </Wrapper.SECTION>
 
-        <Wrapper.SECTION text="커뮤니티">
-          <Link href="/user/board" className="flex items-center justify-between">
-            <Text.HEADING text="작성한 커뮤니티 게시글" />
-            <ChevronRight />
-          </Link>
-          <Link href="/user/board/comment" className="flex items-center justify-between">
-            <Text.HEADING text="작성한 커뮤니티 게시글 댓글" />
-            <ChevronRight />
-          </Link>
-        </Wrapper.SECTION>
+      <Wrapper.SECTION text="커뮤니티">
+        <Link href="/user/board" className="flex items-center justify-between">
+          <Text.HEADING text="작성한 커뮤니티 게시글" />
+          <ChevronRight />
+        </Link>
+        <Link href="/user/board/comment" className="flex items-center justify-between">
+          <Text.HEADING text="작성한 커뮤니티 게시글 댓글" />
+          <ChevronRight />
+        </Link>
+      </Wrapper.SECTION>
 
-        <Wrapper.SECTION text="알림">
-          <Link href="/user/notice" className="flex items-center justify-between">
-            <Text.HEADING text="공지사항" />
-            <ChevronRight />
-          </Link>
-        </Wrapper.SECTION>
+      <Wrapper.SECTION text="알림">
+        <Link href="/user/notice" className="flex items-center justify-between">
+          <Text.HEADING text="공지사항" />
+          <ChevronRight />
+        </Link>
+      </Wrapper.SECTION>
 
-        <UserLogout />
-      </div>
+      <UserLogout />
     </Wrapper.MAIN>
   );
 }

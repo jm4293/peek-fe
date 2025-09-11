@@ -10,10 +10,10 @@ const MAIN = (props: IProps) => {
   const { text = '', children } = props;
 
   return (
-    <div className="flex flex-col gap-4">
+    <section className="flex flex-col gap-4">
       <Text.TITLE text={text} />
       {children}
-    </div>
+    </section>
   );
 };
 
@@ -21,12 +21,12 @@ const SECTION = (props: IProps) => {
   const { id, text = '', children } = props;
 
   return (
-    <div key={id} className="w-full rounded-lg p-4 bg-theme-bg-section">
+    <section key={id} className="w-full rounded-lg p-4 bg-theme-bg-section">
       <div className="flex flex-col gap-4">
         {text && <Text.SUBTITLE text={text} />}
         {children}
       </div>
-    </div>
+    </section>
   );
 };
 
