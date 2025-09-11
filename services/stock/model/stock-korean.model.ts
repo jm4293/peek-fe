@@ -44,6 +44,4 @@ export interface IStockKoreanModel {
   fav_unit: string; // 액면가단위
   dstr_stk: string; // 유통주식
   dstr_rt: string; // 유통비율
-  return_code: number; // 반환코드
-  return_msg: string; // 반환메시지
 }

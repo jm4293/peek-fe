@@ -37,7 +37,7 @@ export default function BoardDetail(props: IProps) {
       }) => {
         setStockData(data);
         // eslint-disable-next-line no-console
-        console.log('실시간 주식 데이터:', data);
+        console.log(data);
       };
 
       onStockUpdate(symbol, handleStockUpdate);

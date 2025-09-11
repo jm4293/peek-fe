@@ -27,24 +27,17 @@ export default async function StockDetailPage(props: IProps) {
   return (
     <Wrapper.MAIN text="상세 정보">
       <Wrapper.SECTION>
-        <BoardDetail code={code} />
+        <div className="flex justify-between items-center">
+          <div>
+            <Text.TITLE text={data.stk_nm} />
+            <Text.PARAGRAPH text={data.stk_cd} color="gray" />
+          </div>
+          <div>
+            <Text.HEADING text={data.cur_prc} />
+          </div>
+        </div>
 
-        <div className="flex items-center gap-2">
-          <Text.PARAGRAPH text="종목코드:" className="text-gray-500" />
-          <Text.HEADING text={data.shtn_pdno} />
-        </div>
-        <div className="flex items-center gap-2">
-          <Text.PARAGRAPH text="종목명:" className="text-gray-500" />
-          <Text.HEADING text={data.prdt_abrv_name} />
-        </div>
-        <div className="flex items-center gap-2">
-          <Text.PARAGRAPH text="종목명(영문):" className="text-gray-500" />
-          <Text.HEADING text={data.prdt_eng_abrv_name} />
-        </div>
-        <div className="flex items-center gap-2">
-          <Text.PARAGRAPH text="상장일:" className="text-gray-500" />
-          <Text.HEADING text={data?.frst_erlm_dt || '정보없음'} />
-        </div>
+        {/* <BoardDetail code={code} /> */}
       </Wrapper.SECTION>
     </Wrapper.MAIN>
   );
