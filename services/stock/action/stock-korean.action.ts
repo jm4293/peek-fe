@@ -9,9 +9,9 @@ export const stockKoreanActions = async (dto: IGetStockKoreanDto) => {
   const { code } = dto;
 
   try {
-    const { stockKorean } = await KY.get<IStockKoreanRes>(`${API_URL}/stock/korean/${code}`).json();
+    const data = await KY.get<IStockKoreanRes>(`${API_URL}/stock/korean/detail/${code}`).json();
 
-    return { success: true, data: stockKorean };
+    return { success: true, data };
   } catch (error) {
     return { success: false, data: null };
   }
