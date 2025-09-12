@@ -54,6 +54,10 @@ export default async function UserPage() {
           <Text.HEADING text="공지사항" />
           <ChevronRight />
         </Link>
+        <Link href="/user/inquiry" className="flex items-center justify-between">
+          <Text.HEADING text="문의하기" />
+          <ChevronRight />
+        </Link>
       </Wrapper.SECTION>
 
       <UserLogout />

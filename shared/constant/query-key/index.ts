@@ -26,4 +26,7 @@ export const QueryKeys = {
   notice: {
     list: (type?: NoticeTypeEnum) => ['notice', 'list', type],
   },
+  inquiry: {
+    list: () => ['inquiry', 'list'],
+  },
 };
