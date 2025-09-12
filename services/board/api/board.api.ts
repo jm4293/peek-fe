@@ -39,11 +39,11 @@ class BoardApi extends AXIOS {
   }
 
   async updateBoard(dto: IUpdateBoardDto) {
-    const { boardId, ...res } = dto;
+    const { boardId, ...rest } = dto;
 
     return await this.put<null, Omit<IUpdateBoardDto, 'boardId'>>({
       url: `${this._baseURL}/${boardId}`,
-      data: res,
+      data: rest,
     });
   }
 
@@ -68,20 +68,20 @@ class BoardApi extends AXIOS {
   }
 
   async createBoardComment(dto: ICreateBoardCommentDto) {
-    const { boardId, ...res } = dto;
+    const { boardId, ...rest } = dto;
 
     return await this.post<null, Omit<ICreateBoardCommentDto, 'boardId'>>({
       url: `${this._baseURL}/${boardId}/comment`,
-      data: res,
+      data: rest,
     });
   }
 
   async updateBoardComment(dto: IUpdateBoardCommentDto) {
-    const { boardId, boardCommentSeq, ...res } = dto;
+    const { boardId, boardCommentSeq, ...rest } = dto;
 
     return await this.put<null, Omit<IUpdateBoardCommentDto, 'boardId' | 'boardCommentSeq'>>({
       url: `${this._baseURL}/${boardId}/comment/${boardCommentSeq}`,
-      data: res,
+      data: rest,
     });
   }
 

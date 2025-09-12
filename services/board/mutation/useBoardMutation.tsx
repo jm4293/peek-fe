@@ -55,7 +55,6 @@ export const useBoardMutation = () => {
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: QueryKeys.board.list() });
     },
-    onError: (err) => {},
   });
 
   return {

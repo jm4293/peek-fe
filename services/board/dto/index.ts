@@ -6,5 +6,5 @@ export * from './create-board.dto';
 export * from './create-board-comment.dto';
 export * from './delete-board.dto';
 export * from './delete-board-comment.dto';
-export * from './modify-board.dto';
-export * from './modify-board-comment.dto';
+export * from './update-board-comment.dto';
+export * from './update-board.dto';
