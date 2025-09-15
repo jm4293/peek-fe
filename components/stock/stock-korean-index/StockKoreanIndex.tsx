@@ -5,23 +5,39 @@ import Link from 'next/link';
 import Marquee from 'react-fast-marquee';
 
 import { LineSkeleton } from '@/components/skeleton';
-import { Text } from '@/components/text';
+import { NetworkErrorText, Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
 import { useKoreanStockIndex } from '@/hooks/stock-index';
 
 import { StockPriceText } from '../stock-price';
 
+const TITLE = () => {
+  return (
+    <div className="flex justify-between items-center">
+      <Text.HEADING text="국내 지수" />
+      <Text.CAPTION text="10초마다 갱신됩니다." color="gray" className="text-end" />
+    </div>
+  );
+};
+
 export const StockKoreanIndex = () => {
-  const { kospi, kosdaq, loading } = useKoreanStockIndex({ isKospi: true, isKosdaq: true });
+  const { kospi, kosdaq, loading, isConnected } = useKoreanStockIndex({ isKospi: true, isKosdaq: true });
+
+  if (!isConnected) {
+    return (
+      <Wrapper.SECTION>
+        <TITLE />
+
+        <NetworkErrorText />
+      </Wrapper.SECTION>
+    );
+  }
 
   if (loading) {
     return (
       <Wrapper.SECTION>
-        <div className="flex justify-between items-center">
-          <Text.HEADING text="국내 지수" />
-          <Text.CAPTION text="10초마다 갱신됩니다." color="gray" className="text-end" />
-        </div>
+        <TITLE />
 
         <LineSkeleton />
       </Wrapper.SECTION>
@@ -30,10 +46,7 @@ export const StockKoreanIndex = () => {
 
   return (
     <Wrapper.SECTION>
-      <div className="flex justify-between items-center">
-        <Text.HEADING text="국내 지수" />
-        <Text.CAPTION text="10초마다 갱신됩니다." color="gray" className="text-end" />
-      </div>
+      <TITLE />
 
       <Marquee speed={20} pauseOnHover={true} gradient={false} gradientWidth={40}>
         <div className="mx-12">

@@ -1,4 +1,4 @@
-import { Text } from '@/components/text';
+import { NetworkErrorText, Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
 import { stockCategoryListAction } from '@/services/stock';
@@ -10,13 +10,13 @@ import { BoardRegisterButton } from './BoardRegisterButton';
 
 export default async function BoardPage() {
   const { success: isAuth } = await myAction();
-  const { data } = await stockCategoryListAction();
+  const { data, success } = await stockCategoryListAction();
 
-  if (!data) {
+  if (!success) {
     return (
       <Wrapper.MAIN text="커뮤니티">
         <Wrapper.SECTION>
-          <Text.HEADING text="주식 카테고리 목록을 불러오는데 실패했습니다." />
+          <NetworkErrorText />
         </Wrapper.SECTION>
       </Wrapper.MAIN>
     );
@@ -24,7 +24,7 @@ export default async function BoardPage() {
 
   return (
     <Wrapper.MAIN text="커뮤니티">
-      <BoardCategory stockCategoryList={data} />
+      {data && <BoardCategory stockCategoryList={data} />}
       <BoardList />
 
       <BoardRegisterButton isAuth={isAuth} />

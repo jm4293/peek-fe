@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { Socket, io } from 'socket.io-client';
 
+import { API_URL } from '@/shared/constant/api-url';
+
 interface StockData {
   symbol: string;
   name: string;
@@ -15,9 +17,7 @@ export const useKoreanStockSocket = () => {
   const socketRef = useRef<Socket | null>(null);
 
   useEffect(() => {
-    const serverUrl = process.env.NEXT_PUBLIC_API_URL;
-
-    socketRef.current = io(`${serverUrl}/kiwoom/korean/stock`, {
+    socketRef.current = io(`${API_URL}/kiwoom/korean/stock`, {
       transports: ['websocket'],
     });
 

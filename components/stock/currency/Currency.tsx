@@ -4,24 +4,48 @@ import { Dayjs } from '@/utils';
 import Marquee from 'react-fast-marquee';
 
 import { LineSkeleton } from '@/components/skeleton';
-import { Text } from '@/components/text';
+import { NetworkErrorText, Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
 import { useCurrencyList } from '@/services/currency/query';
 
+const TITLE = () => {
+  return (
+    <div className="flex justify-between items-center">
+      <Text.HEADING text="환율" />
+      <Text.CAPTION text="1분마다 갱신됩니다." color="gray" className="text-end" />
+    </div>
+  );
+};
+
 export const Currency = () => {
   const { data, isLoading, isSuccess } = useCurrencyList();
 
+  if (isLoading) {
+    return (
+      <Wrapper.SECTION>
+        <TITLE />
+
+        <LineSkeleton />
+      </Wrapper.SECTION>
+    );
+  }
+
+  if (!isSuccess) {
+    return (
+      <Wrapper.SECTION>
+        <TITLE />
+
+        <NetworkErrorText />
+      </Wrapper.SECTION>
+    );
+  }
+
   return (
     <Wrapper.SECTION>
-      <div className="flex justify-between items-center">
-        <Text.HEADING text="환율" />
-        <Text.CAPTION text="1분마다 갱신됩니다." color="gray" className="text-end" />
-      </div>
+      <TITLE />
 
-      {isLoading ? (
-        <LineSkeleton />
-      ) : isSuccess && data.length > 0 ? (
+      {data.length > 0 ? (
         <Marquee speed={20} pauseOnHover={true} gradient={false} gradientWidth={40}>
           {data.map((item) => (
             <div key={item.id} className="flex flex-col mx-4">

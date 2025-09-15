@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { InfinityList } from '@/components/infinity-list';
 import { LineSkeleton } from '@/components/skeleton';
 import { StockPriceText } from '@/components/stock/stock-price';
-import { Text } from '@/components/text';
+import { NetworkErrorText, Text } from '@/components/text';
 
 import { IStockCompanyModel, IStockKoreanRankModel, useStockKoreanRankList } from '@/services/stock';
 
@@ -38,7 +38,7 @@ export default function PopularStock() {
   }
 
   if (!isSuccess) {
-    return <Text.PARAGRAPH text="네트워크 오류가 발생했습니다. 잠시 후 다시 시도해주세요." color="red" />;
+    return <NetworkErrorText />;
   }
 
   const renderItem = (item: IStockKoreanRankModel, index: number) => {

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 
+import { API_URL } from '@/shared/constant/api-url';
 import { KOSDAQ_CODE, KOSPI_CODE } from '@/shared/constant/stock-code';
 import { IKoreanStockIndex } from '@/shared/types/stock-index';
 
@@ -12,16 +13,26 @@ interface IProps {
 export const useKoreanStockIndex = (props: IProps) => {
   const { isKospi, isKosdaq } = props;
 
+  const [loading, setLoading] = useState(true);
+  const [isConnected, setIsConnected] = useState(false);
+
   const [kospi, setKospi] = useState<IKoreanStockIndex | null>(null);
   const [kosdaq, setKosdaq] = useState<IKoreanStockIndex | null>(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const serverUrl = process.env.NEXT_PUBLIC_API_URL;
-
-    const socket = io(`${serverUrl}/kis/korean/index`, {
+    const socket = io(`${API_URL}/kis/korean/index`, {
       transports: ['websocket'],
     });
+
+    if (!socket) {
+      setIsConnected(false);
+      return;
+    }
+
+    if (!socket.connected) {
+      setIsConnected(false);
+      return;
+    }
 
     socket.on('connect', () => {
       setLoading(false);
@@ -44,11 +55,21 @@ export const useKoreanStockIndex = (props: IProps) => {
     };
   }, []);
 
+  if (!isConnected) {
+    return {
+      kospi: null,
+      kosdaq: null,
+      loading: false,
+      isConnected: false,
+    };
+  }
+
   if (loading) {
     return {
       kospi: null,
       kosdaq: null,
       loading: true,
+      isConnected: true,
     };
   }
 
@@ -56,5 +77,6 @@ export const useKoreanStockIndex = (props: IProps) => {
     kospi,
     kosdaq,
     loading,
+    isConnected,
   };
 };

@@ -7,8 +7,7 @@ import { useState } from 'react';
 import { InfinityList } from '@/components/infinity-list';
 import { Input } from '@/components/input';
 import { LineSkeleton } from '@/components/skeleton';
-import { VirtualTable } from '@/components/table';
-import { Text } from '@/components/text';
+import { NetworkErrorText, Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
 import { useDebounce } from '@/hooks/useDebounce';
@@ -25,12 +24,12 @@ export default function StockSearch() {
   const { setStock } = useStockProvider();
 
   const [searchText, setSearchText] = useState('');
-  const { debouncedText, isPending } = useDebounce({ text: searchText, delay: 400 });
+  const { debouncedText, isPending: isPendingDebounce } = useDebounce({ text: searchText, delay: 400 });
 
   // const { data, isSuccess, isLoading } = useStockListQuery({ text: debouncedText });
 
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isSuccess, isLoading } = useStockKoreanList({
-    text: debouncedText,
+    text: debouncedText || '',
   });
 
   const clickHandler = (item: IStockCompanyModel) => {
@@ -74,49 +73,52 @@ export default function StockSearch() {
     );
   };
 
+  const isSearchLoading = isPendingDebounce || isLoading;
+
+  const hasError = !isSuccess && !isSearchLoading;
+
   return (
     <div className="flex flex-col gap-4">
-      <div>
-        <Wrapper.SECTION>
-          <Input
-            title="종목 검색"
-            name="title"
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-            placeholder="종목명을 입력해주세요"
-            required
-          />
-        </Wrapper.SECTION>
-      </div>
+      <Wrapper.SECTION>
+        <Input
+          title="종목 검색"
+          name="title"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          placeholder="종목명을 입력해주세요"
+          required
+        />
+      </Wrapper.SECTION>
 
-      <div>
-        {isPending || isLoading ? (
-          <div className="flex flex-col gap-2">
-            <LineSkeleton h={2} />
-            <LineSkeleton h={2} />
-            <LineSkeleton h={2} />
-          </div>
-        ) : (
-          <Wrapper.SECTION>
-            <Text.CAPTION text={`총: ${data?.total}건`} className="text-end" />
+      <Wrapper.SECTION>
+        <div className="flex flex-col gap-2">
+          <Text.CAPTION text={`총: ${data?.total || 0}건`} className="text-end" />
+          <hr />
+        </div>
 
-            <hr />
-
-            <div className="max-h-[70vh] overflow-y-auto">
-              {data!.stockKoreanList.length > 0 ? (
-                <InfinityList
-                  hasNextPage={hasNextPage}
-                  isFetchingNextPage={isFetchingNextPage}
-                  fetchNextPage={fetchNextPage}>
-                  {data!.stockKoreanList.map(renderItem)}
-                </InfinityList>
-              ) : (
-                <Text.HEADING text="검색된 종목이 없습니다." className="text-center" />
-              )}
+        <div className="max-h-[70vh] overflow-y-auto">
+          {isSearchLoading ? (
+            <div className="flex flex-col gap-2">
+              <LineSkeleton h={2} />
+              <LineSkeleton h={2} />
+              <LineSkeleton h={2} />
             </div>
-          </Wrapper.SECTION>
-        )}
-      </div>
+          ) : hasError ? (
+            <NetworkErrorText />
+          ) : data && data.stockKoreanList.length > 0 ? (
+            <InfinityList
+              hasNextPage={hasNextPage}
+              isFetchingNextPage={isFetchingNextPage}
+              fetchNextPage={fetchNextPage}>
+              {data.stockKoreanList.map(renderItem)}
+            </InfinityList>
+          ) : (
+            <div className="flex flex-col items-center justify-center py-8 text-center">
+              <Text.HEADING text="검색된 종목이 없습니다." className="text-gray-500" />
+            </div>
+          )}
+        </div>
+      </Wrapper.SECTION>
     </div>
   );
 }
