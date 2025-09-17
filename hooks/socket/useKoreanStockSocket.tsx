@@ -23,6 +23,8 @@ export const useKoreanStockSocket = () => {
 
     const socket = socketRef.current;
 
+    socket.on('connect', () => {});
+
     // 연결 성공 시
     socket.on('connected', () => {});
 

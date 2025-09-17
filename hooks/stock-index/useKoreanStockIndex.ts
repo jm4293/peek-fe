@@ -24,17 +24,21 @@ export const useKoreanStockIndex = (props: IProps) => {
       transports: ['websocket'],
     });
 
-    if (!socket) {
-      setIsConnected(false);
-      return;
-    }
-
-    if (!socket.connected) {
-      setIsConnected(false);
-      return;
-    }
+    socket.on('connect', () => {
+      setIsConnected(true);
+    });
 
     socket.on('connected', () => {
+      setLoading(false);
+      setIsConnected(true);
+    });
+
+    socket.on('disconnect', () => {
+      setIsConnected(false);
+    });
+
+    socket.on('connect_error', (error) => {
+      setIsConnected(false);
       setLoading(false);
     });
 
@@ -53,7 +57,7 @@ export const useKoreanStockIndex = (props: IProps) => {
     return () => {
       socket.disconnect();
     };
-  }, []);
+  }, [isKospi, isKosdaq]);
 
   if (loading) {
     return {
