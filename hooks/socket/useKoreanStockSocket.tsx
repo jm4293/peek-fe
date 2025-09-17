@@ -24,7 +24,7 @@ export const useKoreanStockSocket = () => {
     const socket = socketRef.current;
 
     // 연결 성공 시
-    socket.on('connect', () => {});
+    socket.on('connected', () => {});
 
     // 연결 해제 시
     socket.on('disconnect', (reason) => {});

@@ -34,7 +34,7 @@ export const useKoreanStockIndex = (props: IProps) => {
       return;
     }
 
-    socket.on('connect', () => {
+    socket.on('connected', () => {
       setLoading(false);
     });
 
