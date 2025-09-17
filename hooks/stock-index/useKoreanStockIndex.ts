@@ -55,21 +55,21 @@ export const useKoreanStockIndex = (props: IProps) => {
     };
   }, []);
 
-  if (!isConnected) {
-    return {
-      kospi: null,
-      kosdaq: null,
-      loading: false,
-      isConnected: false,
-    };
-  }
-
   if (loading) {
     return {
       kospi: null,
       kosdaq: null,
       loading: true,
       isConnected: true,
+    };
+  }
+
+  if (!isConnected) {
+    return {
+      kospi: null,
+      kosdaq: null,
+      loading: false,
+      isConnected: false,
     };
   }
 

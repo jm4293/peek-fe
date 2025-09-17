@@ -24,22 +24,22 @@ const TITLE = () => {
 export const StockKoreanIndex = () => {
   const { kospi, kosdaq, loading, isConnected } = useKoreanStockIndex({ isKospi: true, isKosdaq: true });
 
-  if (!isConnected) {
-    return (
-      <Wrapper.SECTION>
-        <TITLE />
-
-        <NetworkErrorText />
-      </Wrapper.SECTION>
-    );
-  }
-
   if (loading) {
     return (
       <Wrapper.SECTION>
         <TITLE />
 
         <LineSkeleton />
+      </Wrapper.SECTION>
+    );
+  }
+
+  if (!isConnected) {
+    return (
+      <Wrapper.SECTION>
+        <TITLE />
+
+        <NetworkErrorText />
       </Wrapper.SECTION>
     );
   }
