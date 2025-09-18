@@ -1,5 +1,6 @@
 'use client';
 
+import { DayjsUtil } from '@/utils';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -8,8 +9,6 @@ import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
 import { IBoardCommentModel, useBoardCommentListMineQuery } from '@/services/board';
-
-import { Dayjs } from '@/utils/dayjs';
 
 export default function MineBoardCommentList() {
   const router = useRouter();
@@ -51,7 +50,7 @@ export default function MineBoardCommentList() {
                 <Text.PARAGRAPH text={content} />
               </div>
 
-              <Text.CAPTION text={Dayjs.of(createdAt).formatYYMMDDHHmm()} color="gray" />
+              <Text.CAPTION text={DayjsUtil.of(createdAt).formatYYMMDDHHmm()} color="gray" />
             </div>
           </div>
         </Wrapper.SECTION>

@@ -1,5 +1,6 @@
 'use client';
 
+import { DayjsUtil } from '@/utils';
 import { CornerDownRight } from 'lucide-react';
 import { useState } from 'react';
 
@@ -13,8 +14,6 @@ import { useToast } from '@/hooks/modal';
 
 import { useBoardCommentList, useBoardCommentMutation } from '@/services/board';
 import { IUserAccountModel } from '@/services/user';
-
-import { Dayjs } from '@/utils/dayjs';
 
 interface IProps {
   id: string;
@@ -105,7 +104,7 @@ export default function BoardComment(props: IProps) {
                             <Text.PARAGRAPH text={boardComment.userAccount.user.nickname} />
                           </div>
 
-                          <Text.CAPTION text={Dayjs.of(boardComment.createdAt).formatYYMMDDHHmm()} color="gray" />
+                          <Text.CAPTION text={DayjsUtil.of(boardComment.createdAt).formatYYMMDDHHmm()} color="gray" />
                         </div>
 
                         {boardComment.userAccount.email === my?.email && (
@@ -132,7 +131,7 @@ export default function BoardComment(props: IProps) {
                                   <Text.PARAGRAPH text={reply.userAccount.user.nickname} />
                                 </div>
 
-                                <Text.CAPTION text={Dayjs.of(reply.createdAt).formatYYMMDDHHmm()} color="gray" />
+                                <Text.CAPTION text={DayjsUtil.of(reply.createdAt).formatYYMMDDHHmm()} color="gray" />
                               </div>
 
                               {reply.userAccount.email === my?.email && (

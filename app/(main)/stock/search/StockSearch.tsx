@@ -1,6 +1,6 @@
 'use client';
 
-import { LocalStorage } from '@/utils';
+import { LocalStorageUtil } from '@/utils';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -33,13 +33,13 @@ export default function StockSearch() {
   });
 
   const clickHandler = (item: IStockCompanyModel) => {
-    const stored = LocalStorage.getItem(LocalStorageKey.recentStock);
+    const stored = LocalStorageUtil.getItem(LocalStorageKey.recentStock);
     const searches = stored ? JSON.parse(stored) : [];
 
     const filtered = searches.filter((el: IStockCompanyModel) => el.code !== item.code);
     const updated = [{ ...item, timestamp: Date.now() }, ...filtered].slice(0, 10);
 
-    LocalStorage.setItem(LocalStorageKey.recentStock, JSON.stringify(updated));
+    LocalStorageUtil.setItem(LocalStorageKey.recentStock, JSON.stringify(updated));
 
     setStock(item);
     router.push(`/stock/detail/${item.code}`);

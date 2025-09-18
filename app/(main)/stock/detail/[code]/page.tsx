@@ -1,4 +1,4 @@
-import { signMarkUtil } from '@/utils';
+import { StockSignMarkUtil } from '@/utils';
 
 import { StockPriceText } from '@/components/stock/stock-price';
 import { Text } from '@/components/text';
@@ -43,7 +43,7 @@ export default async function StockDetailPage(props: IProps) {
               className="text-end"
             />
             <StockPriceText
-              price={`${signMarkUtil(data.pre_sig.slice(1))}${(+data.pred_pre).toLocaleString()}(${data.flu_rt}%)`}
+              price={`${StockSignMarkUtil(data.pre_sig.slice(1))}${(+data.pred_pre).toLocaleString()}(${data.flu_rt}%)`}
               sign={data.pre_sig}
               size="PARAGRAPH"
               className="text-end"

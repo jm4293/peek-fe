@@ -1,4 +1,4 @@
-export const signMarkUtil = (sign: string) => {
+export const StockSignMarkUtil = (sign: string) => {
   if (sign === '2') {
     return '+';
   }

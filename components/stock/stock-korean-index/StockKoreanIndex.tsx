@@ -1,6 +1,6 @@
 'use client';
 
-import { signMarkUtil } from '@/utils';
+import { StockSignMarkUtil } from '@/utils';
 import Link from 'next/link';
 import Marquee from 'react-fast-marquee';
 
@@ -62,7 +62,7 @@ export const StockKoreanIndex = () => {
                     className="text-end"
                   />
                   <StockPriceText
-                    price={`${signMarkUtil(kospi.sign)}${kospi.change}(${kospi.drate}%)`}
+                    price={`${StockSignMarkUtil(kospi.sign)}${kospi.change}(${kospi.drate}%)`}
                     sign={kospi.sign}
                     size="PARAGRAPH"
                     className="text-end"
@@ -99,7 +99,7 @@ export const StockKoreanIndex = () => {
                     className="text-end"
                   />
                   <StockPriceText
-                    price={`${signMarkUtil(kosdaq.sign)}${kosdaq.change}(${kosdaq.drate}%)`}
+                    price={`${StockSignMarkUtil(kosdaq.sign)}${kosdaq.change}(${kosdaq.drate}%)`}
                     sign={kosdaq.sign}
                     size="PARAGRAPH"
                     className="text-end"

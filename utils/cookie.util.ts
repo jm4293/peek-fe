@@ -1,4 +1,4 @@
-export const parseCookie = {
+export const CookieUtil = {
   value: {} as Record<string, string>,
   get: function () {
     return this.value;

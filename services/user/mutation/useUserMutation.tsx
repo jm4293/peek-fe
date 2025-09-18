@@ -1,6 +1,6 @@
 'use client';
 
-import { LocalStorage, SessionStorage } from '@/utils';
+import { LocalStorageUtil, SessionStorageUtil } from '@/utils';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
@@ -77,8 +77,8 @@ export const useUserMutation = () => {
     mutationFn: () => UserApi.withdraw(),
     onSuccess: () => {
       queryClient.clear();
-      LocalStorage.clear();
-      SessionStorage.clear();
+      LocalStorageUtil.clear();
+      SessionStorageUtil.clear();
       openToast({ message: '탈퇴가 완료되었습니다.', type: 'success' });
       router.push('/home');
       router.refresh();

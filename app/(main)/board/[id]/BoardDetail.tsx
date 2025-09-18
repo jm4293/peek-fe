@@ -1,5 +1,6 @@
 'use client';
 
+import { DayjsUtil } from '@/utils';
 import { useRouter } from 'next/navigation';
 
 import { Thumbnail } from '@/components/image';
@@ -8,8 +9,6 @@ import { Wrapper } from '@/components/wrapper';
 
 import { IBoardModel, useBoardMutation } from '@/services/board';
 import { IUserAccountModel } from '@/services/user';
-
-import { Dayjs } from '@/utils/dayjs';
 
 interface IProps {
   board: IBoardModel;
@@ -49,7 +48,7 @@ export default function BoardDetail(props: IProps) {
           </div>
 
           <div className="flex justify-end">
-            <Text.CAPTION text={Dayjs.of(board.createdAt).formatYYMMDDHHmm()} color="gray" />
+            <Text.CAPTION text={DayjsUtil.of(board.createdAt).formatYYMMDDHHmm()} color="gray" />
           </div>
         </div>
       </Wrapper.SECTION>

@@ -1,5 +1,6 @@
 'use client';
 
+import { DayjsUtil } from '@/utils';
 import { Heart, MessageCircle } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -9,8 +10,6 @@ import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
 import { IBoardModel, useMineBoardList } from '@/services/board';
-
-import { Dayjs } from '@/utils/dayjs';
 
 export default function MineBoardList() {
   const router = useRouter();
@@ -55,7 +54,7 @@ export default function MineBoardList() {
                 </div>
               </div>
 
-              <Text.PARAGRAPH text={Dayjs.of(createdAt).formatYYMMDDHHmm()} color="gray" />
+              <Text.PARAGRAPH text={DayjsUtil.of(createdAt).formatYYMMDDHHmm()} color="gray" />
             </div>
           </div>
         </Wrapper.SECTION>

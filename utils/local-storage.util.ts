@@ -1,4 +1,4 @@
-export class LocalStorage {
+export class LocalStorageUtil {
   static setItem(name: string, value: string) {
     if (typeof window !== 'undefined') {
       localStorage.setItem(name, value);

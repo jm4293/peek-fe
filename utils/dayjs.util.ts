@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 
-export class Dayjs {
+export class DayjsUtil {
   private date: Date | undefined;
 
   constructor(date?: Date) {

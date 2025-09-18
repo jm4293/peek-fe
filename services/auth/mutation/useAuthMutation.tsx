@@ -1,3 +1,4 @@
+import { LocalStorageUtil, SessionStorageUtil } from '@/utils';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAtomValue } from 'jotai';
 import { useRouter } from 'next/navigation';
@@ -10,9 +11,6 @@ import { useUserMutation } from '@/services/user';
 import { userAccountTypeDescription } from '@/shared/enum/user';
 
 import { notificationTokenAtom } from '@/stores/notification-token.atom';
-
-import { LocalStorage } from '@/utils/local-storage';
-import { SessionStorage } from '@/utils/session-storage';
 
 export const useAuthMutation = () => {
   const queryClient = useQueryClient();
@@ -100,8 +98,8 @@ export const useAuthMutation = () => {
       // }
 
       queryClient.clear();
-      LocalStorage.clear();
-      SessionStorage.clear();
+      LocalStorageUtil.clear();
+      SessionStorageUtil.clear();
       openToast({ type: 'success', message: '로그아웃에 성공했습니다.' });
       router.push('/home');
       router.refresh();

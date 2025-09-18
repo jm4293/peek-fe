@@ -1,5 +1,6 @@
 'use client';
 
+import { DayjsUtil } from '@/utils';
 import { Heart, MessageCircle } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -12,8 +13,6 @@ import { Wrapper } from '@/components/wrapper';
 import { useQueryParams } from '@/hooks/queryParams';
 
 import { IBoardModel, useBoardList } from '@/services/board';
-
-import { Dayjs } from '@/utils/dayjs';
 
 export default function BoardList() {
   const router = useRouter();
@@ -71,7 +70,7 @@ export default function BoardList() {
                 </div>
               </div>
 
-              <Text.CAPTION text={Dayjs.of(createdAt).formatYYMMDDHHmm()} color="gray" />
+              <Text.CAPTION text={DayjsUtil.of(createdAt).formatYYMMDDHHmm()} color="gray" />
             </div>
           </div>
         </Wrapper.SECTION>

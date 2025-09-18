@@ -1,6 +1,6 @@
 'use client';
 
-import { Dayjs } from '@/utils';
+import { DayjsUtil } from '@/utils';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -35,7 +35,7 @@ export default function InquiryList() {
         <Wrapper.SECTION>
           <div className="flex flex-col gap-1" onClick={() => clickHandler(id)}>
             <Text.HEADING text={title} />
-            <Text.PARAGRAPH text={Dayjs.of(createdAt).formatYYMMDDHHmm()} color="gray" />
+            <Text.PARAGRAPH text={DayjsUtil.of(createdAt).formatYYMMDDHHmm()} color="gray" />
           </div>
         </Wrapper.SECTION>
       </li>

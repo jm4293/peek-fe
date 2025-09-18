@@ -1,9 +1,7 @@
+import { LocalStorageUtil, SessionStorageUtil } from '@/utils';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 
 import { API_URL } from '@/shared/constant/api-url';
-
-import { LocalStorage } from '@/utils/local-storage';
-import { SessionStorage } from '@/utils/session-storage';
 
 interface IReq {
   url: string;
@@ -30,7 +28,7 @@ export default class AXIOS {
 
     this._axiosInstance.interceptors.request.use(
       (config) => {
-        // const accessToken = LocalStorage.getItem('__xt');
+        // const accessToken = LocalStorageUtil.getItem('__xt');
 
         // if (accessToken) {
         //   if (config.headers) {
@@ -77,8 +75,8 @@ export default class AXIOS {
             return this._axiosInstance(originalRequest);
           } catch (err: any) {
             if (err.status === 403) {
-              LocalStorage.clear();
-              SessionStorage.clear();
+              LocalStorageUtil.clear();
+              SessionStorageUtil.clear();
 
               alert('로그인 세션이 만료되었습니다. 다시 로그인 해주세요.');
               window.location.href = '/home';
@@ -87,8 +85,8 @@ export default class AXIOS {
         }
 
         if (error.status === 403) {
-          LocalStorage.clear();
-          SessionStorage.clear();
+          LocalStorageUtil.clear();
+          SessionStorageUtil.clear();
 
           alert('로그인 세션이 만료되었습니다. 다시 로그인 해주세요.');
           window.location.href = '/home';

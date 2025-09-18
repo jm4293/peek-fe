@@ -1,4 +1,4 @@
-export class SessionStorage {
+export class SessionStorageUtil {
   static setItem(name: string, value: string) {
     if (typeof window !== 'undefined') {
       sessionStorage.setItem(name, value);

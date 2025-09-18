@@ -1,6 +1,6 @@
 'use client';
 
-import { Dayjs, LocalStorage } from '@/utils';
+import { DayjsUtil, LocalStorageUtil } from '@/utils';
 import { X } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -26,11 +26,11 @@ export default function RecentStockList() {
 
     const updated = searches.filter((item) => item.id !== id);
     setSearches(updated);
-    LocalStorage.setItem(LocalStorageKey.recentStock, JSON.stringify(updated));
+    LocalStorageUtil.setItem(LocalStorageKey.recentStock, JSON.stringify(updated));
   };
 
   useEffect(() => {
-    const stored = LocalStorage.getItem(LocalStorageKey.recentStock);
+    const stored = LocalStorageUtil.getItem(LocalStorageKey.recentStock);
     setSearches(stored ? JSON.parse(stored) : []);
   }, []);
 
@@ -62,7 +62,7 @@ export default function RecentStockList() {
             onClick={() => handleClick(item)}>
             <div className="flex flex-col text-end">
               <Text.HEADING text={item.companyName} nowrap />
-              <Text.CAPTION text={Dayjs.of(item.timestamp).formatMMDD()} nowrap />
+              <Text.CAPTION text={DayjsUtil.of(item.timestamp).formatMMDD()} nowrap />
             </div>
 
             <X onClick={(event) => handleRemove(event, item.id)} />

@@ -1,5 +1,6 @@
 'use server';
 
+import { CookieUtil } from '@/utils';
 import { cookies, headers } from 'next/headers';
 
 import KY from '@/lib/ky';
@@ -7,13 +8,11 @@ import KY from '@/lib/ky';
 import { API_URL } from '@/shared/constant/api-url';
 import { ACCESS_TOKEN_NAME, REFRESH_TOKEN_NAME } from '@/shared/constant/cookie';
 
-import { parseCookie } from '@/utils/cookie';
-
 export const withdrawAction = async () => {
   const headerList = await headers();
   const cookie = headerList.get('cookie');
 
-  const cookieStore = parseCookie.set(cookie);
+  const cookieStore = CookieUtil.set(cookie);
   const access = cookieStore.pick(ACCESS_TOKEN_NAME);
   const refresh = cookieStore.pick(REFRESH_TOKEN_NAME);
 

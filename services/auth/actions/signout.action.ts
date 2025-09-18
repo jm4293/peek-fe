@@ -4,7 +4,7 @@ export const signoutAction = async () => {
   // const headerList = await headers();
   // const cookie = headerList.get('cookie');
   //
-  // const cookieStore = parseCookie.set(cookie);
+  // const cookieStore = parseCookieUtil.set(cookie);
   // let access = cookieStore.pick(ACCESS_TOKEN_NAME);
   // const refresh = cookieStore.pick(REFRESH_TOKEN_NAME);
   //

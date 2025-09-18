@@ -1,4 +1,4 @@
-import { Dayjs } from '@/utils';
+import { DayjsUtil } from '@/utils';
 
 import { PreText, Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
@@ -36,7 +36,7 @@ export default async function UserNoticeDetailPage(props: IProps) {
             <Text.HEADING text={data.title} />
           </div>
 
-          <Text.CAPTION text={Dayjs.of(data.createdAt).formatYYMMDDHHmm()} color="gray" />
+          <Text.CAPTION text={DayjsUtil.of(data.createdAt).formatYYMMDDHHmm()} color="gray" />
         </div>
       </Wrapper.SECTION>
 

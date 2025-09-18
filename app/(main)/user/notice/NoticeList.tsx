@@ -1,6 +1,6 @@
 'use client';
 
-import { Dayjs } from '@/utils';
+import { DayjsUtil } from '@/utils';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -41,7 +41,7 @@ export default function NoticeList() {
               <Text.HEADING text={title} />
             </div>
 
-            <Text.PARAGRAPH text={Dayjs.of(createdAt).formatYYMMDDHHmm()} color="gray" />
+            <Text.PARAGRAPH text={DayjsUtil.of(createdAt).formatYYMMDDHHmm()} color="gray" />
           </div>
         </Wrapper.SECTION>
       </li>

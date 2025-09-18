@@ -1,6 +1,6 @@
 'use client';
 
-import { Dayjs } from '@/utils';
+import { DayjsUtil } from '@/utils';
 import Marquee from 'react-fast-marquee';
 
 import { LineSkeleton } from '@/components/skeleton';
@@ -56,7 +56,7 @@ export const Currency = () => {
 
               <div className="flex justify-end items-center gap-2">
                 <Text.PARAGRAPH
-                  text={Dayjs.of(item.createdAt).formatHHmmss()}
+                  text={DayjsUtil.of(item.createdAt).formatHHmmss()}
                   color="gray"
                   nowrap
                   className="text-end"

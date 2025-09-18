@@ -4,7 +4,7 @@ import InquiryRegister from './InquiryRegister';
 
 export default function InquiryRegisterPage() {
   return (
-    <Wrapper.MAIN text="게시글 등록">
+    <Wrapper.MAIN text="문의 등록">
       <InquiryRegister />
     </Wrapper.MAIN>
   );

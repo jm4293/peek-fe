@@ -1,6 +1,6 @@
 'use client';
 
-import { LocalStorage, signMarkUtil } from '@/utils';
+import { LocalStorageUtil, StockSignMarkUtil } from '@/utils';
 import { useRouter } from 'next/navigation';
 
 import { InfinityList } from '@/components/infinity-list';
@@ -22,13 +22,13 @@ export default function PopularStock() {
     });
 
   const clickHandler = (item: IStockKoreanRankModel) => {
-    const stored = LocalStorage.getItem(LocalStorageKey.recentStock);
+    const stored = LocalStorageUtil.getItem(LocalStorageKey.recentStock);
     const searches = stored ? JSON.parse(stored) : [];
 
     const filtered = searches.filter((el: IStockCompanyModel) => el.code !== item.shcode);
     const updated = [{ code: item.shcode, companyName: item.hname, timestamp: Date.now() }, ...filtered].slice(0, 10);
 
-    LocalStorage.setItem(LocalStorageKey.recentStock, JSON.stringify(updated));
+    LocalStorageUtil.setItem(LocalStorageKey.recentStock, JSON.stringify(updated));
 
     router.push(`/stock/detail/${item.shcode}`);
   };
@@ -59,7 +59,7 @@ export default function PopularStock() {
             <div className="flex flex-col">
               <StockPriceText price={String(price.toLocaleString())} sign={sign} size="HEADING" className="text-end" />
               <StockPriceText
-                price={`${signMarkUtil(sign)}${String(change.toLocaleString())}(${diff}%)`}
+                price={`${StockSignMarkUtil(sign)}${String(change.toLocaleString())}(${diff}%)`}
                 sign={sign}
                 size="PARAGRAPH"
                 className="text-end"
