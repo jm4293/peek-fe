@@ -7,11 +7,11 @@ export class DayjsUtil {
     this.date = date;
   }
 
-  static of(date?: Date): Dayjs {
-    return new Dayjs(date);
+  static of(date?: Date): DayjsUtil {
+    return new DayjsUtil(date);
   }
 
-  formatMMDD(): string {
+  formatMMDD() {
     if (!this.date) {
       return '-';
     }
@@ -19,7 +19,7 @@ export class DayjsUtil {
     return dayjs(this.date).format('MM.DD');
   }
 
-  formatMMDDHHmm(): string {
+  formatMMDDHHmm() {
     if (!this.date) {
       return '-';
     }
@@ -27,7 +27,7 @@ export class DayjsUtil {
     return dayjs(this.date).format('MM.DD HH:mm');
   }
 
-  formatMMDDHHmmss(): string {
+  formatMMDDHHmmss() {
     if (!this.date) {
       return '-';
     }
@@ -35,7 +35,7 @@ export class DayjsUtil {
     return dayjs(this.date).format('MM.DD HH:mm:ss');
   }
 
-  formatHHmmss(): string {
+  formatHHmmss() {
     if (!this.date) {
       return '-';
     }
@@ -43,7 +43,7 @@ export class DayjsUtil {
     return dayjs(this.date).format('HH:mm:ss');
   }
 
-  formatYYMMDD(): string {
+  formatYYMMDD() {
     if (!this.date) {
       return '-';
     }
@@ -51,7 +51,7 @@ export class DayjsUtil {
     return dayjs(this.date).format('YY.MM.DD');
   }
 
-  formatYYMMDDHHmm(): string {
+  formatYYMMDDHHmm() {
     if (!this.date) {
       return '-';
     }
@@ -59,7 +59,7 @@ export class DayjsUtil {
     return dayjs(this.date).format('YY.MM.DD HH:mm');
   }
 
-  formatYYYYMMDD(): string {
+  formatYYYYMMDD() {
     if (!this.date) {
       return '-';
     }
@@ -67,7 +67,7 @@ export class DayjsUtil {
     return dayjs(this.date).format('YYYY.MM.DD');
   }
 
-  formatYYYYMMDDHHmm(): string {
+  formatYYYYMMDDHHmm() {
     if (!this.date) {
       return '-';
     }
@@ -76,7 +76,7 @@ export class DayjsUtil {
   }
 
   // 추가적인 체이닝을 위한 메서드들
-  addDays(days: number): Dayjs {
+  addDays(days: number) {
     if (!this.date) {
       return this;
     }
@@ -85,7 +85,7 @@ export class DayjsUtil {
     return this;
   }
 
-  subtractDays(days: number): Dayjs {
+  subtractDays(days: number) {
     if (!this.date) {
       return this;
     }

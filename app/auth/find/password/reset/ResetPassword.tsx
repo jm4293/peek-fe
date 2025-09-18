@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { Button } from '@/components/button';
 import { Input } from '@/components/input';
 import { Text } from '@/components/text';
+import { Wrapper } from '@/components/wrapper';
 
 import { useInput } from '@/hooks/input';
 import { useModal, useToast } from '@/hooks/modal';
@@ -57,41 +58,43 @@ export default function ResetPassword() {
   }, [email, randomCode]);
 
   return (
-    <section className="w-full flex flex-col gap-12">
-      <div className="flex flex-col gap-4">
-        <Text.HEADING text={`이메일: ${email}`} />
+    <Wrapper.SECTION>
+      <div className="flex flex-col gap-12">
+        <div className="flex flex-col gap-4">
+          <Text.HEADING text={`이메일: ${email}`} />
 
-        <Input
-          type="password"
-          className="w-full col-span-2"
-          title="새로운 비밀번호"
-          name="password"
-          value={value.password}
-          onChange={onChange}
-          placeholder="새로운 비밀번호"
-          required
-        />
-        <Input
-          type="password"
-          className="w-full col-span-2"
-          title="비밀번호 확인"
-          name="confirmPassword"
-          value={value.confirmPassword}
-          onChange={onChange}
-          placeholder="비밀번호 확인"
-          required
-        />
-      </div>
+          <Input
+            type="password"
+            className="w-full col-span-2"
+            title="새로운 비밀번호"
+            name="password"
+            value={value.password}
+            onChange={onChange}
+            placeholder="새로운 비밀번호"
+            required
+          />
+          <Input
+            type="password"
+            className="w-full col-span-2"
+            title="비밀번호 확인"
+            name="confirmPassword"
+            value={value.confirmPassword}
+            onChange={onChange}
+            placeholder="비밀번호 확인"
+            required
+          />
+        </div>
 
-      <div className="w-full flex gap-2">
-        <Button.OUTLINE
-          text="뒤로가기"
-          onClick={() => {
-            router.replace('/auth/login');
-          }}
-        />
-        <Button.CONTAINER type="submit" text="변경하기" onClick={handleResetPassword} />
+        <div className="w-full flex gap-2">
+          <Button.OUTLINE
+            text="뒤로가기"
+            onClick={() => {
+              router.replace('/auth/login');
+            }}
+          />
+          <Button.CONTAINER type="submit" text="변경하기" onClick={handleResetPassword} />
+        </div>
       </div>
-    </section>
+    </Wrapper.SECTION>
   );
 }

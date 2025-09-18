@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { Button } from '@/components/button';
 import { Input } from '@/components/input';
 import { Text } from '@/components/text';
+import { Wrapper } from '@/components/wrapper';
 
 import { useInput } from '@/hooks/input';
 import { useModal, useToast } from '@/hooks/modal';
@@ -123,70 +124,74 @@ export default function VerifyEmail() {
   }, [checkEmail]);
 
   return (
-    <section className="w-full flex flex-col gap-12">
-      <div className="flex flex-col gap-4">
-        <div className="grid grid-cols-3 gap-2">
-          <Input
-            type="email"
-            className="w-full col-span-2"
-            title="이메일"
-            name="email"
-            value={value.email}
-            onChange={onChange}
-            placeholder="이메일 주소"
-            disabled={checkEmail !== 1}
-            required
-          />
-          <Button.CONTAINER
-            className="mt-6"
-            text={checkEmailMutation.isPending ? '코드 전송 중' : '이메일 인증'}
-            onClick={handleCheckEmail}
-            disabled={checkEmailMutation.isPending || checkEmail !== 1}
-          />
-        </div>
-        {checkEmail !== 1 && (
+    <Wrapper.SECTION>
+      <Text.HEADING text="회원정보 확인" />
+
+      <div className="flex flex-col gap-12">
+        <div className="flex flex-col gap-4">
           <div className="grid grid-cols-3 gap-2">
             <Input
-              type="number"
-              className="col-span-2"
-              title="인증코드"
-              name="code"
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              placeholder="인증코드"
-              minLength={4}
-              maxLength={4}
-              disabled={checkEmail === 3}
-              required>
-              <Text.PARAGRAPH text={dayjs.duration(count, 'seconds').format('m:ss')} />
-            </Input>
+              type="email"
+              className="w-full col-span-2"
+              title="이메일"
+              name="email"
+              value={value.email}
+              onChange={onChange}
+              placeholder="이메일 주소"
+              disabled={checkEmail !== 1}
+              required
+            />
             <Button.CONTAINER
               className="mt-6"
-              text={checkEmail === 3 ? '확인 완료' : '코드 확인'}
-              onClick={handleCheckCode}
-              disabled={checkEmail === 3}
+              text={checkEmailMutation.isPending ? '코드 전송 중' : '이메일 인증'}
+              onClick={handleCheckEmail}
+              disabled={checkEmailMutation.isPending || checkEmail !== 1}
             />
           </div>
-        )}
-      </div>
+          {checkEmail !== 1 && (
+            <div className="grid grid-cols-3 gap-2">
+              <Input
+                type="number"
+                className="col-span-2"
+                title="인증코드"
+                name="code"
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                placeholder="인증코드"
+                minLength={4}
+                maxLength={4}
+                disabled={checkEmail === 3}
+                required>
+                <Text.PARAGRAPH text={dayjs.duration(count, 'seconds').format('m:ss')} />
+              </Input>
+              <Button.CONTAINER
+                className="mt-6"
+                text={checkEmail === 3 ? '확인 완료' : '코드 확인'}
+                onClick={handleCheckCode}
+                disabled={checkEmail === 3}
+              />
+            </div>
+          )}
+        </div>
 
-      <div className="w-full flex gap-2">
-        <Button.OUTLINE
-          text="뒤로가기"
-          onClick={() => {
-            router.push('/auth/login');
-          }}
-        />
-        <Button.CONTAINER
-          type="submit"
-          text="다음"
-          onClick={() => {
-            setEmail(value.email);
-            router.push('/auth/find/password/reset', { scroll: true });
-          }}
-          disabled={checkEmail !== 3}
-        />
+        <div className="w-full flex gap-2">
+          <Button.OUTLINE
+            text="뒤로가기"
+            onClick={() => {
+              router.push('/auth/login');
+            }}
+          />
+          <Button.CONTAINER
+            type="submit"
+            text="다음"
+            onClick={() => {
+              setEmail(value.email);
+              router.push('/auth/find/password/reset', { scroll: true });
+            }}
+            disabled={checkEmail !== 3}
+          />
+        </div>
       </div>
-    </section>
+    </Wrapper.SECTION>
   );
 }

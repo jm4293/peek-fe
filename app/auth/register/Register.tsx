@@ -1,5 +1,6 @@
 'use client';
 
+import { ValidationUtil } from '@/utils';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import { useRouter } from 'next/navigation';
@@ -8,6 +9,7 @@ import { useEffect, useState, useTransition } from 'react';
 import { Button } from '@/components/button';
 import { CheckBox, Input } from '@/components/input';
 import { Text } from '@/components/text';
+import { Wrapper } from '@/components/wrapper';
 
 import { useInput } from '@/hooks/input';
 import { useModal, useToast } from '@/hooks/modal';
@@ -42,7 +44,7 @@ export default function Register() {
   const [code, setCode] = useState('');
   const [count, setCount] = useState(300);
 
-  const [value, onChange] = useInput({ ...initialFormData });
+  const [value, onChange] = useInput<ISignUpDto>({ ...initialFormData });
 
   const { checkEmailMutation, checkEmailCodeMutation } = useAuthMutation();
 
@@ -100,33 +102,21 @@ export default function Register() {
   };
 
   const handleSubmit = async () => {
-    if (checkEmail !== 3) {
-      openModal({ content: '이메일 인증을 완료해 주세요.', onConfirm: closeModal });
-      return;
-    }
+    const isValid = ValidationUtil.create()
+      .required(value.email, '이메일을 입력해주세요.')
+      .email(value.email, '유효한 이메일 주소가 아닙니다.')
+      .custom(() => checkEmail === 3, '이메일 인증을 완료해 주세요.')
+      .required(value.password, '비밀번호를 입력해주세요.')
+      .minLength(value.password, 6, '비밀번호는 최소 6글자 이상이어야 합니다')
+      .custom(() => value.password === passwordConfirm, '비밀번호가 일치하지 않습니다.')
+      .required(value.nickname, '닉네임을 입력해주세요.')
+      .required(value.name, '이름을 입력해주세요.')
+      .custom(() => value.policy, '정책에 동의해주세요.')
+      .validate((errorMessage) => {
+        openModal({ content: errorMessage, onConfirm: closeModal });
+      });
 
-    if (!value.password || !value.password.trim()) {
-      openModal({ content: '비밀번호를 입력해주세요.', onConfirm: closeModal });
-      return;
-    }
-
-    if (value.password !== passwordConfirm) {
-      openModal({ content: '비밀번호가 일치하지 않습니다.', onConfirm: closeModal });
-      return;
-    }
-
-    if (!value.nickname || !value.nickname.trim()) {
-      openModal({ content: '닉네임을 입력해주세요.', onConfirm: closeModal });
-      return;
-    }
-
-    if (!value.name || !value.name.trim()) {
-      openModal({ content: '이름을 입력해주세요.', onConfirm: closeModal });
-      return;
-    }
-
-    if (!value.policy) {
-      openModal({ content: '정책에 동의해주세요.', onConfirm: closeModal });
+    if (!isValid) {
       return;
     }
 
@@ -167,83 +157,84 @@ export default function Register() {
   }, [checkEmail]);
 
   return (
-    <section className="w-full flex flex-col gap-12">
-      <div className="flex flex-col gap-4">
-        <div className="grid grid-cols-3 gap-2">
-          <Input
-            type="email"
-            className="w-full col-span-2"
-            title="이메일"
-            name="email"
-            value={value.email}
-            onChange={onChange}
-            placeholder="이메일 주소"
-            disabled={checkEmail !== 1}
-            required
-          />
-          <Button.CONTAINER
-            className="mt-6"
-            text={checkEmailMutation.isPending ? '코드 전송 중' : '이메일 인증'}
-            onClick={handleCheckEmail}
-            disabled={checkEmailMutation.isPending || checkEmail !== 1}
-          />
-        </div>
-        {checkEmail !== 1 && (
+    <Wrapper.SECTION>
+      <div className="flex flex-col gap-12">
+        <div className="flex flex-col gap-4">
           <div className="grid grid-cols-3 gap-2">
             <Input
-              type="number"
-              className="col-span-2"
-              title="인증코드"
-              name="code"
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              placeholder="인증코드"
-              minLength={4}
-              maxLength={4}
-              disabled={checkEmail === 3}
-              required>
-              <Text.PARAGRAPH text={dayjs.duration(count, 'seconds').format('m:ss')} />
-            </Input>
+              type="email"
+              className="w-full col-span-2"
+              title="이메일"
+              name="email"
+              value={value.email}
+              onChange={onChange}
+              placeholder="이메일 주소"
+              disabled={checkEmail !== 1}
+              required
+            />
             <Button.CONTAINER
               className="mt-6"
-              text={checkEmail === 3 ? '확인 완료' : '코드 확인'}
-              onClick={handleCheckCode}
-              disabled={checkEmail === 3}
+              text={checkEmailMutation.isPending ? '코드 전송 중' : '이메일 인증'}
+              onClick={handleCheckEmail}
+              disabled={checkEmailMutation.isPending || checkEmail !== 1}
             />
           </div>
-        )}
+          {checkEmail !== 1 && (
+            <div className="grid grid-cols-3 gap-2">
+              <Input
+                type="number"
+                className="col-span-2"
+                title="인증코드"
+                name="code"
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                placeholder="인증코드"
+                minLength={4}
+                maxLength={4}
+                disabled={checkEmail === 3}
+                required>
+                <Text.PARAGRAPH text={dayjs.duration(count, 'seconds').format('m:ss')} />
+              </Input>
+              <Button.CONTAINER
+                className="mt-6"
+                text={checkEmail === 3 ? '확인 완료' : '코드 확인'}
+                onClick={handleCheckCode}
+                disabled={checkEmail === 3}
+              />
+            </div>
+          )}
 
-        <Input
-          type="password"
-          title="비밀번호"
-          name="password"
-          value={value.password}
-          onChange={onChange}
-          placeholder="비밀번호"
-          required
-        />
-        <Input
-          type="password"
-          title="비밀번호 확인"
-          name="passwordConfirm"
-          value={passwordConfirm}
-          onChange={(e) => setPasswordConfirm(e.target.value)}
-          placeholder="비밀번호 확인"
-          required
-        />
-      </div>
+          <Input
+            type="password"
+            title="비밀번호"
+            name="password"
+            value={value.password}
+            onChange={onChange}
+            placeholder="비밀번호"
+            required
+          />
+          <Input
+            type="password"
+            title="비밀번호 확인"
+            name="passwordConfirm"
+            value={passwordConfirm}
+            onChange={(e) => setPasswordConfirm(e.target.value)}
+            placeholder="비밀번호 확인"
+            required
+          />
+        </div>
 
-      <div className="flex flex-col gap-4">
-        <Input
-          title="닉네임"
-          name="nickname"
-          value={value.nickname}
-          onChange={onChange}
-          placeholder="닉네임"
-          required
-        />
-        <Input title="이름" name="name" value={value.name} onChange={onChange} placeholder="이름" required />
-        {/* <Input
+        <div className="flex flex-col gap-4">
+          <Input
+            title="닉네임"
+            name="nickname"
+            value={value.nickname}
+            onChange={onChange}
+            placeholder="닉네임"
+            required
+          />
+          <Input title="이름" name="name" value={value.name} onChange={onChange} placeholder="이름" required />
+          {/* <Input
           title="생년월일 8자리"
           name="birthdate"
           value={value.birthdate}
@@ -252,20 +243,21 @@ export default function Register() {
           optional
         /> */}
 
-        <div className="flex justify-end">
-          <CheckBox title="정책에 동의합니다" name="policy" checked={value.policy} onChange={onChange} />
+          <div className="flex justify-end">
+            <CheckBox title="정책에 동의합니다" name="policy" checked={value.policy} onChange={onChange} />
+          </div>
+
+          <div className="w-full flex gap-2">
+            <Button.OUTLINE
+              text="뒤로가기"
+              onClick={() => {
+                router.push('/auth/login');
+              }}
+            />
+            <Button.CONTAINER text="회원가입" onClick={handleSubmit} disabled={isPending} />
+          </div>
         </div>
       </div>
-
-      <div className="w-full flex gap-2">
-        <Button.OUTLINE
-          text="뒤로가기"
-          onClick={() => {
-            router.push('/auth/login');
-          }}
-        />
-        <Button.CONTAINER text="회원가입" onClick={handleSubmit} disabled={isPending} />
-      </div>
-    </section>
+    </Wrapper.SECTION>
   );
 }

@@ -22,7 +22,7 @@ class BoardApi extends AXIOS {
 
   async getBoardList(dto: IBoardListDto) {
     return await this.get<IBoardListRes, IBoardListDto>({
-      url: `${this._baseURL}`,
+      url: this._baseURL,
       params: dto,
     });
   }
