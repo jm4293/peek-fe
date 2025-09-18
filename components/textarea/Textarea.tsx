@@ -6,7 +6,6 @@ import { Text } from '../text/Text';
 
 interface IProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   title: string;
-  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   name?: string;
   placeholder?: string;
   color?: 'gray' | 'green';
@@ -41,6 +40,7 @@ export const Textarea = (props: IProps) => {
 
       <textarea
         id={name}
+        name={name}
         ref={textareaRef}
         className={`border-theme-txt-gray  min-h-[20vh] max-h-[60vh] ${borderColor[color]} ${className}`}
         onChange={handleInput}
