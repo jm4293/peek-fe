@@ -19,10 +19,10 @@ interface IPostReq<D> extends IReq {
 export default class AXIOS {
   private readonly _axiosInstance: AxiosInstance;
 
-  constructor() {
+  constructor(headers: AxiosRequestConfig['headers'] = {}) {
     this._axiosInstance = axios.create({
       baseURL: API_URL,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', ...headers },
       withCredentials: true,
     });
 

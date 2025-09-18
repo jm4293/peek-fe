@@ -1,9 +1,15 @@
 import axios from 'axios';
 
-class ImageApi {
-  private readonly _baseURL = '';
-  private readonly UPLOAD_URL = `${process.env.NEXT_PUBLIC_IMAGE_URL}${this._baseURL}`;
-  private readonly DOWNLOAD_URL = `${process.env.NEXT_PUBLIC_IMAGE_URL}${this._baseURL}`;
+import AXIOS from '@/lib/axios';
+
+import { ImageTypeEnum } from '@/shared/enum/image';
+
+class ImageApi extends AXIOS {
+  private readonly _baseURL = '/image';
+
+  constructor() {
+    super({ 'Content-Type': 'multipart/form-data' });
+  }
 
   async uploadImage(dto: { file: File }) {
     const { file } = dto;
@@ -12,17 +18,33 @@ class ImageApi {
 
     formData.append('image', file);
 
-    const ret = await axios.post(this.UPLOAD_URL, formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-    });
+    const ret = await this.post<{ name: string }, FormData>({ url: `${this._baseURL}/upload`, data: formData });
 
     return ret.data.name;
   }
 
-  downloadImage(dto: { name: string; width?: number }) {
-    const { name, width } = dto;
+  async uploadImages(dto: { files: File[] }) {
+    const { files } = dto;
 
-    return `${this.DOWNLOAD_URL}?name=${name}${width ? `&width=${width}` : ''}`;
+    const formData = new FormData();
+
+    files.forEach((file) => {
+      formData.append('images', file);
+    });
+
+    const ret = await this.post<{ names: string[] }, FormData>({ url: `${this._baseURL}/uploads`, data: formData });
+
+    return ret.data.names;
+  }
+
+  async downloadImage(dto: { name: string; type: ImageTypeEnum; w?: number; h?: number }) {
+    const { name, w, h } = dto;
+
+    // return `${this._baseURL}/download?name=${name}${width ? `&width=${width}` : ''}`;
+
+    const ret = await this.get({ url: `${this._baseURL}/${name}`, params: { w, h } });
+
+    return ret.data;
   }
 }
 
