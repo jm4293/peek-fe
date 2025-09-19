@@ -7,5 +7,17 @@ export const useImageMutation = () => {
     mutationFn: (dto: { file: File }) => ImageApi.uploadImage(dto),
   });
 
-  return { uploadImageMutation };
+  const uploadImagesMutation = useMutation({
+    mutationFn: (dto: { files: File[] }) => ImageApi.uploadImages(dto),
+    onSuccess: (data) => {
+      const { successUploads, failUploads } = data.data;
+
+      return { successUploads, failUploads };
+    },
+  });
+
+  return {
+    uploadImageMutation,
+    uploadImagesMutation,
+  };
 };
