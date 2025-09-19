@@ -248,12 +248,7 @@ export default function Register() {
           </div>
 
           <div className="w-full flex gap-2">
-            <Button.OUTLINE
-              text="뒤로가기"
-              onClick={() => {
-                router.push('/auth/login');
-              }}
-            />
+            <Button.OUTLINE text="뒤로가기" onClick={() => router.push('/auth/login')} />
             <Button.CONTAINER text="회원가입" onClick={handleSubmit} disabled={isPending} />
           </div>
         </div>

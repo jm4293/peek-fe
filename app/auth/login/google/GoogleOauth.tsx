@@ -6,6 +6,8 @@ import { useEffect } from 'react';
 import { LineSkeleton } from '@/components/skeleton';
 import { Text } from '@/components/text';
 
+import { useToast } from '@/hooks/modal';
+
 import { useAuthMutation } from '@/services/auth';
 
 import { UserAccountTypeEnum } from '@/shared/enum/user';
@@ -13,6 +15,7 @@ import { UserAccountTypeEnum } from '@/shared/enum/user';
 export default function GoogleOauth() {
   const router = useRouter();
 
+  const { openToast } = useToast();
   const { oauthSignInMutation } = useAuthMutation();
 
   useEffect(() => {
@@ -24,16 +27,18 @@ export default function GoogleOauth() {
     const tokenType = params.get('token_type');
     const expire = params.get('expires_in');
 
-    if (token) {
-      oauthSignInMutation.mutate({
-        token,
-        userAccountType: UserAccountTypeEnum.GOOGLE,
-        tokenType,
-        expire: expire ? Number(expire) : null,
-      });
-    } else {
+    if (!token) {
+      openToast({ type: 'error', message: '구글 로그인에 실패했습니다. 다시 시도해주세요.' });
       router.replace('/auth/login');
+      return;
     }
+
+    oauthSignInMutation.mutate({
+      token,
+      userAccountType: UserAccountTypeEnum.GOOGLE,
+      tokenType,
+      expire: expire ? Number(expire) : null,
+    });
   }, []);
 
   return (

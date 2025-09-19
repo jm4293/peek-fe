@@ -20,10 +20,18 @@ export default async function BoardDetailPage(props: IProps) {
 
   const { data, success } = await boardDetailAction(id);
 
-  if (!success || !data) {
+  if (!success) {
     return (
       <Wrapper.SECTION>
         <Text.HEADING text="게시글 불러오는데 실패했습니다." />
+      </Wrapper.SECTION>
+    );
+  }
+
+  if (!data) {
+    return (
+      <Wrapper.SECTION>
+        <Text.HEADING text="존재하지 않는 게시글입니다." />
       </Wrapper.SECTION>
     );
   }

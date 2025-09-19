@@ -1,4 +1,4 @@
-interface IProps {
+interface IProps extends React.HTMLAttributes<HTMLElement> {
   text: string;
   className?: string;
   color?: 'default' | 'gray' | 'blue' | 'red' | 'main';

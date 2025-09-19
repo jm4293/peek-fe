@@ -175,12 +175,7 @@ export default function VerifyEmail() {
         </div>
 
         <div className="w-full flex gap-2">
-          <Button.OUTLINE
-            text="뒤로가기"
-            onClick={() => {
-              router.push('/auth/login');
-            }}
-          />
+          <Button.OUTLINE text="뒤로가기" onClick={() => router.push('/auth/login')} />
           <Button.CONTAINER
             type="submit"
             text="다음"

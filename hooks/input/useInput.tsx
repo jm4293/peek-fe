@@ -7,8 +7,6 @@ export const useInput = <T,>(initialState: T) => {
     const { name, value, type } = e.target as HTMLInputElement | HTMLTextAreaElement;
     const checked = type === 'checkbox' ? (e.target as HTMLInputElement).checked : undefined;
 
-    console.log(name, value, type, checked);
-
     setInputs((prev) => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value,
