@@ -1,16 +1,19 @@
 'use client';
 
 import { ValidationUtil } from '@/utils';
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useRef, useState } from 'react';
 
 import { Button } from '@/components/button';
 import { Input } from '@/components/input';
+import { Text } from '@/components/text';
 import { Textarea } from '@/components/textarea';
 import { Wrapper } from '@/components/wrapper';
 
 import { useInput } from '@/hooks/input';
 import { useModal, useToast } from '@/hooks/modal';
 
+import { useImageMutation } from '@/services/image';
 import { ICreateInquiryDto } from '@/services/inquiry';
 import { useInquiryMutation } from '@/services/inquiry/mutation/useInquiryMutation';
 
@@ -21,18 +24,20 @@ const initialFormData: ICreateInquiryDto = {
 };
 
 export default function InquiryRegister() {
-  // const [title, setTitle] = useState('');
-  // const [content, setContent] = useState('');
-  const [images, setImages] = useState<string[]>([]);
+  const router = useRouter();
 
-  const [value, onChange, setValue] = useInput<ICreateInquiryDto>({ ...initialFormData });
+  const imageInputRef = useRef<HTMLInputElement>(null);
+  const [images, setImages] = useState<File[]>([]);
+
+  const [value, onChange] = useInput<ICreateInquiryDto>({ ...initialFormData });
 
   const { openModal, closeModal } = useModal();
-  const { toast, closeToast, openToast } = useToast();
+  const { openToast } = useToast();
 
+  const { uploadImagesMutation } = useImageMutation();
   const { createInquiryMutation } = useInquiryMutation();
 
-  const clickHandler = () => {
+  const clickHandler = async () => {
     const isValid = ValidationUtil.create()
       .required(value.title, '제목을 입력해주세요.')
       .required(value.content, '내용을 입력해주세요.')
@@ -45,6 +50,47 @@ export default function InquiryRegister() {
     if (!isValid) {
       return;
     }
+
+    let uploadedImageNames: string[] = [];
+
+    await uploadImagesMutation.mutateAsync(
+      { files: images },
+      {
+        onSuccess: (ret) => {
+          const { successUploads, failUploads } = ret.data;
+
+          if (failUploads.length > 0) {
+            openToast({ message: `${failUploads.length}개의 이미지 업로드에 실패했습니다.`, type: 'error' });
+            return;
+          }
+
+          uploadedImageNames = successUploads;
+        },
+      },
+    );
+
+    createInquiryMutation.mutate({ ...value, images: uploadedImageNames });
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+
+    if (!files || files.length === 0) {
+      return;
+    }
+
+    const fileArray = Array.from(files).slice(0, 5 - images.length);
+    setImages((prevImages) => [...prevImages, ...fileArray]);
+
+    e.target.value = '';
+  };
+
+  const handleImageUpload = () => {
+    if (!imageInputRef.current) {
+      return;
+    }
+
+    imageInputRef.current.click();
   };
 
   return (
@@ -53,20 +99,45 @@ export default function InquiryRegister() {
         <div className="flex flex-col gap-4">
           <Input title="제목" name="title" value={value.title} onChange={onChange} placeholder="제목" required />
           <Textarea title="내용" name="content" value={value.content} onChange={onChange} placeholder="내용" required />
+
+          <div className="flex flex-col gap-2">
+            <Text.HEADING text="이미지" />
+            {images.length > 0 ? (
+              <div className="flex gap-2">
+                {images.map((file, index) => (
+                  <div key={index} className="relative">
+                    <img
+                      src={URL.createObjectURL(file)}
+                      alt={`Selected ${index}`}
+                      className="w-20 h-20 object-cover rounded"
+                    />
+                    <button
+                      type="button"
+                      className="absolute top-0 right-0 bg-white text-black rounded-full w-5 h-5 flex items-center justify-center"
+                      onClick={() => setImages((prevImages) => prevImages.filter((img) => img !== file))}>
+                      &times;
+                    </button>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <Text.PARAGRAPH text="이미지는 최대 5장까지 등록할 수 있습니다." />
+            )}
+            <input
+              ref={imageInputRef}
+              type="file"
+              accept="image/*"
+              multiple
+              className="hidden"
+              onChange={handleImageChange}
+            />
+            <Button.CONTAINER text="이미지 업로드" onClick={handleImageUpload} />
+          </div>
         </div>
 
         <div className="w-full flex gap-2">
-          <Button.OUTLINE
-            text="뒤로가기"
-            // onClick={() => {
-            //   router.push('/auth/login');
-            // }}
-          />
-          <Button.CONTAINER
-            text="등록하기"
-            onClick={clickHandler}
-            // disabled={isPending}
-          />
+          <Button.OUTLINE text="뒤로가기" onClick={() => router.push('/auth/login')} />
+          <Button.CONTAINER text="등록하기" onClick={clickHandler} disabled={createInquiryMutation.isPending} />
         </div>
       </div>
     </Wrapper.SECTION>
