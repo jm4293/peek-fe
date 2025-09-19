@@ -1,5 +1,6 @@
 export const CookieUtil = {
   value: {} as Record<string, string>,
+
   get: function () {
     return this.value;
   },
@@ -20,7 +21,6 @@ export const CookieUtil = {
       {} as Record<string, string>,
     );
 
-    // return this.value;
     return this;
   },
   pick: function (key: string) {
