@@ -35,6 +35,8 @@ export default function BoardDetail(props: IProps) {
   return (
     <>
       <Wrapper.SECTION>
+        <Text.HEADING text="제목" />
+
         <div className="flex flex-col gap-1">
           <div className="flex justify-between items-center gap-2">
             <div className="flex items-center gap-2">
@@ -53,16 +55,18 @@ export default function BoardDetail(props: IProps) {
         </div>
       </Wrapper.SECTION>
       <Wrapper.SECTION>
+        <Text.HEADING text="내용" />
+
         <div className="flex flex-col gap-4">
           <PreText text={board.article.content} />
 
           {board.userAccount.email === my?.email && (
             <div className="flex items-center justify-end gap-2">
-              <div className="cursor-pointer" onClick={modifyClickHandler}>
-                <Text.PARAGRAPH text="수정" color="blue" />
-              </div>
               <div className="cursor-pointer" onClick={deleteClickHandler}>
                 <Text.PARAGRAPH text="삭제" color="red" />
+              </div>
+              <div className="cursor-pointer" onClick={modifyClickHandler}>
+                <Text.PARAGRAPH text="수정" color="blue" />
               </div>
             </div>
           )}

@@ -16,15 +16,19 @@ export default function InquiryDetail(props: IProps) {
   return (
     <>
       <Wrapper.SECTION>
-        <div className="flex justify-between items-center">
-          <Text.HEADING text={inquiry.title} />
-          <Text.PARAGRAPH text={DayjsUtil.of(inquiry.createdAt).formatYYMMDDHHmm()} color="gray" />
-        </div>
+        <Text.HEADING text="제목" />
+
+        <Text.HEADING text={inquiry.title} />
+        <Text.PARAGRAPH text={DayjsUtil.of(inquiry.createdAt).formatYYMMDDHHmm()} className="text-end" color="gray" />
       </Wrapper.SECTION>
       <Wrapper.SECTION>
+        <Text.HEADING text="내용" />
+
         <PreText text={inquiry.content} />
       </Wrapper.SECTION>
       <Wrapper.SECTION>
+        <Text.HEADING text="첨부 이미지" />
+
         {inquiry.images.length > 0 ? (
           <div className="flex flex-wrap gap-2">
             {inquiry.images.map((image, index) => (
@@ -40,6 +44,23 @@ export default function InquiryDetail(props: IProps) {
           </div>
         ) : (
           <Text.PARAGRAPH text="첨부된 이미지가 없습니다." color="gray" />
+        )}
+      </Wrapper.SECTION>
+
+      <Wrapper.SECTION>
+        <Text.HEADING text="답변" />
+
+        {inquiry.reply ? (
+          <div className="flex flex-col gap-2">
+            <Text.PARAGRAPH text={inquiry.reply.content} />
+            <Text.CAPTION
+              text={DayjsUtil.of(inquiry.reply.createdAt).formatYYMMDDHHmm()}
+              className="text-end"
+              color="gray"
+            />
+          </div>
+        ) : (
+          <Text.PARAGRAPH text="아직 답변이 등록되지 않았습니다." color="gray" />
         )}
       </Wrapper.SECTION>
     </>

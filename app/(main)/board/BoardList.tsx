@@ -58,14 +58,14 @@ export default function BoardList() {
               </div>
             </div>
 
-            <div className="flex justify-between items-center">
-              <div className="flex gap-2">
+            <div className="flex justify-between items-center gap-4">
+              <div className="flex gap-4">
                 <div className="flex items-center gap-1">
-                  <Heart color="#8b8b8e" size={16} />
+                  <Heart color="#8b8b8e" size={18} />
                   <Text.PARAGRAPH text={String(likeCount)} color="gray" />
                 </div>
                 <div className="flex items-center gap-1">
-                  <MessageCircle color="#8b8b8e" size={16} />
+                  <MessageCircle color="#8b8b8e" size={18} />
                   <Text.PARAGRAPH text={String(commentCount)} color="gray" />
                 </div>
               </div>

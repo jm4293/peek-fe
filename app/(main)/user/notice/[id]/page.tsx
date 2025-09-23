@@ -16,7 +16,7 @@ export default async function UserNoticeDetailPage(props: IProps) {
 
   const { data, success } = await noticeDetailAction(id);
 
-  if (!success || !data) {
+  if (!success) {
     return (
       <Wrapper.SECTION>
         <Text.HEADING text="공지사항 불러오는데 실패했습니다." />
@@ -24,23 +24,33 @@ export default async function UserNoticeDetailPage(props: IProps) {
     );
   }
 
+  if (!data) {
+    return (
+      <Wrapper.SECTION>
+        <Text.HEADING text="존재하지 않는 공지사항입니다." />
+      </Wrapper.SECTION>
+    );
+  }
+
   return (
     <div className="flex flex-col gap-2">
       <Wrapper.SECTION>
-        <div className="flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <Text.PARAGRAPH
-              text={`[${NoticeTypeEnumList[data.type].label}]`}
-              color={NoticeTypeEnumList[data.type].color}
-            />
-            <Text.HEADING text={data.title} />
-          </div>
+        <Text.HEADING text="제목" />
 
-          <Text.CAPTION text={DayjsUtil.of(data.createdAt).formatYYMMDDHHmm()} color="gray" />
+        <div className="flex items-center gap-2">
+          <Text.PARAGRAPH
+            text={`[${NoticeTypeEnumList[data.type].label}]`}
+            color={NoticeTypeEnumList[data.type].color}
+          />
+          <Text.HEADING text={data.title} />
         </div>
+
+        <Text.CAPTION text={DayjsUtil.of(data.createdAt).formatYYMMDDHHmm()} className="text-end" color="gray" />
       </Wrapper.SECTION>
 
       <Wrapper.SECTION>
+        <Text.HEADING text="내용" />
+
         <PreText text={data.content} />
       </Wrapper.SECTION>
     </div>

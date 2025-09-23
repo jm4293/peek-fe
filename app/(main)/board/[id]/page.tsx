@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 

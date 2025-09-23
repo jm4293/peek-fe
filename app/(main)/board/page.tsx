@@ -1,4 +1,4 @@
-import { NetworkErrorText, Text } from '@/components/text';
+import { NetworkErrorText } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
 import { stockCategoryListAction } from '@/services/stock';

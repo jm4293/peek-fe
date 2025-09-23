@@ -51,25 +51,21 @@ export default function InquiryRegister() {
       return;
     }
 
-    let uploadedImageNames: string[] = [];
+    if (images.length === 0) {
+      createInquiryMutation.mutate({ ...value, images: [] });
+      return;
+    }
 
-    await uploadImagesMutation.mutateAsync(
-      { files: images },
-      {
-        onSuccess: (ret) => {
-          const { successUploads, failUploads } = ret.data;
+    await uploadImagesMutation
+      .mutateAsync({ files: images })
+      .then((res) => {
+        const { successUploads } = res.data;
 
-          if (failUploads.length > 0) {
-            openToast({ message: `${failUploads.length}개의 이미지 업로드에 실패했습니다.`, type: 'error' });
-            return;
-          }
-
-          uploadedImageNames = successUploads;
-        },
-      },
-    );
-
-    createInquiryMutation.mutate({ ...value, images: uploadedImageNames });
+        createInquiryMutation.mutate({ ...value, images: successUploads });
+      })
+      .catch(() => {
+        openToast({ message: '이미지 업로드에 실패했습니다. 잠시 후 다시 시도해주세요.', type: 'error' });
+      });
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -131,7 +127,7 @@ export default function InquiryRegister() {
               className="hidden"
               onChange={handleImageChange}
             />
-            <Button.CONTAINER text="이미지 업로드" onClick={handleImageUpload} />
+            <Button.CONTAINER text="이미지 등록" onClick={handleImageUpload} disabled={images.length === 5} />
           </div>
         </div>
 

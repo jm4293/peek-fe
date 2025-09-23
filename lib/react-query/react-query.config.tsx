@@ -19,7 +19,6 @@ export default function QueryProvider(props: IProps) {
       defaultOptions: {
         queries: {
           throwOnError: false,
-          networkMode: 'always',
           retry: 0,
         },
         mutations: {

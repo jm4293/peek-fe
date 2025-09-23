@@ -15,17 +15,24 @@ export default function InquiryList() {
 
   const [list, setList] = useState<IInquiryModel[]>([]);
 
-  const { data: inquiryList, hasNextPage, fetchNextPage, isFetchingNextPage, isSuccess } = useInquiryList({});
+  const {
+    data: inquiryList,
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+    isSuccess,
+    isFetching,
+  } = useInquiryList({});
 
   const clickHandler = (id: number) => {
     router.push(`/user/inquiry/${id}`);
   };
 
   useEffect(() => {
-    if (isSuccess && inquiryList) {
+    if (isSuccess && !isFetching) {
       setList(inquiryList.inquiryList);
     }
-  }, [isSuccess]);
+  }, [isSuccess, isFetching]);
 
   const renderItem = (item: IInquiryModel) => {
     const { id, title, createdAt } = item;

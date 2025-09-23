@@ -14,6 +14,8 @@ export default async function UserInquiryDetailPage(props: IProps) {
 
   const { data, success } = await inquiryDetailAction(id);
 
+  console.log('inquiryDetailAction', { data, success });
+
   if (!success) {
     return (
       <Wrapper.SECTION>

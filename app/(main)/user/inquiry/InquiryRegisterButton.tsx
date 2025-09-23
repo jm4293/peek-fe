@@ -31,7 +31,7 @@ export const InquiryRegisterButton = (props: IProps) => {
 
   return (
     <Link href="/user/inquiry/register">
-      <Button.CONTAINER text="문의하기" />
+      <Button.CONTAINER text="문의 등록" />
     </Link>
   );
 };
