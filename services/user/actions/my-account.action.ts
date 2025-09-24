@@ -10,12 +10,12 @@ import { API_URL } from '@/shared/constant/api-url';
 import { IUserAccountModel } from '../model';
 import { IMyInfoRes } from '../response';
 
-export interface MyActionResult {
+export interface MyAccountActionResult {
   success: boolean;
   data: IUserAccountModel | null;
 }
 
-export const myAction = async (): Promise<MyActionResult> => {
+export const myAccountAction = async (): Promise<MyAccountActionResult> => {
   const headerList = await headers();
   const cookie = headerList.get('cookie');
 

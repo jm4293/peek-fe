@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
-import { myAction } from '@/services/user';
+import { myAccountAction } from '@/services/user';
 
 import { userAccountTypeDescription } from '@/shared/enum/user';
 
@@ -12,7 +12,7 @@ import NotAuth from '../NotAuth';
 import UserWithdraw from './Withdraw';
 
 export default async function UserDetailPage() {
-  const { data: my } = await myAction();
+  const { data: my } = await myAccountAction();
 
   if (!my) {
     return <NotAuth />;

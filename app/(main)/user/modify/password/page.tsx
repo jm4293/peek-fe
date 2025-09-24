@@ -1,7 +1,7 @@
 import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
-import { myAction } from '@/services/user';
+import { myAccountAction } from '@/services/user';
 
 import { UserAccountTypeEnum } from '@/shared/enum/user';
 
@@ -9,7 +9,7 @@ import NotAuth from '../../NotAuth';
 import ModifyPassword from './ModifyPassword';
 
 export default async function ModifyPasswordPage() {
-  const { data: my } = await myAction();
+  const { data: my } = await myAccountAction();
 
   if (!my) {
     return <NotAuth />;

@@ -4,14 +4,14 @@ import Link from 'next/link';
 import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
-import { myAction } from '@/services/user';
+import { myAccountAction } from '@/services/user';
 
 import UserLogout from './Logout';
 import NotAuth from './NotAuth';
 import User from './User';
 
 export default async function UserPage() {
-  const { data: my } = await myAction();
+  const { data: my } = await myAccountAction();
 
   if (!my) {
     return (

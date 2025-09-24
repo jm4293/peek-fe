@@ -2,7 +2,7 @@ import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
 import { boardDetailAction } from '@/services/board';
-import { myAction } from '@/services/user';
+import { myAccountAction } from '@/services/user';
 
 import BoardComment from './BoardComment';
 import BoardDetail from './BoardDetail';
@@ -14,7 +14,7 @@ interface IProps {
 export default async function BoardDetailPage(props: IProps) {
   const { id } = await props.params;
 
-  const { data: my } = await myAction();
+  const { data: my } = await myAccountAction();
 
   const { data, success } = await boardDetailAction(id);
 

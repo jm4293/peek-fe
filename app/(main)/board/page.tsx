@@ -2,14 +2,14 @@ import { NetworkErrorText } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
 import { stockCategoryListAction } from '@/services/stock';
-import { myAction } from '@/services/user';
+import { myAccountAction } from '@/services/user';
 
 import BoardCategory from './BoardCategory';
 import BoardList from './BoardList';
 import { BoardRegisterButton } from './BoardRegisterButton';
 
 export default async function BoardPage() {
-  const { success: isAuth } = await myAction();
+  const { success: isAuth } = await myAccountAction();
   const { data, success } = await stockCategoryListAction();
 
   if (!success) {

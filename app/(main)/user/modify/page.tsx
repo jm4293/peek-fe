@@ -1,12 +1,12 @@
 import { Wrapper } from '@/components/wrapper';
 
-import { myAction } from '@/services/user';
+import { myAccountAction } from '@/services/user';
 
 import NotAuth from '../NotAuth';
 import ModifyUser from './ModifyUser';
 
 export default async function ModifyUserPage() {
-  const { data: my } = await myAction();
+  const { data: my } = await myAccountAction();
 
   if (!my) {
     return <NotAuth />;
