@@ -60,7 +60,7 @@ export default function BoardDetail(props: IProps) {
         <div className="flex flex-col gap-4">
           <PreText text={board.article.content} />
 
-          {board.userAccount.email === my?.email && (
+          {board.userAccount.id === my?.id && (
             <div className="flex items-center justify-end gap-2">
               <div className="cursor-pointer" onClick={deleteClickHandler}>
                 <Text.PARAGRAPH text="삭제" color="red" />

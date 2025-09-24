@@ -104,7 +104,7 @@ export default function BoardComment(props: IProps) {
                         <Text.CAPTION text={DayjsUtil.of(boardComment.createdAt).formatYYMMDDHHmm()} color="gray" />
                       </div>
 
-                      {boardComment.userAccount.email === my?.email && (
+                      {boardComment.userAccount.id === my?.id && (
                         <div className="cursor-pointer" onClick={() => onDeleteCommentHandler(boardComment.id)}>
                           <Text.PARAGRAPH text="삭제" color="red" />
                         </div>
@@ -131,7 +131,7 @@ export default function BoardComment(props: IProps) {
                               <Text.CAPTION text={DayjsUtil.of(reply.createdAt).formatYYMMDDHHmm()} color="gray" />
                             </div>
 
-                            {reply.userAccount.email === my?.email && (
+                            {reply.userAccount.id === my?.id && (
                               <div className="cursor-pointer" onClick={() => onDeleteCommentHandler(reply.id)}>
                                 <Text.PARAGRAPH text="삭제" color="red" />
                               </div>
