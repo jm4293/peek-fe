@@ -49,12 +49,12 @@ export const NetworkError = (props: IProps) => {
           <div className="flex flex-col items-center gap-4">
             <Text.SUBTITLE text="네트워크 오프라인" />
 
-            <Link href="/login" className="flex flex-col items-center gap-2">
+            <div className="flex flex-col items-center gap-2">
               <Text.HEADING text="현재 접속이 원활하지 않습니다." />
               <Text.HEADING text="네트워크 문제로 화면을 불러오지 못하였습니다. 잠시 후 다시 시도해 주세요." />
 
               <Text.HEADING text="로그인 페이지로 이동" />
-            </Link>
+            </div>
           </div>
         </div>
       </div>

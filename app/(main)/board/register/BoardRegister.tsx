@@ -5,7 +5,6 @@ import { useState } from 'react';
 
 import { Button } from '@/components/button';
 import { Input } from '@/components/input';
-import { Clickable } from '@/components/interactive';
 import { Text } from '@/components/text';
 import { Textarea } from '@/components/textarea';
 import { Wrapper } from '@/components/wrapper';
@@ -64,9 +63,9 @@ export default function BoardRegister(props: IProps) {
         <div className="flex items-center gap-4">
           {stockCategoryList.map((cur) => {
             return (
-              <Clickable key={cur.id} onClick={() => setCategory(cur.id)}>
+              <div key={cur.id} onClick={() => setCategory(cur.id)}>
                 <Text.HEADING text={cur.name} color={category === cur.id ? 'default' : 'gray'} />
-              </Clickable>
+              </div>
             );
           })}
         </div>

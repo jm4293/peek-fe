@@ -1,6 +1,7 @@
 'use client';
 
-import { Clickable } from '@/components/interactive';
+import Link from 'next/link';
+
 import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
@@ -19,17 +20,15 @@ export default function BoardCategory(props: IProps) {
   return (
     <Wrapper.SECTION text="카테고리">
       <div className="flex items-center gap-4">
-        <Clickable key="all" onClick={() => setQuery('category', null)}>
+        <Link href="/board">
           <Text.HEADING text="전체" color={category === null ? 'default' : 'gray'} />
-        </Clickable>
+        </Link>
 
-        {stockCategoryList.map((cur) => {
-          return (
-            <Clickable key={cur.id} onClick={() => setQuery('category', cur.id.toString())}>
-              <Text.HEADING text={cur.name} color={category === cur.id.toString() ? 'default' : 'gray'} />
-            </Clickable>
-          );
-        })}
+        {stockCategoryList.map((cur) => (
+          <Link key={cur.id} href={`/board?category=${cur.id}`}>
+            <Text.HEADING text={cur.name} color={category === cur.id.toString() ? 'default' : 'gray'} />
+          </Link>
+        ))}
       </div>
     </Wrapper.SECTION>
   );
