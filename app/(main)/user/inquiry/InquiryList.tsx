@@ -1,7 +1,7 @@
 'use client';
 
 import { DayjsUtil } from '@/utils';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import { InfinityList } from '@/components/infinity-list';
@@ -11,8 +11,6 @@ import { Wrapper } from '@/components/wrapper';
 import { IInquiryModel, useInquiryList } from '@/services/inquiry';
 
 export default function InquiryList() {
-  const router = useRouter();
-
   const [list, setList] = useState<IInquiryModel[]>([]);
 
   const {
@@ -23,10 +21,6 @@ export default function InquiryList() {
     isSuccess,
     isFetching,
   } = useInquiryList({});
-
-  const clickHandler = (id: number) => {
-    router.push(`/user/inquiry/${id}`);
-  };
 
   useEffect(() => {
     if (isSuccess && !isFetching) {
@@ -40,10 +34,10 @@ export default function InquiryList() {
     return (
       <li key={id}>
         <Wrapper.SECTION>
-          <div className="flex flex-col gap-1" onClick={() => clickHandler(id)}>
+          <Link href={`/user/inquiry/${id}`} className="flex flex-col gap-1">
             <Text.HEADING text={title} />
             <Text.PARAGRAPH text={DayjsUtil.of(createdAt).formatYYMMDDHHmm()} color="gray" />
-          </div>
+          </Link>
         </Wrapper.SECTION>
       </li>
     );

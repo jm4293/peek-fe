@@ -1,7 +1,7 @@
 'use client';
 
 import { DayjsUtil } from '@/utils';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import { InfinityList } from '@/components/infinity-list';
@@ -11,8 +11,6 @@ import { Wrapper } from '@/components/wrapper';
 import { IBoardCommentModel, useBoardCommentListMineQuery } from '@/services/board';
 
 export default function MineBoardCommentList() {
-  const router = useRouter();
-
   const [list, setList] = useState<IBoardCommentModel[]>([]);
 
   const {
@@ -22,10 +20,6 @@ export default function MineBoardCommentList() {
     isFetchingNextPage,
     isSuccess,
   } = useBoardCommentListMineQuery();
-
-  const clickHandler = (id: number) => {
-    router.push(`/board/${id}`);
-  };
 
   useEffect(() => {
     if (isSuccess && commentList) {
@@ -39,7 +33,7 @@ export default function MineBoardCommentList() {
     return (
       <li key={id}>
         <Wrapper.SECTION>
-          <div className="flex flex-col gap-1" onClick={() => clickHandler(board.id)}>
+          <Link href={`/board/${board.id}`} className="flex flex-col gap-1">
             <div className="flex items-center gap-2">
               <Text.PARAGRAPH text={`[${board.category.name}]`} color="gray" />
               <Text.PARAGRAPH text={board.title} />
@@ -52,7 +46,7 @@ export default function MineBoardCommentList() {
 
               <Text.CAPTION text={DayjsUtil.of(createdAt).formatYYMMDDHHmm()} color="gray" />
             </div>
-          </div>
+          </Link>
         </Wrapper.SECTION>
       </li>
     );

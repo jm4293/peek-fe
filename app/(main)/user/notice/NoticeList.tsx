@@ -1,7 +1,7 @@
 'use client';
 
 import { DayjsUtil } from '@/utils';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import { InfinityList } from '@/components/infinity-list';
@@ -13,15 +13,9 @@ import { INoticeModel, useNoticeList } from '@/services/notice';
 import { NoticeTypeEnumList } from '@/shared/enum/notice';
 
 export default function NoticeList() {
-  const router = useRouter();
-
   const [list, setList] = useState<INoticeModel[]>([]);
 
   const { data: noticeList, hasNextPage, fetchNextPage, isFetchingNextPage, isSuccess } = useNoticeList({});
-
-  const clickHandler = (id: number) => {
-    router.push(`/user/notice/${id}`);
-  };
 
   useEffect(() => {
     if (isSuccess && noticeList) {
@@ -35,14 +29,14 @@ export default function NoticeList() {
     return (
       <li key={id}>
         <Wrapper.SECTION>
-          <div className="flex flex-col gap-1" onClick={() => clickHandler(id)}>
+          <Link href={`/user/notice/${id}`} className="flex flex-col gap-1">
             <div className="flex items-center gap-2">
               <Text.PARAGRAPH text={`[${NoticeTypeEnumList[type].label}]`} color={NoticeTypeEnumList[type].color} />
               <Text.HEADING text={title} />
             </div>
 
             <Text.PARAGRAPH text={DayjsUtil.of(createdAt).formatYYMMDDHHmm()} color="gray" />
-          </div>
+          </Link>
         </Wrapper.SECTION>
       </li>
     );

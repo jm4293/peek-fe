@@ -1,7 +1,7 @@
 'use client';
 
 import { DayjsUtil } from '@/utils';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 import { Thumbnail } from '@/components/image';
 import { PreText, Text } from '@/components/text';
@@ -18,13 +18,7 @@ interface IProps {
 export default function BoardDetail(props: IProps) {
   const { board, my } = props;
 
-  const router = useRouter();
-
   const { deleteBoardMutation } = useBoardMutation();
-
-  const modifyClickHandler = () => {
-    router.push(`/board/${board.id}/modify`);
-  };
 
   const deleteClickHandler = () => {
     if (confirm('게시글을 삭제하시겠습니까?')) {
@@ -65,9 +59,9 @@ export default function BoardDetail(props: IProps) {
               <div className="cursor-pointer" onClick={deleteClickHandler}>
                 <Text.PARAGRAPH text="삭제" color="red" />
               </div>
-              <div className="cursor-pointer" onClick={modifyClickHandler}>
+              <Link href={`/board/${board.id}/modify`}>
                 <Text.PARAGRAPH text="수정" color="blue" />
-              </div>
+              </Link>
             </div>
           )}
         </div>

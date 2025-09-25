@@ -3,6 +3,7 @@
 import { ValidationUtil } from '@/utils';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState, useTransition } from 'react';
 
@@ -248,7 +249,9 @@ export default function Register() {
           </div>
 
           <div className="w-full flex gap-2">
-            <Button.OUTLINE text="뒤로가기" onClick={() => router.push('/auth/login')} />
+            <Link href="/auth/login" className="w-full">
+              <Button.OUTLINE text="뒤로가기" />
+            </Link>
             <Button.CONTAINER text="회원가입" onClick={handleSubmit} disabled={isPending} />
           </div>
         </div>

@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
@@ -86,12 +87,9 @@ export default function ResetPassword() {
         </div>
 
         <div className="w-full flex gap-2">
-          <Button.OUTLINE
-            text="뒤로가기"
-            onClick={() => {
-              router.replace('/auth/login');
-            }}
-          />
+          <Link href="/auth/login" className="w-full">
+            <Button.OUTLINE text="뒤로가기" />
+          </Link>
           <Button.CONTAINER type="submit" text="변경하기" onClick={handleResetPassword} />
         </div>
       </div>

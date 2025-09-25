@@ -1,6 +1,7 @@
 'use client';
 
 import { ValidationUtil } from '@/utils';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
 
@@ -132,7 +133,9 @@ export default function InquiryRegister() {
         </div>
 
         <div className="w-full flex gap-2">
-          <Button.OUTLINE text="뒤로가기" onClick={() => router.push('/auth/login')} />
+          <Link href="/user/inquiry" className="w-full">
+            <Button.OUTLINE text="뒤로가기" />
+          </Link>
           <Button.CONTAINER text="등록하기" onClick={clickHandler} disabled={createInquiryMutation.isPending} />
         </div>
       </div>

@@ -2,7 +2,7 @@
 
 import { DayjsUtil } from '@/utils';
 import { Heart, MessageCircle } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import { Thumbnail } from '@/components/image';
@@ -15,8 +15,6 @@ import { useQueryParams } from '@/hooks/queryParams';
 import { IBoardModel, useBoardList } from '@/services/board';
 
 export default function BoardList() {
-  const router = useRouter();
-
   const [list, setList] = useState<IBoardModel[]>([]);
 
   const { getQuery } = useQueryParams();
@@ -30,10 +28,6 @@ export default function BoardList() {
     isSuccess,
   } = useBoardList({ category: category ? Number(category) : undefined });
 
-  const clickHandler = (id: number) => {
-    router.push(`/board/${id}`, { scroll: true });
-  };
-
   useEffect(() => {
     if (isSuccess && boardList) {
       setList(boardList.boards);
@@ -46,7 +40,7 @@ export default function BoardList() {
     return (
       <li key={id}>
         <Wrapper.SECTION>
-          <div className="flex flex-col gap-1" onClick={() => clickHandler(id)}>
+          <Link href={`/board/${id}`}>
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-2">
                 <Text.PARAGRAPH text={`[${category.name}]`} color="gray" />
@@ -72,7 +66,7 @@ export default function BoardList() {
 
               <Text.CAPTION text={DayjsUtil.of(createdAt).formatYYMMDDHHmm()} color="gray" />
             </div>
-          </div>
+          </Link>
         </Wrapper.SECTION>
       </li>
     );

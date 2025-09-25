@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -93,7 +94,9 @@ export default function BoardRegister(props: IProps) {
           </div>
 
           <div className="flex justify-end gap-2">
-            <Button.OUTLINE text="취소" onClick={() => router.back()} />
+            <Link href="/board" className="w-full">
+              <Button.OUTLINE text="취소" />
+            </Link>
             <Button.CONTAINER text="등록하기" onClick={clickHandler} disabled={createBoardMutation.isPending} />
           </div>
         </div>

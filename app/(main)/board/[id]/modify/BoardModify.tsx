@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
@@ -65,7 +66,9 @@ export default function BoardModify(props: IProps) {
         </div>
 
         <div className="flex justify-end gap-2">
-          <Button.OUTLINE text="취소" onClick={() => router.back()} />
+          <Link href={`/board/${id}`} className="w-full">
+            <Button.OUTLINE text="취소" />
+          </Link>
           <Button.CONTAINER text="수정하기" onClick={clickHandler} />
         </div>
       </div>
