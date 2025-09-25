@@ -26,8 +26,6 @@ export default function StockSearch() {
   const [searchText, setSearchText] = useState('');
   const { debouncedText, isPending: isPendingDebounce } = useDebounce({ text: searchText, delay: 400 });
 
-  // const { data, isSuccess, isLoading } = useStockListQuery({ text: debouncedText });
-
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isSuccess, isLoading } = useStockKoreanList({
     text: debouncedText || '',
   });

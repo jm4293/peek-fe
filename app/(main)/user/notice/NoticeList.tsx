@@ -2,7 +2,6 @@
 
 import { DayjsUtil } from '@/utils';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 
 import { InfinityList } from '@/components/infinity-list';
 import { Text } from '@/components/text';
@@ -13,15 +12,7 @@ import { INoticeModel, useNoticeList } from '@/services/notice';
 import { NoticeTypeEnumList } from '@/shared/enum/notice';
 
 export default function NoticeList() {
-  const [list, setList] = useState<INoticeModel[]>([]);
-
-  const { data: noticeList, hasNextPage, fetchNextPage, isFetchingNextPage, isSuccess } = useNoticeList({});
-
-  useEffect(() => {
-    if (isSuccess && noticeList) {
-      setList(noticeList.noticeList);
-    }
-  }, [isSuccess]);
+  const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isPending, isSuccess } = useNoticeList({});
 
   const renderItem = (item: INoticeModel) => {
     const { id, type, title, createdAt } = item;
@@ -42,7 +33,23 @@ export default function NoticeList() {
     );
   };
 
-  if (list.length === 0) {
+  if (isPending) {
+    return (
+      <Wrapper.SECTION>
+        <Text.HEADING text="로딩중..." />
+      </Wrapper.SECTION>
+    );
+  }
+
+  if (!isSuccess) {
+    return (
+      <Wrapper.SECTION>
+        <Text.HEADING text="오류가 발생했습니다." />
+      </Wrapper.SECTION>
+    );
+  }
+
+  if (data.noticeList.length === 0) {
     return (
       <Wrapper.SECTION>
         <Text.HEADING text="공지사항이 없습니다." />
@@ -52,7 +59,7 @@ export default function NoticeList() {
 
   return (
     <InfinityList hasNextPage={hasNextPage} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage}>
-      {list.map(renderItem)}
+      {data.noticeList.map(renderItem)}
     </InfinityList>
   );
 }

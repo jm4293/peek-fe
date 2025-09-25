@@ -1,7 +1,7 @@
 import { IBoardModel } from '@/services/board';
 
 export interface IBoardListRes {
-  boards: IBoardModel[];
+  boardList: IBoardModel[];
   total: number;
   nextPage: number | null;
 }

@@ -2,7 +2,6 @@
 
 import { DayjsUtil } from '@/utils';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 
 import { InfinityList } from '@/components/infinity-list';
 import { Text } from '@/components/text';
@@ -11,22 +10,7 @@ import { Wrapper } from '@/components/wrapper';
 import { IInquiryModel, useInquiryList } from '@/services/inquiry';
 
 export default function InquiryList() {
-  const [list, setList] = useState<IInquiryModel[]>([]);
-
-  const {
-    data: inquiryList,
-    hasNextPage,
-    fetchNextPage,
-    isFetchingNextPage,
-    isSuccess,
-    isFetching,
-  } = useInquiryList({});
-
-  useEffect(() => {
-    if (isSuccess && !isFetching) {
-      setList(inquiryList.inquiryList);
-    }
-  }, [isSuccess, isFetching]);
+  const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isPending, isSuccess } = useInquiryList({});
 
   const renderItem = (item: IInquiryModel) => {
     const { id, title, createdAt } = item;
@@ -43,7 +27,23 @@ export default function InquiryList() {
     );
   };
 
-  if (list.length === 0) {
+  if (isPending) {
+    return (
+      <Wrapper.SECTION>
+        <Text.HEADING text="로딩중..." />
+      </Wrapper.SECTION>
+    );
+  }
+
+  if (!isSuccess) {
+    return (
+      <Wrapper.SECTION>
+        <Text.HEADING text="오류가 발생했습니다." />
+      </Wrapper.SECTION>
+    );
+  }
+
+  if (data.inquiryList.length === 0) {
     return (
       <Wrapper.SECTION>
         <Text.HEADING text="문의내역이 없습니다." />
@@ -53,7 +53,7 @@ export default function InquiryList() {
 
   return (
     <InfinityList hasNextPage={hasNextPage} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage}>
-      {list.map(renderItem)}
+      {data.inquiryList.map(renderItem)}
     </InfinityList>
   );
 }

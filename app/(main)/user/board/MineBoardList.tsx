@@ -3,7 +3,6 @@
 import { DayjsUtil } from '@/utils';
 import { Heart, MessageCircle } from 'lucide-react';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 
 import { InfinityList } from '@/components/infinity-list';
 import { Text } from '@/components/text';
@@ -12,15 +11,7 @@ import { Wrapper } from '@/components/wrapper';
 import { IBoardModel, useMineBoardList } from '@/services/board';
 
 export default function MineBoardList() {
-  const [list, setList] = useState<IBoardModel[]>([]);
-
-  const { data: boardList, hasNextPage, fetchNextPage, isFetchingNextPage, isSuccess } = useMineBoardList();
-
-  useEffect(() => {
-    if (isSuccess && boardList) {
-      setList(boardList.boards);
-    }
-  }, [isSuccess]);
+  const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isPending, isSuccess } = useMineBoardList();
 
   const renderItem = (item: IBoardModel) => {
     const { id, category, title, createdAt, commentCount, likeCount } = item;
@@ -56,7 +47,23 @@ export default function MineBoardList() {
     );
   };
 
-  if (list.length === 0) {
+  if (isPending) {
+    return (
+      <Wrapper.SECTION>
+        <Text.HEADING text="로딩중..." />
+      </Wrapper.SECTION>
+    );
+  }
+
+  if (!isSuccess) {
+    return (
+      <Wrapper.SECTION>
+        <Text.HEADING text="오류가 발생했습니다." />
+      </Wrapper.SECTION>
+    );
+  }
+
+  if (data.boardList.length === 0) {
     return (
       <Wrapper.SECTION>
         <Text.HEADING text="작성한 게시글이 없습니다." />
@@ -66,7 +73,7 @@ export default function MineBoardList() {
 
   return (
     <InfinityList hasNextPage={hasNextPage} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage}>
-      {list.map(renderItem)}
+      {data.boardList.map(renderItem)}
     </InfinityList>
   );
 }

@@ -22,11 +22,11 @@ export const useBoardCommentList = (props: IProps) => {
     select: (data) => {
       return data.pages.reduce(
         (acc: IBoardCommentListRes, cur) => {
-          const { boardComments, total, nextPage } = cur.data;
+          const { boardCommentList, total, nextPage } = cur.data;
 
-          return { boardComments: [...acc.boardComments, ...boardComments], total, nextPage };
+          return { boardCommentList: [...acc.boardCommentList, ...boardCommentList], total, nextPage };
         },
-        { boardComments: [], total: 0, nextPage: null },
+        { boardCommentList: [], total: 0, nextPage: null },
       );
     },
     initialPageParam: 1,

@@ -3,7 +3,6 @@
 import { DayjsUtil } from '@/utils';
 import { Heart, MessageCircle } from 'lucide-react';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 
 import { Thumbnail } from '@/components/image';
 import { InfinityList } from '@/components/infinity-list';
@@ -15,24 +14,12 @@ import { useQueryParams } from '@/hooks/queryParams';
 import { IBoardModel, useBoardList } from '@/services/board';
 
 export default function BoardList() {
-  const [list, setList] = useState<IBoardModel[]>([]);
-
   const { getQuery } = useQueryParams();
   const category = getQuery('category');
 
-  const {
-    data: boardList,
-    hasNextPage,
-    fetchNextPage,
-    isFetchingNextPage,
-    isSuccess,
-  } = useBoardList({ category: category ? Number(category) : undefined });
-
-  useEffect(() => {
-    if (isSuccess && boardList) {
-      setList(boardList.boards);
-    }
-  }, [isSuccess, boardList]);
+  const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isPending, isSuccess } = useBoardList({
+    category: category ? Number(category) : undefined,
+  });
 
   const renderItem = (item: IBoardModel) => {
     const { id, category, title, createdAt, commentCount, likeCount, userAccount } = item;
@@ -72,7 +59,23 @@ export default function BoardList() {
     );
   };
 
-  if (list.length === 0) {
+  if (isPending) {
+    return (
+      <Wrapper.SECTION>
+        <Text.HEADING text="로딩중..." />
+      </Wrapper.SECTION>
+    );
+  }
+
+  if (!isSuccess) {
+    return (
+      <Wrapper.SECTION>
+        <Text.HEADING text="에러가 발생했습니다." />
+      </Wrapper.SECTION>
+    );
+  }
+
+  if (data.boardList.length === 0) {
     return (
       <Wrapper.SECTION>
         <Text.HEADING text="게시글이 없습니다." />
@@ -82,7 +85,7 @@ export default function BoardList() {
 
   return (
     <InfinityList hasNextPage={hasNextPage} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage}>
-      {list.map(renderItem)}
+      {data.boardList.map(renderItem)}
     </InfinityList>
   );
 }

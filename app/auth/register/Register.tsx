@@ -175,7 +175,7 @@ export default function Register() {
             />
             <Button.CONTAINER
               className="mt-6"
-              text={checkEmailMutation.isPending ? '코드 전송 중' : '이메일 인증'}
+              text={checkEmailMutation.isPending ? '전송 중' : '인증'}
               onClick={handleCheckEmail}
               disabled={checkEmailMutation.isPending || checkEmail !== 1}
             />
@@ -198,7 +198,7 @@ export default function Register() {
               </Input>
               <Button.CONTAINER
                 className="mt-6"
-                text={checkEmail === 3 ? '확인 완료' : '코드 확인'}
+                text={checkEmail === 3 ? '완료' : '확인'}
                 onClick={handleCheckCode}
                 disabled={checkEmail === 3}
               />

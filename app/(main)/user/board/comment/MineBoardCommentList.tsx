@@ -2,7 +2,6 @@
 
 import { DayjsUtil } from '@/utils';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 
 import { InfinityList } from '@/components/infinity-list';
 import { Text } from '@/components/text';
@@ -11,21 +10,7 @@ import { Wrapper } from '@/components/wrapper';
 import { IBoardCommentModel, useBoardCommentListMineQuery } from '@/services/board';
 
 export default function MineBoardCommentList() {
-  const [list, setList] = useState<IBoardCommentModel[]>([]);
-
-  const {
-    data: commentList,
-    hasNextPage,
-    fetchNextPage,
-    isFetchingNextPage,
-    isSuccess,
-  } = useBoardCommentListMineQuery();
-
-  useEffect(() => {
-    if (isSuccess && commentList) {
-      setList(commentList.boardComments);
-    }
-  }, [isSuccess, commentList]);
+  const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isPending, isSuccess } = useBoardCommentListMineQuery();
 
   const renderItem = (item: IBoardCommentModel) => {
     const { id, content, createdAt, board } = item;
@@ -52,7 +37,23 @@ export default function MineBoardCommentList() {
     );
   };
 
-  if (list.length === 0) {
+  if (isPending) {
+    return (
+      <Wrapper.SECTION>
+        <Text.HEADING text="로딩중..." />
+      </Wrapper.SECTION>
+    );
+  }
+
+  if (!isSuccess) {
+    return (
+      <Wrapper.SECTION>
+        <Text.HEADING text="오류가 발생했습니다." />
+      </Wrapper.SECTION>
+    );
+  }
+
+  if (data.boardCommentList.length === 0) {
     return (
       <Wrapper.SECTION>
         <Text.HEADING text="작성한 게시글 댓글이 없습니다." />
@@ -62,7 +63,7 @@ export default function MineBoardCommentList() {
 
   return (
     <InfinityList hasNextPage={hasNextPage} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage}>
-      {list.map(renderItem)}
+      {data.boardCommentList.map(renderItem)}
     </InfinityList>
   );
 }

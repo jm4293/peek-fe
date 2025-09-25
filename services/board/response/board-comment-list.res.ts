@@ -1,7 +1,7 @@
 import { IBoardCommentModel } from '@/services/board';
 
 export interface IBoardCommentListRes {
-  boardComments: IBoardCommentModel[];
+  boardCommentList: IBoardCommentModel[];
   total: number;
   nextPage: number | null;
 }

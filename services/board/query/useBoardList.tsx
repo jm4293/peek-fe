@@ -20,11 +20,11 @@ export const useBoardList = (props: IProps) => {
     select: (data) => {
       return data.pages.reduce(
         (acc: IBoardListRes, cur) => {
-          const { boards, total, nextPage } = cur.data;
+          const { boardList, total, nextPage } = cur.data;
 
-          return { boards: [...acc.boards, ...boards], total, nextPage };
+          return { boardList: [...acc.boardList, ...boardList], total, nextPage };
         },
-        { boards: [], total: 0, nextPage: null },
+        { boardList: [], total: 0, nextPage: null },
       );
     },
     initialPageParam: 1,

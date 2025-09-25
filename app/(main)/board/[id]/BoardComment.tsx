@@ -84,7 +84,7 @@ export default function BoardComment(props: IProps) {
         {isSuccess ? (
           data.total > 0 ? (
             <div className="flex flex-col">
-              {data.boardComments.map((boardComment) => (
+              {data.boardCommentList.map((boardComment) => (
                 <div key={boardComment.id} className="border-b py-2">
                   <div
                     className="flex justify-between items-center cursor-pointer "
