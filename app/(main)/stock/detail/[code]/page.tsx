@@ -6,8 +6,6 @@ import { Wrapper } from '@/components/wrapper';
 
 import { stockKoreanActions } from '@/services/stock';
 
-import BoardDetail from './BoardDetail';
-
 interface IProps {
   params: Promise<{ code: string }>;
 }
@@ -15,7 +13,17 @@ interface IProps {
 export default async function StockDetailPage(props: IProps) {
   const { code } = await props.params;
 
-  const { data } = await stockKoreanActions({ code });
+  const { data, success } = await stockKoreanActions({ code });
+
+  if (!success) {
+    return (
+      <Wrapper.MAIN text="상세 정보">
+        <Wrapper.SECTION>
+          <Text.HEADING text="서버 오류가 발생했습니다." />
+        </Wrapper.SECTION>
+      </Wrapper.MAIN>
+    );
+  }
 
   if (!data) {
     return (

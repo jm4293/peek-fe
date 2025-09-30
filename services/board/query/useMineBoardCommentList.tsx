@@ -4,7 +4,7 @@ import BoardApi, { IBoardCommentListRes } from '@/services/board';
 
 import { QueryKeys } from '@/shared/constant/query-key';
 
-export const useBoardCommentListMineQuery = () => {
+export const useBoardCommentListMine = () => {
   return useInfiniteQuery({
     queryKey: QueryKeys.board.mineCommentList(),
     queryFn: ({ pageParam }) => BoardApi.getBoardCommentListMine(pageParam),

@@ -7,10 +7,10 @@ import { InfinityList } from '@/components/infinity-list';
 import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
-import { IBoardCommentModel, useBoardCommentListMineQuery } from '@/services/board';
+import { IBoardCommentModel, useBoardCommentListMine } from '@/services/board';
 
 export default function MineBoardCommentList() {
-  const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isPending, isSuccess } = useBoardCommentListMineQuery();
+  const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isPending, isSuccess } = useBoardCommentListMine();
 
   const renderItem = (item: IBoardCommentModel) => {
     const { id, content, createdAt, board } = item;
