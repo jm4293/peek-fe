@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import { Button } from '@/components/button';
@@ -18,13 +17,17 @@ import { ButtonGoogle } from './ButtonGoogle';
 import { ButtonKakao } from './ButtonKakao';
 import { ButtonNaver } from './ButtonNaver';
 
+interface IProps {
+  email?: string;
+}
+
 const initialFormData: ILoginEmailDto = {
   email: '',
   password: '',
 };
 
-export default function Login() {
-  const searchParams = useSearchParams();
+export default function Login(props: IProps) {
+  const { email } = props;
 
   const { openToast } = useToast();
 
@@ -55,12 +58,10 @@ export default function Login() {
   };
 
   useEffect(() => {
-    const value = searchParams.get('email');
-
-    if (value) {
-      init((prev) => ({ ...prev, email: value }));
+    if (email) {
+      init((prev) => ({ ...prev, email }));
     }
-  }, []);
+  }, [email]);
 
   return (
     <Wrapper.SECTION>

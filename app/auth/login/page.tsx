@@ -1,15 +1,17 @@
-import { Suspense } from 'react';
-
 import Login from '@/app/auth/login/Login';
 
 import { Wrapper } from '@/components/wrapper';
 
-export default function LoginPage() {
+interface IProps {
+  searchParams: Promise<{ email?: string }>;
+}
+
+export default async function LoginPage(props: IProps) {
+  const { email } = await props.searchParams;
+
   return (
     <Wrapper.MAIN text="로그인">
-      <Suspense>
-        <Login />
-      </Suspense>
+      <Login email={email} />
     </Wrapper.MAIN>
   );
 }

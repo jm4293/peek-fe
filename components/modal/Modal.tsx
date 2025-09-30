@@ -45,7 +45,7 @@ export const Modal = () => {
         onClick={(e) => e.stopPropagation()}>
         <div className="text-xl font-semibold mb-4">{modal.title}</div>
 
-        <div className="text-base font-medium mb-6 whitespace-pre-wrap">{modal.content}</div>
+        <div className="text-center text-base font-medium mb-6 whitespace-pre-wrap">{modal.content}</div>
 
         {modal.onCancel && <Button.OUTLINE text={modal.cancelText || '취소'} onClick={(e) => handleCancel(e)} />}
 

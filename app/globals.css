@@ -11,7 +11,7 @@
   --bg-blue: #f9f9fc;
 
   --txt-default: #151515;
-  --txt-gray: #949494;
+  --txt-gray: #c4c4c4;
   --txt-blue: #0894e2;
   --txt-red: #db2840;
 
@@ -25,7 +25,7 @@ html.dark {
   --bg-blue: #202329;
 
   --txt-default: #d0d0d4;
-  --txt-gray: #8b8b8e;
+  --txt-gray: #a8a8ab;
   --txt-blue: #0894e2;
   --txt-red: #f1455f;
 
@@ -55,9 +55,6 @@ header {
   width: 100vw;
   min-width: 256px;
   height: 4rem;
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
   top: 0;
   padding: 0 1rem;
   z-index: 30;
@@ -68,9 +65,6 @@ footer {
   width: 100vw;
   min-width: 256px;
   height: 4rem;
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
   bottom: 0;
   padding: 0 1.4rem;
   z-index: 30;
@@ -87,14 +81,20 @@ svg {
 }
 
 input,
-textarea,
 select {
+  width: 100%;
+  border-width: 1px;
+  border-color: rgb(209 213 219);
+  padding: 0.75rem 0.5rem;
+}
+
+textarea {
   width: 100%;
   border-width: 1px;
   border-radius: 0.5rem;
   border-color: rgb(209 213 219);
-  resize: none;
   padding: 0.75rem 1rem;
+  resize: none;
 }
 
 button {

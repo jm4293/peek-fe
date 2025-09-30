@@ -1,11 +1,13 @@
 import { CookieUtil } from '@/utils';
 
-import KY from '@/lib/ky';
-
 import { API_URL } from '@/shared/constant/api-url';
 import { ACCESS_TOKEN_NAME, REFRESH_TOKEN_NAME } from '@/shared/constant/cookie';
 
 export const getValidTokens = async (cookie: string | null) => {
+  if (!cookie) {
+    throw new Error('No cookies');
+  }
+
   const cookieStore = CookieUtil.set(cookie);
   let access = cookieStore.pick(ACCESS_TOKEN_NAME);
   const refresh = cookieStore.pick(REFRESH_TOKEN_NAME);
@@ -15,11 +17,18 @@ export const getValidTokens = async (cookie: string | null) => {
   }
 
   if (!access) {
-    const { accessToken } = await KY.post<{ accessToken: string | null }>(`${API_URL}/auth/refresh`, {
+    const res = await fetch(`${API_URL}/auth/refresh`, {
+      method: 'POST',
       headers: {
         cookie: `${REFRESH_TOKEN_NAME}=${refresh}`,
       },
-    }).json();
+    });
+
+    if (!res.ok) {
+      throw new Error('Failed to refresh token');
+    }
+
+    const { accessToken } = await res.json();
 
     if (!accessToken) {
       throw new Error('No access token');
@@ -29,15 +38,8 @@ export const getValidTokens = async (cookie: string | null) => {
   }
 
   const cookieParts: string[] = [];
-
-  if (access) {
-    cookieParts.push(`${ACCESS_TOKEN_NAME}=${access}`);
-  }
-
-  if (refresh) {
-    cookieParts.push(`${REFRESH_TOKEN_NAME}=${refresh}`);
-  }
-
+  cookieParts.push(`${ACCESS_TOKEN_NAME}=${access}`);
+  cookieParts.push(`${REFRESH_TOKEN_NAME}=${refresh}`);
   const cookieHeader = cookieParts.join('; ');
 
   return { access, refresh, cookieHeader };

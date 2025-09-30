@@ -3,7 +3,6 @@
 import { useDeviceLayout } from '@/hooks';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
 
 import { BackButton, ThemeSwitcher } from '@/components/button';
 import { Text } from '@/components/text';
@@ -26,28 +25,7 @@ const Logo = () => {
 export const Header = () => {
   const pathname = usePathname();
 
-  const [isVisible, setIsVisible] = useState(true);
-  const lastScrollY = useRef(0);
-
   const { isMobile } = useDeviceLayout();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentY = window.scrollY;
-
-      if (currentY > lastScrollY.current && currentY > 48) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
-      }
-
-      lastScrollY.current = currentY;
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   if (isMobile === null) {
     return (
@@ -72,8 +50,7 @@ export const Header = () => {
       className={`
         bg-theme-bg-header
         flex justify-center items-center
-        transition-transform duration-500 ease-in-out
-        ${isVisible ? 'translate-y-0' : '-translate-y-full'}
+
       `}>
       <div className="w-3/4 flex justify-between">
         <div className="flex items-center gap-8">

@@ -3,12 +3,9 @@
 import { getValidTokens } from '@/utils';
 import { headers } from 'next/headers';
 
-import KY from '@/lib/ky';
-
 import { API_URL } from '@/shared/constant/api-url';
 
 import { IUserAccountModel } from '../model';
-import { IMyInfoRes } from '../response';
 
 export interface MyAccountActionResult {
   success: boolean;
@@ -22,14 +19,22 @@ export const myAccountAction = async (): Promise<MyAccountActionResult> => {
   try {
     const { cookieHeader } = await getValidTokens(cookie);
 
-    const { my } = await KY.get<IMyInfoRes>(`${API_URL}/user`, {
+    const res = await fetch(`${API_URL}/user`, {
+      credentials: 'include',
       headers: {
         cookie: cookieHeader,
       },
-    }).json();
+    });
 
-    return { success: true, data: my };
-  } catch (error: any) {
+    if (!res.ok) {
+      throw new Error('Failed to fetch');
+    }
+
+    const json = await res.json();
+    const { myInfo } = json;
+
+    return { success: true, data: myInfo };
+  } catch (error: unknown) {
     return { success: false, data: null };
   }
 };

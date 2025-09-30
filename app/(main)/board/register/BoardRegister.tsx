@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import { Button } from '@/components/button';
@@ -19,7 +18,6 @@ interface IProps extends IStockCategoryListRes {}
 
 export default function BoardRegister(props: IProps) {
   const { stockCategoryList } = props;
-  const router = useRouter();
 
   const [category, setCategory] = useState<number | null>(null);
   const [title, setTitle] = useState('');

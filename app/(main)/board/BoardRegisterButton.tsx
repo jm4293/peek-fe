@@ -1,10 +1,10 @@
 'use client';
 
 import { useDeviceLayout } from '@/hooks';
-import { Plus } from 'lucide-react';
-import Link from 'next/link';
+import { PencilLine } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
-import { Button } from '@/components/button';
+import { useModal } from '@/hooks/modal';
 
 interface IProps {
   isAuth: boolean;
@@ -12,26 +12,41 @@ interface IProps {
 
 export const BoardRegisterButton = (props: IProps) => {
   const { isAuth } = props;
+  const router = useRouter();
 
-  const { isMobile } = useDeviceLayout();
+  const { isMobile, isPending } = useDeviceLayout();
+  const { openModal, closeModal } = useModal();
 
-  if (!isAuth) {
+  const clickHandler = () => {
+    if (!isAuth) {
+      openModal({
+        content: '로그인 후 이용 가능한 서비스입니다.\n 지금 로그인하고 시작하세요!',
+        onConfirm: () => {
+          closeModal();
+          router.push('/auth/login');
+        },
+      });
+      return;
+    }
+
+    router.push('/board/register');
+  };
+
+  if (isPending) {
     return null;
   }
 
-  if (isMobile) {
-    return (
-      <Link
-        href="/board/register"
-        className="bg-theme-main-color rounded-full p-2 fixed bottom-16 right-0 -translate-x-1/2 -translate-y-1/2">
-        <Plus color="white" strokeWidth={2} />
-      </Link>
-    );
-  }
-
   return (
-    <Link href="/board/register">
-      <Button.CONTAINER text="게시글 작성" />
-    </Link>
+    <div
+      className="bg-theme-main-color rounded-full p-4 fixed bottom-16 right-0 -translate-x-1/2 -translate-y-1/2"
+      onClick={clickHandler}>
+      <PencilLine color="white" />
+    </div>
   );
+
+  // return (
+  //   <div onClick={clickHandler}>
+  //     <Button.CONTAINER text="게시글 작성" />
+  //   </div>
+  // );
 };

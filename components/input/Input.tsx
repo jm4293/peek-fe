@@ -27,7 +27,7 @@ export const Input = (props: IProps) => {
         <input
           id={name}
           name={name}
-          className={`border-theme-txt-gray ${isError ? 'border-red-500' : ''} ${children ? 'pr-16' : ''}`}
+          className={`border-0 border-b-2 border-b-theme-txt-gray ${isError ? 'border-red-500' : ''} ${children ? 'pr-16' : ''}`}
           placeholder={`${placeholder} ${isOptional ? '[선택] ' : ''}`}
           {...rest}
         />

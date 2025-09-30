@@ -4,11 +4,15 @@ import { useDeviceLayout } from '@/hooks';
 import { ChartCandlestick, House, MessagesSquare, User } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useEffect, useRef, useState } from 'react';
 
 import { Text } from '@/components/text';
 
 export const Footer = () => {
   const pathname = usePathname();
+
+  const [isVisible, setIsVisible] = useState(true);
+  const lastScrollY = useRef(0);
 
   const { isMobile } = useDeviceLayout();
 
@@ -23,9 +27,32 @@ export const Footer = () => {
     { path: '/user', icon: User, label: '내 정보' },
   ];
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+
+      if (currentY > lastScrollY.current && currentY > 48) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+
+      lastScrollY.current = currentY;
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   if (isMobile) {
     return (
-      <footer className={`flex justify-between items-center bg-theme-bg-header`}>
+      <footer
+        className={`
+          flex justify-between items-center bg-theme-bg-header
+          transition-transform duration-500 ease-in-out
+          ${isVisible ? 'translate-y-0' : 'translate-y-full'}
+        `}>
         {menuItems.map(({ path, icon: Icon, label }) => (
           <Link key={path} href={path} className="flex flex-col items-center">
             <Icon size={18} className={getActiveClass(path)} />
@@ -35,4 +62,6 @@ export const Footer = () => {
       </footer>
     );
   }
+
+  return null;
 };
