@@ -78,8 +78,8 @@ export default class AXIOS {
               LocalStorageUtil.clear();
               SessionStorageUtil.clear();
 
-              alert('로그인 세션이 만료되었습니다. 다시 로그인 해주세요.');
-              window.location.href = '/home';
+              alert('로그인 세션이 만료되었습니다. 로그인 페이지로 이동합니다.');
+              window.location.href = '/auth/login';
             }
           }
         }
@@ -88,8 +88,8 @@ export default class AXIOS {
           LocalStorageUtil.clear();
           SessionStorageUtil.clear();
 
-          alert('로그인 세션이 만료되었습니다. 다시 로그인 해주세요.');
-          window.location.href = '/home';
+          alert('로그인 세션이 만료되었습니다. 로그인 페이지로 이동합니다.');
+          window.location.href = '/auth/login';
         }
 
         return Promise.reject(error);

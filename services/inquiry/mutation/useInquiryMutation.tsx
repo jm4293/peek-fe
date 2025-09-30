@@ -20,7 +20,7 @@ export const useInquiryMutation = () => {
       await queryClient.invalidateQueries({ queryKey: QueryKeys.inquiry.list() });
 
       openToast({ message: '문의가 등록되었습니다.', type: 'success' });
-      router.push('/user/inquiry');
+      router.push('/inquiry');
     },
   });
 
@@ -32,7 +32,7 @@ export const useInquiryMutation = () => {
       await queryClient.invalidateQueries({ queryKey: QueryKeys.inquiry.list() });
 
       openToast({ message: '문의가 수정되었습니다.', type: 'success' });
-      router.push(`/user/inquiry/${inquiryId}`);
+      router.push(`/inquiry/${inquiryId}`);
     },
   });
 
@@ -42,7 +42,7 @@ export const useInquiryMutation = () => {
       await queryClient.invalidateQueries({ queryKey: QueryKeys.inquiry.list() });
 
       openToast({ message: '문의가 삭제되었습니다.', type: 'success' });
-      router.push('/user/inquiry');
+      router.push('/inquiry');
     },
   });
 

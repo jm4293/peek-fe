@@ -133,7 +133,7 @@ export default function InquiryRegister() {
         </div>
 
         <div className="w-full flex gap-2">
-          <Link href="/user/inquiry" className="w-full">
+          <Link href="/inquiry" className="w-full">
             <Button.OUTLINE text="뒤로가기" />
           </Link>
           <Button.CONTAINER text="등록하기" onClick={clickHandler} disabled={createInquiryMutation.isPending} />

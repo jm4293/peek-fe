@@ -18,7 +18,7 @@ export default async function UserPage() {
       <Wrapper.MAIN text="마이페이지">
         <NotAuth />
         <Wrapper.SECTION text="알림">
-          <Link href="/user/notice" className="flex items-center justify-between">
+          <Link href="/notice" className="flex items-center justify-between">
             <Text.HEADING text="공지사항" />
             <ChevronRight />
           </Link>
@@ -50,11 +50,11 @@ export default async function UserPage() {
       </Wrapper.SECTION>
 
       <Wrapper.SECTION text="알림">
-        <Link href="/user/notice" className="flex items-center justify-between">
+        <Link href="/notice" className="flex items-center justify-between">
           <Text.HEADING text="공지사항" />
           <ChevronRight />
         </Link>
-        <Link href="/user/inquiry" className="flex items-center justify-between">
+        <Link href="/inquiry" className="flex items-center justify-between">
           <Text.HEADING text="문의하기" />
           <ChevronRight />
         </Link>
