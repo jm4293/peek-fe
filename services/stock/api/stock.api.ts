@@ -2,21 +2,30 @@ import AXIOS from '@/lib/axios';
 
 import {
   IGetStockKoreanDto,
+  IGetStockKoreanFavoriteDto,
   IGetStockKoreanIndexCandleListDto,
   IGetStockKoreanListDto,
   IGetStockKoreanRankDto,
+  IStockKoreanFavoriteRes,
   IStockKoreanIndexCandleListRes,
   IStockKoreanListRes,
   IStockKoreanRankListRes,
   IStockKoreanRes,
-  IStockTokenRes,
+  IToggleStockKoreanFavoriteDto,
 } from '@/services/stock';
 
 class StockApi extends AXIOS {
   private readonly _baseURL = '/stock';
 
-  async getToken() {
-    return await this.get<IStockTokenRes, null>({ url: `${this._baseURL}/token` });
+  // async getToken() {
+  //   return await this.get<IStockTokenRes, null>({ url: `${this._baseURL}/token` });
+  // }
+
+  async getStockKoreanList(dto: IGetStockKoreanListDto) {
+    return await this.get<IStockKoreanListRes, IGetStockKoreanListDto>({
+      url: `${this._baseURL}/korean`,
+      params: dto,
+    });
   }
 
   async getStockKorean(dto: IGetStockKoreanDto) {
@@ -24,13 +33,6 @@ class StockApi extends AXIOS {
 
     return await this.get<IStockKoreanRes, IGetStockKoreanDto>({
       url: `${this._baseURL}/korean/detail/${code}`,
-    });
-  }
-
-  async getStockKoreanList(dto: IGetStockKoreanListDto) {
-    return await this.get<IStockKoreanListRes, IGetStockKoreanListDto>({
-      url: `${this._baseURL}/korean`,
-      params: dto,
     });
   }
 
@@ -47,6 +49,20 @@ class StockApi extends AXIOS {
     return await this.get<IStockKoreanIndexCandleListRes, Omit<IGetStockKoreanIndexCandleListDto, 'code'>>({
       url: `${this._baseURL}/korean/index/candle/${code}`,
       params: rest,
+    });
+  }
+
+  async getStockKoreanFavoriteList(dto: IGetStockKoreanFavoriteDto) {
+    return await this.get<IStockKoreanFavoriteRes, IGetStockKoreanFavoriteDto>({
+      url: `${this._baseURL}/korean/favorite`,
+      params: dto,
+    });
+  }
+
+  async toggleStockKoreanFavorite(dto: IToggleStockKoreanFavoriteDto) {
+    return await this.post<unknown, IToggleStockKoreanFavoriteDto>({
+      url: `${this._baseURL}/korean/favorite`,
+      data: dto,
     });
   }
 }

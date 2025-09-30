@@ -22,6 +22,7 @@ export const QueryKeys = {
     stockKoreanList: (text?: string) => ['stock', 'korean-list', text],
     stockKoreanRankList: (type: StockRankEnum) => ['stock', 'korean-rank-list', type],
     stockKoreanIndexCandleList: (code: string) => ['stock', 'korean-index-candle-list', code],
+    stockKoreanFavoriteList: () => ['stock', 'korean-favorite-list'],
   },
   notice: {
     list: (type?: NoticeTypeEnum) => ['notice', 'list', type],

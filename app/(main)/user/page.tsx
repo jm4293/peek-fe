@@ -32,7 +32,7 @@ export default async function UserPage() {
       <User my={my} />
 
       <Wrapper.SECTION text="기록">
-        <Link href="" className="flex items-center justify-between">
+        <Link href="/user/stock/favorite" className="flex items-center justify-between">
           <Text.HEADING text="즐겨찾기 종목" />
           <ChevronRight />
         </Link>
