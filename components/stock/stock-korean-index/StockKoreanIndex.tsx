@@ -61,7 +61,7 @@ export const StockKoreanIndex = () => {
                     className="text-end"
                   />
                   <StockPriceText
-                    price={`${kospi.sign}${kospi.change}(${kospi.drate}%)`}
+                    price={`${kospi.change}(${kospi.drate}%)`}
                     sign={kospi.sign}
                     size="PARAGRAPH"
                     className="text-end"
@@ -98,7 +98,7 @@ export const StockKoreanIndex = () => {
                     className="text-end"
                   />
                   <StockPriceText
-                    price={`${kosdaq.sign}${kosdaq.change}(${kosdaq.drate}%)`}
+                    price={`${kosdaq.change}(${kosdaq.drate}%)`}
                     sign={kosdaq.sign}
                     size="PARAGRAPH"
                     className="text-end"
