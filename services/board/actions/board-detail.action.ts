@@ -1,14 +1,19 @@
 'use server';
 
-import KY from '@/lib/ky';
-
 import { API_URL } from '@/shared/constant/api-url';
 
-import { IBoardDetailRes } from '../response';
+import { IBoardModel } from '../model';
 
-export const boardDetailAction = async (boardId: string) => {
+export const boardDetailAction = async (boardId: string): Promise<{ success: boolean; data: IBoardModel | null }> => {
   try {
-    const { board } = await KY.get<IBoardDetailRes>(`${API_URL}/board/${boardId}`).json();
+    const res = await fetch(`${API_URL}/board/${boardId}`);
+
+    if (!res.ok) {
+      throw new Error('Failed to fetch');
+    }
+
+    const json = await res.json();
+    const { board } = json;
 
     return { success: true, data: board };
   } catch (error: unknown) {

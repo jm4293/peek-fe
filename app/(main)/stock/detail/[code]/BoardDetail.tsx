@@ -21,7 +21,7 @@ export default function BoardDetail(props: IProps) {
     volume: number;
     timestamp: Date;
   } | null>(null);
-  const [symbol] = useState(code); // URL에서 받은 종목코드 사용
+  const [symbol] = useState(code);
   const [isSubscribed, setIsSubscribed] = useState(false);
 
   useEffect(() => {

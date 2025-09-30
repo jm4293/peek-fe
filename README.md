@@ -85,3 +85,10 @@ npm start
     Rename: 파일 혹은 폴더명을 수정만 한 경우
     Remove: 파일을 삭제만 한 경우
 ```
+
+---
+
+server action 사용
+
+1. 인증(myInfo)
+2. 상세 페이지

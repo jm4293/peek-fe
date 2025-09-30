@@ -3,24 +3,32 @@
 import { getValidTokens } from '@/utils';
 import { headers } from 'next/headers';
 
-import KY from '@/lib/ky';
-
 import { API_URL } from '@/shared/constant/api-url';
 
-import { IInquiryDetailRes } from '../response';
+import { IInquiryModel } from '../model';
 
-export const inquiryDetailAction = async (inquiryId: string) => {
+export const inquiryDetailAction = async (
+  inquiryId: string,
+): Promise<{ success: boolean; data: IInquiryModel | null }> => {
   const headerList = await headers();
   const cookie = headerList.get('cookie');
 
   try {
     const { cookieHeader } = await getValidTokens(cookie);
 
-    const { inquiry } = await KY.get<IInquiryDetailRes>(`${API_URL}/inquiry/${inquiryId}`, {
+    const res = await fetch(`${API_URL}/inquiry/${inquiryId}`, {
+      credentials: 'include',
       headers: {
         cookie: cookieHeader,
       },
-    }).json();
+    });
+
+    if (!res.ok) {
+      throw new Error('Failed to fetch');
+    }
+
+    const json = await res.json();
+    const { inquiry } = json;
 
     return { success: true, data: inquiry };
   } catch (error: unknown) {

@@ -46,7 +46,7 @@ class AuthApi extends AXIOS {
 
   async signUp(dto: ISignUpDto) {
     return await this.post<ISignUpRes, ISignUpDto>({
-      url: `${this._baseURL}/register`,
+      url: `${this._baseURL}/signup`,
       data: dto,
     });
   }

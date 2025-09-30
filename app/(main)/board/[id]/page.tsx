@@ -15,7 +15,6 @@ export default async function BoardDetailPage(props: IProps) {
   const { id } = await props.params;
 
   const { data: my } = await myAccountAction();
-
   const { data, success } = await boardDetailAction(id);
 
   if (!success) {

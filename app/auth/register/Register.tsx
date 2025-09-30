@@ -4,8 +4,7 @@ import { ValidationUtil } from '@/utils';
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState, useTransition } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Button } from '@/components/button';
 import { CheckBox, Input } from '@/components/input';
@@ -15,14 +14,9 @@ import { Wrapper } from '@/components/wrapper';
 import { useInput } from '@/hooks/input';
 import { useModal, useToast } from '@/hooks/modal';
 
-import { ISignUpDto, signupEmailAction, useAuthMutation } from '@/services/auth';
+import { ISignUpDto, useAuthMutation } from '@/services/auth';
 
 dayjs.extend(duration);
-
-const validateEmail = (email: string): boolean => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-};
 
 const initialFormData: ISignUpDto = {
   nickname: '',
@@ -34,9 +28,6 @@ const initialFormData: ISignUpDto = {
 };
 
 export default function Register() {
-  const router = useRouter();
-
-  const [isPending, startTransition] = useTransition();
   const { openModal, closeModal } = useModal();
   const { openToast } = useToast();
 
@@ -47,16 +38,17 @@ export default function Register() {
 
   const [value, onChange] = useInput<ISignUpDto>({ ...initialFormData });
 
-  const { checkEmailMutation, checkEmailCodeMutation } = useAuthMutation();
+  const { checkEmailMutation, checkEmailCodeMutation, signUpMutation } = useAuthMutation();
 
   const handleCheckEmail = async () => {
-    if (!value.email || !value.email.trim()) {
-      openModal({ content: '이메일을 입력해주세요.', onConfirm: closeModal });
-      return;
-    }
+    const isValid = ValidationUtil.create()
+      .required(value.email, '이메일을 입력해주세요.')
+      .email(value.email, '유효한 이메일 주소가 아닙니다.')
+      .validate((errorMessage) => {
+        openModal({ content: errorMessage, onConfirm: closeModal });
+      });
 
-    if (!validateEmail(value.email)) {
-      openModal({ content: '유효한 이메일 주소가 아닙니다.', onConfirm: closeModal });
+    if (!isValid) {
       return;
     }
 
@@ -79,8 +71,15 @@ export default function Register() {
   };
 
   const handleCheckCode = async () => {
-    if (!code || !code.trim()) {
-      openModal({ content: '인증코드를 입력해주세요.', onConfirm: closeModal });
+    const isValid = ValidationUtil.create()
+      .required(code, '인증코드를 입력해주세요.')
+      .minLength(code, 4, '인증코드는 4글자입니다.')
+      .maxLength(code, 4, '인증코드는 4글자입니다.')
+      .validate((errorMessage) => {
+        openModal({ content: errorMessage, onConfirm: closeModal });
+      });
+
+    if (!isValid) {
       return;
     }
 
@@ -121,17 +120,7 @@ export default function Register() {
       return;
     }
 
-    startTransition(async () => {
-      const { success } = await signupEmailAction(value);
-
-      if (!success) {
-        openToast({ type: 'error', message: '회원가입에 실패했습니다. 다시 시도해주세요.' });
-        return;
-      }
-
-      openToast({ type: 'success', message: '회원가입이 완료되었습니다.' });
-      router.push(`/auth/login?email=${value.email}`);
-    });
+    signUpMutation.mutate(value);
   };
 
   useEffect(() => {
@@ -252,7 +241,7 @@ export default function Register() {
             <Link href="/auth/login" className="w-full">
               <Button.OUTLINE text="뒤로가기" />
             </Link>
-            <Button.CONTAINER text="회원가입" onClick={handleSubmit} disabled={isPending} />
+            <Button.CONTAINER text="회원가입" onClick={handleSubmit} disabled={signUpMutation.isPending} />
           </div>
         </div>
       </div>

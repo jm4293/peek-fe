@@ -5,7 +5,13 @@ import { useRouter } from 'next/navigation';
 
 import { useToast } from '@/hooks/modal';
 
-import AuthApi, { ICheckEmailCodeDto, ICheckEmailDto, ILoginEmailDto, ILoginOauthDto } from '@/services/auth';
+import AuthApi, {
+  ICheckEmailCodeDto,
+  ICheckEmailDto,
+  ILoginEmailDto,
+  ILoginOauthDto,
+  ISignUpDto,
+} from '@/services/auth';
 import { useUserMutation } from '@/services/user';
 
 import { userAccountTypeDescription } from '@/shared/enum/user';
@@ -65,14 +71,18 @@ export const useAuthMutation = () => {
     mutationFn: (dto: ICheckEmailCodeDto) => AuthApi.checkEmailCode(dto),
   });
 
-  // const signUpMutation = useMutation({
-  //   mutationFn: (dto: ISignUpDto) => AuthApi.signUp(dto),
-  //   onSuccess: (res) => {
-  //     const { email } = res.data;
+  const signUpMutation = useMutation({
+    mutationFn: (dto: ISignUpDto) => AuthApi.signUp(dto),
+    onSuccess: (res) => {
+      const { email } = res.data;
 
-  //     router.push(`/auth/login?email=${email}`);
-  //   },
-  // });
+      openToast({ type: 'success', message: '회원가입이 완료되었습니다.' });
+      router.push(`/auth/login?email=${email}`);
+    },
+    onError: () => {
+      openToast({ type: 'error', message: '회원가입에 실패했습니다. 다시 시도해주세요.' });
+    },
+  });
 
   const signoutMutation = useMutation({
     mutationFn: () => AuthApi.logout(),
@@ -114,7 +124,7 @@ export const useAuthMutation = () => {
     oauthSignInMutation,
     checkEmailMutation,
     checkEmailCodeMutation,
-    // signUpMutation,
+    signUpMutation,
     signoutMutation,
   };
 };

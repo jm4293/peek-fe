@@ -4,7 +4,7 @@ import { StockPriceText } from '@/components/stock/stock-price';
 import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
-import { stockKoreanActions } from '@/services/stock';
+import { stockKoreanDetailAction } from '@/services/stock';
 
 interface IProps {
   params: Promise<{ code: string }>;
@@ -13,7 +13,7 @@ interface IProps {
 export default async function StockDetailPage(props: IProps) {
   const { code } = await props.params;
 
-  const { data, success } = await stockKoreanActions({ code });
+  const { data, success } = await stockKoreanDetailAction({ code });
 
   if (!success) {
     return (
