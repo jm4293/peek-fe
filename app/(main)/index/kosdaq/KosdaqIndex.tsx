@@ -17,8 +17,8 @@ export default function KosdaqIndex() {
   if (!kosdaq) {
     return (
       <div className="flex items-center gap-2">
-        <Text.HEADING text="코스닥" nowrap />
-        <Text.PARAGRAPH text="데이터가 없습니다." color="gray" nowrap />
+        <Text.HEADING text="코스닥" className="text-nowrap" />
+        <Text.PARAGRAPH text="데이터가 없습니다." color="gray" className="text-nowrap" />
       </div>
     );
   }
@@ -27,26 +27,25 @@ export default function KosdaqIndex() {
     <Wrapper.SECTION>
       <div>
         <div className="flex items-center gap-2">
-          <Text.HEADING text="코스닥" nowrap className="text-end" />
+          <Text.HEADING text="코스닥" className="text-nowrap text-end" />
           <Text.HEADING
             text={kosdaq.jisu}
             color={`${kosdaq.sign === '2' ? 'red' : kosdaq.sign === '5' ? 'blue' : 'default'}`}
-            nowrap
-            className="text-end"
+            className="text-nowrap text-end"
           />
           <Text.PARAGRAPH
             text={`${kosdaq.change}(${kosdaq.drate}%)`}
             color={`${kosdaq.sign === '2' ? 'red' : kosdaq.sign === '5' ? 'blue' : 'default'}`}
-            nowrap
+            className="text-nowrap"
           />
         </div>
         <div className="flex items-center gap-2">
-          <Text.PARAGRAPH text={`최고 ${kosdaq.highjisu}`} color="gray" nowrap />
-          <Text.PARAGRAPH text={`최저 ${kosdaq.lowjisu}`} color="gray" nowrap />
+          <Text.PARAGRAPH text={`최고 ${kosdaq.highjisu}`} color="gray" className="text-nowrap" />
+          <Text.PARAGRAPH text={`최저 ${kosdaq.lowjisu}`} color="gray" className="text-nowrap" />
           <Text.CAPTION
             text={kosdaq.time.slice(0, 2) + ':' + kosdaq.time.slice(2, 4) + ':' + kosdaq.time.slice(4, 6)}
             color="gray"
-            nowrap
+            className="text-nowrap"
           />
         </div>
       </div>

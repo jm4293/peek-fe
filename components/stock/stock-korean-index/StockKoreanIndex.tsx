@@ -53,7 +53,7 @@ export const StockKoreanIndex = () => {
             <Link href="/index/kospi">
               <div className="flex flex-col">
                 <div className="flex items-center gap-2">
-                  <Text.HEADING text="코스피" nowrap className="text-end" />
+                  <Text.HEADING text="코스피" className="text-nowrap text-end" />
                   <StockPriceText
                     price={(+kospi.jisu).toLocaleString()}
                     sign={kospi.sign}
@@ -68,20 +68,20 @@ export const StockKoreanIndex = () => {
                   />
                 </div>
                 <div className="flex items-center gap-2">
-                  <Text.PARAGRAPH text={`최고 ${kospi.highjisu}`} color="gray" nowrap />
-                  <Text.PARAGRAPH text={`최저 ${kospi.lowjisu}`} color="gray" nowrap />
+                  <Text.PARAGRAPH text={`최고 ${kospi.highjisu}`} color="gray" className="text-nowrap" />
+                  <Text.PARAGRAPH text={`최저 ${kospi.lowjisu}`} color="gray" className="text-nowrap" />
                   <Text.CAPTION
                     text={kospi.time.slice(0, 2) + ':' + kospi.time.slice(2, 4) + ':' + kospi.time.slice(4, 6)}
                     color="gray"
-                    nowrap
+                    className="text-nowrap"
                   />
                 </div>
               </div>
             </Link>
           ) : (
             <div className="flex items-center gap-2">
-              <Text.HEADING text="코스피" nowrap />
-              <Text.PARAGRAPH text="데이터가 없습니다." color="gray" nowrap />
+              <Text.HEADING text="코스피" className="text-nowrap" />
+              <Text.PARAGRAPH text="데이터가 없습니다." color="gray" className="text-nowrap" />
             </div>
           )}
         </div>
@@ -90,7 +90,7 @@ export const StockKoreanIndex = () => {
             <Link href="/index/kosdaq">
               <div className="flex flex-col">
                 <div className="flex items-center gap-2">
-                  <Text.HEADING text="코스닥" nowrap className="text-end" />
+                  <Text.HEADING text="코스닥" className="text-nowrap text-end" />
                   <StockPriceText
                     price={(+kosdaq.jisu).toLocaleString()}
                     sign={kosdaq.sign}
@@ -105,20 +105,20 @@ export const StockKoreanIndex = () => {
                   />
                 </div>
                 <div className="flex items-center gap-2">
-                  <Text.PARAGRAPH text={`최고 ${kosdaq.highjisu}`} color="gray" nowrap />
-                  <Text.PARAGRAPH text={`최저 ${kosdaq.lowjisu}`} color="gray" nowrap />
+                  <Text.PARAGRAPH text={`최고 ${kosdaq.highjisu}`} color="gray" className="text-nowrap" />
+                  <Text.PARAGRAPH text={`최저 ${kosdaq.lowjisu}`} color="gray" className="text-nowrap" />
                   <Text.CAPTION
                     text={kosdaq.time.slice(0, 2) + ':' + kosdaq.time.slice(2, 4) + ':' + kosdaq.time.slice(4, 6)}
                     color="gray"
-                    nowrap
+                    className="text-nowrap"
                   />
                 </div>
               </div>
             </Link>
           ) : (
             <div className="flex items-center gap-2">
-              <Text.HEADING text="코스닥" nowrap />
-              <Text.PARAGRAPH text="데이터가 없습니다." color="gray" nowrap />
+              <Text.HEADING text="코스닥" className="text-nowrap" />
+              <Text.PARAGRAPH text="데이터가 없습니다." color="gray" className="text-nowrap" />
             </div>
           )}
         </div>

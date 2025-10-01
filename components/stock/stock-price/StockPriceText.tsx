@@ -15,8 +15,7 @@ export const StockPriceText = (props: IProps) => {
       <Text.HEADING
         text={price}
         color={`${sign === '2' ? 'red' : sign === '5' ? 'blue' : 'default'}`}
-        nowrap
-        className={className}
+        className={`text-nowrap ${className}`}
       />
     );
   }
@@ -25,8 +24,7 @@ export const StockPriceText = (props: IProps) => {
     <Text.PARAGRAPH
       text={price}
       color={`${sign === '2' ? 'red' : sign === '5' ? 'blue' : 'default'}`}
-      nowrap
-      className={className}
+      className={`text-nowrap ${className}`}
     />
   );
 };

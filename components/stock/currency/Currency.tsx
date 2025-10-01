@@ -50,16 +50,15 @@ export const Currency = () => {
           {data.map((item) => (
             <div key={item.id} className="flex flex-col mx-4">
               <div className="flex items-center gap-2">
-                <Text.HEADING text={item.curUnit} nowrap />
-                <Text.HEADING text={item.standard} nowrap className="text-end" />
+                <Text.HEADING text={item.curUnit} className="text-nowrap" />
+                <Text.HEADING text={item.standard} className="text-nowrap text-end" />
               </div>
 
               <div className="flex justify-end items-center gap-2">
                 <Text.PARAGRAPH
                   text={DayjsUtil.of(item.createdAt).formatHHmmss()}
                   color="gray"
-                  nowrap
-                  className="text-end"
+                  className="text-nowrap text-end"
                 />
               </div>
             </div>

@@ -5,7 +5,7 @@ import { InputHTMLAttributes } from 'react';
 import { Text } from '@/components/text';
 
 interface IProps extends InputHTMLAttributes<HTMLInputElement> {
-  title: string;
+  title?: string;
   name?: string;
   placeholder?: string;
   isOptional?: boolean;
@@ -19,9 +19,11 @@ export const Input = (props: IProps) => {
 
   return (
     <div className={`w-full flex flex-col gap-2 ${className}`}>
-      <label className="pl-2" htmlFor={name}>
-        <Text.HEADING text={title} />
-      </label>
+      {title && (
+        <label className="pl-2" htmlFor={name}>
+          <Text.HEADING text={title} />
+        </label>
+      )}
 
       <div className="relative">
         <input

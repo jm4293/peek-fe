@@ -53,8 +53,8 @@ export default function RecentStockList() {
           <Link key={item.id} href={`/stock/detail/${item.code}`}>
             <li className="flex items-center gap-2 rounded-lg px-2 py-1 bg-theme-bg-main">
               <div className="flex flex-col text-end">
-                <Text.HEADING text={item.companyName} nowrap />
-                <Text.CAPTION text={DayjsUtil.of(item.timestamp).formatMMDD()} nowrap />
+                <Text.HEADING text={item.companyName} className="text-nowrap" />
+                <Text.CAPTION text={DayjsUtil.of(item.timestamp).formatMMDD()} className="text-nowrap" />
               </div>
 
               <X onClick={(event) => handleRemove(event, item.id)} />
