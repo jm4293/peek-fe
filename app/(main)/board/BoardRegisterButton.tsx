@@ -6,19 +6,21 @@ import { useRouter } from 'next/navigation';
 
 import { useModal } from '@/hooks/modal';
 
+import { IUserAccountModel } from '@/services/user';
+
 interface IProps {
-  isAuth: boolean;
+  myInfo: IUserAccountModel | null;
 }
 
 export const BoardRegisterButton = (props: IProps) => {
-  const { isAuth } = props;
+  const { myInfo } = props;
   const router = useRouter();
 
   const { isMobile, isPending } = useDeviceLayout();
   const { openModal, closeModal } = useModal();
 
   const clickHandler = () => {
-    if (!isAuth) {
+    if (!myInfo) {
       openModal({
         content: '로그인 후 이용 가능한 서비스입니다.\n 지금 로그인하고 시작하세요!',
         onConfirm: () => {
