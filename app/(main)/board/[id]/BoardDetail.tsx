@@ -1,6 +1,7 @@
 'use client';
 
 import { DayjsUtil } from '@/utils';
+import { Share } from 'lucide-react';
 import Link from 'next/link';
 
 import { Thumbnail } from '@/components/image';
@@ -12,11 +13,11 @@ import { IUserAccountModel } from '@/services/user';
 
 interface IProps {
   board: IBoardModel;
-  my: IUserAccountModel | null;
+  myInfo: IUserAccountModel | null;
 }
 
 export default function BoardDetail(props: IProps) {
-  const { board, my } = props;
+  const { board, myInfo } = props;
 
   const { deleteBoardMutation } = useBoardMutation();
 
@@ -29,32 +30,28 @@ export default function BoardDetail(props: IProps) {
   return (
     <>
       <Wrapper.SECTION>
-        <Text.HEADING text="제목" />
-
-        <div className="flex flex-col gap-1">
-          <div className="flex justify-between items-center gap-2">
-            <div className="flex items-center gap-2">
-              <Text.PARAGRAPH text={`[${board.category.name}]`} color="gray" />
-              <Text.HEADING text={board.title} />
-            </div>
-            <div className="flex items-center gap-1">
-              <Thumbnail thumbnail={board.userAccount.user.thumbnail} size={16} />
-              <Text.PARAGRAPH text={board.userAccount.user.nickname} />
+        <div className="flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <Thumbnail thumbnail={board.userAccount.user.thumbnail} size={32} />
+            <div className="flex flex-col">
+              <Text.HEADING text={board.userAccount.user.nickname} />
+              <Text.CAPTION text={DayjsUtil.of(board.createdAt).formatYYMMDDHHmm()} color="gray" />
             </div>
           </div>
-
-          <div className="flex justify-end">
-            <Text.CAPTION text={DayjsUtil.of(board.createdAt).formatYYMMDDHHmm()} color="gray" />
-          </div>
+          <Share />
         </div>
       </Wrapper.SECTION>
-      <Wrapper.SECTION>
-        <Text.HEADING text="내용" />
 
+      <Wrapper.SECTION>
         <div className="flex flex-col gap-4">
+          <div className="flex items-center gap-2">
+            <Text.PARAGRAPH text={`[${board.category.name}]`} color="gray" />
+            <Text.HEADING text={board.title} />
+          </div>
+
           <PreText text={board.article.content} />
 
-          {board.userAccount.id === my?.id && (
+          {board.userAccount.id === myInfo?.id && (
             <div className="flex items-center justify-end gap-2">
               <div className="cursor-pointer" onClick={deleteClickHandler}>
                 <Text.PARAGRAPH text="삭제" color="red" />

@@ -1,0 +1,67 @@
+'use client';
+
+import { ValidationUtil } from '@/utils';
+import { useState } from 'react';
+
+import { Input } from '@/components/input';
+import { Text } from '@/components/text';
+import { Wrapper } from '@/components/wrapper';
+
+import { useModal } from '@/hooks/modal';
+
+import { useBoardCommentMutation } from '@/services/board';
+import { IUserAccountModel } from '@/services/user';
+
+interface IProps {
+  id: string;
+  myInfo: IUserAccountModel | null;
+}
+
+export default function BoardCommentRegister(props: IProps) {
+  const { id, myInfo } = props;
+
+  const [comment, setComment] = useState('');
+
+  const { openModal, closeModal } = useModal();
+
+  const { createBoardCommentMutation } = useBoardCommentMutation();
+
+  const onCreateCommentHandler = () => {
+    if (createBoardCommentMutation.isPending) {
+      return;
+    }
+
+    const isValid = ValidationUtil.create()
+      .required(comment, '댓글을 입력해주세요.')
+      .maxLength(comment, 500, '댓글은 최대 500자까지 입력 가능합니다.')
+      .validate((errorMessage) => {
+        openModal({ content: errorMessage, onConfirm: closeModal });
+      });
+
+    if (!isValid) {
+      return;
+    }
+
+    createBoardCommentMutation.mutate({ boardId: Number(id), content: comment });
+    setComment('');
+  };
+
+  return (
+    <div className="w-full max-w-screen-xl fixed left-1/2 bottom-0 transform -translate-x-1/2">
+      <Wrapper.SECTION>
+        <Input
+          name="comment"
+          value={comment}
+          onChange={(event) => setComment(event.target.value)}
+          placeholder="댓글을 입력해주세요">
+          <div className="cursor-pointer" onClick={onCreateCommentHandler}>
+            <Text.HEADING
+              text={createBoardCommentMutation.isPending ? '등록 중...' : '등록'}
+              color={createBoardCommentMutation.isPending ? 'gray' : 'blue'}
+            />
+          </div>
+        </Input>
+      </Wrapper.SECTION>
+    </div>
+  );
+}

@@ -45,6 +45,11 @@ export const Footer = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // 게시글 상세 페이지에서는 Footer 숨김
+  if (pathname.startsWith('/board') && pathname.split('/').length > 2) {
+    return null;
+  }
+
   if (isMobile) {
     return (
       <footer
@@ -55,7 +60,7 @@ export const Footer = () => {
         `}>
         {menuItems.map(({ path, icon: Icon, label }) => (
           <Link key={path} href={path} className="flex flex-col items-center">
-            <Icon size={18} className={getActiveClass(path)} />
+            <Icon className={getActiveClass(path)} />
             <Text.HEADING text={label} color={getActiveClass(path) ? 'main' : 'default'} />
           </Link>
         ))}
