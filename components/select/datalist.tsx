@@ -1,28 +1,46 @@
-import { LineSkeleton } from '../skeleton';
+'use client';
 
-interface IProps {
+import { InputHTMLAttributes } from 'react';
+
+import { Text } from '@/components/text';
+
+interface IProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
-  optionList: string[] | undefined;
-  value: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  options: { value: string; label: string }[];
+  title?: string;
+  placeholder?: string;
+  isOptional?: boolean;
+  isError?: boolean;
+  className?: string;
 }
 
 export const Datalist = (props: IProps) => {
-  const { name, optionList, value, onChange } = props;
+  const { title, name, className, placeholder, isOptional, isError, ...rest } = props;
 
-  if (!optionList) {
-    return <LineSkeleton h={2} />;
-  }
+  const datalistId = `${name}-datalist`;
 
   return (
-    <>
-      <input type="text" list={`${name}-datalist`} value={value} onChange={onChange} />
+    <div className={`w-full flex flex-col gap-2 ${className}`}>
+      {title && (
+        <label className="pl-2" htmlFor={name}>
+          <Text.HEADING text={title} />
+        </label>
+      )}
 
-      <datalist id={`${name}-datalist`}>
-        {optionList.map((option, index) => (
-          <option key={`${option}-${index}`} value={option} />
+      <input
+        list={datalistId}
+        id={name}
+        name={name}
+        className={`border-b-theme-txt-gray ${isError ? 'border-red-500' : ''}`}
+        placeholder={`${placeholder ?? title} ${isOptional ? '[선택] ' : ''}`}
+        {...rest}
+      />
+
+      <datalist id={datalistId}>
+        {props.options.map((cur) => (
+          <option key={cur.label} value={cur.label} />
         ))}
       </datalist>
-    </>
+    </div>
   );
 };

@@ -1,11 +1,34 @@
-export default function Select() {
+'use client';
+
+import { SelectHTMLAttributes } from 'react';
+
+import { Text } from '../text';
+
+interface IProps extends SelectHTMLAttributes<HTMLSelectElement> {
+  name: string;
+  options: { value: string; label: string }[];
+  title?: string;
+  isError?: boolean;
+  className?: string;
+}
+
+export default function Select(props: IProps) {
+  const { options, title, name, isError, className, ...rest } = props;
+
   return (
-    <select>
-      <option value="option1">Option 1</option>
-      <option value="option2">Option 2</option>
-      <option value="option3">Option 3</option>
-      <option value="option4">Option 4</option>
-      <option value="option5">Option 5</option>
-    </select>
+    <div className={`w-full flex flex-col gap-2 ${className}`}>
+      {title && (
+        <label className="pl-2" htmlFor={name}>
+          <Text.HEADING text={title} />
+        </label>
+      )}
+      <select id={name} name={name} className={`border-b-theme-txt-gray ${isError ? 'border-red-500' : ''}`} {...rest}>
+        {options.map((cur) => (
+          <option key={cur.value} value={cur.value}>
+            {cur.label}
+          </option>
+        ))}
+      </select>
+    </div>
   );
 }

@@ -46,7 +46,7 @@ export const Footer = () => {
   }, []);
 
   // 게시글 상세 페이지에서는 Footer 숨김
-  if (pathname.startsWith('/board') && pathname.split('/').length > 2) {
+  if (pathname.startsWith('/board') && !isNaN(Number(pathname.split('/').pop()))) {
     return null;
   }
 
