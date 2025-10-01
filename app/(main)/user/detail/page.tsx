@@ -12,9 +12,9 @@ import NotAuth from '../NotAuth';
 import UserWithdraw from './Withdraw';
 
 export default async function UserDetailPage() {
-  const { data: my } = await myAccountAction();
+  const { data: myInfo } = await myAccountAction();
 
-  if (!my) {
+  if (!myInfo) {
     return <NotAuth />;
   }
 
@@ -24,19 +24,19 @@ export default async function UserDetailPage() {
         <Wrapper.SECTION text="상세">
           <div className="flex items-center gap-2">
             <Text.PARAGRAPH text="가입경로:" />
-            <Text.HEADING text={`${userAccountTypeDescription[my.userAccountType]}`} />
+            <Text.HEADING text={`${userAccountTypeDescription[myInfo.userAccountType]}`} />
           </div>
           <div className="flex items-center gap-2">
             <Text.PARAGRAPH text="이메일:" />
-            <Text.HEADING text={`${my.email}`} />
+            <Text.HEADING text={`${myInfo.email}`} />
           </div>
           <div className="flex items-center gap-2">
             <Text.PARAGRAPH text="이름:" />
-            <Text.HEADING text={`${my.user.name}`} />
+            <Text.HEADING text={`${myInfo.user.name}`} />
           </div>
           <div className="flex items-center gap-2">
             <Text.PARAGRAPH text="닉네임:" />
-            <Text.HEADING text={`${my.user.nickname}`} />
+            <Text.HEADING text={`${myInfo.user.nickname}`} />
           </div>
           {/* <div className="flex items-end gap-2">
             <Text.PARAGRAPH text="생년월일:" />

@@ -9,13 +9,13 @@ import NotAuth from '../../NotAuth';
 import ModifyPassword from './ModifyPassword';
 
 export default async function ModifyPasswordPage() {
-  const { data: my } = await myAccountAction();
+  const { data: myInfo } = await myAccountAction();
 
-  if (!my) {
+  if (!myInfo) {
     return <NotAuth />;
   }
 
-  if (my.userAccountType !== UserAccountTypeEnum.EMAIL) {
+  if (myInfo.userAccountType !== UserAccountTypeEnum.EMAIL) {
     return (
       <Wrapper.MAIN text="비밀번호 변경">
         <Wrapper.SECTION>

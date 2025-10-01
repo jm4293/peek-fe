@@ -6,15 +6,15 @@ import NotAuth from '../NotAuth';
 import ModifyUser from './ModifyUser';
 
 export default async function ModifyUserPage() {
-  const { data: my } = await myAccountAction();
+  const { data: myInfo } = await myAccountAction();
 
-  if (!my) {
+  if (!myInfo) {
     return <NotAuth />;
   }
 
   return (
     <Wrapper.MAIN text="유저정보 변경">
-      <ModifyUser my={my} />
+      <ModifyUser myInfo={myInfo} />
     </Wrapper.MAIN>
   );
 }

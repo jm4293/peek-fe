@@ -11,9 +11,9 @@ import NotAuth from './NotAuth';
 import User from './User';
 
 export default async function UserPage() {
-  const { data: my } = await myAccountAction();
+  const { data: myInfo } = await myAccountAction();
 
-  if (!my) {
+  if (!myInfo) {
     return (
       <Wrapper.MAIN text="마이페이지">
         <NotAuth />
@@ -29,7 +29,7 @@ export default async function UserPage() {
 
   return (
     <Wrapper.MAIN text="마이페이지">
-      <User my={my} />
+      <User myInfo={myInfo} />
 
       <Wrapper.SECTION text="기록">
         <Link href="/user/stock/favorite" className="flex items-center justify-between">

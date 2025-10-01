@@ -9,7 +9,7 @@ import BoardList from './BoardList';
 import { BoardRegisterButton } from './BoardRegisterButton';
 
 export default async function BoardPage() {
-  const { success: isAuth } = await myAccountAction();
+  const { data: myInfo } = await myAccountAction();
   const { data, success } = await stockCategoryListAction();
 
   if (!success) {
@@ -35,7 +35,7 @@ export default async function BoardPage() {
   return (
     <Wrapper.MAIN text="커뮤니티">
       <BoardCategory stockCategoryList={data} />
-      <BoardRegisterButton isAuth={isAuth} />
+      <BoardRegisterButton isAuth={!!myInfo} />
       <BoardList />
     </Wrapper.MAIN>
   );
