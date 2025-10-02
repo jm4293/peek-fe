@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Marquee from 'react-fast-marquee';
 
 import { LineSkeleton } from '@/components/skeleton';
 import { NetworkErrorText, Text } from '@/components/text';
@@ -59,74 +60,80 @@ export const StockKoreanIndex = () => {
       {kospi && (
         <Link href="/index/kospi">
           <Text.HEADING text="코스피" />
-          <div className="flex items-center gap-4">
-            <div className="min-w-20 flex flex-col items-end">
-              <Text.PARAGRAPH text="지수" className="text-end" />
-              <StockPriceText
-                price={(+kospi.jisu).toLocaleString()}
-                sign={kospi.sign}
-                size="HEADING"
-                className="text-end"
-              />
-            </div>
 
-            <div className="min-w-24 flex flex-col items-end">
-              <Text.PARAGRAPH text="변동" className="text-end" />
-              <StockPriceText
-                price={`${kospi.change}(${kospi.drate}%)`}
-                sign={kospi.sign}
-                size="PARAGRAPH"
-                className="text-end"
-              />
-            </div>
+          <Marquee speed={20} pauseOnHover={true} gradient={false}>
+            <div className="flex items-center gap-4">
+              <div className="min-w-20 flex flex-col items-end">
+                <Text.PARAGRAPH text="지수" className="text-end" />
+                <StockPriceText
+                  price={(+kospi.jisu).toLocaleString()}
+                  sign={kospi.sign}
+                  size="HEADING"
+                  className="text-end"
+                />
+              </div>
 
-            <div className="min-w-20 flex flex-col items-end">
-              <Text.PARAGRAPH text="최고" className="text-end" />
-              <Text.HEADING text={`${kospi.highjisu}`} />
-            </div>
+              <div className="min-w-24 flex flex-col items-end">
+                <Text.PARAGRAPH text="변동" className="text-end" />
+                <StockPriceText
+                  price={`${kospi.change}(${kospi.drate}%)`}
+                  sign={kospi.sign}
+                  size="PARAGRAPH"
+                  className="text-end"
+                />
+              </div>
 
-            <div className="min-w-20 flex flex-col items-end">
-              <Text.PARAGRAPH text="최저" className="text-end" />
-              <Text.HEADING text={`${kospi.lowjisu}`} />
+              <div className="min-w-20 flex flex-col items-end">
+                <Text.PARAGRAPH text="최고" className="text-end" />
+                <Text.HEADING text={`${kospi.highjisu}`} />
+              </div>
+
+              <div className="min-w-20 flex flex-col items-end">
+                <Text.PARAGRAPH text="최저" className="text-end" />
+                <Text.HEADING text={`${kospi.lowjisu}`} />
+              </div>
             </div>
-          </div>
+          </Marquee>
         </Link>
       )}
 
       {kosdaq && (
         <Link href="/index/kosdaq">
           <Text.HEADING text="코스닥" />
-          <div className="flex items-center gap-4">
-            <div className="min-w-20 flex flex-col items-end">
-              <Text.PARAGRAPH text="지수" className="text-end" />
-              <StockPriceText
-                price={(+kosdaq.jisu).toLocaleString()}
-                sign={kosdaq.sign}
-                size="HEADING"
-                className="text-end"
-              />
-            </div>
 
-            <div className="min-w-24 flex flex-col items-end">
-              <Text.PARAGRAPH text="변동" className="text-end" />
-              <StockPriceText
-                price={`${kosdaq.change}(${kosdaq.drate}%)`}
-                sign={kosdaq.sign}
-                size="PARAGRAPH"
-                className="text-end"
-              />
-            </div>
+          <Marquee speed={20} pauseOnHover={true} gradient={false}>
+            <div className="flex items-center gap-4">
+              <div className="min-w-20 flex flex-col items-end">
+                <Text.PARAGRAPH text="지수" className="text-end" />
+                <StockPriceText
+                  price={(+kosdaq.jisu).toLocaleString()}
+                  sign={kosdaq.sign}
+                  size="HEADING"
+                  className="text-end"
+                />
+              </div>
 
-            <div className="min-w-20 flex flex-col items-end">
-              <Text.PARAGRAPH text="최고" className="text-end" />
-              <Text.HEADING text={`${kosdaq.highjisu}`} />
-            </div>
+              <div className="min-w-24 flex flex-col items-end">
+                <Text.PARAGRAPH text="변동" className="text-end" />
+                <StockPriceText
+                  price={`${kosdaq.change}(${kosdaq.drate}%)`}
+                  sign={kosdaq.sign}
+                  size="PARAGRAPH"
+                  className="text-end"
+                />
+              </div>
 
-            <div className="min-w-20 flex flex-col items-end">
-              <Text.PARAGRAPH text="최저" className="text-end" />
-              <Text.HEADING text={`${kosdaq.lowjisu}`} />
+              <div className="min-w-20 flex flex-col items-end">
+                <Text.PARAGRAPH text="최고" className="text-end" />
+                <Text.HEADING text={`${kosdaq.highjisu}`} />
+              </div>
+
+              <div className="min-w-20 flex flex-col items-end">
+                <Text.PARAGRAPH text="최저" className="text-end" />
+                <Text.HEADING text={`${kosdaq.lowjisu}`} />
+              </div>
             </div>
-          </div>
+          </Marquee>
         </Link>
       )}
     </Wrapper.SECTION>

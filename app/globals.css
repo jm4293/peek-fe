@@ -64,7 +64,7 @@ footer {
   position: fixed;
   width: 100vw;
   min-width: 256px;
-  height: 3rem;
+  height: 4rem;
   bottom: 0;
   padding: 0 1.4rem;
   z-index: 30;
@@ -109,18 +109,18 @@ main {
 
 @media screen and (max-width: 767px) {
   main {
-    padding: 5rem 1rem 6rem 1rem;
+    padding: 4rem 1rem 6rem 1rem;
   }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   main {
-    padding: 5rem 2rem 4rem 2rem;
+    padding: 4rem 2rem 4rem 2rem;
   }
 }
 
 @media screen and (min-width: 1024px) {
   main {
-    padding: 5rem 12rem 4rem 12rem;
+    padding: 4rem 12rem 4rem 12rem;
   }
 }
