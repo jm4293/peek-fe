@@ -76,11 +76,7 @@ export default function PopularStock() {
       <Text.HEADING text="시가총액 상위 리스트" />
 
       {data.stockKoreanRankList.length > 0 ? (
-        <InfinityList
-          hasNextPage={hasNextPage}
-          isFetchingNextPage={isFetchingNextPage}
-          fetchNextPage={fetchNextPage}
-          maxHeight={40}>
+        <InfinityList hasNextPage={hasNextPage} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage}>
           {data.stockKoreanRankList.map(renderItem)}
         </InfinityList>
       ) : (
