@@ -20,7 +20,7 @@
 
 html.dark {
   --bg-header: #1b1b1d;
-  --bg-main: #1f1f22;
+  --bg-main: #27272a;
   --bg-section: #1b1b1d;
   --bg-blue: #202329;
 
@@ -54,7 +54,7 @@ header {
   position: fixed;
   width: 100vw;
   min-width: 256px;
-  height: 4rem;
+  height: 3rem;
   top: 0;
   padding: 0 1rem;
   z-index: 30;
@@ -64,7 +64,7 @@ footer {
   position: fixed;
   width: 100vw;
   min-width: 256px;
-  height: 4rem;
+  height: 3rem;
   bottom: 0;
   padding: 0 1.4rem;
   z-index: 30;

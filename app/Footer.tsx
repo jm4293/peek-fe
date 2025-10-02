@@ -60,8 +60,8 @@ export const Footer = () => {
         `}>
         {menuItems.map(({ path, icon: Icon, label }) => (
           <Link key={path} href={path} className="flex flex-col items-center">
-            <Icon className={getActiveClass(path)} />
-            <Text.HEADING text={label} color={getActiveClass(path) ? 'main' : 'default'} />
+            <Icon className={getActiveClass(path)} size={18} />
+            <Text.PARAGRAPH text={label} color={getActiveClass(path) ? 'main' : 'default'} />
           </Link>
         ))}
       </footer>
