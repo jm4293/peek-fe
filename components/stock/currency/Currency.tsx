@@ -1,5 +1,6 @@
 'use client';
 
+import { useDeviceLayout } from '@/hooks';
 import { DayjsUtil } from '@/utils';
 import { useMemo } from 'react';
 import Marquee from 'react-fast-marquee';
@@ -14,6 +15,8 @@ import { useCurrencyList } from '@/services/currency/query';
 interface ICurrencyData extends ICurrencyModel {}
 
 export const Currency = () => {
+  const { isMobile } = useDeviceLayout();
+
   const { data, isPending, isSuccess } = useCurrencyList();
 
   const titleComponent = useMemo(
@@ -66,6 +69,15 @@ export const Currency = () => {
     </div>
   );
 
+  if (isMobile === null) {
+    return (
+      <Wrapper.SECTION>
+        {titleComponent}
+        <LineSkeleton />
+      </Wrapper.SECTION>
+    );
+  }
+
   if (isPending) {
     return (
       <Wrapper.SECTION>
@@ -84,11 +96,49 @@ export const Currency = () => {
     );
   }
 
+  if (isMobile) {
+    return (
+      <Wrapper.SECTION>
+        {titleComponent}
+
+        {data && data.length > 0 ? (
+          data.map((item) => <CurrencyMarquee key={item.curUnit} item={item} />)
+        ) : (
+          <EmptyData />
+        )}
+      </Wrapper.SECTION>
+    );
+  }
+
   return (
     <Wrapper.SECTION>
       {titleComponent}
+      <div className="flex flex-col justify-center items-center gap-4">
+        {data && data.length > 0 ? (
+          data.map((item) => (
+            <div className="flex items-center gap-4" key={item.curUnit}>
+              <Text.HEADING className="min-w-20" text={item.curUnitDesc} />
 
-      {data && data.length > 0 ? data.map((item) => <CurrencyMarquee key={item.curUnit} item={item} />) : <EmptyData />}
+              <div className="min-w-20 flex flex-col">
+                <Text.PARAGRAPH text="매매 기준" className="text-end" />
+                <Text.HEADING text={item.dealBasR} className="text-nowrap text-end" />
+              </div>
+
+              <div className="min-w-20 flex flex-col">
+                <Text.PARAGRAPH text="받으실 때" className="text-end" />
+                <Text.HEADING text={item.ttb} className="text-nowrap text-end" />
+              </div>
+
+              <div className="min-w-20 flex flex-col">
+                <Text.PARAGRAPH text="보내실 때" className="text-end" />
+                <Text.HEADING text={item.tts} className="text-nowrap text-end" />
+              </div>
+            </div>
+          ))
+        ) : (
+          <EmptyData />
+        )}
+      </div>
     </Wrapper.SECTION>
   );
 };
