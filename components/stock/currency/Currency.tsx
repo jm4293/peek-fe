@@ -2,7 +2,6 @@
 
 import { useDeviceLayout } from '@/hooks';
 import { DayjsUtil } from '@/utils';
-import { useMemo } from 'react';
 import Marquee from 'react-fast-marquee';
 
 import { LineSkeleton } from '@/components/skeleton';
@@ -19,23 +18,20 @@ export const Currency = () => {
 
   const { data, isPending, isSuccess } = useCurrencyList();
 
-  const titleComponent = useMemo(
-    () => (
-      <div className="flex justify-between items-center mb-2">
-        <div className="flex items-center gap-2">
-          <Text.HEADING text="환율" />
-          {isSuccess && data && data.length > 0 && (
-            <Text.PARAGRAPH
-              text={DayjsUtil.of(data[0].createdAt).formatHHmmss()}
-              color="gray"
-              className="text-nowrap text-end"
-            />
-          )}
-        </div>
-        <Text.CAPTION text="1분마다 갱신됩니다." color="gray" className="text-end" />
+  const titleComponent = (
+    <div className="flex justify-between items-center mb-2">
+      <div className="flex items-center gap-2">
+        <Text.HEADING text="환율" />
+        {isSuccess && data && data.length > 0 && (
+          <Text.PARAGRAPH
+            text={DayjsUtil.of(data[0].createdAt).formatHHmmss()}
+            color="gray"
+            className="text-nowrap text-end"
+          />
+        )}
       </div>
-    ),
-    [isSuccess, data],
+      <Text.CAPTION text="1분마다 갱신됩니다." color="gray" className="text-end" />
+    </div>
   );
 
   const CurrencyMarquee = ({ item }: { item: ICurrencyData }) => (
@@ -113,10 +109,11 @@ export const Currency = () => {
   return (
     <Wrapper.SECTION>
       {titleComponent}
-      <div className="flex flex-col justify-center items-center gap-4">
+
+      <div className="flex flex-col gap-4">
         {data && data.length > 0 ? (
           data.map((item) => (
-            <div className="flex items-center gap-4" key={item.curUnit}>
+            <div key={item.curUnit} className="w-full flex justify-evenly items-center">
               <Text.HEADING className="min-w-20" text={item.curUnitDesc} />
 
               <div className="min-w-20 flex flex-col">

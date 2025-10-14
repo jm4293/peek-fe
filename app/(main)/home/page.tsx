@@ -1,12 +1,16 @@
 import { Currency, StockKoreanIndex } from '@/components/stock';
-import { CurrentTimeText } from '@/components/text';
+import { CurrentTimeText, Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
 export default async function HomePage() {
   return (
-    <Wrapper.MAIN text="메인">
-      <CurrentTimeText />
-
+    <Wrapper.MAIN
+      text={
+        <div className="flex items-center justify-between">
+          <Text.TITLE text="메인" />
+          <CurrentTimeText />
+        </div>
+      }>
       <StockKoreanIndex />
       <Currency />
     </Wrapper.MAIN>

@@ -88,8 +88,8 @@ export const StockKoreanIndex = () => {
     const { indexData, title, href } = props;
 
     return (
-      <Link href={href}>
-        <div className="flex items-center gap-4">
+      <Link href={href} className="w-full">
+        <div className="w-full flex justify-evenly items-center">
           <Text.HEADING text={title} />
 
           <div className="min-w-20 flex flex-col items-end">
@@ -168,7 +168,7 @@ export const StockKoreanIndex = () => {
     <Wrapper.SECTION>
       {titleComponent}
 
-      <div className="flex flex-col justify-center items-center gap-4">
+      <div className="flex flex-col items-center gap-4">
         {kospi && <Render indexData={kospi} title="코스피" href="/index/kospi" />}
         {kosdaq && <Render indexData={kosdaq} title="코스닥" href="/index/kosdaq" />}
       </div>
