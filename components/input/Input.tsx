@@ -18,7 +18,7 @@ export const Input = (props: IProps) => {
   const { title, name, className, placeholder, isOptional, isError, children, ...rest } = props;
 
   return (
-    <div className={`w-full flex flex-col gap-2 ${className}`}>
+    <div className={`w-full flex flex-col gap-1 ${className}`}>
       {title && (
         <label className="pl-2" htmlFor={name}>
           <Text.HEADING text={title} />
@@ -29,7 +29,7 @@ export const Input = (props: IProps) => {
           id={name}
           name={name}
           className={`border-b-theme-txt-gray ${isError ? 'border-red-500' : ''} ${children ? 'pr-16' : ''}`}
-          placeholder={`${placeholder ?? title} ${isOptional ? '[선택] ' : ''}`}
+          placeholder={`${isOptional ? '[선택] ' : ''} ${placeholder ?? title}`}
           {...rest}
         />
         <div className="absolute right-4 bottom-1/2 translate-y-1/2">{children}</div>

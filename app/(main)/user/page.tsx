@@ -7,7 +7,6 @@ import { Wrapper } from '@/components/wrapper';
 import { myAccountAction } from '@/services/user';
 
 import UserLogout from './Logout';
-import NotAuth from './NotAuth';
 import User from './User';
 
 export default async function UserPage() {
@@ -16,7 +15,12 @@ export default async function UserPage() {
   if (!myInfo) {
     return (
       <Wrapper.MAIN text="마이페이지">
-        <NotAuth />
+        <Wrapper.SECTION text="로그인 후 이용 가능합니다">
+          <Link href="/auth/login" className="flex items-center justify-between">
+            <Text.HEADING text="로그인" />
+            <ChevronRight />
+          </Link>
+        </Wrapper.SECTION>
         <Wrapper.SECTION text="알림">
           <Link href="/notice" className="flex items-center justify-between">
             <Text.HEADING text="공지사항" />
