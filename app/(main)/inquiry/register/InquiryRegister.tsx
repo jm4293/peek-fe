@@ -2,7 +2,6 @@
 
 import { ValidationUtil } from '@/utils';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
 
 import { Button } from '@/components/button';
@@ -25,8 +24,6 @@ const initialFormData: ICreateInquiryDto = {
 };
 
 export default function InquiryRegister() {
-  const router = useRouter();
-
   const imageInputRef = useRef<HTMLInputElement>(null);
   const [images, setImages] = useState<File[]>([]);
 

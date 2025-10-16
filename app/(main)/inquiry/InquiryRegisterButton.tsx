@@ -2,10 +2,7 @@
 
 import { useDeviceLayout } from '@/hooks';
 import { Plus } from 'lucide-react';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-
-import { Button } from '@/components/button';
 
 import { useModal } from '@/hooks/modal';
 

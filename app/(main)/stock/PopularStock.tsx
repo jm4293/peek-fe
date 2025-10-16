@@ -16,10 +16,9 @@ import { StockRankEnum } from '@/shared/enum/stock';
 export default function PopularStock() {
   const router = useRouter();
 
-  const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isSuccess, isLoading, isFetching } =
-    useStockKoreanRankList({
-      type: StockRankEnum.MARKET_CAP_TOP,
-    });
+  const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isSuccess, isLoading } = useStockKoreanRankList({
+    type: StockRankEnum.MARKET_CAP_TOP,
+  });
 
   const clickHandler = (item: IStockKoreanRankModel) => {
     const stored = LocalStorageUtil.getItem(LocalStorageKey.recentStock);

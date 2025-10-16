@@ -1,4 +1,3 @@
-import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
 import Register from './Register';
