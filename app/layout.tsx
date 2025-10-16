@@ -18,7 +18,10 @@ export const metadata: Metadata = {
   description: '주식 정보와 커뮤니티 서비스',
   keywords: '주식, 실시간, stock, 커뮤니티',
   icons: {
-    icon: '/favicon.ico',
+    icon: [
+      { rel: 'apple-touch-icon', url: '/favicon.ico', sizes: '180x180' },
+      { rel: 'icon', url: '/favicon.ico' },
+    ],
   },
   verification: {
     google: 'uJW_8OCDzvQJqQgfYwsslu44VsruK8gm346PCn8lVKE',
