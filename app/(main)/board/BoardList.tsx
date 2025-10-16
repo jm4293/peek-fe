@@ -27,7 +27,7 @@ export default function BoardList() {
     return (
       <li key={id}>
         <Wrapper.SECTION>
-          <Link href={`/board/${id}`}>
+          <Link href={`/board/${id}`} className="flex flex-col gap-2">
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-2">
                 <Text.PARAGRAPH text={`[${category.name}]`} color="gray" />
@@ -39,8 +39,8 @@ export default function BoardList() {
               </div>
             </div>
 
-            <div className="flex justify-between items-center gap-4">
-              <div className="flex gap-4">
+            <div className="flex justify-between items-center">
+              <div className="flex items-center gap-4">
                 <div className="flex items-center gap-1">
                   <Heart color="#8b8b8e" size={18} />
                   <Text.PARAGRAPH text={String(likeCount)} color="gray" />

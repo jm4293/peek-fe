@@ -9,7 +9,7 @@ interface IProps {
 }
 
 const MAIN = (props: IProps) => {
-  const { text = '', children } = props;
+  const { text, children } = props;
 
   return (
     <section className="flex flex-col gap-4">
@@ -20,12 +20,12 @@ const MAIN = (props: IProps) => {
 };
 
 const SECTION = (props: IProps) => {
-  const { id, text = '', children } = props;
+  const { id, text, children } = props;
 
   return (
-    <section key={id} className="w-full rounded-lg p-4 bg-theme-bg-section">
+    <section key={id} className="flex flex-col justify-center gap-2 p-4 rounded-lg bg-theme-bg-section">
       {typeof text === 'string' ? <Text.SUBTITLE text={text} /> : text}
-      <div className="flex flex-col gap-4">{children}</div>
+      {children}
     </section>
   );
 };

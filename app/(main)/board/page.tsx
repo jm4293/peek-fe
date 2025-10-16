@@ -35,8 +35,8 @@ export default async function BoardPage() {
   return (
     <Wrapper.MAIN text="커뮤니티">
       <BoardCategory stockCategoryList={data} />
-      <BoardRegisterButton myInfo={myInfo} />
       <BoardList />
+      <BoardRegisterButton myInfo={myInfo} />
     </Wrapper.MAIN>
   );
 }

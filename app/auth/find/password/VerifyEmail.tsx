@@ -130,48 +130,47 @@ export default function VerifyEmail() {
 
       <div className="flex flex-col gap-12">
         <div className="flex flex-col gap-4">
-          <div className="grid grid-cols-3 gap-2">
-            <Input
-              type="email"
-              className="w-full col-span-2"
-              title="이메일"
-              name="email"
-              value={value.email}
-              onChange={onChange}
-              placeholder="이메일 주소"
-              disabled={checkEmail !== 1}
-              required
-            />
-            <Button.CONTAINER
-              className="mt-6"
-              text={checkEmailMutation.isPending ? '코드 전송 중' : '이메일 인증'}
-              onClick={handleCheckEmail}
-              disabled={checkEmailMutation.isPending || checkEmail !== 1}
-            />
-          </div>
-          {checkEmail !== 1 && (
-            <div className="grid grid-cols-3 gap-2">
-              <Input
-                type="number"
-                className="col-span-2"
-                title="인증코드"
-                name="code"
-                value={code}
-                onChange={(e) => setCode(e.target.value)}
-                placeholder="인증코드"
-                minLength={4}
-                maxLength={4}
-                disabled={checkEmail === 3}
-                required>
-                <Text.PARAGRAPH text={dayjs.duration(count, 'seconds').format('m:ss')} />
-              </Input>
-              <Button.CONTAINER
-                className="mt-6"
-                text={checkEmail === 3 ? '확인 완료' : '코드 확인'}
-                onClick={handleCheckCode}
-                disabled={checkEmail === 3}
+          <Input
+            type="email"
+            className="w-full col-span-2"
+            title="이메일"
+            name="email"
+            value={value.email}
+            onChange={onChange}
+            placeholder="이메일 주소"
+            disabled={checkEmail !== 1}
+            required>
+            <div className="cursor-pointer" onClick={handleCheckEmail}>
+              <Text.HEADING
+                text={checkEmailMutation.isPending ? '전송 중' : '인증'}
+                color={`${checkEmailMutation.isPending ? 'gray' : 'blue'}`}
               />
             </div>
+          </Input>
+
+          {checkEmail !== 1 && (
+            <Input
+              type="number"
+              className="col-span-2"
+              title="인증코드"
+              name="code"
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+              placeholder="인증코드"
+              minLength={4}
+              maxLength={4}
+              disabled={checkEmail === 3}
+              required>
+              <div className="flex items-center gap-2">
+                {checkEmail !== 3 && <Text.CAPTION text={dayjs.duration(count, 'seconds').format('m:ss')} />}
+                <div className="cursor-pointer" onClick={handleCheckCode}>
+                  <Text.HEADING
+                    text={checkEmail === 3 ? '완료' : checkEmailCodeMutation.isPending ? '확인 중' : '확인'}
+                    color={checkEmail === 3 ? 'gray' : 'blue'}
+                  />
+                </div>
+              </div>
+            </Input>
           )}
         </div>
 
