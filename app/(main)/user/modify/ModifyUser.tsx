@@ -12,11 +12,11 @@ import { useModal } from '@/hooks/modal';
 import { IUserAccountModel, useUserMutation } from '@/services/user';
 
 interface IProps {
-  myInfo: IUserAccountModel;
+  userInfo: IUserAccountModel;
 }
 
 export default function ModifyUser(props: IProps) {
-  const { myInfo } = props;
+  const { userInfo } = props;
 
   const { openModal, closeModal } = useModal();
 
@@ -46,9 +46,9 @@ export default function ModifyUser(props: IProps) {
       <Wrapper.SECTION>
         <div className="flex flex-col gap-12">
           <div className="flex flex-col gap-4">
-            <Input title="이메일" name="email" placeholder="이메일" defaultValue={myInfo.email} disabled />
-            <Input title="이름" name="name" placeholder="이름" defaultValue={myInfo.user.name} disabled />
-            <Input title="닉네임" name="nickname" placeholder="닉네임" defaultValue={myInfo.user.nickname} required />
+            <Input title="이메일" name="email" placeholder="이메일" defaultValue={userInfo.email} disabled />
+            <Input title="이름" name="name" placeholder="이름" defaultValue={userInfo.user.name} disabled />
+            <Input title="닉네임" name="nickname" placeholder="닉네임" defaultValue={userInfo.user.nickname} required />
           </div>
 
           <div className="w-full grid grid-cols-2 gap-2">

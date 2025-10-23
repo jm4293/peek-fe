@@ -4,22 +4,22 @@ import Link from 'next/link';
 import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
-import { myAccountAction } from '@/services/user';
+import { userInfoAction } from '@/services/user';
 
 import UserLogout from './Logout';
 import NotAuth from './NotAuth';
 import User from './User';
 
 export default async function UserPage() {
-  const { data: myInfo } = await myAccountAction();
+  const { data: userInfo } = await userInfoAction();
 
-  if (!myInfo) {
+  if (!userInfo) {
     return <NotAuth />;
   }
 
   return (
-    <Wrapper.MAIN text="마이페이지">
-      <User myInfo={myInfo} />
+    <Wrapper.MAIN text="내 정보">
+      <User userInfo={userInfo} />
 
       <Wrapper.SECTION text="기록">
         <Link href="/user/stock/favorite" className="flex items-center justify-between">

@@ -13,11 +13,11 @@ import { IUserAccountModel } from '@/services/user';
 
 interface IProps {
   board: IBoardModel;
-  myInfo: IUserAccountModel | null;
+  userInfo: IUserAccountModel | null;
 }
 
 export default function BoardDetail(props: IProps) {
-  const { board, myInfo } = props;
+  const { board, userInfo } = props;
 
   const { deleteBoardMutation } = useBoardMutation();
 
@@ -51,7 +51,7 @@ export default function BoardDetail(props: IProps) {
 
           <PreText text={board.article.content} />
 
-          {board.userAccount.id === myInfo?.id && (
+          {board.userAccount.id === userInfo?.id && (
             <div className="flex items-center justify-end gap-2">
               <div className="cursor-pointer" onClick={deleteClickHandler}>
                 <Text.PARAGRAPH text="삭제" color="red" />

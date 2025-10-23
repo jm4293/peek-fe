@@ -32,7 +32,7 @@ export default function QueryProvider(props: IProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <QueryErrorResetBoundary>
+      {/* <QueryErrorResetBoundary>
         {({ reset }) => (
           <ErrorBoundary
             onReset={reset}
@@ -45,9 +45,11 @@ export default function QueryProvider(props: IProps) {
             {children}
           </ErrorBoundary>
         )}
-      </QueryErrorResetBoundary>
+      </QueryErrorResetBoundary> */}
 
       {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+
+      {children}
     </QueryClientProvider>
   );
 }

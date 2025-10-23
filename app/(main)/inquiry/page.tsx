@@ -1,18 +1,18 @@
 import { Wrapper } from '@/components/wrapper';
 
-import { myAccountAction } from '@/services/user';
+import { userInfoAction } from '@/services/user';
 
 import InquiryList from './InquiryList';
 import { InquiryRegisterButton } from './InquiryRegisterButton';
 
 export default async function UserInquiryPage() {
-  const { success: isAuth } = await myAccountAction();
+  const { success } = await userInfoAction();
 
   return (
     <Wrapper.MAIN text="문의하기">
       <InquiryList />
 
-      <InquiryRegisterButton isAuth={isAuth} />
+      <InquiryRegisterButton isAuth={success} />
     </Wrapper.MAIN>
   );
 }

@@ -1,7 +1,7 @@
 import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
-import { myAccountAction } from '@/services/user';
+import { userInfoAction } from '@/services/user';
 
 import { UserAccountTypeEnum } from '@/shared/enum/user';
 
@@ -9,13 +9,13 @@ import NotAuth from '../../NotAuth';
 import ModifyPassword from './ModifyPassword';
 
 export default async function ModifyPasswordPage() {
-  const { data: myInfo } = await myAccountAction();
+  const { data: userInfo } = await userInfoAction();
 
-  if (!myInfo) {
+  if (!userInfo) {
     return <NotAuth />;
   }
 
-  if (myInfo.userAccountType !== UserAccountTypeEnum.EMAIL) {
+  if (userInfo.userAccountType !== UserAccountTypeEnum.EMAIL) {
     return (
       <Wrapper.MAIN text="비밀번호 변경">
         <Wrapper.SECTION>

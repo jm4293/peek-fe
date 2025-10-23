@@ -2,7 +2,7 @@ import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
 import { boardDetailAction } from '@/services/board';
-import { myAccountAction } from '@/services/user';
+import { userInfoAction } from '@/services/user';
 
 import BoardComment from './BoardComment';
 import BoardCommentRegister from './BoardCommentRegister';
@@ -15,7 +15,7 @@ interface IProps {
 export default async function BoardDetailPage(props: IProps) {
   const { id } = await props.params;
 
-  const { data: myInfo } = await myAccountAction();
+  const { data: userInfo } = await userInfoAction();
   const { data, success } = await boardDetailAction(id);
 
   if (!success) {
@@ -36,9 +36,9 @@ export default async function BoardDetailPage(props: IProps) {
 
   return (
     <Wrapper.MAIN text="게시글">
-      <BoardDetail board={data} myInfo={myInfo} />
-      <BoardComment id={id} myInfo={myInfo} />
-      <BoardCommentRegister id={id} myInfo={myInfo} />
+      <BoardDetail board={data} userInfo={userInfo} />
+      <BoardComment id={id} userInfo={userInfo} />
+      <BoardCommentRegister id={id} userInfo={userInfo} />
     </Wrapper.MAIN>
   );
 }

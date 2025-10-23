@@ -1,1 +1,1 @@
-export * from './my-account.action';
+export * from './user-info.action';

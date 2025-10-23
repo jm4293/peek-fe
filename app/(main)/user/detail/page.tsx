@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
-import { myAccountAction } from '@/services/user';
+import { userInfoAction } from '@/services/user';
 
 import { userAccountTypeDescription } from '@/shared/enum/user';
 
@@ -12,9 +12,9 @@ import NotAuth from '../NotAuth';
 import UserWithdraw from './Withdraw';
 
 export default async function UserDetailPage() {
-  const { data: myInfo } = await myAccountAction();
+  const { data: userInfo } = await userInfoAction();
 
-  if (!myInfo) {
+  if (!userInfo) {
     return <NotAuth />;
   }
 
@@ -24,19 +24,19 @@ export default async function UserDetailPage() {
         <Wrapper.SECTION text="상세">
           <div className="flex items-center gap-2">
             <Text.PARAGRAPH text="가입경로:" />
-            <Text.HEADING text={`${userAccountTypeDescription[myInfo.userAccountType]}`} />
+            <Text.HEADING text={`${userAccountTypeDescription[userInfo.userAccountType]}`} />
           </div>
           <div className="flex items-center gap-2">
             <Text.PARAGRAPH text="이메일:" />
-            <Text.HEADING text={`${myInfo.email}`} />
+            <Text.HEADING text={`${userInfo.email}`} />
           </div>
           <div className="flex items-center gap-2">
             <Text.PARAGRAPH text="이름:" />
-            <Text.HEADING text={`${myInfo.user.name}`} />
+            <Text.HEADING text={`${userInfo.user.name}`} />
           </div>
           <div className="flex items-center gap-2">
             <Text.PARAGRAPH text="닉네임:" />
-            <Text.HEADING text={`${myInfo.user.nickname}`} />
+            <Text.HEADING text={`${userInfo.user.nickname}`} />
           </div>
           {/* <div className="flex items-end gap-2">
             <Text.PARAGRAPH text="생년월일:" />

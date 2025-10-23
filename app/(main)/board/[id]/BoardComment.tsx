@@ -16,11 +16,11 @@ import { IUserAccountModel } from '@/services/user';
 
 interface IProps {
   id: string;
-  myInfo: IUserAccountModel | null;
+  userInfo: IUserAccountModel | null;
 }
 
 export default function BoardComment(props: IProps) {
-  const { id, myInfo } = props;
+  const { id, userInfo } = props;
 
   const [replyComment, setReplyComment] = useState('');
   const [isReply, setIsReply] = useState<number>(-1);
@@ -95,7 +95,7 @@ export default function BoardComment(props: IProps) {
                       />
                     </div>
 
-                    {boardComment.userAccount.id === myInfo?.id && (
+                    {boardComment.userAccount.id === userInfo?.id && (
                       <div className="cursor-pointer" onClick={() => onDeleteCommentHandler(boardComment.id)}>
                         <Text.PARAGRAPH text="삭제" color="red" />
                       </div>
@@ -118,7 +118,7 @@ export default function BoardComment(props: IProps) {
 
                     <div className="flex justify-between items-center gap-2">
                       <Text.CAPTION text={DayjsUtil.of(reply.createdAt).formatYYMMDDHHmm()} color="gray" />
-                      {reply.userAccount.id === myInfo?.id && (
+                      {reply.userAccount.id === userInfo?.id && (
                         <div className="cursor-pointer" onClick={() => onDeleteCommentHandler(reply.id)}>
                           <Text.PARAGRAPH text="삭제" color="red" />
                         </div>

@@ -9,18 +9,18 @@ import { useModal } from '@/hooks/modal';
 import { IUserAccountModel } from '@/services/user';
 
 interface IProps {
-  myInfo: IUserAccountModel | null;
+  userInfo: IUserAccountModel | null;
 }
 
 export const BoardRegisterButton = (props: IProps) => {
-  const { myInfo } = props;
+  const { userInfo } = props;
   const router = useRouter();
 
   const { isMobile, isPending } = useDeviceLayout();
   const { openModal, closeModal } = useModal();
 
   const clickHandler = () => {
-    if (!myInfo) {
+    if (!userInfo) {
       openModal({
         content: '로그인 후 이용 가능한 서비스입니다.\n 지금 로그인하고 시작하세요!',
         onConfirm: () => {
@@ -45,10 +45,4 @@ export const BoardRegisterButton = (props: IProps) => {
       <PencilLine color="white" />
     </div>
   );
-
-  // return (
-  //   <div onClick={clickHandler}>
-  //     <Button.CONTAINER text="게시글 작성" />
-  //   </div>
-  // );
 };

@@ -2,14 +2,14 @@ import { NetworkErrorText, Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
 import { stockCategoryListAction } from '@/services/stock';
-import { myAccountAction } from '@/services/user';
+import { userInfoAction } from '@/services/user';
 
 import BoardCategory from './BoardCategory';
 import BoardList from './BoardList';
 import { BoardRegisterButton } from './BoardRegisterButton';
 
 export default async function BoardPage() {
-  const { data: myInfo } = await myAccountAction();
+  const { data: userInfo } = await userInfoAction();
   const { data, success } = await stockCategoryListAction();
 
   if (!success) {
@@ -36,7 +36,7 @@ export default async function BoardPage() {
     <Wrapper.MAIN text="커뮤니티">
       <BoardCategory stockCategoryList={data} />
       <BoardList />
-      <BoardRegisterButton myInfo={myInfo} />
+      <BoardRegisterButton userInfo={userInfo} />
     </Wrapper.MAIN>
   );
 }

@@ -12,7 +12,7 @@ export interface MyAccountActionResult {
   data: IUserAccountModel | null;
 }
 
-export const myAccountAction = async (): Promise<MyAccountActionResult> => {
+export const userInfoAction = async (): Promise<MyAccountActionResult> => {
   const headerList = await headers();
   const cookie = headerList.get('cookie');
 

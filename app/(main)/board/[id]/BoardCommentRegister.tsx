@@ -15,11 +15,11 @@ import { IUserAccountModel } from '@/services/user';
 
 interface IProps {
   id: string;
-  myInfo: IUserAccountModel | null;
+  userInfo: IUserAccountModel | null;
 }
 
 export default function BoardCommentRegister(props: IProps) {
-  const { id, myInfo } = props;
+  const { id, userInfo } = props;
   const router = useRouter();
 
   const [comment, setComment] = useState('');
@@ -29,7 +29,7 @@ export default function BoardCommentRegister(props: IProps) {
   const { createBoardCommentMutation } = useBoardCommentMutation();
 
   const onCreateCommentHandler = () => {
-    if (!myInfo) {
+    if (!userInfo) {
       openModal({
         content: '로그인 후 이용 가능한 서비스입니다.\n 지금 로그인하고 시작하세요!',
         onConfirm: () => {
