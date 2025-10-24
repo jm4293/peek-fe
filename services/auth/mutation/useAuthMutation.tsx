@@ -14,6 +14,7 @@ import AuthApi, {
 } from '@/services/auth';
 import { useUserMutation } from '@/services/user';
 
+import { LocalStorageKey } from '@/shared/constant/local-storage-key';
 import { userAccountTypeDescription } from '@/shared/enum/user';
 
 import { notificationTokenAtom } from '@/stores/notification-token.atom';
@@ -54,6 +55,7 @@ export const useAuthMutation = () => {
         await notificationTokenMutation.mutateAsync(notificationToken);
       }
 
+      LocalStorageUtil.setItem(LocalStorageKey.lastLoginMethod, JSON.stringify(userAccountType));
       openToast({ type: 'success', message: `${userAccountTypeDescription[userAccountType]} 로그인에 성공했습니다.` });
       router.replace('/home');
       router.refresh();
@@ -108,7 +110,7 @@ export const useAuthMutation = () => {
       // }
 
       queryClient.clear();
-      LocalStorageUtil.clear();
+      // LocalStorageUtil.clear();
       SessionStorageUtil.clear();
       openToast({ type: 'success', message: '로그아웃에 성공했습니다.' });
       router.push('/home');
