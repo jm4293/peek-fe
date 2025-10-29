@@ -10,8 +10,8 @@ export const InternalErrorView = (props: IProps) => {
 
   return (
     <Wrapper.MAIN text={text}>
-      <Wrapper.SECTION text="서버 오류가 발생했dd습니다.">
-        <Text.HEADING text="잠시 후 다시 시도해주세요." />
+      <Wrapper.SECTION>
+        <Text.CAPTION text="서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요." color="red" />
       </Wrapper.SECTION>
     </Wrapper.MAIN>
   );
