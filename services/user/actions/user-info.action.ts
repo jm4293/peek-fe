@@ -1,40 +1,40 @@
 'use server';
 
-import { getValidTokens } from '@/utils';
-import { headers } from 'next/headers';
+import { ValidToken } from '@/utils';
+import { cookies } from 'next/headers';
 
 import { API_URL } from '@/shared/constant/api-url';
+import { ACCESS_TOKEN_NAME, REFRESH_TOKEN_NAME } from '@/shared/constant/cookie';
+import { ERROR_CODE } from '@/shared/constant/error-code/error-code';
+import { IResponseType } from '@/shared/types';
 
 import { IUserAccountModel } from '../model';
 
-export interface MyAccountActionResult {
-  success: boolean;
-  data: IUserAccountModel | null;
-}
+export const userInfoAction = async (): Promise<IResponseType<IUserAccountModel>> => {
+  const cookieStore = await cookies();
 
-export const userInfoAction = async (): Promise<MyAccountActionResult> => {
-  const headerList = await headers();
-  const cookie = headerList.get('cookie');
+  const tkn = cookieStore.get(ACCESS_TOKEN_NAME);
+  const rtkn = cookieStore.get(REFRESH_TOKEN_NAME);
 
-  try {
-    const { cookieHeader } = await getValidTokens(cookie);
+  const validTkn = await ValidToken({ tkn: tkn?.value, rtkn: rtkn?.value });
 
-    const res = await fetch(`${API_URL}/user`, {
-      credentials: 'include',
-      headers: {
-        cookie: cookieHeader,
-      },
-    });
-
-    if (!res.ok) {
-      throw new Error('Failed to fetch');
-    }
-
-    const json = await res.json();
-    const { myInfo } = json;
-
-    return { success: true, data: myInfo };
-  } catch (error: unknown) {
-    return { success: false, data: null };
+  if (!validTkn) {
+    return { success: false, data: null, code: ERROR_CODE.UNAUTHORIZED };
   }
+
+  const response = await fetch(`${API_URL}/user`, {
+    credentials: 'include',
+    headers: {
+      cookie: `${ACCESS_TOKEN_NAME}=${validTkn}`,
+    },
+  });
+
+  if (!response.ok) {
+    return { success: false, data: null, code: ERROR_CODE.INTERNAL_ERROR };
+  }
+
+  const data = await response.json();
+  const { myInfo } = data;
+
+  return { success: true, data: myInfo };
 };

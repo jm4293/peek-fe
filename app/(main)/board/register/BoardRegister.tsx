@@ -30,6 +30,7 @@ export default function BoardRegister(props: IProps) {
   const clickHandler = () => {
     if (!category) {
       openModal({
+        title: '알림',
         content: '카테고리를 선택해주세요.',
         onConfirm: closeModal,
       });
@@ -38,6 +39,7 @@ export default function BoardRegister(props: IProps) {
 
     if (!title || !title.trim()) {
       openModal({
+        title: '알림',
         content: '제목을 입력해주세요.',
         onConfirm: closeModal,
       });
@@ -47,6 +49,7 @@ export default function BoardRegister(props: IProps) {
 
     if (!content || !content.trim()) {
       openModal({
+        title: '알림',
         content: '내용을 입력해주세요.',
         onConfirm: closeModal,
       });

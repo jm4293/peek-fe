@@ -7,9 +7,11 @@ import { Wrapper } from '@/components/wrapper';
 
 import { useQueryParams } from '@/hooks/queryParams';
 
-import { IStockCategoryListRes } from '@/services/stock';
+import { IStockCategoryModel } from '@/services/stock';
 
-interface IProps extends IStockCategoryListRes {}
+interface IProps {
+  stockCategoryList: IStockCategoryModel[];
+}
 
 export default function BoardCategory(props: IProps) {
   const { stockCategoryList } = props;

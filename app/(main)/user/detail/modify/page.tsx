@@ -2,7 +2,7 @@ import { Wrapper } from '@/components/wrapper';
 
 import { userInfoAction } from '@/services/user';
 
-import NotAuth from '../NotAuth';
+import NotAuth from '../../NotAuth';
 import ModifyUser from './ModifyUser';
 
 export default async function ModifyUserPage() {

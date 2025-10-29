@@ -1,4 +1,5 @@
 import { CookieUtil } from '@/utils';
+import { cookies } from 'next/headers';
 
 import { API_URL } from '@/shared/constant/api-url';
 import { ACCESS_TOKEN_NAME, REFRESH_TOKEN_NAME } from '@/shared/constant/cookie';

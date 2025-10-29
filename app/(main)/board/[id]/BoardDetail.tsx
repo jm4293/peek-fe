@@ -52,12 +52,12 @@ export default function BoardDetail(props: IProps) {
           <PreText text={board.article.content} />
 
           {board.userAccount.id === userInfo?.id && (
-            <div className="flex items-center justify-end gap-2">
+            <div className="flex items-center justify-end gap-4">
               <div className="cursor-pointer" onClick={deleteClickHandler}>
-                <Text.PARAGRAPH text="삭제" color="red" />
+                <Text.PARAGRAPH text="삭제하기" color="red" />
               </div>
               <Link href={`/board/${board.id}/modify`}>
-                <Text.PARAGRAPH text="수정" color="blue" />
+                <Text.PARAGRAPH text="수정하기" color="blue" />
               </Link>
             </div>
           )}

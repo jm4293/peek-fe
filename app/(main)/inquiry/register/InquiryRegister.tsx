@@ -42,7 +42,11 @@ export default function InquiryRegister() {
       .minLength(value.title, 1, '제목은 최소 1글자 이상이어야 합니다')
       .minLength(value.content, 10, '내용은 최소 10글자 이상이어야 합니다')
       .validate((errorMessage) => {
-        openModal({ content: errorMessage, onConfirm: closeModal });
+        openModal({
+          title: '알림',
+          content: errorMessage,
+          onConfirm: closeModal,
+        });
       });
 
     if (!isValid) {

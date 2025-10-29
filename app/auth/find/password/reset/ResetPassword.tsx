@@ -34,17 +34,29 @@ export default function ResetPassword() {
 
   const handleResetPassword = () => {
     if (!value.password || !value.password.trim()) {
-      openModal({ content: '비밀번호를 입력해주세요.', onConfirm: closeModal });
+      openModal({
+        title: '알림',
+        content: '비밀번호를 입력해주세요.',
+        onConfirm: closeModal,
+      });
       return;
     }
 
     if (!value.confirmPassword || !value.confirmPassword.trim()) {
-      openModal({ content: '비밀번호 확인을 입력해주세요.', onConfirm: closeModal });
+      openModal({
+        title: '알림',
+        content: '비밀번호 확인을 입력해주세요.',
+        onConfirm: closeModal,
+      });
       return;
     }
 
     if (value.password !== value.confirmPassword) {
-      openModal({ content: '비밀번호가 일치하지 않습니다.', onConfirm: closeModal });
+      openModal({
+        title: '알림',
+        content: '비밀번호가 일치하지 않습니다.',
+        onConfirm: closeModal,
+      });
       return;
     }
 

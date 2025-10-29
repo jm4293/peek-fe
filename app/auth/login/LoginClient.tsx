@@ -19,14 +19,11 @@ gsap.registerPlugin(useGSAP);
 
 const LastLoginCheck = () => {
   return (
-    <div className="absolute -top-9 left-1/2 transform -translate-x-1/2">
+    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
       <div
         className="relative text-white px-3 py-1.5 rounded-xl shadow-md"
         style={{ backgroundColor: 'var(--main-color)' }}>
-        <div className="flex items-center gap-1.5">
-          <span className="text-sm">🔥</span>
-          <Text.PARAGRAPH text="최근 로그인" />
-        </div>
+        <Text.PARAGRAPH text="최근 로그인" className="text-white" />
 
         <div
           className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[5px] border-r-[5px] border-t-[6px] border-l-transparent border-r-transparent"
@@ -45,20 +42,15 @@ export function LoginClient() {
 
   useGSAP(
     () => {
-      if (!textRef.current || !buttonsRef.current) return;
+      if (!buttonsRef.current) {
+        return;
+      }
 
       const tl = gsap.timeline();
 
-      const textElements = Array.from(textRef.current.children);
       const buttonElements = Array.from(buttonsRef.current.children);
 
-      tl.from(textElements, {
-        opacity: 0,
-        y: -20,
-        duration: 0.5,
-        stagger: 0.15,
-        ease: 'power2.out',
-      }).from(
+      tl.from(
         buttonElements,
         {
           opacity: 0,

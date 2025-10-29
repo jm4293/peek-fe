@@ -47,12 +47,20 @@ export default function VerifyEmail() {
 
   const handleCheckEmail = async () => {
     if (!value.email || !value.email.trim()) {
-      openModal({ content: '이메일을 입력해주세요.', onConfirm: closeModal });
+      openModal({
+        title: '알림',
+        content: '이메일을 입력해주세요.',
+        onConfirm: closeModal,
+      });
       return;
     }
 
     if (!validateEmail(value.email)) {
-      openModal({ content: '유효한 이메일 주소가 아닙니다.', onConfirm: closeModal });
+      openModal({
+        title: '알림',
+        content: '유효한 이메일 주소가 아닙니다.',
+        onConfirm: closeModal,
+      });
       return;
     }
 
@@ -80,7 +88,11 @@ export default function VerifyEmail() {
 
   const handleCheckCode = async () => {
     if (!code || !code.trim()) {
-      openModal({ content: '인증코드를 입력해주세요.', onConfirm: closeModal });
+      openModal({
+        title: '알림',
+        content: '인증코드를 입력해주세요.',
+        onConfirm: closeModal,
+      });
       return;
     }
 

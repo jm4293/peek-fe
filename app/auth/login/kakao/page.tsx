@@ -1,15 +1,16 @@
 import { LineSkeleton } from '@/components/skeleton';
-import { Text } from '@/components/text';
+import { Wrapper } from '@/components/wrapper';
 
 import KakaoOauth from './KakaoOauth';
 
 export default function KakaoOauthPage() {
   return (
-    <div className="text-center flex flex-col gap-4">
-      <Text.HEADING text="카카오 로그인중..." />
-      <LineSkeleton h={2} />
-      <LineSkeleton h={2} />
-      <KakaoOauth />
-    </div>
+    <Wrapper.MAIN text="카카오 로그인">
+      <Wrapper.SECTION>
+        <LineSkeleton />
+        <LineSkeleton />
+        <KakaoOauth />
+      </Wrapper.SECTION>
+    </Wrapper.MAIN>
   );
 }

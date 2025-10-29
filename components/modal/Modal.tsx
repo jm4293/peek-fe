@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import { useModal } from '@/hooks/modal';
 
 import { Button } from '../button';
+import { Text } from '../text';
 
 export const Modal = () => {
   const modalRoot = useRef<Element | null>(null);
@@ -41,15 +42,18 @@ export const Modal = () => {
       className="fixed inset-0 w-screen h-screen bg-black/40 flex items-center justify-center z-[1000]"
       onClick={closeModal}>
       <div
-        className="rounded-2xl shadow-lg p-6 min-w-[320px] flex flex-col bg-theme-bg-main"
+        className="rounded-2xl shadow-lg p-4 min-w-[320px] flex flex-col bg-theme-bg-main"
         onClick={(e) => e.stopPropagation()}>
-        <div className="text-xl font-semibold mb-4">{modal.title}</div>
+        <Text.TITLE text={modal.title} className="mb-4" />
 
-        <div className="text-center text-base font-medium mb-6 whitespace-pre-wrap">{modal.content}</div>
+        <div className="mb-6">
+          {typeof modal.content === 'string' ? <Text.SUBTITLE text={modal.content} /> : <div>{modal.content}</div>}
+        </div>
 
-        {modal.onCancel && <Button.OUTLINE text={modal.cancelText || '취소'} onClick={(e) => handleCancel(e)} />}
-
-        {modal.onConfirm && <Button.CONTAINER text={modal.confirmText || '확인'} onClick={(e) => handleConfirm(e)} />}
+        <div className="flex gap-4">
+          {modal.onCancel && <Button.OUTLINE text={modal.cancelText || '취소'} onClick={(e) => handleCancel(e)} />}
+          {modal.onConfirm && <Button.CONTAINER text={modal.confirmText || '확인'} onClick={(e) => handleConfirm(e)} />}
+        </div>
       </div>
     </div>,
     modalRoot.current,

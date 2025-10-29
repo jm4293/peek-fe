@@ -13,7 +13,7 @@ const MAIN = (props: IProps) => {
 
   return (
     <section className="flex flex-col gap-4">
-      {typeof text === 'string' ? <Text.SUBTITLE text={text} /> : text}
+      {typeof text === 'string' ? <Text.TITLE text={text} /> : text}
       {children}
     </section>
   );
@@ -24,9 +24,8 @@ const SECTION = (props: IProps) => {
 
   return (
     <section key={id} className="flex flex-col justify-center gap-4 p-4 rounded-lg bg-theme-bg-section">
-      {typeof text === 'string' ? <Text.HEADING text={text} /> : text}
-
-      <div className="flex flex-col gap-2">{children}</div>
+      {typeof text === 'string' ? <Text.SUBTITLE text={text} /> : text}
+      {children}
     </section>
   );
 };

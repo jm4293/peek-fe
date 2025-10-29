@@ -2,20 +2,25 @@ import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 
 import { Text } from '@/components/text';
-import { Wrapper } from '@/components/wrapper';
+import { InternalErrorView, Wrapper } from '@/components/wrapper';
 
 import { userInfoAction } from '@/services/user';
 
+import { ERROR_CODE } from '@/shared/constant/error-code/error-code';
 import { userAccountTypeDescription } from '@/shared/enum/user';
 
 import NotAuth from '../NotAuth';
 import UserWithdraw from './Withdraw';
 
 export default async function UserDetailPage() {
-  const { data: userInfo } = await userInfoAction();
+  const { success, data, code } = await userInfoAction();
 
-  if (!userInfo) {
+  if (!success && code === ERROR_CODE.UNAUTHORIZED) {
     return <NotAuth />;
+  }
+
+  if (!data) {
+    return <InternalErrorView text="내 정보" />;
   }
 
   return (
@@ -24,19 +29,19 @@ export default async function UserDetailPage() {
         <Wrapper.SECTION text="상세">
           <div className="flex items-center gap-2">
             <Text.PARAGRAPH text="가입경로:" />
-            <Text.HEADING text={`${userAccountTypeDescription[userInfo.userAccountType]}`} />
+            <Text.HEADING text={`${userAccountTypeDescription[data.userAccountType]}`} />
           </div>
           <div className="flex items-center gap-2">
             <Text.PARAGRAPH text="이메일:" />
-            <Text.HEADING text={`${userInfo.email}`} />
+            <Text.HEADING text={`${data.email}`} />
           </div>
           <div className="flex items-center gap-2">
             <Text.PARAGRAPH text="이름:" />
-            <Text.HEADING text={`${userInfo.user.name}`} />
+            <Text.HEADING text={`${data.user.name}`} />
           </div>
           <div className="flex items-center gap-2">
             <Text.PARAGRAPH text="닉네임:" />
-            <Text.HEADING text={`${userInfo.user.nickname}`} />
+            <Text.HEADING text={`${data.user.nickname}`} />
           </div>
           {/* <div className="flex items-end gap-2">
             <Text.PARAGRAPH text="생년월일:" />
@@ -45,14 +50,14 @@ export default async function UserDetailPage() {
         </Wrapper.SECTION>
 
         <Wrapper.SECTION text="변경">
-          <Link href="/user/modify" className="flex items-center justify-between">
+          <Link href="/user/detail/modify" className="flex items-center justify-between">
             <Text.HEADING text="유저정보 변경" />
             <ChevronRight />
           </Link>
-          <Link href="/user/modify/password" className="flex items-center justify-between">
+          {/* <Link href="/user/detail/modify/password" className="flex items-center justify-between">
             <Text.HEADING text="비밀번호 변경" />
             <ChevronRight />
-          </Link>
+          </Link> */}
         </Wrapper.SECTION>
 
         <UserWithdraw />

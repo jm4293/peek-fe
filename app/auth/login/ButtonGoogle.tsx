@@ -9,7 +9,7 @@ import dark from '@/asset/login/google_login_light.png';
 import light from '@/asset/login/google_login_light.png';
 
 export const ButtonGoogle = () => {
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
 
   return (
     <Link

@@ -1,5 +1,5 @@
-import { NetworkErrorText, Text } from '@/components/text';
-import { Wrapper } from '@/components/wrapper';
+import { Text } from '@/components/text';
+import { InternalErrorView, Wrapper } from '@/components/wrapper';
 
 import { stockCategoryListAction } from '@/services/stock';
 import { userInfoAction } from '@/services/user';
@@ -9,20 +9,14 @@ import BoardList from './BoardList';
 import { BoardRegisterButton } from './BoardRegisterButton';
 
 export default async function BoardPage() {
-  const { data: userInfo } = await userInfoAction();
-  const { data, success } = await stockCategoryListAction();
+  const { success: userInfoSuccess, data: userInfo } = await userInfoAction();
+  const { success: stockCategorySuccess, data: stockCategoryList } = await stockCategoryListAction();
 
-  if (!success) {
-    return (
-      <Wrapper.MAIN text="커뮤니티">
-        <Wrapper.SECTION>
-          <NetworkErrorText />
-        </Wrapper.SECTION>
-      </Wrapper.MAIN>
-    );
+  if (!userInfoSuccess || !stockCategorySuccess) {
+    return <InternalErrorView text="커뮤니티" />;
   }
 
-  if (!data) {
+  if (!stockCategoryList) {
     return (
       <Wrapper.MAIN text="커뮤니티">
         <Wrapper.SECTION>
@@ -34,7 +28,7 @@ export default async function BoardPage() {
 
   return (
     <Wrapper.MAIN text="커뮤니티">
-      <BoardCategory stockCategoryList={data} />
+      <BoardCategory stockCategoryList={stockCategoryList} />
       <BoardList />
       <BoardRegisterButton userInfo={userInfo} />
     </Wrapper.MAIN>

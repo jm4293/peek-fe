@@ -8,7 +8,7 @@ import dark from '@/asset/login/kakao_login.png';
 import light from '@/asset/login/kakao_login.png';
 
 export const ButtonKakao = () => {
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
 
   return (
     <Link

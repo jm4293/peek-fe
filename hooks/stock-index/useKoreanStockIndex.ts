@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 
 import { API_URL } from '@/shared/constant/api-url';
-import { KOSDAQ_CODE, KOSPI_CODE } from '@/shared/constant/stock-code';
+import { KOSDAQ_CODE, KOSPI_CODE } from '@/shared/constant/korean-stock-index-code';
 import { IKoreanStockIndex } from '@/shared/types/stock-index';
 
 interface IProps {

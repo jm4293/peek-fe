@@ -31,6 +31,7 @@ export default function BoardCommentRegister(props: IProps) {
   const onCreateCommentHandler = () => {
     if (!userInfo) {
       openModal({
+        title: '알림',
         content: '로그인 후 이용 가능한 서비스입니다.\n 지금 로그인하고 시작하세요!',
         onConfirm: () => {
           closeModal();
@@ -48,7 +49,11 @@ export default function BoardCommentRegister(props: IProps) {
       .required(comment, '댓글을 입력해주세요.')
       .maxLength(comment, 500, '댓글은 최대 500자까지 입력 가능합니다.')
       .validate((errorMessage) => {
-        openModal({ content: errorMessage, onConfirm: closeModal });
+        openModal({
+          title: '알림',
+          content: errorMessage,
+          onConfirm: closeModal,
+        });
       });
 
     if (!isValid) {

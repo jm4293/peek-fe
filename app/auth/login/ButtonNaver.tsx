@@ -9,7 +9,7 @@ import dark from '@/asset/login/naver_login_light.png';
 import light from '@/asset/login/naver_login_light.png';
 
 export const ButtonNaver = () => {
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
 
   return (
     <Link

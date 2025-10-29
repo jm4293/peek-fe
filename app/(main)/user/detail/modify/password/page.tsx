@@ -5,7 +5,7 @@ import { userInfoAction } from '@/services/user';
 
 import { UserAccountTypeEnum } from '@/shared/enum/user';
 
-import NotAuth from '../../NotAuth';
+import NotAuth from '../../../NotAuth';
 import ModifyPassword from './ModifyPassword';
 
 export default async function ModifyPasswordPage() {

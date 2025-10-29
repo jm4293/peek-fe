@@ -26,6 +26,7 @@ export default function ModifyPassword() {
 
     if (!currentPassword) {
       openModal({
+        title: '알림',
         content: '현재 비밀번호를 입력해주세요.',
         onConfirm: closeModal,
       });
@@ -34,6 +35,7 @@ export default function ModifyPassword() {
 
     if (!newPassword) {
       openModal({
+        title: '알림',
         content: '새 비밀번호를 입력해주세요.',
         onConfirm: closeModal,
       });
@@ -42,6 +44,7 @@ export default function ModifyPassword() {
 
     if (!confirmPassword) {
       openModal({
+        title: '알림',
         content: '비밀번호 확인을 입력해주세요.',
         onConfirm: closeModal,
       });
@@ -50,6 +53,7 @@ export default function ModifyPassword() {
 
     if (newPassword !== confirmPassword) {
       openModal({
+        title: '알림',
         content: '변경할 비밀번호와 확인 비밀번호가 일치하지 않습니다.',
         onConfirm: closeModal,
       });

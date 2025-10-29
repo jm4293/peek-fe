@@ -58,9 +58,9 @@ export const useAuthMutation = () => {
       LocalStorageUtil.setItem(LocalStorageKey.lastLoginMethod, JSON.stringify(userAccountType));
       openToast({ type: 'success', message: `${userAccountTypeDescription[userAccountType]} 로그인에 성공했습니다.` });
       router.replace('/home');
-      router.refresh();
+      // router.refresh();
     },
-    onError: (err) => {
+    onError: () => {
       router.replace('/auth/login');
     },
   });
@@ -114,7 +114,7 @@ export const useAuthMutation = () => {
       SessionStorageUtil.clear();
       openToast({ type: 'success', message: '로그아웃에 성공했습니다.' });
       router.push('/home');
-      router.refresh();
+      // router.refresh();
     },
     onError: () => {
       openToast({ type: 'error', message: '로그아웃에 실패했습니다. 다시 시도해주세요.' });

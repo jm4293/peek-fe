@@ -108,7 +108,11 @@ export default function Register() {
       .required(value.email, '이메일을 입력해주세요.')
       .email(value.email, '유효한 이메일 주소가 아닙니다.')
       .validate((errorMessage) => {
-        openModal({ content: errorMessage, onConfirm: closeModal });
+        openModal({
+          title: '알림',
+          content: errorMessage,
+          onConfirm: closeModal,
+        });
       });
 
     if (!isValid) {
@@ -139,7 +143,11 @@ export default function Register() {
       .minLength(code, 4, '인증코드는 4글자입니다.')
       .maxLength(code, 4, '인증코드는 4글자입니다.')
       .validate((errorMessage) => {
-        openModal({ content: errorMessage, onConfirm: closeModal });
+        openModal({
+          title: '알림',
+          content: errorMessage,
+          onConfirm: closeModal,
+        });
       });
 
     if (!isValid) {
@@ -176,7 +184,11 @@ export default function Register() {
       .required(value.name, '이름을 입력해주세요.')
       .custom(() => value.policy, '정책에 동의해주세요.')
       .validate((errorMessage) => {
-        openModal({ content: errorMessage, onConfirm: closeModal });
+        openModal({
+          title: '알림',
+          content: errorMessage,
+          onConfirm: closeModal,
+        });
       });
 
     if (!isValid) {

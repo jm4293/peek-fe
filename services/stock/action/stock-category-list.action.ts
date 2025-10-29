@@ -1,23 +1,23 @@
 'use server';
 
 import { API_URL } from '@/shared/constant/api-url';
+import { IResponseType } from '@/shared/types';
 
-export const stockCategoryListAction = async () => {
-  try {
-    const res = await fetch(`${API_URL}/stock/category`);
+import { IStockCategoryModel } from '../model';
 
-    if (!res.ok) {
-      throw new Error('Failed to fetch');
-    }
+export const stockCategoryListAction = async (): Promise<IResponseType<IStockCategoryModel[] | null>> => {
+  const response = await fetch(`${API_URL}/stock/category`, {
+    next: {
+      revalidate: 3600, // 1 hour
+      tags: ['stock-category-list'],
+    },
+  });
 
-    const { stockCategoryList } = await res.json();
-
-    if (!stockCategoryList) {
-      throw new Error('No stock category list');
-    }
-
-    return { success: true, data: stockCategoryList };
-  } catch (error: unknown) {
+  if (!response.ok) {
     return { success: false, data: null };
   }
+
+  const { stockCategoryList } = await response.json();
+
+  return { success: true, data: stockCategoryList };
 };

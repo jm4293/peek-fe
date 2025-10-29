@@ -2,7 +2,7 @@ import { atom } from 'jotai';
 
 export interface IModalState {
   visible: boolean;
-  title?: string;
+  title: string;
   content?: string | React.ReactNode;
   onConfirm?: () => void;
   confirmText?: string;

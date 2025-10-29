@@ -69,7 +69,11 @@ export const useUserMutation = () => {
     onError: (err: any) => {
       const { message } = err.response.data;
 
-      openModal({ content: message, onConfirm: closeModal });
+      openModal({
+        title: '알림',
+        content: message,
+        onConfirm: closeModal,
+      });
     },
   });
 

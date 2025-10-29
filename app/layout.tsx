@@ -10,6 +10,7 @@ import { NetworkError } from '@/lib/network-error';
 import QueryProvider from '@/lib/react-query/react-query.config';
 
 import { Footer } from './Footer';
+import GlobalLoading from './GlobalLoading';
 import { Header } from './Header';
 import './globals.css';
 
@@ -55,6 +56,8 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
                     <div className="m-auto max-w-screen-xl">{children}</div>
                   </main>
                   <Footer />
+
+                  <GlobalLoading />
                 </div>
               </MessagingConfig>
             </QueryProvider>

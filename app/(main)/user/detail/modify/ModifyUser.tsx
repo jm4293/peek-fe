@@ -30,6 +30,7 @@ export default function ModifyUser(props: IProps) {
 
     if (!nickname) {
       openModal({
+        title: '알림',
         content: '닉네임을 입력해주세요.',
         onConfirm: closeModal,
       });

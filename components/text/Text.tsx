@@ -15,7 +15,7 @@ const textColor = {
 const TITLE = (props: IProps) => {
   const { className, text, color = 'default', ...rest } = props;
   return (
-    <h1 className={`${textColor[color]} text-lg font-semibold ${className}`} {...rest}>
+    <h1 className={`text-xl font-semibold whitespace-nowrap ${textColor[color]} ${className}`} {...rest}>
       {text}
     </h1>
   );
@@ -24,7 +24,7 @@ const TITLE = (props: IProps) => {
 const SUBTITLE = (props: IProps) => {
   const { className, text, color = 'default', ...rest } = props;
   return (
-    <h2 className={`${textColor[color]} text-lg font-medium ${className}`} {...rest}>
+    <h2 className={`text-lg font-medium whitespace-nowrap ${textColor[color]} ${className}`} {...rest}>
       {text}
     </h2>
   );
@@ -33,7 +33,7 @@ const SUBTITLE = (props: IProps) => {
 const HEADING = (props: IProps) => {
   const { className, text, color = 'default', ...rest } = props;
   return (
-    <h3 className={`${textColor[color]} text-base font-medium ${className}`} {...rest}>
+    <h3 className={`text-base font-medium whitespace-nowrap ${textColor[color]} ${className}`} {...rest}>
       {text}
     </h3>
   );
@@ -42,7 +42,7 @@ const HEADING = (props: IProps) => {
 const PARAGRAPH = (props: IProps) => {
   const { className, text, color = 'default', ...rest } = props;
   return (
-    <p className={`${textColor[color]} text-base font-normal ${className}`} {...rest}>
+    <p className={`text-sm whitespace-nowrap ${textColor[color]} ${className}`} {...rest}>
       {text}
     </p>
   );
@@ -51,7 +51,7 @@ const PARAGRAPH = (props: IProps) => {
 const CAPTION = (props: IProps) => {
   const { className, text, color = 'default', ...rest } = props;
   return (
-    <p className={`${textColor[color]} text-sm font-normal italic ${className}`} {...rest}>
+    <p className={`text-xs italic whitespace-nowrap ${textColor[color]} ${className}`} {...rest}>
       {text}
     </p>
   );
