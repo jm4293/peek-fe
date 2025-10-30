@@ -46,8 +46,8 @@ export const Header = () => {
   }
 
   return (
-    <header className="bg-theme-bg-header flex justify-center items-center">
-      <div className="w-3/4 flex justify-between">
+    <header className="flex justify-center items-center bg-theme-bg-header">
+      <div className="w-full max-w-screen-xl flex justify-between">
         <div className="flex items-center gap-8">
           <Logo />
 
