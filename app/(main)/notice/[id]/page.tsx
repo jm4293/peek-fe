@@ -1,7 +1,7 @@
 import { DayjsUtil } from '@/utils';
 
 import { PreText, Text } from '@/components/text';
-import { Wrapper } from '@/components/wrapper';
+import { EmptyDataView, InternalErrorView, Wrapper } from '@/components/wrapper';
 
 import { noticeDetailAction } from '@/services/notice';
 
@@ -14,21 +14,21 @@ interface IProps {
 export default async function UserNoticeDetailPage(props: IProps) {
   const { id } = await props.params;
 
-  const { data, success } = await noticeDetailAction(id);
+  const { success, data } = await noticeDetailAction(id);
 
   if (!success) {
     return (
-      <Wrapper.SECTION>
-        <Text.HEADING text="공지사항 불러오는데 실패했습니다." />
-      </Wrapper.SECTION>
+      <Wrapper.MAIN text="공지사항">
+        <InternalErrorView />
+      </Wrapper.MAIN>
     );
   }
 
   if (!data) {
     return (
-      <Wrapper.SECTION>
-        <Text.HEADING text="존재하지 않는 공지사항입니다." />
-      </Wrapper.SECTION>
+      <Wrapper.MAIN text="공지사항">
+        <EmptyDataView text="공지사항" />
+      </Wrapper.MAIN>
     );
   }
 

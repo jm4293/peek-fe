@@ -47,7 +47,7 @@ export const Modal = () => {
         <Text.TITLE text={modal.title} className="mb-4" />
 
         <div className="mb-6">
-          {typeof modal.content === 'string' ? <Text.SUBTITLE text={modal.content} /> : <div>{modal.content}</div>}
+          {typeof modal.content === 'string' ? <Text.SUBTITLE text={modal.content} /> : modal.content}
         </div>
 
         <div className="flex gap-4">

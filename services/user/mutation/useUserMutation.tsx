@@ -30,7 +30,7 @@ export const useUserMutation = () => {
       await queryClient.refetchQueries({ queryKey: QueryKeys.user.myInfo() });
       openToast({ message: '회원정보 수정 완료', type: 'success' });
       router.push('/user');
-      router.refresh();
+      // router.refresh();
     },
   });
 

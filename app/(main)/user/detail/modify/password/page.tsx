@@ -1,21 +1,29 @@
 import { Text } from '@/components/text';
-import { Wrapper } from '@/components/wrapper';
+import { InternalErrorView, NotAuthView, Wrapper } from '@/components/wrapper';
 
 import { userInfoAction } from '@/services/user';
 
+import { ERROR_CODE } from '@/shared/constant/error-code/error-code';
 import { UserAccountTypeEnum } from '@/shared/enum/user';
 
-import NotAuth from '../../../NotAuth';
 import ModifyPassword from './ModifyPassword';
 
 export default async function ModifyPasswordPage() {
-  const { data: userInfo } = await userInfoAction();
+  const { success, data, code } = await userInfoAction();
 
-  if (!userInfo) {
-    return <NotAuth />;
+  if (!success && code === ERROR_CODE.UNAUTHORIZED) {
+    return <NotAuthView text="비밀번호 변경" />;
   }
 
-  if (userInfo.userAccountType !== UserAccountTypeEnum.EMAIL) {
+  if (!data) {
+    return (
+      <Wrapper.MAIN text="비밀번호 변경">
+        <InternalErrorView />
+      </Wrapper.MAIN>
+    );
+  }
+
+  if (data.userAccountType !== UserAccountTypeEnum.EMAIL) {
     return (
       <Wrapper.MAIN text="비밀번호 변경">
         <Wrapper.SECTION>

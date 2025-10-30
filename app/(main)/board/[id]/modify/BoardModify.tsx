@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 import { Button } from '@/components/button';
@@ -20,7 +19,6 @@ interface IProps {
 
 export default function BoardModify(props: IProps) {
   const { board, id } = props;
-  const router = useRouter();
 
   const [title, setTitle] = useState(board.title || '');
   const [content, setContent] = useState(board.article.content || '');

@@ -1,17 +1,16 @@
 'use server';
 
 import { API_URL } from '@/shared/constant/api-url';
+import { IResponseType } from '@/shared/types';
 
 import { INoticeModel } from '../model';
 
-export const noticeDetailAction = async (
-  noticeId: string,
-): Promise<{ success: boolean; data: INoticeModel | null }> => {
+export const noticeDetailAction = async (noticeId: string): Promise<IResponseType<INoticeModel | null>> => {
   try {
     const res = await fetch(`${API_URL}/notice/${noticeId}`);
 
     if (!res.ok) {
-      throw new Error('Failed to fetch');
+      return { success: false, data: null };
     }
 
     const json = await res.json();

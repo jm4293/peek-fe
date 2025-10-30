@@ -4,6 +4,8 @@ import { useDeviceLayout } from '@/hooks';
 import { PencilLine } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
+import { Text } from '@/components/text';
+
 import { useModal } from '@/hooks/modal';
 
 import { IUserAccountModel } from '@/services/user';
@@ -23,6 +25,12 @@ export const BoardRegisterButton = (props: IProps) => {
     if (!userInfo) {
       openModal({
         title: '알림',
+        content: (
+          <div className="text-center">
+            <Text.SUBTITLE text="로그인 후 이용가능한 서비스입니다." />
+            <Text.SUBTITLE text="지금 로그인하고 시작하세요!" />
+          </div>
+        ),
         onConfirm: () => {
           closeModal();
           router.push('/auth/login');

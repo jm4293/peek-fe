@@ -1,5 +1,4 @@
-import { Text } from '@/components/text';
-import { Wrapper } from '@/components/wrapper';
+import { EmptyDataView, InternalErrorView, Wrapper } from '@/components/wrapper';
 
 import { boardDetailAction } from '@/services/board';
 import { userInfoAction } from '@/services/user';
@@ -16,21 +15,21 @@ export default async function BoardDetailPage(props: IProps) {
   const { id } = await props.params;
 
   const { data: userInfo } = await userInfoAction();
-  const { data, success } = await boardDetailAction(id);
+  const { success, data } = await boardDetailAction(id);
 
   if (!success) {
     return (
-      <Wrapper.SECTION>
-        <Text.HEADING text="게시글 불러오는데 실패했습니다." />
-      </Wrapper.SECTION>
+      <Wrapper.MAIN text="게시글">
+        <InternalErrorView />
+      </Wrapper.MAIN>
     );
   }
 
   if (!data) {
     return (
-      <Wrapper.SECTION>
-        <Text.HEADING text="존재하지 않는 게시글입니다." />
-      </Wrapper.SECTION>
+      <Wrapper.MAIN text="게시글">
+        <EmptyDataView text="게시글" />
+      </Wrapper.MAIN>
     );
   }
 

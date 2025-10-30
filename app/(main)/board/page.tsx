@@ -9,11 +9,15 @@ import BoardList from './BoardList';
 import { BoardRegisterButton } from './BoardRegisterButton';
 
 export default async function BoardPage() {
-  const { success: userInfoSuccess, data: userInfo } = await userInfoAction();
+  const { data: userInfo } = await userInfoAction();
   const { success: stockCategorySuccess, data: stockCategoryList } = await stockCategoryListAction();
 
-  if (!userInfoSuccess || !stockCategorySuccess) {
-    return <InternalErrorView text="커뮤니티" />;
+  if (!stockCategorySuccess) {
+    return (
+      <Wrapper.MAIN text="커뮤니티">
+        <InternalErrorView />
+      </Wrapper.MAIN>
+    );
   }
 
   if (!stockCategoryList) {

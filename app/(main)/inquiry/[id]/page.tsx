@@ -1,5 +1,4 @@
-import { Text } from '@/components/text';
-import { Wrapper } from '@/components/wrapper';
+import { EmptyDataView, InternalErrorView, Wrapper } from '@/components/wrapper';
 
 import { inquiryDetailAction } from '@/services/inquiry/actions';
 
@@ -16,17 +15,17 @@ export default async function UserInquiryDetailPage(props: IProps) {
 
   if (!success) {
     return (
-      <Wrapper.SECTION>
-        <Text.HEADING text="문의 불러오는데 실패했습니다." />
-      </Wrapper.SECTION>
+      <Wrapper.MAIN text="문의">
+        <InternalErrorView />
+      </Wrapper.MAIN>
     );
   }
 
   if (!data) {
     return (
-      <Wrapper.SECTION>
-        <Text.HEADING text="존재하지 않는 문의입니다." />
-      </Wrapper.SECTION>
+      <Wrapper.MAIN text="문의">
+        <EmptyDataView text="문의 내역" />
+      </Wrapper.MAIN>
     );
   }
 

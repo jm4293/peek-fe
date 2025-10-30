@@ -43,23 +43,21 @@ export default function ModifyUser(props: IProps) {
   };
 
   return (
-    <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
-      <Wrapper.SECTION>
-        <div className="flex flex-col gap-12">
-          <div className="flex flex-col gap-4">
-            <Input title="이메일" name="email" placeholder="이메일" defaultValue={userInfo.email} disabled />
-            <Input title="이름" name="name" placeholder="이름" defaultValue={userInfo.user.name} disabled />
-            <Input title="닉네임" name="nickname" placeholder="닉네임" defaultValue={userInfo.user.nickname} required />
-          </div>
-
-          <div className="w-full grid grid-cols-2 gap-2">
-            <Link href="/user/detail">
-              <Button.OUTLINE text="뒤로가기" />
-            </Link>
-            <Button.CONTAINER type="submit" text="변경하기" />
-          </div>
+    <Wrapper.SECTION>
+      <form className="flex flex-col gap-16" onSubmit={handleSubmit}>
+        <div className="flex flex-col gap-8">
+          <Input title="이메일" name="email" placeholder="이메일" defaultValue={userInfo.email} disabled />
+          <Input title="이름" name="name" placeholder="이름" defaultValue={userInfo.user.name} disabled />
+          <Input title="닉네임" name="nickname" placeholder="닉네임" defaultValue={userInfo.user.nickname} required />
         </div>
-      </Wrapper.SECTION>
-    </form>
+
+        <div className="grid grid-cols-2 gap-2">
+          <Link href="/user/detail">
+            <Button.OUTLINE text="뒤로가기" />
+          </Link>
+          <Button.CONTAINER type="submit" text="변경하기" />
+        </div>
+      </form>
+    </Wrapper.SECTION>
   );
 }

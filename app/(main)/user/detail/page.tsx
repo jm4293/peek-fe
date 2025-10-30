@@ -2,25 +2,28 @@ import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 
 import { Text } from '@/components/text';
-import { InternalErrorView, Wrapper } from '@/components/wrapper';
+import { InternalErrorView, NotAuthView, Wrapper } from '@/components/wrapper';
 
 import { userInfoAction } from '@/services/user';
 
 import { ERROR_CODE } from '@/shared/constant/error-code/error-code';
 import { userAccountTypeDescription } from '@/shared/enum/user';
 
-import NotAuth from '../NotAuth';
 import UserWithdraw from './Withdraw';
 
 export default async function UserDetailPage() {
   const { success, data, code } = await userInfoAction();
 
   if (!success && code === ERROR_CODE.UNAUTHORIZED) {
-    return <NotAuth />;
+    return <NotAuthView text="유저 상세" />;
   }
 
   if (!data) {
-    return <InternalErrorView text="내 정보" />;
+    return (
+      <Wrapper.MAIN text="유저 상세">
+        <InternalErrorView />
+      </Wrapper.MAIN>
+    );
   }
 
   return (

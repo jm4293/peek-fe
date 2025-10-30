@@ -16,25 +16,29 @@ export const userInfoAction = async (): Promise<IResponseType<IUserAccountModel>
   const tkn = cookieStore.get(ACCESS_TOKEN_NAME);
   const rtkn = cookieStore.get(REFRESH_TOKEN_NAME);
 
-  const validTkn = await ValidToken({ tkn: tkn?.value, rtkn: rtkn?.value });
+  try {
+    const validTkn = await ValidToken({ tkn: tkn?.value, rtkn: rtkn?.value });
 
-  if (!validTkn) {
-    return { success: false, data: null, code: ERROR_CODE.UNAUTHORIZED };
-  }
+    if (!validTkn) {
+      return { success: false, data: null, code: ERROR_CODE.UNAUTHORIZED };
+    }
 
-  const response = await fetch(`${API_URL}/user`, {
-    credentials: 'include',
-    headers: {
-      cookie: `${ACCESS_TOKEN_NAME}=${validTkn}`,
-    },
-  });
+    const response = await fetch(`${API_URL}/user`, {
+      credentials: 'include',
+      headers: {
+        cookie: `${ACCESS_TOKEN_NAME}=${validTkn}`,
+      },
+    });
 
-  if (!response.ok) {
+    if (!response.ok) {
+      return { success: false, data: null, code: ERROR_CODE.INTERNAL_ERROR };
+    }
+
+    const data = await response.json();
+    const { myInfo } = data;
+
+    return { success: true, data: myInfo };
+  } catch (error) {
     return { success: false, data: null, code: ERROR_CODE.INTERNAL_ERROR };
   }
-
-  const data = await response.json();
-  const { myInfo } = data;
-
-  return { success: true, data: myInfo };
 };

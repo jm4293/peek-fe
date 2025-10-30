@@ -3,24 +3,27 @@ import Link from 'next/link';
 
 import { Thumbnail } from '@/components/image';
 import { Text } from '@/components/text';
-import { InternalErrorView, Wrapper } from '@/components/wrapper';
+import { InternalErrorView, NotAuthView, Wrapper } from '@/components/wrapper';
 
 import { userInfoAction } from '@/services/user';
 
 import { ERROR_CODE } from '@/shared/constant/error-code/error-code';
 
 import UserLogout from './Logout';
-import NotAuth from './NotAuth';
 
 export default async function UserPage() {
   const { success, data, code } = await userInfoAction();
 
   if (!success && code === ERROR_CODE.UNAUTHORIZED) {
-    return <NotAuth />;
+    return <NotAuthView text="내 정보" />;
   }
 
   if (!data) {
-    return <InternalErrorView text="내 정보" />;
+    return (
+      <Wrapper.MAIN text="내 정보">
+        <InternalErrorView />
+      </Wrapper.MAIN>
+    );
   }
 
   return (

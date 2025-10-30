@@ -67,23 +67,21 @@ export default function ModifyPassword() {
   };
 
   return (
-    <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
-      <Wrapper.SECTION>
-        <div className="flex flex-col gap-12">
-          <div className="flex flex-col gap-4">
-            <Input title="현재 비밀번호" name="currentPassword" placeholder="현재 비밀번호" />
-            <Input title="새 비밀번호" name="newPassword" placeholder="새 비밀번호" />
-            <Input title="비밀번호 확인" name="confirmPassword" placeholder="비밀번호 확인" />
-          </div>
-
-          <div className="w-full grid grid-cols-2 gap-2">
-            <Link href="/user/detail">
-              <Button.OUTLINE text="뒤로가기" />
-            </Link>
-            <Button.CONTAINER type="submit" text="변경하기" />
-          </div>
+    <Wrapper.SECTION>
+      <form className="flex flex-col gap-16" onSubmit={handleSubmit}>
+        <div className="flex flex-col gap-8">
+          <Input title="현재 비밀번호" name="currentPassword" placeholder="현재 비밀번호" />
+          <Input title="새 비밀번호" name="newPassword" placeholder="새 비밀번호" />
+          <Input title="비밀번호 확인" name="confirmPassword" placeholder="비밀번호 확인" />
         </div>
-      </Wrapper.SECTION>
-    </form>
+
+        <div className="w-full grid grid-cols-2 gap-2">
+          <Link href="/user/detail">
+            <Button.OUTLINE text="뒤로가기" />
+          </Link>
+          <Button.CONTAINER type="submit" text="변경하기" />
+        </div>
+      </form>
+    </Wrapper.SECTION>
   );
 }

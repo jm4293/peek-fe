@@ -1,5 +1,4 @@
-import { Text } from '@/components/text';
-import { Wrapper } from '@/components/wrapper';
+import { EmptyDataView, InternalErrorView, Wrapper } from '@/components/wrapper';
 
 import { boardDetailAction } from '@/services/board';
 
@@ -12,13 +11,21 @@ interface IProps {
 export default async function BoardModifyPage(props: IProps) {
   const { id } = await props.params;
 
-  const { data } = await boardDetailAction(id);
+  const { success, data } = await boardDetailAction(id);
+
+  if (!success) {
+    return (
+      <Wrapper.MAIN text="게시글 수정">
+        <InternalErrorView />
+      </Wrapper.MAIN>
+    );
+  }
 
   if (!data) {
     return (
-      <Wrapper.SECTION>
-        <Text.HEADING text="게시글 불러오는데 실패했습니다." />
-      </Wrapper.SECTION>
+      <Wrapper.MAIN text="게시글 수정">
+        <EmptyDataView text="게시글" />
+      </Wrapper.MAIN>
     );
   }
 

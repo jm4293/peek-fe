@@ -4,12 +4,11 @@ import { getValidTokens } from '@/utils';
 import { headers } from 'next/headers';
 
 import { API_URL } from '@/shared/constant/api-url';
+import { IResponseType } from '@/shared/types';
 
 import { IInquiryModel } from '../model';
 
-export const inquiryDetailAction = async (
-  inquiryId: string,
-): Promise<{ success: boolean; data: IInquiryModel | null }> => {
+export const inquiryDetailAction = async (inquiryId: string): Promise<IResponseType<IInquiryModel | null>> => {
   const headerList = await headers();
   const cookie = headerList.get('cookie');
 
@@ -24,7 +23,7 @@ export const inquiryDetailAction = async (
     });
 
     if (!res.ok) {
-      throw new Error('Failed to fetch');
+      return { success: false, data: null };
     }
 
     const json = await res.json();

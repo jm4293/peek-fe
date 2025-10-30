@@ -4,9 +4,9 @@ import { LocalStorageUtil, StockSignMarkUtil } from '@/utils';
 import { useRouter } from 'next/navigation';
 
 import { InfinityList } from '@/components/infinity-list';
-import { LineSkeleton } from '@/components/skeleton';
 import { StockPriceText } from '@/components/stock/stock-price';
-import { NetworkErrorText, Text } from '@/components/text';
+import { Text } from '@/components/text';
+import { InternalErrorView, LoadingView } from '@/components/wrapper';
 
 import { IStockCompanyModel, IStockKoreanRankModel, useStockKoreanRankList } from '@/services/stock';
 
@@ -33,11 +33,11 @@ export default function PopularStock() {
   };
 
   if (isLoading) {
-    return <LineSkeleton />;
+    return <LoadingView />;
   }
 
   if (!isSuccess) {
-    return <NetworkErrorText />;
+    return <InternalErrorView />;
   }
 
   const renderItem = (item: IStockKoreanRankModel, index: number) => {

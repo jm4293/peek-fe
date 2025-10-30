@@ -80,7 +80,7 @@ export function LoginClient() {
   }, []);
 
   return (
-    <div className="flex flex-col gap-10" ref={containerRef}>
+    <div className="flex flex-col items-center gap-10" ref={containerRef}>
       <div className="flex flex-col items-center gap-2" ref={textRef}>
         <Text.HEADING text="안녕하세요!" />
         <Text.HEADING text="소셜 계정으로 간편하게 로그인하세요." />
@@ -88,21 +88,21 @@ export function LoginClient() {
 
       <div className="flex flex-col gap-2" ref={buttonsRef}>
         <Wrapper.SECTION>
-          <div className="relative w-[180px] m-auto">
+          <div className="w-[180px] m-auto mx-14">
             {lastLoginMethod === UserAccountTypeEnum.GOOGLE && <LastLoginCheck />}
             <ButtonGoogle />
           </div>
         </Wrapper.SECTION>
 
         <Wrapper.SECTION>
-          <div className="w-[180px] m-auto">
+          <div className="w-[180px] m-auto mx-14">
             {lastLoginMethod === UserAccountTypeEnum.NAVER && <LastLoginCheck />}
             <ButtonNaver />
           </div>
         </Wrapper.SECTION>
 
         <Wrapper.SECTION>
-          <div className="w-[180px] m-auto">
+          <div className="w-[180px] m-auto mx-14">
             {lastLoginMethod === UserAccountTypeEnum.KAKAO && <LastLoginCheck />}
             <ButtonKakao />
           </div>

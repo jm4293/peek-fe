@@ -13,29 +13,33 @@ export const ValidToken = async (props: IProps) => {
     return null;
   }
 
-  if (!tkn) {
-    const response = await fetch(`${API_URL}/auth/refresh`, {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        cookie: `${REFRESH_TOKEN_NAME}=${rtkn}`,
-      },
-    });
+  try {
+    if (!tkn) {
+      const response = await fetch(`${API_URL}/auth/refresh`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          cookie: `${REFRESH_TOKEN_NAME}=${rtkn}`,
+        },
+      });
 
-    if (!response.ok) {
-      return null;
+      if (!response.ok) {
+        return null;
+      }
+
+      const data = await response.json();
+
+      if (!data) {
+        return null;
+      }
+
+      const { tkn } = data;
+
+      return tkn;
     }
-
-    const data = await response.json();
-
-    if (!data) {
-      return null;
-    }
-
-    const { tkn } = data;
 
     return tkn;
+  } catch (error) {
+    return null;
   }
-
-  return tkn;
 };

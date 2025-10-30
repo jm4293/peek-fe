@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import { InfinityList } from '@/components/infinity-list';
 import { Text } from '@/components/text';
-import { Wrapper } from '@/components/wrapper';
+import { InternalErrorView, LoadingView, Wrapper } from '@/components/wrapper';
 
 import { INoticeModel, useNoticeList } from '@/services/notice';
 
@@ -34,19 +34,11 @@ export default function NoticeList() {
   };
 
   if (isPending) {
-    return (
-      <Wrapper.SECTION>
-        <Text.HEADING text="로딩중..." />
-      </Wrapper.SECTION>
-    );
+    return <LoadingView />;
   }
 
   if (!isSuccess) {
-    return (
-      <Wrapper.SECTION>
-        <Text.HEADING text="오류가 발생했습니다." />
-      </Wrapper.SECTION>
-    );
+    return <InternalErrorView />;
   }
 
   if (data.noticeList.length === 0) {

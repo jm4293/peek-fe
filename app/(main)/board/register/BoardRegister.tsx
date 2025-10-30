@@ -12,9 +12,11 @@ import { Wrapper } from '@/components/wrapper';
 import { useModal } from '@/hooks/modal';
 
 import { useBoardMutation } from '@/services/board';
-import { IStockCategoryListRes } from '@/services/stock';
+import { IStockCategoryModel } from '@/services/stock';
 
-interface IProps extends IStockCategoryListRes {}
+interface IProps {
+  stockCategoryList: IStockCategoryModel[];
+}
 
 export default function BoardRegister(props: IProps) {
   const { stockCategoryList } = props;

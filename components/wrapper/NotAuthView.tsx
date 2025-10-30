@@ -4,9 +4,15 @@ import Link from 'next/link';
 import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
-export default function NotAuth() {
+interface IProps {
+  text: string;
+}
+
+export function NotAuthView(props: IProps) {
+  const { text } = props;
+
   return (
-    <Wrapper.MAIN text="내 정보">
+    <Wrapper.MAIN text={text}>
       <Wrapper.SECTION text="로그인이 필요합니다.">
         <Link href="/auth/login" className="flex items-center justify-between">
           <Text.HEADING text="로그인 하러 가기" />

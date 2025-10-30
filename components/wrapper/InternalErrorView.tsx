@@ -1,18 +1,10 @@
 import { Text } from '../text';
 import { Wrapper } from './Wrapper';
 
-interface IProps {
-  text: string;
-}
-
-export const InternalErrorView = (props: IProps) => {
-  const { text } = props;
-
+export const InternalErrorView = () => {
   return (
-    <Wrapper.MAIN text={text}>
-      <Wrapper.SECTION>
-        <Text.CAPTION text="서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요." color="red" />
-      </Wrapper.SECTION>
-    </Wrapper.MAIN>
+    <Wrapper.SECTION>
+      <Text.CAPTION text="서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요." color="red" />
+    </Wrapper.SECTION>
   );
 };

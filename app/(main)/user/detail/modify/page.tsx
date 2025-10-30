@@ -1,20 +1,29 @@
-import { Wrapper } from '@/components/wrapper';
+import { InternalErrorView, NotAuthView, Wrapper } from '@/components/wrapper';
 
 import { userInfoAction } from '@/services/user';
 
-import NotAuth from '../../NotAuth';
+import { ERROR_CODE } from '@/shared/constant/error-code/error-code';
+
 import ModifyUser from './ModifyUser';
 
 export default async function ModifyUserPage() {
-  const { data: userInfo } = await userInfoAction();
+  const { success, data, code } = await userInfoAction();
 
-  if (!userInfo) {
-    return <NotAuth />;
+  if (!success && code === ERROR_CODE.UNAUTHORIZED) {
+    return <NotAuthView text="유저 상세" />;
+  }
+
+  if (!data) {
+    return (
+      <Wrapper.MAIN text="유저 상세">
+        <InternalErrorView />
+      </Wrapper.MAIN>
+    );
   }
 
   return (
     <Wrapper.MAIN text="유저정보 변경">
-      <ModifyUser userInfo={userInfo} />
+      <ModifyUser userInfo={data} />
     </Wrapper.MAIN>
   );
 }
