@@ -50,7 +50,7 @@ export const Modal = () => {
           {typeof modal.content === 'string' ? <Text.SUBTITLE text={modal.content} /> : modal.content}
         </div>
 
-        <div className="flex gap-4">
+        <div className="flex gap-2">
           {modal.onCancel && <Button.OUTLINE text={modal.cancelText || '취소'} onClick={(e) => handleCancel(e)} />}
           {modal.onConfirm && <Button.CONTAINER text={modal.confirmText || '확인'} onClick={(e) => handleConfirm(e)} />}
         </div>

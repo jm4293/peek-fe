@@ -8,7 +8,6 @@ import { LineSkeleton } from '@/components/skeleton';
 import { NetworkErrorText, Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
-import { ICurrencyModel } from '@/services/currency/model';
 import { useCurrencyList } from '@/services/currency/query';
 
 export const Currency = () => {
@@ -71,7 +70,7 @@ export const Currency = () => {
 
         {data.map((item) => (
           <div key={item.curUnit}>
-            <Text.HEADING text={item.curUnitDesc} />
+            <Text.HEADING text={item.curNm} />
 
             <Marquee speed={20} pauseOnHover={true} gradient={false}>
               <div className="flex items-center gap-4">
@@ -104,7 +103,7 @@ export const Currency = () => {
       <div className="flex flex-col gap-4">
         {data.map((item) => (
           <div key={item.curUnit} className="w-full flex justify-evenly items-center">
-            <Text.HEADING className="min-w-20" text={item.curUnitDesc} />
+            <Text.HEADING className="min-w-20" text={item.curNm} />
 
             <div className="min-w-20 flex flex-col">
               <Text.PARAGRAPH text="매매 기준" className="text-end" />

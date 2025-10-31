@@ -40,26 +40,26 @@ export default async function UserPage() {
 
       <Wrapper.SECTION text="히스토리">
         <Link href="/user/stock/favorite" className="flex items-center justify-between">
-          <Text.PARAGRAPH text="즐겨찾기 종목" />
+          <Text.HEADING text="즐겨찾기 종목" />
           <ChevronRight />
         </Link>
         <Link href="/user/board" className="flex items-center justify-between">
-          <Text.PARAGRAPH text="작성한 커뮤니티 게시글" />
+          <Text.HEADING text="작성한 커뮤니티 게시글" />
           <ChevronRight />
         </Link>
         <Link href="/user/board/comment" className="flex items-center justify-between">
-          <Text.PARAGRAPH text="작성한 커뮤니티 게시글 댓글" />
+          <Text.HEADING text="작성한 커뮤니티 게시글 댓글" />
           <ChevronRight />
         </Link>
       </Wrapper.SECTION>
 
       <Wrapper.SECTION text="고객센터">
         <Link href="/notice" className="flex items-center justify-between">
-          <Text.PARAGRAPH text="공지사항" />
+          <Text.HEADING text="공지사항" />
           <ChevronRight />
         </Link>
         <Link href="/inquiry" className="flex items-center justify-between">
-          <Text.PARAGRAPH text="문의하기" />
+          <Text.HEADING text="문의하기" />
           <ChevronRight />
         </Link>
       </Wrapper.SECTION>
