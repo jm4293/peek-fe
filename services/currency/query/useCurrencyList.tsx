@@ -11,6 +11,6 @@ export const useCurrencyList = () => {
     queryKey: QueryKeys.currency.list(),
     queryFn: () => currencyApi.getCurrencyList(),
     select: (res) => res.data.currencyList,
-    refetchInterval: 60000, // 1분마다 재호출 (60000ms = 60초)
+    refetchInterval: 1000 * 10,
   });
 };

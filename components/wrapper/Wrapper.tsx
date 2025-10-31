@@ -1,10 +1,8 @@
-import { JSX } from 'react';
-
 import { Text } from '@/components/text';
 
 interface IProps {
   id?: string;
-  text?: string | JSX.Element;
+  text?: string | React.ReactNode;
   children: React.ReactNode;
 }
 
