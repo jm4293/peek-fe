@@ -97,9 +97,8 @@ export default function StockSearch() {
         <div className="max-h-[70vh] overflow-y-auto">
           {isSearchLoading ? (
             <div className="flex flex-col gap-2">
-              <LineSkeleton h={2} />
-              <LineSkeleton h={2} />
-              <LineSkeleton h={2} />
+              <LineSkeleton />
+              <LineSkeleton />
             </div>
           ) : hasError ? (
             <NetworkErrorText />

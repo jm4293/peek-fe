@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import { InfinityList } from '@/components/infinity-list';
 import { Text } from '@/components/text';
-import { Wrapper } from '@/components/wrapper';
+import { EmptyDataView, InternalErrorView, LoadingView, Wrapper } from '@/components/wrapper';
 
 import { IBoardCommentModel, useBoardCommentListMine } from '@/services/board';
 
@@ -38,27 +38,15 @@ export default function MineBoardCommentList() {
   };
 
   if (isPending) {
-    return (
-      <Wrapper.SECTION>
-        <Text.HEADING text="로딩중..." />
-      </Wrapper.SECTION>
-    );
+    return <LoadingView />;
   }
 
   if (!isSuccess) {
-    return (
-      <Wrapper.SECTION>
-        <Text.HEADING text="오류가 발생했습니다." />
-      </Wrapper.SECTION>
-    );
+    return <InternalErrorView />;
   }
 
   if (data.boardCommentList.length === 0) {
-    return (
-      <Wrapper.SECTION>
-        <Text.HEADING text="작성한 게시글 댓글이 없습니다." />
-      </Wrapper.SECTION>
-    );
+    return <EmptyDataView text="작성한 댓글" />;
   }
 
   return (

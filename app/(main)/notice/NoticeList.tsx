@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import { InfinityList } from '@/components/infinity-list';
 import { Text } from '@/components/text';
-import { InternalErrorView, LoadingView, Wrapper } from '@/components/wrapper';
+import { EmptyDataView, InternalErrorView, LoadingView, Wrapper } from '@/components/wrapper';
 
 import { INoticeModel, useNoticeList } from '@/services/notice';
 
@@ -42,11 +42,7 @@ export default function NoticeList() {
   }
 
   if (data.noticeList.length === 0) {
-    return (
-      <Wrapper.SECTION>
-        <Text.HEADING text="공지사항이 없습니다." />
-      </Wrapper.SECTION>
-    );
+    return <EmptyDataView text="공지사항" />;
   }
 
   return (

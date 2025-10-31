@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { Thumbnail } from '@/components/image';
 import { InfinityList } from '@/components/infinity-list';
 import { Text } from '@/components/text';
-import { Wrapper } from '@/components/wrapper';
+import { EmptyDataView, InternalErrorView, LoadingView, Wrapper } from '@/components/wrapper';
 
 import { useQueryParams } from '@/hooks/queryParams';
 
@@ -60,27 +60,15 @@ export default function BoardList() {
   };
 
   if (isPending) {
-    return (
-      <Wrapper.SECTION>
-        <Text.HEADING text="로딩중..." />
-      </Wrapper.SECTION>
-    );
+    return <LoadingView />;
   }
 
   if (!isSuccess) {
-    return (
-      <Wrapper.SECTION>
-        <Text.HEADING text="에러가 발생했습니다." />
-      </Wrapper.SECTION>
-    );
+    return <InternalErrorView />;
   }
 
   if (data.boardList.length === 0) {
-    return (
-      <Wrapper.SECTION>
-        <Text.HEADING text="게시글이 없습니다." />
-      </Wrapper.SECTION>
-    );
+    return <EmptyDataView text="게시글" />;
   }
 
   return (

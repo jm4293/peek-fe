@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import { InfinityList } from '@/components/infinity-list';
 import { Text } from '@/components/text';
-import { Wrapper } from '@/components/wrapper';
+import { EmptyDataView, InternalErrorView, LoadingView, Wrapper } from '@/components/wrapper';
 
 import { IInquiryModel, useInquiryList } from '@/services/inquiry';
 
@@ -28,27 +28,15 @@ export default function InquiryList() {
   };
 
   if (isPending) {
-    return (
-      <Wrapper.SECTION>
-        <Text.HEADING text="로딩중..." />
-      </Wrapper.SECTION>
-    );
+    return <LoadingView />;
   }
 
   if (!isSuccess) {
-    return (
-      <Wrapper.SECTION>
-        <Text.HEADING text="오류가 발생했습니다." />
-      </Wrapper.SECTION>
-    );
+    return <InternalErrorView />;
   }
 
   if (data.inquiryList.length === 0) {
-    return (
-      <Wrapper.SECTION>
-        <Text.HEADING text="문의내역이 없습니다." />
-      </Wrapper.SECTION>
-    );
+    return <EmptyDataView text="문의 내역" />;
   }
 
   return (

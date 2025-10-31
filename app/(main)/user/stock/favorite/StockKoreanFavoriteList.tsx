@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import { InfinityList } from '@/components/infinity-list';
 import { Text } from '@/components/text';
-import { Wrapper } from '@/components/wrapper';
+import { EmptyDataView, InternalErrorView, LoadingView, Wrapper } from '@/components/wrapper';
 
 import { useStockKoreanFavoriteList } from '@/services/stock';
 import { IUserStockFavoriteModel } from '@/services/user';
@@ -47,27 +47,15 @@ export default function StockKoreanFavoriteList() {
   };
 
   if (isPending) {
-    return (
-      <Wrapper.SECTION>
-        <Text.HEADING text="로딩중..." />
-      </Wrapper.SECTION>
-    );
+    return <LoadingView />;
   }
 
   if (!isSuccess) {
-    return (
-      <Wrapper.SECTION>
-        <Text.HEADING text="오류가 발생했습니다." />
-      </Wrapper.SECTION>
-    );
+    return <InternalErrorView />;
   }
 
   if (data.favoriteStockList.length === 0) {
-    return (
-      <Wrapper.SECTION>
-        <Text.HEADING text="즐겨찾기한 종목이 없습니다." />
-      </Wrapper.SECTION>
-    );
+    return <EmptyDataView text="관심 종목" />;
   }
 
   return (
