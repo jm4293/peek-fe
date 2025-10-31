@@ -87,12 +87,14 @@ export default function BoardComment(props: IProps) {
                   <div className="w-full flex justify-between items-center">
                     <div className="flex items-end gap-4">
                       <Text.CAPTION text={DayjsUtil.of(boardComment.createdAt).formatYYMMDDHHmm()} color="gray" />
-                      <Text.PARAGRAPH
-                        text="답글 쓰기"
-                        color="blue"
-                        className="cursor-pointer"
-                        onClick={() => setIsReply(isReply === boardComment.id ? -1 : boardComment.id)}
-                      />
+                      {userInfo && (
+                        <Text.PARAGRAPH
+                          text="답글 쓰기"
+                          color="blue"
+                          className="cursor-pointer"
+                          onClick={() => setIsReply(isReply === boardComment.id ? -1 : boardComment.id)}
+                        />
+                      )}
                     </div>
 
                     {boardComment.userAccount.id === userInfo?.id && (
