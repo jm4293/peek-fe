@@ -17,7 +17,7 @@ export default function Page() {
         <RecentStockList />
       </Wrapper.SECTION>
 
-      <PopularStock />
+      {/* <PopularStock /> */}
     </Wrapper.MAIN>
   );
 }

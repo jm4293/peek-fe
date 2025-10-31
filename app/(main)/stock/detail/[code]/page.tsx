@@ -2,7 +2,7 @@ import { StockSignMarkUtil } from '@/utils';
 
 import { StockPriceText } from '@/components/stock/stock-price';
 import { Text } from '@/components/text';
-import { Wrapper } from '@/components/wrapper';
+import { EmptyDataView, InternalErrorView, Wrapper } from '@/components/wrapper';
 
 import { stockKoreanDetailAction } from '@/services/stock';
 
@@ -13,14 +13,12 @@ interface IProps {
 export default async function StockDetailPage(props: IProps) {
   const { code } = await props.params;
 
-  const { data, success } = await stockKoreanDetailAction({ code });
+  const { success, data } = await stockKoreanDetailAction({ code });
 
   if (!success) {
     return (
       <Wrapper.MAIN text="상세 정보">
-        <Wrapper.SECTION>
-          <Text.HEADING text="서버 오류가 발생했습니다." />
-        </Wrapper.SECTION>
+        <InternalErrorView />
       </Wrapper.MAIN>
     );
   }
@@ -28,9 +26,7 @@ export default async function StockDetailPage(props: IProps) {
   if (!data) {
     return (
       <Wrapper.MAIN text="상세 정보">
-        <Wrapper.SECTION>
-          <Text.HEADING text="종목 정보를 불러올 수 없습니다." />
-        </Wrapper.SECTION>
+        <EmptyDataView text="상세 정보" />
       </Wrapper.MAIN>
     );
   }

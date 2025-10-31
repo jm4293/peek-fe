@@ -1,20 +1,21 @@
 'use server';
 
 import { API_URL } from '@/shared/constant/api-url';
+import { IResponseType } from '@/shared/types';
 
 import { IGetStockKoreanDto } from '../dto';
 import { IStockKoreanModel } from '../model';
 
 export const stockKoreanDetailAction = async (
   dto: IGetStockKoreanDto,
-): Promise<{ success: boolean; data: IStockKoreanModel | null }> => {
+): Promise<IResponseType<IStockKoreanModel | null>> => {
   const { code } = dto;
 
   try {
     const res = await fetch(`${API_URL}/stock/korean/detail/${code}`);
 
     if (!res.ok) {
-      throw new Error('Failed to fetch');
+      return { success: false, data: null };
     }
 
     const json = await res.json();
