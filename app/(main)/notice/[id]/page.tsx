@@ -1,11 +1,11 @@
 import { DayjsUtil } from '@/utils';
+import { Share } from 'lucide-react';
 
+import { Thumbnail } from '@/components/image';
 import { PreText, Text } from '@/components/text';
 import { EmptyDataView, InternalErrorView, Wrapper } from '@/components/wrapper';
 
 import { noticeDetailAction } from '@/services/notice';
-
-import { NoticeTypeEnumList } from '@/shared/enum/notice';
 
 interface IProps {
   params: Promise<{ id: string }>;
@@ -33,26 +33,24 @@ export default async function UserNoticeDetailPage(props: IProps) {
   }
 
   return (
-    <div className="flex flex-col gap-2">
+    <Wrapper.MAIN text="공지사항">
       <Wrapper.SECTION>
-        <Text.HEADING text="제목" />
-
-        <div className="flex items-center gap-2">
-          <Text.PARAGRAPH
-            text={`[${NoticeTypeEnumList[data.type].label}]`}
-            color={NoticeTypeEnumList[data.type].color}
-          />
-          <Text.HEADING text={data.title} />
+        <div className="flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <Thumbnail thumbnail={data.userAccount.user.thumbnail} size={32} />
+            <div className="flex flex-col">
+              <Text.HEADING text={data.userAccount.user.nickname} />
+              <Text.CAPTION text={DayjsUtil.of(data.createdAt).formatYYMMDDHHmm()} color="gray" />
+            </div>
+          </div>
+          <Share />
         </div>
-
-        <Text.CAPTION text={DayjsUtil.of(data.createdAt).formatYYMMDDHHmm()} className="text-end" color="gray" />
       </Wrapper.SECTION>
 
       <Wrapper.SECTION>
-        <Text.HEADING text="내용" />
-
+        <Text.HEADING text={data.title} />
         <PreText text={data.content} />
       </Wrapper.SECTION>
-    </div>
+    </Wrapper.MAIN>
   );
 }

@@ -12,18 +12,18 @@ import { IBoardModel, useBoardMutation } from '@/services/board';
 import { IUserAccountModel } from '@/services/user';
 
 interface IProps {
-  board: IBoardModel;
+  data: IBoardModel;
   userInfo: IUserAccountModel | null;
 }
 
 export default function BoardDetail(props: IProps) {
-  const { board, userInfo } = props;
+  const { data, userInfo } = props;
 
   const { deleteBoardMutation } = useBoardMutation();
 
   const deleteClickHandler = () => {
     if (confirm('게시글을 삭제하시겠습니까?')) {
-      deleteBoardMutation.mutate(board.id);
+      deleteBoardMutation.mutate(data.id);
     }
   };
 
@@ -32,10 +32,10 @@ export default function BoardDetail(props: IProps) {
       <Wrapper.SECTION>
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">
-            <Thumbnail thumbnail={board.userAccount.user.thumbnail} size={32} />
+            <Thumbnail thumbnail={data.userAccount.user.thumbnail} size={32} />
             <div className="flex flex-col">
-              <Text.HEADING text={board.userAccount.user.nickname} />
-              <Text.CAPTION text={DayjsUtil.of(board.createdAt).formatYYMMDDHHmm()} color="gray" />
+              <Text.HEADING text={data.userAccount.user.nickname} />
+              <Text.CAPTION text={DayjsUtil.of(data.createdAt).formatYYMMDDHHmm()} color="gray" />
             </div>
           </div>
           <Share />
@@ -45,18 +45,18 @@ export default function BoardDetail(props: IProps) {
       <Wrapper.SECTION>
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-2">
-            <Text.PARAGRAPH text={`[${board.category.name}]`} color="gray" />
-            <Text.HEADING text={board.title} />
+            <Text.PARAGRAPH text={`[${data.category.name}]`} color="gray" />
+            <Text.HEADING text={data.title} />
           </div>
 
-          <PreText text={board.article.content} />
+          <PreText text={data.article.content} />
 
-          {board.userAccount.id === userInfo?.id && (
+          {data.userAccount.uuid === userInfo?.uuid && (
             <div className="flex items-center justify-end gap-4">
               <div className="cursor-pointer" onClick={deleteClickHandler}>
                 <Text.PARAGRAPH text="삭제하기" color="red" />
               </div>
-              <Link href={`/board/${board.id}/modify`}>
+              <Link href={`/board/${data.id}/modify`}>
                 <Text.PARAGRAPH text="수정하기" color="blue" />
               </Link>
             </div>

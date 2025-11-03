@@ -35,7 +35,7 @@ export default async function BoardDetailPage(props: IProps) {
 
   return (
     <Wrapper.MAIN text="게시글">
-      <BoardDetail board={data} userInfo={userInfo} />
+      <BoardDetail data={data} userInfo={userInfo} />
       <BoardComment id={id} userInfo={userInfo} />
       <BoardCommentRegister id={id} userInfo={userInfo} />
     </Wrapper.MAIN>

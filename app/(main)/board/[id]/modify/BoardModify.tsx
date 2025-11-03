@@ -13,15 +13,15 @@ import { useToast } from '@/hooks/modal';
 import { IBoardModel, useBoardMutation } from '@/services/board';
 
 interface IProps {
-  board: IBoardModel;
+  data: IBoardModel;
   id: string;
 }
 
 export default function BoardModify(props: IProps) {
-  const { board, id } = props;
+  const { data, id } = props;
 
-  const [title, setTitle] = useState(board.title || '');
-  const [content, setContent] = useState(board.article.content || '');
+  const [title, setTitle] = useState(data.title || '');
+  const [content, setContent] = useState(data.article.content || '');
 
   const { openToast } = useToast();
 

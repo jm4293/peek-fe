@@ -7,31 +7,31 @@ import { Wrapper } from '@/components/wrapper';
 import { IInquiryModel } from '@/services/inquiry';
 
 interface IProps {
-  inquiry: IInquiryModel;
+  data: IInquiryModel;
 }
 
 export default function InquiryDetail(props: IProps) {
-  const { inquiry } = props;
+  const { data } = props;
 
   return (
     <>
       <Wrapper.SECTION>
         <Text.HEADING text="제목" />
 
-        <Text.HEADING text={inquiry.title} />
-        <Text.PARAGRAPH text={DayjsUtil.of(inquiry.createdAt).formatYYMMDDHHmm()} className="text-end" color="gray" />
+        <Text.HEADING text={data.title} />
+        <Text.PARAGRAPH text={DayjsUtil.of(data.createdAt).formatYYMMDDHHmm()} className="text-end" color="gray" />
       </Wrapper.SECTION>
       <Wrapper.SECTION>
         <Text.HEADING text="내용" />
 
-        <PreText text={inquiry.content} />
+        <PreText text={data.content} />
       </Wrapper.SECTION>
       <Wrapper.SECTION>
         <Text.HEADING text="첨부 이미지" />
 
-        {inquiry.images.length > 0 ? (
+        {data.images.length > 0 ? (
           <div className="flex flex-wrap gap-2">
-            {inquiry.images.map((image, index) => (
+            {data.images.map((image, index) => (
               <Image
                 key={index}
                 src={`${process.env.NEXT_PUBLIC_IMAGE_HOST}/${image.image}`}
@@ -50,11 +50,11 @@ export default function InquiryDetail(props: IProps) {
       <Wrapper.SECTION>
         <Text.HEADING text="답변" />
 
-        {inquiry.reply ? (
+        {data.reply ? (
           <div className="flex flex-col gap-2">
-            <Text.PARAGRAPH text={inquiry.reply.content} />
+            <Text.PARAGRAPH text={data.reply.content} />
             <Text.CAPTION
-              text={DayjsUtil.of(inquiry.reply.createdAt).formatYYMMDDHHmm()}
+              text={DayjsUtil.of(data.reply.createdAt).formatYYMMDDHHmm()}
               className="text-end"
               color="gray"
             />

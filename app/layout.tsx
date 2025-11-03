@@ -15,7 +15,7 @@ import { Header } from './Header';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'PEEK',
+  title: `${process.env.NODE_ENV === 'production' ? '' : '[DEV] '}PEEK`,
   description: '주식 정보와 커뮤니티 서비스',
   keywords: '주식, 실시간, stock, 커뮤니티',
   icons: {

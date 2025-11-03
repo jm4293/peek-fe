@@ -31,7 +31,7 @@ export default async function UserInquiryDetailPage(props: IProps) {
 
   return (
     <Wrapper.MAIN text="문의">
-      <InquiryDetail inquiry={data} />
+      <InquiryDetail data={data} />
     </Wrapper.MAIN>
   );
 }

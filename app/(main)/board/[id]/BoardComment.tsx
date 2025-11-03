@@ -97,7 +97,7 @@ export default function BoardComment(props: IProps) {
                       )}
                     </div>
 
-                    {boardComment.userAccount.id === userInfo?.id && (
+                    {boardComment.userAccount.uuid === userInfo?.uuid && (
                       <div className="cursor-pointer" onClick={() => onDeleteCommentHandler(boardComment.id)}>
                         <Text.PARAGRAPH text="삭제" color="red" />
                       </div>
@@ -120,7 +120,7 @@ export default function BoardComment(props: IProps) {
 
                     <div className="flex justify-between items-center gap-2">
                       <Text.CAPTION text={DayjsUtil.of(reply.createdAt).formatYYMMDDHHmm()} color="gray" />
-                      {reply.userAccount.id === userInfo?.id && (
+                      {reply.userAccount.uuid === userInfo?.uuid && (
                         <div className="cursor-pointer" onClick={() => onDeleteCommentHandler(reply.id)}>
                           <Text.PARAGRAPH text="삭제" color="red" />
                         </div>
