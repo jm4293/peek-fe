@@ -2,11 +2,11 @@
 
 import { Dispatch, SetStateAction, createContext, useContext, useState } from 'react';
 
-import { IStockCompanyModel } from '@/services/stock';
+import { IStockKoreanCompanyModel } from '@/services/stock';
 
 interface ContextType {
-  stock: IStockCompanyModel | null;
-  setStock: Dispatch<SetStateAction<IStockCompanyModel | null>>;
+  stock: IStockKoreanCompanyModel | null;
+  setStock: Dispatch<SetStateAction<IStockKoreanCompanyModel | null>>;
 }
 
 const StockContext = createContext<ContextType | undefined>(undefined);
@@ -22,7 +22,7 @@ export const useStockProvider = () => {
 };
 
 export function StockCodeProvider({ children }: { children: React.ReactNode }) {
-  const [stock, setStock] = useState<IStockCompanyModel | null>(null);
+  const [stock, setStock] = useState<IStockKoreanCompanyModel | null>(null);
 
   return <StockContext.Provider value={{ stock, setStock }}>{children}</StockContext.Provider>;
 }

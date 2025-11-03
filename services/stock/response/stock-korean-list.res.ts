@@ -1,7 +1,7 @@
-import { IStockCompanyModel } from '../model';
+import { IStockKoreanCompanyModel } from '../model';
 
 export interface IStockKoreanListRes {
-  stockKoreanList: IStockCompanyModel[];
+  stockKoreanList: IStockKoreanCompanyModel[];
   total: number;
   nextPage: number | null;
 }

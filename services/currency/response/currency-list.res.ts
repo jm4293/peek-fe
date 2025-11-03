@@ -1,6 +1,6 @@
-import { ICurrencyModel } from '../model';
+import { ICurrencyHistoryModel } from '../model';
 
 export interface ICurrencyListRes {
-  currencyList: ICurrencyModel[];
+  currencyList: ICurrencyHistoryModel[];
   total: number;
 }

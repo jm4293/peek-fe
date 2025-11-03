@@ -8,7 +8,7 @@ import { StockPriceText } from '@/components/stock/stock-price';
 import { Text } from '@/components/text';
 import { InternalErrorView, LoadingView } from '@/components/wrapper';
 
-import { IStockCompanyModel, IStockKoreanRankModel, useStockKoreanRankList } from '@/services/stock';
+import { IStockKoreanCompanyModel, IStockKoreanRankModel, useStockKoreanRankList } from '@/services/stock';
 
 import { LocalStorageKey } from '@/shared/constant/local-storage-key';
 import { StockRankEnum } from '@/shared/enum/stock';
@@ -24,7 +24,7 @@ export default function PopularStock() {
     const stored = LocalStorageUtil.getItem(LocalStorageKey.recentStock);
     const searches = stored ? JSON.parse(stored) : [];
 
-    const filtered = searches.filter((el: IStockCompanyModel) => el.code !== item.shcode);
+    const filtered = searches.filter((el: IStockKoreanCompanyModel) => el.code !== item.shcode);
     const updated = [{ code: item.shcode, companyName: item.hname, timestamp: Date.now() }, ...filtered].slice(0, 10);
 
     LocalStorageUtil.setItem(LocalStorageKey.recentStock, JSON.stringify(updated));

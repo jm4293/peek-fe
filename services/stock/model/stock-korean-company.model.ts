@@ -1,4 +1,4 @@
-export interface IStockCompanyModel {
+export interface IStockKoreanCompanyModel {
   ceo: string;
   code: string;
   companyName: string;

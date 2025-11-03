@@ -1,5 +1,6 @@
-export interface ICurrencyModel {
+export interface ICurrencyHistoryModel {
   id: number;
+  uuid: string;
   curUnit: string; // 통화코드
   curNm: string; // 국가/통화명
   curUnitDesc: string; // 통화 단위 설명

@@ -6,6 +6,7 @@ import { BoardTypeEnum } from '@/shared/enum/board';
 
 export interface IBoardModel {
   id: number;
+  uuid: string;
   type: BoardTypeEnum;
   title: string;
   viewCount: number;
@@ -13,7 +14,7 @@ export interface IBoardModel {
   commentCount: number;
   likeCount: number;
 
+  userAccount: IUserAccountModel;
   category: IStockCategoryModel;
   article: IBoardArticleModel;
-  userAccount: IUserAccountModel;
 }
