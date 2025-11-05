@@ -1,13 +1,14 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-import BoardApi, { IBoardCommentListRes } from '@/services/board';
-
 import { QueryKeys } from '@/shared/constant/query-key';
+
+import boardApi from '../api';
+import { GetBoardCommentListRes } from '../type';
 
 export const useBoardCommentListMine = () => {
   return useInfiniteQuery({
     queryKey: QueryKeys.board.mineCommentList(),
-    queryFn: ({ pageParam }) => BoardApi.getBoardCommentListMine(pageParam),
+    queryFn: ({ pageParam }) => boardApi.getBoardCommentListMine({ page: pageParam }),
     getNextPageParam: (lastPage) => {
       const { nextPage } = lastPage.data;
 
@@ -15,7 +16,7 @@ export const useBoardCommentListMine = () => {
     },
     select: (data) => {
       return data.pages.reduce(
-        (acc: IBoardCommentListRes, cur) => {
+        (acc: GetBoardCommentListRes, cur) => {
           const { boardCommentList, total, nextPage } = cur.data;
 
           return { boardCommentList: [...acc.boardCommentList, ...boardCommentList], total, nextPage };

@@ -1,1 +1,14 @@
-export { default } from './home.api';
+import createAxiosInstance from '@/lib/axios';
+
+import { GetRecentBoardListRes } from '../type';
+
+const axios = createAxiosInstance();
+const baseURL = '/home';
+
+const homeApi = {
+  getRecentBoardList: async () => {
+    return await axios.get<GetRecentBoardListRes, null>({ url: `${baseURL}/recent-boards` });
+  },
+};
+
+export default homeApi;

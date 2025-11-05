@@ -14,10 +14,10 @@ import { useInput } from '@/hooks/input';
 import { useModal, useToast } from '@/hooks/modal';
 
 import { useImageMutation } from '@/services/image';
-import { ICreateInquiryDto } from '@/services/inquiry';
+import { CreateInquiryReq } from '@/services/inquiry';
 import { useInquiryMutation } from '@/services/inquiry/mutation/useInquiryMutation';
 
-const initialFormData: ICreateInquiryDto = {
+const initialFormData: CreateInquiryReq = {
   title: '',
   content: '',
   images: [],
@@ -27,7 +27,7 @@ export default function InquiryRegister() {
   const imageInputRef = useRef<HTMLInputElement>(null);
   const [images, setImages] = useState<File[]>([]);
 
-  const [value, onChange] = useInput<ICreateInquiryDto>({ ...initialFormData });
+  const [value, onChange] = useInput<CreateInquiryReq>({ ...initialFormData });
 
   const { openModal, closeModal } = useModal();
   const { openToast } = useToast();

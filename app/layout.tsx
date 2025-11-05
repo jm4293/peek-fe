@@ -7,7 +7,7 @@ import { Modal, Toast } from '@/components/modal';
 
 import MessagingConfig from '@/lib/firebase/messaging.config';
 import { NetworkError } from '@/lib/network-error';
-import QueryProvider from '@/lib/react-query/react-query.config';
+import QueryProvider from '@/lib/query-provider';
 
 import { Footer } from './Footer';
 import GlobalLoading from './GlobalLoading';

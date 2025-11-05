@@ -10,6 +10,12 @@ const withPWA = require('next-pwa')({
 });
 
 const nextConfig: NextConfig = {
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
+    // incomingRequests: false
+  },
   images: {
     remotePatterns: [
       {

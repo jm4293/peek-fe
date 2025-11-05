@@ -5,10 +5,10 @@ import { useRouter } from 'next/navigation';
 
 import { useToast } from '@/hooks/modal';
 
-import { ICreateBoardDto, IUpdateBoardDto } from '@/services/board';
-import BoardApi from '@/services/board/api/board.api';
-
 import { QueryKeys } from '@/shared/constant/query-key';
+
+import boardApi from '../api';
+import { CreateBoardReq, DeleteBoardReq, UpdateBoardReq } from '../type';
 
 export const useBoardMutation = () => {
   const queryClient = useQueryClient();
@@ -17,7 +17,7 @@ export const useBoardMutation = () => {
   const { openToast } = useToast();
 
   const createBoardMutation = useMutation({
-    mutationFn: (dto: ICreateBoardDto) => BoardApi.createBoard(dto),
+    mutationFn: (dto: CreateBoardReq) => boardApi.createBoard(dto),
     onSuccess: async (_, variables) => {
       const { categoryId } = variables;
 
@@ -29,7 +29,7 @@ export const useBoardMutation = () => {
   });
 
   const updateBoardMutation = useMutation({
-    mutationFn: (dto: IUpdateBoardDto) => BoardApi.updateBoard(dto),
+    mutationFn: (dto: UpdateBoardReq) => boardApi.updateBoard(dto),
     onSuccess: async (_, variables) => {
       const { boardId } = variables;
 
@@ -42,7 +42,7 @@ export const useBoardMutation = () => {
   });
 
   const deleteBoardMutation = useMutation({
-    mutationFn: (boardId: number) => BoardApi.deleteBoard(boardId),
+    mutationFn: (dto: DeleteBoardReq) => boardApi.deleteBoard(dto),
     onSuccess: async () => {
       router.push('/board');
 
@@ -50,17 +50,17 @@ export const useBoardMutation = () => {
     },
   });
 
-  const boardLikeMutation = useMutation({
-    mutationFn: (boardSeq: number) => BoardApi.boardLike(boardSeq),
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: QueryKeys.board.list() });
-    },
-  });
+  // const boardLikeMutation = useMutation({
+  //   mutationFn: (boardSeq: number) => boardApi.boardLike(boardSeq),
+  //   onSuccess: async () => {
+  //     await queryClient.invalidateQueries({ queryKey: QueryKeys.board.list() });
+  //   },
+  // });
 
   return {
     createBoardMutation,
     updateBoardMutation,
     deleteBoardMutation,
-    boardLikeMutation,
+    // boardLikeMutation,
   };
 };

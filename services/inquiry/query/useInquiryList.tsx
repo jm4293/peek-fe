@@ -3,10 +3,9 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { QueryKeys } from '@/shared/constant/query-key';
 
 import inquiryApi from '../api';
-import { IInquiryListDto } from '../dto';
-import { IInquiryListRes } from '../response';
+import { GetInquiryListReq, GetInquiryListRes } from '../type';
 
-export interface IProps extends Omit<IInquiryListDto, 'page'> {}
+export interface IProps extends Omit<GetInquiryListReq, 'page'> {}
 
 export const useInquiryList = (props: IProps) => {
   return useInfiniteQuery({
@@ -19,7 +18,7 @@ export const useInquiryList = (props: IProps) => {
     },
     select: (data) => {
       return data.pages.reduce(
-        (acc: IInquiryListRes, cur) => {
+        (acc: GetInquiryListRes, cur) => {
           const { inquiryList, total, nextPage } = cur.data;
 
           return { inquiryList: [...acc.inquiryList, ...inquiryList], total, nextPage };

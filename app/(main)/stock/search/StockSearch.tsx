@@ -12,7 +12,7 @@ import { Wrapper } from '@/components/wrapper';
 
 import { useDebounce } from '@/hooks/useDebounce';
 
-import { IStockKoreanCompanyModel, useStockKoreanList } from '@/services/stock';
+import { StockKoreanCompanyModel, useStockKoreanList } from '@/services/stock';
 
 import { LocalStorageKey } from '@/shared/constant/local-storage-key';
 
@@ -30,11 +30,11 @@ export default function StockSearch() {
     text: debouncedText || '',
   });
 
-  const clickHandler = (item: IStockKoreanCompanyModel) => {
+  const clickHandler = (item: StockKoreanCompanyModel) => {
     const stored = LocalStorageUtil.getItem(LocalStorageKey.recentStock);
     const searches = stored ? JSON.parse(stored) : [];
 
-    const filtered = searches.filter((el: IStockKoreanCompanyModel) => el.code !== item.code);
+    const filtered = searches.filter((el: StockKoreanCompanyModel) => el.code !== item.code);
     const updated = [{ ...item, timestamp: Date.now() }, ...filtered].slice(0, 10);
 
     LocalStorageUtil.setItem(LocalStorageKey.recentStock, JSON.stringify(updated));
@@ -43,7 +43,7 @@ export default function StockSearch() {
     router.push(`/stock/detail/${item.code}`);
   };
 
-  const renderItem = (item: IStockKoreanCompanyModel) => {
+  const renderItem = (item: StockKoreanCompanyModel) => {
     const { id, companyName, code, products, industry } = item;
 
     return (

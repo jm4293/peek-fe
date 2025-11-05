@@ -12,11 +12,11 @@ import { Wrapper } from '@/components/wrapper';
 import { useToast } from '@/hooks/modal';
 
 import { useBoardCommentList, useBoardCommentMutation } from '@/services/board';
-import { IUserAccountModel } from '@/services/user';
+import { UserAccountModel } from '@/services/user';
 
 interface IProps {
   id: string;
-  userInfo: IUserAccountModel | null;
+  userInfo: UserAccountModel | null;
 }
 
 export default function BoardComment(props: IProps) {
@@ -56,7 +56,7 @@ export default function BoardComment(props: IProps) {
     }
 
     createBoardCommentMutation.mutate(
-      { boardId: Number(id), content: replyComment, commentId },
+      { boardId: Number(id), content: replyComment, boardCommentId: commentId },
       {
         onSuccess: () => {
           setIsReply(-1);
@@ -151,7 +151,6 @@ export default function BoardComment(props: IProps) {
         )
       ) : (
         <>
-          <LineSkeleton />
           <LineSkeleton />
           <LineSkeleton />
         </>

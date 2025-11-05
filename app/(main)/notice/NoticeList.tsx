@@ -7,14 +7,14 @@ import { InfinityList } from '@/components/infinity-list';
 import { Text } from '@/components/text';
 import { EmptyDataView, InternalErrorView, LoadingView, Wrapper } from '@/components/wrapper';
 
-import { INoticeModel, useNoticeList } from '@/services/notice';
+import { NoticeModel, useNoticeList } from '@/services/notice';
 
 import { NoticeTypeEnumList } from '@/shared/enum/notice';
 
 export default function NoticeList() {
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isPending, isSuccess } = useNoticeList({});
 
-  const renderItem = (item: INoticeModel) => {
+  const renderItem = (item: NoticeModel) => {
     const { id, type, title, createdAt } = item;
 
     return (

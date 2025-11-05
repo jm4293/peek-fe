@@ -43,7 +43,7 @@ export default function VerifyEmail() {
 
   const [value, onChange] = useInput({ ...initialFormData });
 
-  const { checkEmailMutation, checkEmailCodeMutation } = useUserMutation();
+  // const { checkEmailMutation, checkEmailCodeMutation } = useUserMutation();
 
   const handleCheckEmail = async () => {
     if (!value.email || !value.email.trim()) {
@@ -64,26 +64,26 @@ export default function VerifyEmail() {
       return;
     }
 
-    checkEmailMutation.mutate(
-      { email: value.email },
-      {
-        onSuccess: (res) => {
-          const { isExist, message } = res.data;
+    // checkEmailMutation.mutate(
+    //   { email: value.email },
+    //   {
+    //     onSuccess: (res) => {
+    //       const { isExist, message } = res.data;
 
-          if (isExist) {
-            openToast({ message, type: 'error' });
-            return;
-          }
+    //       if (isExist) {
+    //         openToast({ message, type: 'error' });
+    //         return;
+    //       }
 
-          openToast({ message: '이메일 인증코드를 전송했습니다.', type: 'success' });
-          setCheckEmail(2);
-        },
-        onError: (err: any) => {
-          const { message } = err.response.data;
-          openToast({ message, type: 'error' });
-        },
-      },
-    );
+    //       openToast({ message: '이메일 인증코드를 전송했습니다.', type: 'success' });
+    //       setCheckEmail(2);
+    //     },
+    //     onError: (err: any) => {
+    //       const { message } = err.response.data;
+    //       openToast({ message, type: 'error' });
+    //     },
+    //   },
+    // );
   };
 
   const handleCheckCode = async () => {
@@ -96,21 +96,21 @@ export default function VerifyEmail() {
       return;
     }
 
-    checkEmailCodeMutation.mutate(
-      { email: value.email, code },
-      {
-        onSuccess: (res) => {
-          const { success, message, code } = res.data;
+    // checkEmailCodeMutation.mutate(
+    //   { email: value.email, code },
+    //   {
+    //     onSuccess: (res) => {
+    //       const { success, message, code } = res.data;
 
-          setRandomCode(code);
-          setCheckEmail(3);
-        },
-        onError: (err: any) => {
-          const { message } = err.response.data;
-          openToast({ message, type: 'error' });
-        },
-      },
-    );
+    //       setRandomCode(code);
+    //       setCheckEmail(3);
+    //     },
+    //     onError: (err: any) => {
+    //       const { message } = err.response.data;
+    //       openToast({ message, type: 'error' });
+    //     },
+    //   },
+    // );
   };
 
   useEffect(() => {
@@ -152,12 +152,12 @@ export default function VerifyEmail() {
             placeholder="이메일 주소"
             disabled={checkEmail !== 1}
             required>
-            <div className="cursor-pointer" onClick={handleCheckEmail}>
+            {/* <div className="cursor-pointer" onClick={handleCheckEmail}>
               <Text.HEADING
                 text={checkEmailMutation.isPending ? '전송 중' : '인증'}
                 color={`${checkEmailMutation.isPending ? 'gray' : 'blue'}`}
               />
-            </div>
+            </div> */}
           </Input>
 
           {checkEmail !== 1 && (
@@ -175,12 +175,12 @@ export default function VerifyEmail() {
               required>
               <div className="flex items-center gap-2">
                 {checkEmail !== 3 && <Text.CAPTION text={dayjs.duration(count, 'seconds').format('m:ss')} />}
-                <div className="cursor-pointer" onClick={handleCheckCode}>
+                {/* <div className="cursor-pointer" onClick={handleCheckCode}>
                   <Text.HEADING
                     text={checkEmail === 3 ? '완료' : checkEmailCodeMutation.isPending ? '확인 중' : '확인'}
                     color={checkEmail === 3 ? 'gray' : 'blue'}
                   />
-                </div>
+                </div> */}
               </div>
             </Input>
           )}

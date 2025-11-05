@@ -1,17 +1,40 @@
+'use client';
+
 import { DayjsUtil } from '@/utils';
 import Image from 'next/image';
+import { use } from 'react';
 
 import { PreText, Text } from '@/components/text';
-import { Wrapper } from '@/components/wrapper';
+import { EmptyDataView, InternalErrorView, Wrapper } from '@/components/wrapper';
 
-import { IInquiryModel } from '@/services/inquiry';
+import { InquiryModel } from '@/services/inquiry';
+
+import { IResponseType } from '@/shared/types';
 
 interface IProps {
-  data: IInquiryModel;
+  inquiry: Promise<IResponseType<InquiryModel | null>>;
 }
 
 export default function InquiryDetail(props: IProps) {
-  const { data } = props;
+  const { inquiry } = props;
+
+  const { data, success } = use(inquiry);
+
+  if (!success) {
+    return (
+      <Wrapper.MAIN text="문의">
+        <InternalErrorView />
+      </Wrapper.MAIN>
+    );
+  }
+
+  if (!data) {
+    return (
+      <Wrapper.MAIN text="문의">
+        <EmptyDataView text="문의 내역" />
+      </Wrapper.MAIN>
+    );
+  }
 
   return (
     <>
@@ -29,9 +52,9 @@ export default function InquiryDetail(props: IProps) {
       <Wrapper.SECTION>
         <Text.HEADING text="첨부 이미지" />
 
-        {data.images.length > 0 ? (
+        {data.inquiryImages.length > 0 ? (
           <div className="flex flex-wrap gap-2">
-            {data.images.map((image, index) => (
+            {data.inquiryImages.map((image, index) => (
               <Image
                 key={index}
                 src={`${process.env.NEXT_PUBLIC_IMAGE_HOST}/${image.image}`}
@@ -50,11 +73,11 @@ export default function InquiryDetail(props: IProps) {
       <Wrapper.SECTION>
         <Text.HEADING text="답변" />
 
-        {data.reply ? (
+        {data.inquiryReply ? (
           <div className="flex flex-col gap-2">
-            <Text.PARAGRAPH text={data.reply.content} />
+            <Text.PARAGRAPH text={data.inquiryReply.content} />
             <Text.CAPTION
-              text={DayjsUtil.of(data.reply.createdAt).formatYYMMDDHHmm()}
+              text={DayjsUtil.of(data.inquiryReply.createdAt).formatYYMMDDHHmm()}
               className="text-end"
               color="gray"
             />

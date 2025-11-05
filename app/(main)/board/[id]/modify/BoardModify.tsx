@@ -10,10 +10,10 @@ import { Wrapper } from '@/components/wrapper';
 
 import { useToast } from '@/hooks/modal';
 
-import { IBoardModel, useBoardMutation } from '@/services/board';
+import { BoardModel, useBoardMutation } from '@/services/board';
 
 interface IProps {
-  data: IBoardModel;
+  data: BoardModel;
   id: string;
 }
 
@@ -21,7 +21,7 @@ export default function BoardModify(props: IProps) {
   const { data, id } = props;
 
   const [title, setTitle] = useState(data.title || '');
-  const [content, setContent] = useState(data.article.content || '');
+  const [content, setContent] = useState(data.boardArticle.content || '');
 
   const { openToast } = useToast();
 

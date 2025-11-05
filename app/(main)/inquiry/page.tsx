@@ -1,12 +1,12 @@
 import { Wrapper } from '@/components/wrapper';
 
-import { userInfoAction } from '@/services/user';
+import { getUserInfo } from '@/services/user';
 
 import InquiryList from './InquiryList';
 import { InquiryRegisterButton } from './InquiryRegisterButton';
 
 export default async function UserInquiryPage() {
-  const { success } = await userInfoAction();
+  const { success } = await getUserInfo();
 
   return (
     <Wrapper.MAIN text="문의하기">

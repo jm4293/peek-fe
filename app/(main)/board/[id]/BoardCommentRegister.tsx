@@ -11,11 +11,11 @@ import { Wrapper } from '@/components/wrapper';
 import { useModal } from '@/hooks/modal';
 
 import { useBoardCommentMutation } from '@/services/board';
-import { IUserAccountModel } from '@/services/user';
+import { UserAccountModel } from '@/services/user';
 
 interface IProps {
   id: string;
-  userInfo: IUserAccountModel | null;
+  userInfo: UserAccountModel | null;
 }
 
 export default function BoardCommentRegister(props: IProps) {

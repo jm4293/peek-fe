@@ -7,12 +7,12 @@ import { useEffect, useState } from 'react';
 
 import { Text } from '@/components/text';
 
-import { IStockKoreanCompanyModel } from '@/services/stock';
+import { StockKoreanCompanyModel } from '@/services/stock';
 
 import { LocalStorageKey } from '@/shared/constant/local-storage-key';
 
 export default function RecentStockList() {
-  const [searches, setSearches] = useState<(IStockKoreanCompanyModel & { timestamp: Date })[]>([]);
+  const [searches, setSearches] = useState<(StockKoreanCompanyModel & { timestamp: Date })[]>([]);
 
   const handleRemove = (event: React.MouseEvent<SVGElement, MouseEvent>, id: number) => {
     event.preventDefault();

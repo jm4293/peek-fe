@@ -7,12 +7,12 @@ import { InfinityList } from '@/components/infinity-list';
 import { Text } from '@/components/text';
 import { EmptyDataView, InternalErrorView, LoadingView, Wrapper } from '@/components/wrapper';
 
-import { IBoardCommentModel, useBoardCommentListMine } from '@/services/board';
+import { BoardCommentModel, useBoardCommentListMine } from '@/services/board';
 
 export default function MineBoardCommentList() {
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isPending, isSuccess } = useBoardCommentListMine();
 
-  const renderItem = (item: IBoardCommentModel) => {
+  const renderItem = (item: BoardCommentModel) => {
     const { id, content, createdAt, board } = item;
 
     return (
@@ -20,7 +20,7 @@ export default function MineBoardCommentList() {
         <Wrapper.SECTION>
           <Link href={`/board/${board.id}`} className="flex flex-col gap-1">
             <div className="flex items-center gap-2">
-              <Text.PARAGRAPH text={`[${board.category.name}]`} color="gray" />
+              <Text.PARAGRAPH text={`[${board.stockCategory.name}]`} color="gray" />
               <Text.PARAGRAPH text={board.title} />
             </div>
             <div className="flex justify-between items-center">

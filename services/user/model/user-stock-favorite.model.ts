@@ -1,12 +1,13 @@
-import { IStockKoreanCompanyModel } from '@/services/stock';
+import { StockKoreanCompanyModel } from '@/services/stock';
 
-import { IUserAccountModel } from './user-account.model';
+import { UserAccountModel } from './user-account.model';
 
-export interface IUserStockFavoriteModel {
+export interface UserStockFavoriteModel {
   userAccountId: number;
-  userAccount: IUserAccountModel;
-  createdAt: Date;
+  stockKoreanCompanyId: number;
   uuid: string;
+  createdAt: Date;
 
-  stockCompany: IStockKoreanCompanyModel;
+  userAccount: UserAccountModel;
+  stockKoreanCompany: StockKoreanCompanyModel;
 }

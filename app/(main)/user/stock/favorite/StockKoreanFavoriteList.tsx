@@ -7,22 +7,22 @@ import { Text } from '@/components/text';
 import { EmptyDataView, InternalErrorView, LoadingView, Wrapper } from '@/components/wrapper';
 
 import { useStockKoreanFavoriteList } from '@/services/stock';
-import { IUserStockFavoriteModel } from '@/services/user';
+import { UserStockFavoriteModel } from '@/services/user';
 
 export default function StockKoreanFavoriteList() {
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isPending, isSuccess } = useStockKoreanFavoriteList();
 
-  const renderItem = (item: IUserStockFavoriteModel) => {
-    const { createdAt, stockCompany } = item;
+  const renderItem = (item: UserStockFavoriteModel) => {
+    const { createdAt, stockKoreanCompany } = item;
 
     return (
-      <li key={stockCompany.id}>
+      <li key={stockKoreanCompany.id}>
         <Wrapper.SECTION>
-          <Link href={`/stock/detail/${stockCompany.code}`} className="flex flex-col gap-1">
+          <Link href={`/stock/detail/${stockKoreanCompany.code}`} className="flex flex-col gap-1">
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-2">
-                <Text.PARAGRAPH text={`[${stockCompany.companyName}]`} color="gray" />
-                <Text.HEADING text={stockCompany.code} />
+                <Text.PARAGRAPH text={`[${stockKoreanCompany.companyName}]`} color="gray" />
+                <Text.HEADING text={stockKoreanCompany.code} />
               </div>
             </div>
 

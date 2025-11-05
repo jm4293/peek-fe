@@ -1,31 +1,56 @@
 'use client';
 
 import { DayjsUtil } from '@/utils';
-import { Share } from 'lucide-react';
 import Link from 'next/link';
+import { use } from 'react';
 
+import { ShareButton } from '@/components/button';
 import { Thumbnail } from '@/components/image';
 import { PreText, Text } from '@/components/text';
-import { Wrapper } from '@/components/wrapper';
+import { EmptyDataView, InternalErrorView, Wrapper } from '@/components/wrapper';
 
-import { IBoardModel, useBoardMutation } from '@/services/board';
-import { IUserAccountModel } from '@/services/user';
+import { BoardModel, useBoardMutation } from '@/services/board';
+import { UserAccountModel } from '@/services/user';
+
+import { IResponseType } from '@/shared/types';
 
 interface IProps {
-  data: IBoardModel;
-  userInfo: IUserAccountModel | null;
+  board: Promise<IResponseType<BoardModel | null>>;
+  userInfo: UserAccountModel | null;
 }
 
 export default function BoardDetail(props: IProps) {
-  const { data, userInfo } = props;
+  const { board, userInfo } = props;
+
+  const { data, success } = use(board);
 
   const { deleteBoardMutation } = useBoardMutation();
 
   const deleteClickHandler = () => {
+    if (!data) {
+      return;
+    }
+
     if (confirm('게시글을 삭제하시겠습니까?')) {
-      deleteBoardMutation.mutate(data.id);
+      deleteBoardMutation.mutate({ boardId: data.id });
     }
   };
+
+  if (!success) {
+    return (
+      <Wrapper.MAIN text="게시글">
+        <InternalErrorView />
+      </Wrapper.MAIN>
+    );
+  }
+
+  if (!data) {
+    return (
+      <Wrapper.MAIN text="게시글">
+        <EmptyDataView text="게시글" />
+      </Wrapper.MAIN>
+    );
+  }
 
   return (
     <>
@@ -38,18 +63,18 @@ export default function BoardDetail(props: IProps) {
               <Text.CAPTION text={DayjsUtil.of(data.createdAt).formatYYMMDDHHmm()} color="gray" />
             </div>
           </div>
-          <Share />
+          <ShareButton text="게시글" />
         </div>
       </Wrapper.SECTION>
 
       <Wrapper.SECTION>
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-2">
-            <Text.PARAGRAPH text={`[${data.category.name}]`} color="gray" />
+            <Text.PARAGRAPH text={`[${data.stockCategory.name}]`} color="gray" />
             <Text.HEADING text={data.title} />
           </div>
 
-          <PreText text={data.article.content} />
+          <PreText text={data.boardArticle.content} />
 
           {data.userAccount.uuid === userInfo?.uuid && (
             <div className="flex items-center justify-end gap-4">

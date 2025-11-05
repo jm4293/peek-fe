@@ -9,10 +9,10 @@ import { Wrapper } from '@/components/wrapper';
 
 import { useModal } from '@/hooks/modal';
 
-import { IUserAccountModel, useUserMutation } from '@/services/user';
+import { UserAccountModel, useUserMutation } from '@/services/user';
 
 interface IProps {
-  userInfo: IUserAccountModel;
+  userInfo: UserAccountModel;
 }
 
 export default function ModifyUser(props: IProps) {

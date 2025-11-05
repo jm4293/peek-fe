@@ -8,10 +8,10 @@ import { Text } from '@/components/text';
 
 import { useModal } from '@/hooks/modal';
 
-import { IUserAccountModel } from '@/services/user';
+import { UserAccountModel } from '@/services/user';
 
 interface IProps {
-  userInfo: IUserAccountModel | null;
+  userInfo: UserAccountModel | null;
 }
 
 export const BoardRegisterButton = (props: IProps) => {

@@ -1,13 +1,23 @@
-import { IUserModel } from '@/services/user';
+import { BoardCommentModel, BoardModel } from '@/services/board';
+import { InquiryModel } from '@/services/inquiry';
+import { UserModel, UserNotificationModel, UserStockFavoriteModel } from '@/services/user';
 
-import { UserAccountTypeEnum } from '@/shared/enum/user';
+import { UserAccountStatusEnum, UserAccountTypeEnum } from '@/shared/enum/user';
 
-export interface IUserAccountModel {
+export interface UserAccountModel {
   id: number;
   uuid: string;
   email: string;
+  status: UserAccountStatusEnum;
   userAccountType: UserAccountTypeEnum;
   createdAt: Date;
+  updatedAt: Date | null;
 
-  user: IUserModel;
+  user: UserModel;
+  userNotifications: UserNotificationModel[];
+  userStockFavorites: UserStockFavoriteModel[];
+  boards: BoardModel[];
+  boardComments: BoardCommentModel[];
+  boardLikes: BoardModel[];
+  inquiries: InquiryModel[];
 }

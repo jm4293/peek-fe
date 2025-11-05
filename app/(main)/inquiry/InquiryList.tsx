@@ -7,12 +7,12 @@ import { InfinityList } from '@/components/infinity-list';
 import { Text } from '@/components/text';
 import { EmptyDataView, InternalErrorView, LoadingView, Wrapper } from '@/components/wrapper';
 
-import { IInquiryModel, useInquiryList } from '@/services/inquiry';
+import { InquiryModel, useInquiryList } from '@/services/inquiry';
 
 export default function InquiryList() {
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isPending, isSuccess } = useInquiryList({});
 
-  const renderItem = (item: IInquiryModel) => {
+  const renderItem = (item: InquiryModel) => {
     const { id, title, createdAt } = item;
 
     return (

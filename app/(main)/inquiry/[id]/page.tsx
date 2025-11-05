@@ -1,6 +1,9 @@
-import { EmptyDataView, InternalErrorView, Wrapper } from '@/components/wrapper';
+import { Suspense } from 'react';
 
-import { inquiryDetailAction } from '@/services/inquiry/actions';
+import { SkeletonSuspense } from '@/components/skeleton';
+import { Wrapper } from '@/components/wrapper';
+
+import { getInquiryDetail } from '@/services/inquiry/server';
 
 import InquiryDetail from './InquiryDetail';
 
@@ -11,27 +14,13 @@ interface IProps {
 export default async function UserInquiryDetailPage(props: IProps) {
   const { id } = await props.params;
 
-  const { data, success } = await inquiryDetailAction(id);
-
-  if (!success) {
-    return (
-      <Wrapper.MAIN text="문의">
-        <InternalErrorView />
-      </Wrapper.MAIN>
-    );
-  }
-
-  if (!data) {
-    return (
-      <Wrapper.MAIN text="문의">
-        <EmptyDataView text="문의 내역" />
-      </Wrapper.MAIN>
-    );
-  }
+  const inquiry = getInquiryDetail(id);
 
   return (
     <Wrapper.MAIN text="문의">
-      <InquiryDetail data={data} />
+      <Suspense fallback={<SkeletonSuspense />}>
+        <InquiryDetail inquiry={inquiry} />
+      </Suspense>
     </Wrapper.MAIN>
   );
 }

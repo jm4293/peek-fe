@@ -2,10 +2,10 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { useToast } from '@/hooks/modal';
 
-import { ICreateBoardCommentDto, IDeleteBoardCommentDto, IUpdateBoardCommentDto } from '@/services/board';
-import BoardApi from '@/services/board/api/board.api';
-
 import { QueryKeys } from '@/shared/constant/query-key';
+
+import boardApi from '../api';
+import { CreateBoardCommentReq, DeleteBoardCommentReq, UpdateBoardCommentReq } from '../type';
 
 export const useBoardCommentMutation = () => {
   const queryClient = useQueryClient();
@@ -13,7 +13,7 @@ export const useBoardCommentMutation = () => {
   const { openToast } = useToast();
 
   const createBoardCommentMutation = useMutation({
-    mutationFn: (dto: ICreateBoardCommentDto) => BoardApi.createBoardComment(dto),
+    mutationFn: (dto: CreateBoardCommentReq) => boardApi.createBoardComment(dto),
     onSuccess: async (_, variables) => {
       const { boardId } = variables;
 
@@ -22,7 +22,7 @@ export const useBoardCommentMutation = () => {
   });
 
   const updateBoardCommentMutation = useMutation({
-    mutationFn: (dto: IUpdateBoardCommentDto) => BoardApi.updateBoardComment(dto),
+    mutationFn: (dto: UpdateBoardCommentReq) => boardApi.updateBoardComment(dto),
     onSuccess: async (_, variables) => {
       const { boardId } = variables;
 
@@ -31,7 +31,7 @@ export const useBoardCommentMutation = () => {
   });
 
   const deleteBoardCommentMutation = useMutation({
-    mutationFn: (dto: IDeleteBoardCommentDto) => BoardApi.deleteBoardComment(dto),
+    mutationFn: (dto: DeleteBoardCommentReq) => boardApi.deleteBoardComment(dto),
     onSuccess: async (_, variables) => {
       const { boardId } = variables;
 

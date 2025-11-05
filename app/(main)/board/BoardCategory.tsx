@@ -2,33 +2,46 @@
 
 import Link from 'next/link';
 
+import { LineSkeleton } from '@/components/skeleton';
 import { Text } from '@/components/text';
-import { Wrapper } from '@/components/wrapper';
+import { InternalErrorView, Wrapper } from '@/components/wrapper';
 
 import { useQueryParams } from '@/hooks/queryParams';
 
-import { IStockCategoryModel } from '@/services/stock';
+import { useStockCategoryList } from '@/services/stock';
 
-interface IProps {
-  stockCategoryList: IStockCategoryModel[];
-}
+export default function BoardCategory() {
+  const { getQuery } = useQueryParams();
+  const stockCategory = getQuery('stockCategory');
 
-export default function BoardCategory(props: IProps) {
-  const { stockCategoryList } = props;
+  const { data, isPending, isSuccess } = useStockCategoryList();
 
-  const { getQuery, setQuery } = useQueryParams();
-  const category = getQuery('category');
+  if (isPending) {
+    return (
+      <Wrapper.SECTION text="카테고리">
+        <LineSkeleton />
+      </Wrapper.SECTION>
+    );
+  }
+
+  if (!isSuccess) {
+    return (
+      <Wrapper.MAIN text="커뮤니티">
+        <InternalErrorView />
+      </Wrapper.MAIN>
+    );
+  }
 
   return (
     <Wrapper.SECTION text="카테고리">
       <div className="flex items-center gap-4">
         <Link href="/board">
-          <Text.HEADING text="전체" color={category === null ? 'default' : 'gray'} />
+          <Text.HEADING text="전체" color={stockCategory === null ? 'default' : 'gray'} />
         </Link>
 
-        {stockCategoryList.map((cur) => (
+        {data.map((cur) => (
           <Link key={cur.id} href={`/board?category=${cur.id}`}>
-            <Text.HEADING text={cur.name} color={category === cur.id.toString() ? 'default' : 'gray'} />
+            <Text.HEADING text={cur.name} color={stockCategory === cur.id.toString() ? 'default' : 'gray'} />
           </Link>
         ))}
       </div>

@@ -18,6 +18,7 @@ export const QueryKeys = {
   },
   stock: {
     token: () => ['stock', 'token'],
+    stockCategoryList: () => ['stock', 'category-list'],
     stockKorean: (code: string) => ['stock', 'korean', code],
     stockKoreanList: (text?: string) => ['stock', 'korean-list', text],
     stockKoreanRankList: (type: StockRankEnum) => ['stock', 'korean-rank-list', type],

@@ -1,4 +1,4 @@
-export interface ICurrencyHistoryModel {
+export interface CurrencyHistoryModel {
   id: number;
   uuid: string;
   curUnit: string; // 통화코드

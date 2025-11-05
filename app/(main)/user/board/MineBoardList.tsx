@@ -8,13 +8,13 @@ import { InfinityList } from '@/components/infinity-list';
 import { Text } from '@/components/text';
 import { EmptyDataView, InternalErrorView, LoadingView, Wrapper } from '@/components/wrapper';
 
-import { IBoardModel, useMineBoardList } from '@/services/board';
+import { BoardModel, useMineBoardList } from '@/services/board';
 
 export default function MineBoardList() {
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isPending, isSuccess } = useMineBoardList();
 
-  const renderItem = (item: IBoardModel) => {
-    const { id, category, title, createdAt, commentCount, likeCount } = item;
+  const renderItem = (item: BoardModel) => {
+    const { id, stockCategory, title, createdAt, commentCount, likeCount } = item;
 
     return (
       <li key={id}>
@@ -22,7 +22,7 @@ export default function MineBoardList() {
           <Link href={`/board/${id}`} className="flex flex-col gap-1">
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-2">
-                <Text.PARAGRAPH text={`[${category.name}]`} color="gray" />
+                <Text.PARAGRAPH text={`[${stockCategory.name}]`} color="gray" />
                 <Text.HEADING text={title} />
               </div>
             </div>

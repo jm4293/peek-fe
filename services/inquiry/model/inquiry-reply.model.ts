@@ -1,7 +1,11 @@
-export interface IInquiryReplyModel {
+import { InquiryModel } from './inquiry.model';
+
+export interface InquiryReplyModel {
   id: number;
   uuid: string;
   content: string;
   createdAt: Date;
-  inquiryId: number;
+  updatedAt: Date | null;
+
+  inquiry: InquiryModel;
 }

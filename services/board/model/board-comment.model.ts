@@ -1,15 +1,16 @@
-import { IUserAccountModel } from '@/services/user';
+import { UserAccountModel } from '@/services/user';
 
-import { IBoardModel } from './board.model';
+import { BoardModel } from './board.model';
 
-export interface IBoardCommentModel {
+export interface BoardCommentModel {
   id: number;
   uuid: string;
   content: string;
   createdAt: Date;
+  updatedAt: Date | null;
   parentCommentId: number | null;
 
-  userAccount: IUserAccountModel;
-  board: IBoardModel;
-  replies: IBoardCommentModel[];
+  userAccount: UserAccountModel;
+  board: BoardModel;
+  replies: BoardCommentModel[];
 }

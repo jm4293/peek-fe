@@ -11,18 +11,18 @@ import { EmptyDataView, InternalErrorView, LoadingView, Wrapper } from '@/compon
 
 import { useQueryParams } from '@/hooks/queryParams';
 
-import { IBoardModel, useBoardList } from '@/services/board';
+import { BoardModel, useBoardList } from '@/services/board';
 
 export default function BoardList() {
   const { getQuery } = useQueryParams();
-  const category = getQuery('category');
+  const stockCategory = getQuery('stockCategory');
 
   const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isPending, isSuccess } = useBoardList({
-    category: category ? Number(category) : undefined,
+    stockCategory: stockCategory ? Number(stockCategory) : undefined,
   });
 
-  const renderItem = (item: IBoardModel) => {
-    const { id, category, title, createdAt, commentCount, likeCount, userAccount } = item;
+  const renderItem = (item: BoardModel) => {
+    const { id, stockCategory, title, createdAt, commentCount, likeCount, userAccount } = item;
 
     return (
       <li key={id}>
@@ -30,7 +30,7 @@ export default function BoardList() {
           <Link href={`/board/${id}`} className="flex flex-col gap-2">
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-2">
-                <Text.PARAGRAPH text={`[${category.name}]`} color="gray" />
+                <Text.PARAGRAPH text={`[${stockCategory.name}]`} color="gray" />
                 <Text.HEADING text={title} />
               </div>
               <div className="flex items-center gap-1">

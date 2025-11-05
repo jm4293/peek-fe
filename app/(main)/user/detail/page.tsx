@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Text } from '@/components/text';
 import { InternalErrorView, NotAuthView, Wrapper } from '@/components/wrapper';
 
-import { userInfoAction } from '@/services/user';
+import { getUserInfo } from '@/services/user';
 
 import { ERROR_CODE } from '@/shared/constant/error-code/error-code';
 import { userAccountTypeDescription } from '@/shared/enum/user';
@@ -12,7 +12,7 @@ import { userAccountTypeDescription } from '@/shared/enum/user';
 import UserWithdraw from './Withdraw';
 
 export default async function UserDetailPage() {
-  const { success, data, code } = await userInfoAction();
+  const { success, data, code } = await getUserInfo();
 
   if (!success && code === ERROR_CODE.UNAUTHORIZED) {
     return <NotAuthView text="유저 상세" />;

@@ -1,16 +1,18 @@
-import { IUserAccountModel } from '@/services/user';
+import { UserAccountModel } from '@/services/user';
 
-import { IInquiryImageModel } from './inquiry-image.model';
-import { IInquiryReplyModel } from './inquiry-reply.model';
+import { InquiryImageModel } from './inquiry-image.model';
+import { InquiryReplyModel } from './inquiry-reply.model';
 
-export interface IInquiryModel {
+export interface InquiryModel {
   id: number;
   uuid: string;
   title: string;
   content: string;
+  viewCount: number;
   createdAt: Date;
-  reply: IInquiryReplyModel;
-  images: IInquiryImageModel[];
+  updatedAt: Date | null;
 
-  userAccount: IUserAccountModel;
+  inquiryReply: InquiryReplyModel;
+  inquiryImages: InquiryImageModel[];
+  userAccount: UserAccountModel;
 }

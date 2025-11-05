@@ -5,19 +5,15 @@ import { useRouter } from 'next/navigation';
 
 import { useToast } from '@/hooks/modal';
 
-import AuthApi, {
-  ICheckEmailCodeDto,
-  ICheckEmailDto,
-  ILoginEmailDto,
-  ILoginOauthDto,
-  ISignUpDto,
-} from '@/services/auth';
 import { useUserMutation } from '@/services/user';
 
 import { LocalStorageKey } from '@/shared/constant/local-storage-key';
 import { userAccountTypeDescription } from '@/shared/enum/user';
 
 import { notificationTokenAtom } from '@/stores/notification-token.atom';
+
+import authApi from '../api';
+import { CheckEmailCodeReq, CheckEmailReq, SignInEmailReq, SignInOAuthReq, SignUpEmailReq } from '../type';
 
 export const useAuthMutation = () => {
   const queryClient = useQueryClient();
@@ -26,14 +22,14 @@ export const useAuthMutation = () => {
   const notificationToken = useAtomValue(notificationTokenAtom);
 
   const { openToast } = useToast();
-  const { notificationTokenMutation } = useUserMutation();
+  // const { notificationTokenMutation } = useUserMutation();
 
   const signInMutation = useMutation({
-    mutationFn: (dto: ILoginEmailDto) => AuthApi.signInEmail(dto),
+    mutationFn: (dto: SignInEmailReq) => authApi.signInEmail(dto),
     onSuccess: async () => {
-      if (notificationToken) {
-        await notificationTokenMutation.mutateAsync(notificationToken);
-      }
+      // if (notificationToken) {
+      //   await notificationTokenMutation.mutateAsync(notificationToken);
+      // }
 
       openToast({ type: 'success', message: '로그인에 성공했습니다.' });
       router.push('/home');
@@ -47,13 +43,13 @@ export const useAuthMutation = () => {
   });
 
   const oauthSignInMutation = useMutation({
-    mutationFn: (dto: ILoginOauthDto) => AuthApi.signInOauth(dto),
+    mutationFn: (dto: SignInOAuthReq) => authApi.signInOauth(dto),
     onSuccess: async (_, variables) => {
       const { userAccountType } = variables;
 
-      if (notificationToken) {
-        await notificationTokenMutation.mutateAsync(notificationToken);
-      }
+      // if (notificationToken) {
+      //   await notificationTokenMutation.mutateAsync(notificationToken);
+      // }
 
       LocalStorageUtil.setItem(LocalStorageKey.lastLoginMethod, JSON.stringify(userAccountType));
       openToast({ type: 'success', message: `${userAccountTypeDescription[userAccountType]} 로그인에 성공했습니다.` });
@@ -66,15 +62,15 @@ export const useAuthMutation = () => {
   });
 
   const checkEmailMutation = useMutation({
-    mutationFn: (dto: ICheckEmailDto) => AuthApi.checkEmail(dto),
+    mutationFn: (dto: CheckEmailReq) => authApi.checkEmail(dto),
   });
 
   const checkEmailCodeMutation = useMutation({
-    mutationFn: (dto: ICheckEmailCodeDto) => AuthApi.checkEmailCode(dto),
+    mutationFn: (dto: CheckEmailCodeReq) => authApi.checkEmailCode(dto),
   });
 
   const signUpMutation = useMutation({
-    mutationFn: (dto: ISignUpDto) => AuthApi.signUp(dto),
+    mutationFn: (dto: SignUpEmailReq) => authApi.signUp(dto),
     onSuccess: (res) => {
       const { email } = res.data;
 
@@ -87,7 +83,7 @@ export const useAuthMutation = () => {
   });
 
   const signoutMutation = useMutation({
-    mutationFn: () => AuthApi.logout(),
+    mutationFn: () => authApi.logout(),
     onSuccess: () => {
       // const firebase_messaging = getMessaging();
       // await deleteToken(firebase_messaging);

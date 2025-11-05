@@ -1,7 +1,10 @@
-import { EmptyDataView, InternalErrorView, Wrapper } from '@/components/wrapper';
+import { Suspense } from 'react';
 
-import { boardDetailAction } from '@/services/board';
-import { userInfoAction } from '@/services/user';
+import { SkeletonSuspense } from '@/components/skeleton';
+import { Wrapper } from '@/components/wrapper';
+
+import { getBoardDetail } from '@/services/board';
+import { getUserInfo } from '@/services/user';
 
 import BoardComment from './BoardComment';
 import BoardCommentRegister from './BoardCommentRegister';
@@ -14,28 +17,15 @@ interface IProps {
 export default async function BoardDetailPage(props: IProps) {
   const { id } = await props.params;
 
-  const { data: userInfo } = await userInfoAction();
-  const { success, data } = await boardDetailAction(id);
+  const { data: userInfo } = await getUserInfo();
 
-  if (!success) {
-    return (
-      <Wrapper.MAIN text="게시글">
-        <InternalErrorView />
-      </Wrapper.MAIN>
-    );
-  }
-
-  if (!data) {
-    return (
-      <Wrapper.MAIN text="게시글">
-        <EmptyDataView text="게시글" />
-      </Wrapper.MAIN>
-    );
-  }
+  const board = getBoardDetail(id);
 
   return (
     <Wrapper.MAIN text="게시글">
-      <BoardDetail data={data} userInfo={userInfo} />
+      <Suspense fallback={<SkeletonSuspense />}>
+        <BoardDetail board={board} userInfo={userInfo} />
+      </Suspense>
       <BoardComment id={id} userInfo={userInfo} />
       <BoardCommentRegister id={id} userInfo={userInfo} />
     </Wrapper.MAIN>

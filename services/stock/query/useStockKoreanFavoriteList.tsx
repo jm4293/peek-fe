@@ -3,7 +3,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { QueryKeys } from '@/shared/constant/query-key';
 
 import stockApi from '../api';
-import { IStockKoreanFavoriteRes } from '../response';
+import { GetStockKoreanFavoriteListRes } from '../type';
 
 export const useStockKoreanFavoriteList = () => {
   return useInfiniteQuery({
@@ -16,7 +16,7 @@ export const useStockKoreanFavoriteList = () => {
     },
     select: (data) => {
       return data.pages.reduce(
-        (acc: IStockKoreanFavoriteRes, cur) => {
+        (acc: GetStockKoreanFavoriteListRes, cur) => {
           const { favoriteStockList, total } = cur.data;
 
           return {

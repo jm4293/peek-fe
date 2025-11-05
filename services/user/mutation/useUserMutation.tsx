@@ -6,16 +6,10 @@ import { useRouter } from 'next/navigation';
 
 import { useModal, useToast } from '@/hooks/modal';
 
-import { ICheckEmailCodeDto, ICheckEmailDto } from '@/services/auth';
-import UserApi, {
-  IReadNotificationDto,
-  IResetPasswordDto,
-  IUpdateUserDto,
-  IUpdateUserPasswordDto,
-  IUpdateUserThumbnailDto,
-} from '@/services/user';
-
 import { QueryKeys } from '@/shared/constant/query-key';
+
+import userApi from '../api';
+import { ResetUserPasswordReq, UpdateUserInfoReq, UpdateUserPasswordReq, UpdateUserThumbnailReq } from '../type';
 
 export const useUserMutation = () => {
   const queryClient = useQueryClient();
@@ -25,7 +19,7 @@ export const useUserMutation = () => {
   const { openToast } = useToast();
 
   const updateUserMutation = useMutation({
-    mutationFn: (dto: IUpdateUserDto) => UserApi.updateUser(dto),
+    mutationFn: (dto: UpdateUserInfoReq) => userApi.updateUser(dto),
     onSuccess: async () => {
       await queryClient.refetchQueries({ queryKey: QueryKeys.user.myInfo() });
       openToast({ message: '회원정보 수정 완료', type: 'success' });
@@ -35,32 +29,22 @@ export const useUserMutation = () => {
   });
 
   const updateThumbnailMutation = useMutation({
-    mutationFn: (dto: IUpdateUserThumbnailDto) => UserApi.updateThumbnail(dto),
+    mutationFn: (dto: UpdateUserThumbnailReq) => userApi.updateThumbnail(dto),
     onSuccess: async () => {
       await queryClient.refetchQueries({ queryKey: QueryKeys.user.myInfo() });
     },
   });
 
-  const checkEmailMutation = useMutation({
-    mutationFn: (dto: ICheckEmailDto) => UserApi.checkEmail(dto),
-  });
+  // const checkEmailMutation = useMutation({
+  //   mutationFn: (dto: ICheckEmailDto) => userApi.checkEmail(dto),
+  // });
 
-  const checkEmailCodeMutation = useMutation({
-    mutationFn: (dto: ICheckEmailCodeDto) => UserApi.checkEmailCode(dto),
-  });
-
-  const resetPasswordMutation = useMutation({
-    mutationFn: (dto: IResetPasswordDto) => UserApi.resetPassword(dto),
-    onSuccess: (_, variables) => {
-      const { email } = variables;
-
-      openToast({ message: '비밀번호 재설정이 완료되었습니다.', type: 'success' });
-      router.replace(`/auth/login?email=${email}`);
-    },
-  });
+  // const checkEmailCodeMutation = useMutation({
+  //   mutationFn: (dto: ICheckEmailCodeDto) => userApi.checkEmailCode(dto),
+  // });
 
   const updatePasswordMutation = useMutation({
-    mutationFn: (dto: IUpdateUserPasswordDto) => UserApi.updatePassword(dto),
+    mutationFn: (dto: UpdateUserPasswordReq) => userApi.updatePassword(dto),
     onSuccess: async () => {
       await queryClient.refetchQueries({ queryKey: QueryKeys.user.myInfo() });
       openToast({ message: '비밀번호가 변경되었습니다.', type: 'success' });
@@ -77,8 +61,18 @@ export const useUserMutation = () => {
     },
   });
 
+  const resetPasswordMutation = useMutation({
+    mutationFn: (dto: ResetUserPasswordReq) => userApi.resetPassword(dto),
+    onSuccess: (_, variables) => {
+      const { email } = variables;
+
+      openToast({ message: '비밀번호 재설정이 완료되었습니다.', type: 'success' });
+      router.replace(`/auth/login?email=${email}`);
+    },
+  });
+
   const withdrawMutation = useMutation({
-    mutationFn: () => UserApi.withdraw(),
+    mutationFn: () => userApi.withdraw(),
     onSuccess: () => {
       queryClient.clear();
       LocalStorageUtil.clear();
@@ -89,42 +83,42 @@ export const useUserMutation = () => {
     },
   });
 
-  const readNotificationMutation = useMutation({
-    mutationFn: (dto: IReadNotificationDto) => UserApi.postNotificationRead(dto),
-    onSuccess: async () => {
-      await queryClient.refetchQueries({ queryKey: ['notification-list'] });
-    },
-  });
+  // const readNotificationMutation = useMutation({
+  //   mutationFn: (dto: IReadNotificationDto) => userApi.postNotificationRead(dto),
+  //   onSuccess: async () => {
+  //     await queryClient.refetchQueries({ queryKey: ['notification-list'] });
+  //   },
+  // });
 
-  const readAllNotificationMutation = useMutation({
-    mutationFn: () => UserApi.postNotificationReadAll(),
-    onSuccess: async () => {
-      await queryClient.refetchQueries({ queryKey: ['notification-list'] });
-    },
-  });
+  // const readAllNotificationMutation = useMutation({
+  //   mutationFn: () => userApi.postNotificationReadAll(),
+  //   onSuccess: async () => {
+  //     await queryClient.refetchQueries({ queryKey: ['notification-list'] });
+  //   },
+  // });
 
-  const deleteNotificationMutation = useMutation({
-    mutationFn: (notificationSeq: number) => UserApi.deleteNotification(notificationSeq),
-    onSuccess: async () => {
-      await queryClient.refetchQueries({ queryKey: ['notification-list'] });
-    },
-  });
+  // const deleteNotificationMutation = useMutation({
+  //   mutationFn: (notificationSeq: number) => userApi.deleteNotification(notificationSeq),
+  //   onSuccess: async () => {
+  //     await queryClient.refetchQueries({ queryKey: ['notification-list'] });
+  //   },
+  // });
 
-  const notificationTokenMutation = useMutation({
-    mutationFn: (token: string) => UserApi.postRegisterPushToken({ pushToken: token }),
-  });
+  // const notificationTokenMutation = useMutation({
+  //   mutationFn: (token: string) => userApi.postRegisterPushToken({ pushToken: token }),
+  // });
 
   return {
     updateUserMutation,
     updateThumbnailMutation,
-    checkEmailMutation,
-    checkEmailCodeMutation,
+    // checkEmailMutation,
+    // checkEmailCodeMutation,
     resetPasswordMutation,
     updatePasswordMutation,
     withdrawMutation,
-    readNotificationMutation,
-    readAllNotificationMutation,
-    deleteNotificationMutation,
-    notificationTokenMutation,
+    // readNotificationMutation,
+    // readAllNotificationMutation,
+    // deleteNotificationMutation,
+    // notificationTokenMutation,
   };
 };

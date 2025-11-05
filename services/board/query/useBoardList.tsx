@@ -1,17 +1,18 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-import BoardApi, { IBoardListDto, IBoardListRes } from '@/services/board';
-
 import { QueryKeys } from '@/shared/constant/query-key';
 
-interface IProps extends Omit<IBoardListDto, 'page'> {}
+import boardApi from '../api';
+import { GetBoardListReq, GetBoardListRes } from '../type';
+
+interface IProps extends Omit<GetBoardListReq, 'page'> {}
 
 export const useBoardList = (props: IProps) => {
-  const { category } = props;
+  const { stockCategory } = props;
 
   return useInfiniteQuery({
-    queryKey: QueryKeys.board.list(category),
-    queryFn: ({ pageParam }) => BoardApi.getBoardList({ page: pageParam, category }),
+    queryKey: QueryKeys.board.list(stockCategory),
+    queryFn: ({ pageParam }) => boardApi.getBoardList({ page: pageParam, stockCategory }),
     getNextPageParam: (lastPage) => {
       const { nextPage } = lastPage.data;
 
@@ -19,7 +20,7 @@ export const useBoardList = (props: IProps) => {
     },
     select: (data) => {
       return data.pages.reduce(
-        (acc: IBoardListRes, cur) => {
+        (acc: GetBoardListRes, cur) => {
           const { boardList, total, nextPage } = cur.data;
 
           return { boardList: [...acc.boardList, ...boardList], total, nextPage };

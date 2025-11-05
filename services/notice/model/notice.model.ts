@@ -1,8 +1,8 @@
-import { IUserAccountModel } from '@/services/user';
+import { UserAccountModel } from '@/services/user';
 
 import { NoticeTypeEnum } from '@/shared/enum/notice';
 
-export interface INoticeModel {
+export interface NoticeModel {
   id: number;
   uuid: string;
   type: NoticeTypeEnum;
@@ -12,5 +12,5 @@ export interface INoticeModel {
   createdAt: Date;
   updatedAt: Date;
 
-  userAccount: IUserAccountModel;
+  userAccount: UserAccountModel;
 }

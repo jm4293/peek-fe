@@ -1,12 +1,20 @@
-export interface IStockKoreanCompanyModel {
-  ceo: string;
+import { UserStockFavoriteModel } from '@/services/user';
+
+import { StockCategoryModel } from './stock-category.model';
+
+export interface StockKoreanCompanyModel {
+  id: number;
+  uuid: string;
   code: string;
   companyName: string;
-  createdAt: Date;
-  homePage: string;
-  id: number;
   industry: string;
-  listingAt: Date;
   products: string;
-  updatedAt: Date;
+  ceo: string;
+  homePage: string;
+  listingAt: Date;
+  createdAt: Date;
+  updatedAt: Date | null;
+
+  stockCategory: StockCategoryModel;
+  userStockFavorites: UserStockFavoriteModel[];
 }

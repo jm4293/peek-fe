@@ -5,14 +5,14 @@ import { Thumbnail } from '@/components/image';
 import { Text } from '@/components/text';
 import { InternalErrorView, NotAuthView, Wrapper } from '@/components/wrapper';
 
-import { userInfoAction } from '@/services/user';
+import { getUserInfo } from '@/services/user';
 
 import { ERROR_CODE } from '@/shared/constant/error-code/error-code';
 
 import UserLogout from './Logout';
 
 export default async function UserPage() {
-  const { success, data, code } = await userInfoAction();
+  const { success, data, code } = await getUserInfo();
 
   if (!success && code === ERROR_CODE.UNAUTHORIZED) {
     return <NotAuthView text="내 정보" />;

@@ -1,14 +1,14 @@
 import { useMutation } from '@tanstack/react-query';
 
-import ImageApi from '@/services/image';
+import imageApi from '../api';
 
 export const useImageMutation = () => {
   const uploadImageMutation = useMutation({
-    mutationFn: (dto: { file: File }) => ImageApi.uploadImage(dto),
+    mutationFn: (dto: { file: File }) => imageApi.uploadImage(dto),
   });
 
   const uploadImagesMutation = useMutation({
-    mutationFn: (dto: { files: File[] }) => ImageApi.uploadImages(dto),
+    mutationFn: (dto: { files: File[] }) => imageApi.uploadImages(dto),
     onSuccess: (data) => {
       const { successUploads, failUploads } = data.data;
 

@@ -1,6 +1,6 @@
 import { EmptyDataView, InternalErrorView, Wrapper } from '@/components/wrapper';
 
-import { boardDetailAction } from '@/services/board';
+import { getBoardDetail } from '@/services/board';
 
 import BoardModify from './BoardModify';
 
@@ -11,7 +11,7 @@ interface IProps {
 export default async function BoardModifyPage(props: IProps) {
   const { id } = await props.params;
 
-  const { success, data } = await boardDetailAction(id);
+  const { success, data } = await getBoardDetail(id);
 
   if (!success) {
     return (

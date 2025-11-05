@@ -5,27 +5,24 @@ import { useState } from 'react';
 
 import { Button } from '@/components/button';
 import { Input } from '@/components/input';
+import { SkeletonSuspense } from '@/components/skeleton';
 import { Text } from '@/components/text';
 import { Textarea } from '@/components/textarea';
-import { Wrapper } from '@/components/wrapper';
+import { InternalErrorView, Wrapper } from '@/components/wrapper';
 
 import { useModal } from '@/hooks/modal';
 
 import { useBoardMutation } from '@/services/board';
-import { IStockCategoryModel } from '@/services/stock';
+import { useStockCategoryList } from '@/services/stock';
 
-interface IProps {
-  stockCategoryList: IStockCategoryModel[];
-}
-
-export default function BoardRegister(props: IProps) {
-  const { stockCategoryList } = props;
-
+export default function BoardRegister() {
   const [category, setCategory] = useState<number | null>(null);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
   const { openModal, closeModal } = useModal();
+
+  const { data, isPending, isSuccess } = useStockCategoryList();
 
   const { createBoardMutation } = useBoardMutation();
 
@@ -61,11 +58,23 @@ export default function BoardRegister(props: IProps) {
     createBoardMutation.mutate({ categoryId: category, title, content });
   };
 
+  if (isPending) {
+    return <SkeletonSuspense />;
+  }
+
+  if (!isSuccess) {
+    return (
+      <Wrapper.SECTION>
+        <InternalErrorView />
+      </Wrapper.SECTION>
+    );
+  }
+
   return (
     <>
       <Wrapper.SECTION text="카테고리">
         <div className="flex items-center gap-4">
-          {stockCategoryList.map((cur) => {
+          {data.map((cur) => {
             return (
               <div key={cur.id} onClick={() => setCategory(cur.id)}>
                 <Text.HEADING text={cur.name} color={category === cur.id ? 'default' : 'gray'} />
