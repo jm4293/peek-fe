@@ -19,7 +19,9 @@ export const Currency = () => {
     <div className="flex justify-between items-center mb-2">
       <div className="flex items-center gap-2">
         <Text.HEADING text="환율" />
-        {isSuccess && data.length > 0 && <Text.PARAGRAPH text={DayjsUtil.of(data[0].createdAt).formatYYMMDDHHmm()} />}
+        {isSuccess && data.length > 0 && (
+          <Text.PARAGRAPH text={DayjsUtil.of(data[0].createdAt).formatYYYYMMDDHHmmss()} />
+        )}
       </div>
       <Text.CAPTION text="30초마다 갱신됩니다." color="gray" className="text-end" />
     </div>

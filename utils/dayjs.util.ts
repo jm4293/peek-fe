@@ -75,6 +75,14 @@ export class DayjsUtil {
     return dayjs(this.date).format('YYYY.MM.DD HH:mm');
   }
 
+  formatYYYYMMDDHHmmss() {
+    if (!this.date) {
+      return '-';
+    }
+
+    return dayjs(this.date).format('YYYY.MM.DD HH:mm:ss');
+  }
+
   // 추가적인 체이닝을 위한 메서드들
   addDays(days: number) {
     if (!this.date) {
