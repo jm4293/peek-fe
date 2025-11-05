@@ -20,7 +20,7 @@ export const useKoreanStockIndex = (props: IProps) => {
   const [kosdaq, setKosdaq] = useState<IKoreanStockIndex | null>(null);
 
   useEffect(() => {
-    const socket = io(`${API_URL}/kis/korean/index`, {
+    const socket = io(`${API_URL}/ls/korean/index`, {
       transports: ['websocket'],
     });
 
