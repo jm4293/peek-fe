@@ -11,6 +11,16 @@ export class DayjsUtil {
     return new DayjsUtil(date);
   }
 
+  // 시간만
+  formatHHmmss() {
+    if (!this.date) {
+      return '-';
+    }
+
+    return dayjs(this.date).format('HH:mm:ss');
+  }
+
+  // 월.일
   formatMMDD() {
     if (!this.date) {
       return '-';
@@ -35,14 +45,7 @@ export class DayjsUtil {
     return dayjs(this.date).format('MM.DD HH:mm:ss');
   }
 
-  formatHHmmss() {
-    if (!this.date) {
-      return '-';
-    }
-
-    return dayjs(this.date).format('HH:mm:ss');
-  }
-
+  // 년(2자리).월.일
   formatYYMMDD() {
     if (!this.date) {
       return '-';
@@ -59,6 +62,15 @@ export class DayjsUtil {
     return dayjs(this.date).format('YY.MM.DD HH:mm');
   }
 
+  formatYYMMDDHHmmss() {
+    if (!this.date) {
+      return '-';
+    }
+
+    return dayjs(this.date).format('YY.MM.DD HH:mm:ss');
+  }
+
+  // 년(4자리).월.일
   formatYYYYMMDD() {
     if (!this.date) {
       return '-';
@@ -83,7 +95,7 @@ export class DayjsUtil {
     return dayjs(this.date).format('YYYY.MM.DD HH:mm:ss');
   }
 
-  // 추가적인 체이닝을 위한 메서드들
+  // 날짜 조작
   addDays(days: number) {
     if (!this.date) {
       return this;
