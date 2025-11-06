@@ -29,7 +29,7 @@ export const StockKoreanIndex = () => {
       <div className="flex items-center gap-2">
         <Text.HEADING text="국내 지수" />
         {isConnected && kospi && (
-          <Text.CAPTION text={DayjsUtil.of(kospi.createdAt).formatMMDDHHmmss()} color="gray" className="text-nowrap" />
+          <Text.CAPTION text={DayjsUtil.of(kospi.createdAt).formatMMDDHHmmss()} className="text-nowrap" />
         )}
       </div>
       <Text.CAPTION text="10초마다 갱신됩니다." color="gray" className="text-end" />

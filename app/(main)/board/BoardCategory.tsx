@@ -40,7 +40,7 @@ export default function BoardCategory() {
         </Link>
 
         {data.map((cur) => (
-          <Link key={cur.id} href={`/board?category=${cur.id}`}>
+          <Link key={cur.id} href={`/board?stockCategory=${cur.id}`}>
             <Text.HEADING text={cur.name} color={stockCategory === cur.id.toString() ? 'default' : 'gray'} />
           </Link>
         ))}
