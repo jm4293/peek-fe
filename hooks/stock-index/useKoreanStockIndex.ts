@@ -28,17 +28,19 @@ export const useKoreanStockIndex = (props: IProps) => {
       setIsConnected(true);
     });
 
-    socket.on('connected', () => {
-      setLoading(false);
-      setIsConnected(true);
-    });
-
     socket.on('disconnect', () => {
       setIsConnected(false);
     });
 
     socket.on('connect_error', (error) => {
       setIsConnected(false);
+    });
+
+    socket.on('connected', () => {
+      setIsConnected(true);
+    });
+
+    socket.onAny((eventName, ...args) => {
       setLoading(false);
     });
 
@@ -80,7 +82,7 @@ export const useKoreanStockIndex = (props: IProps) => {
   return {
     kospi,
     kosdaq,
-    loading,
-    isConnected,
+    loading: false,
+    isConnected: true,
   };
 };

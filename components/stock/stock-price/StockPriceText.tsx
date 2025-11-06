@@ -12,7 +12,7 @@ export const StockPriceText = (props: IProps) => {
 
   if (size === 'HEADING') {
     return (
-      <Text.HEADING
+      <Text.TITLE
         text={price}
         color={`${sign === '2' ? 'red' : sign === '5' ? 'blue' : 'default'}`}
         className={`text-nowrap ${className}`}

@@ -59,4 +59,5 @@ export interface IKoreanStockIndex {
   frgsvalue: string; // 외인순매수금액
   orgsvalue: string; // 기관순매수금액
   upcode: string; // 업종코드
+  createdAt: Date;
 }
