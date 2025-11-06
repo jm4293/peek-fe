@@ -44,7 +44,7 @@ const OUTLINE = (props: IProps) => {
     <button
       className={`
         px-6 py-3 rounded-lg
-        bg-white
+        bg-gray-100
         transition-all duration-200 ease-in-out
         hover:shadow-md
         disabled:cursor-not-allowed disabled:opacity-60

@@ -1,10 +1,11 @@
 'use client';
 
 import { useDeviceLayout } from '@/hooks';
+import { ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
-import { BackButton, ThemeSwitcher } from '@/components/button';
+import { ThemeSwitcher } from '@/components/button';
 import { Text } from '@/components/text';
 
 const menuItems = [
@@ -23,6 +24,7 @@ const Logo = () => {
 };
 
 export const Header = () => {
+  const router = useRouter();
   const pathname = usePathname();
 
   const { isMobile } = useDeviceLayout();
@@ -38,7 +40,11 @@ export const Header = () => {
   if (isMobile) {
     return (
       <header className="flex justify-between items-center bg-theme-bg-header">
-        {pathname.split('/').length > 2 ? <BackButton /> : <div style={{ width: '24px' }} />}
+        {pathname.split('/').length > 2 ? (
+          <ChevronLeft onClick={() => router.back()} />
+        ) : (
+          <div style={{ width: '24px' }} />
+        )}
         <Logo />
         <ThemeSwitcher />
       </header>

@@ -73,6 +73,7 @@ export default function BoardCommentRegister(props: IProps) {
     <div className="w-full max-w-screen-xl fixed left-1/2 bottom-0 transform -translate-x-1/2">
       <Wrapper.SECTION>
         <Input
+          className="pb-4"
           name="comment"
           value={comment}
           onChange={(event) => setComment(event.target.value)}

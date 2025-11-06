@@ -2,9 +2,8 @@
 
 import Link from 'next/link';
 
-import { LineSkeleton } from '@/components/skeleton';
 import { Text } from '@/components/text';
-import { InternalErrorView, Wrapper } from '@/components/wrapper';
+import { InternalErrorView, LoadingView, Wrapper } from '@/components/wrapper';
 
 import { useQueryParams } from '@/hooks/queryParams';
 
@@ -17,19 +16,11 @@ export default function BoardCategory() {
   const { data, isPending, isSuccess } = useStockCategoryList();
 
   if (isPending) {
-    return (
-      <Wrapper.SECTION text="카테고리">
-        <LineSkeleton />
-      </Wrapper.SECTION>
-    );
+    return <LoadingView />;
   }
 
   if (!isSuccess) {
-    return (
-      <Wrapper.MAIN text="커뮤니티">
-        <InternalErrorView />
-      </Wrapper.MAIN>
-    );
+    return <InternalErrorView />;
   }
 
   return (
