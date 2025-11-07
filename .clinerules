@@ -1,0 +1,288 @@
+# Peek-FE 프로젝트 - Claude/Cline AI 규칙
+
+당신은 Peek-FE 프로젝트의 전문 개발자입니다. 다음 규칙을 **엄격히** 준수하여 코드를 작성하고 제안하세요.
+
+## 🎯 프로젝트 개요
+
+- **프로젝트명**: Peek-FE (실시간 금융 정보 시각화 웹 애플리케이션)
+- **주요 기능**: 실시간 주식/환율 데이터 제공, 커뮤니티, 차트 시각화
+- **기술 스택**: Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS
+
+## 📚 기술 스택 및 라이브러리
+
+### Core
+- **프레임워크**: Next.js 15+ (App Router 방식 사용)
+- **언어**: TypeScript (엄격 모드)
+- **UI**: React 19+
+
+### 스타일링
+- **CSS**: Tailwind CSS 사용 (인라인 클래스 방식)
+- **테마**: next-themes (다크 모드는 `class` 전략 사용)
+- **색상**: `tailwind.config.js`에 정의된 CSS 변수 사용 (예: `var(--main-color)`)
+- **아이콘**: Lucide React
+
+### 상태 관리
+- **서버 상태**: TanStack React Query (API 데이터 캐싱 및 동기화)
+- **클라이언트 상태**: Jotai (UI 상태 관리)
+- **전역 상태는 최소화**하고 필요한 경우에만 Jotai atoms 사용
+
+### 데이터 통신
+- **HTTP**: Axios (lib/axios에 설정된 인스턴스 사용)
+- **실시간**: Socket.IO Client
+- **에러 처리**: `hooks/useApiError.tsx` 훅 사용
+
+### 시각화
+- **차트**: Lightweight Charts
+- **가상 스크롤**: TanStack Virtual
+- **애니메이션**: GSAP
+
+## 🔧 코드 스타일 규칙
+
+### 포맷팅 (엄격히 준수)
+```typescript
+// ✅ 올바른 예시
+const example = {
+  name: 'test',
+  value: 100,
+};
+
+// ❌ 잘못된 예시 (더블 쿼트, 세미콜론 없음, 종결 쉼표 없음)
+const example = {
+  name: "test",
+  value: 100
+}
+```
+
+- **들여쓰기**: 2칸
+- **문자열**: 싱글 쿼트(`'`) 사용
+- **종결 쉼표**: 항상 사용 (`trailingComma: 'all'`)
+- **세미콜론**: 항상 사용
+- **줄 길이**: 120자 권장
+
+### 명명 규칙
+- **컴포넌트**: `PascalCase` (예: `StockChart.tsx`, `UserProfile.tsx`)
+- **훅**: `camelCase` with `use` prefix (예: `useStockData.tsx`, `useAuth.tsx`)
+- **유틸 함수**: `camelCase` (예: `formatDate.ts`, `validateEmail.ts`)
+- **상수**: `UPPER_SNAKE_CASE` (예: `API_BASE_URL`, `MAX_RETRY_COUNT`)
+- **타입/인터페이스**: `PascalCase` (예: `UserProfile`, `StockData`)
+- **Enum**: `PascalCase` (예: `UserRole`, `StockStatus`)
+
+### 임포트 순서 (자동 정렬됨)
+```typescript
+// 1. React 및 Next.js
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
+
+// 2. 외부 라이브러리
+import { useQuery } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
+
+// 3. @/app
+import { SomeComponent } from '@/app/components';
+
+// 4. @/components
+import { Button } from '@/components/button';
+
+// 5. @/hooks
+import { useApiError } from '@/hooks';
+
+// 6. @/services
+import { getStockData } from '@/services/stock';
+
+// 7. @/shared
+import { API_URL } from '@/shared/constant/api-url';
+
+// 8. @/utils
+import { formatDate } from '@/utils';
+
+// 9. 상대 경로
+import { helper } from './helper';
+```
+
+## 📁 프로젝트 구조
+
+### 경로 별칭 (반드시 사용)
+```typescript
+// ✅ 올바른 예시
+import { Button } from '@/components/button';
+import { useAuth } from '@/hooks';
+import { API_URL } from '@/shared/constant/api-url';
+
+// ❌ 잘못된 예시 (상대 경로 사용)
+import { Button } from '../../../components/button';
+```
+
+### 주요 디렉토리
+- `app/`: Next.js App Router 페이지 (파일 시스템 기반 라우팅)
+- `components/`: 재사용 가능한 UI 컴포넌트 (index.ts로 export)
+- `services/`: API 호출 함수 (React Query와 함께 사용)
+- `hooks/`: 커스텀 훅
+- `lib/`: 외부 라이브러리 초기화 및 설정
+- `stores/`: Jotai atoms (전역 상태)
+- `shared/`: 타입, 상수, enum
+- `utils/`: 순수 함수 유틸리티
+
+### 모듈 내보내기
+각 폴더는 `index.ts`를 통해 모듈을 외부에 노출:
+```typescript
+// components/button/index.ts
+export { Button } from './Button';
+export { ShareButton } from './ShareButton';
+export { ThemeSwitcher } from './ThemeSwitcher';
+```
+
+## 🎨 컴포넌트 작성 규칙
+
+### React 컴포넌트
+```typescript
+// ✅ 올바른 예시
+'use client'; // 클라이언트 컴포넌트인 경우
+
+import { useState } from 'react';
+
+import { Button } from '@/components/button';
+
+interface MyComponentProps {
+  title: string;
+  count?: number;
+}
+
+export function MyComponent({ title, count = 0 }: MyComponentProps) {
+  const [value, setValue] = useState(count);
+
+  return (
+    <div className="flex flex-col gap-4 p-4">
+      <h1 className="text-2xl font-bold">{title}</h1>
+      <Button onClick={() => setValue(value + 1)}>
+        Count: {value}
+      </Button>
+    </div>
+  );
+}
+```
+
+### 서버 컴포넌트 vs 클라이언트 컴포넌트
+- **기본은 서버 컴포넌트**
+- 다음의 경우에만 `'use client'` 지시어 사용:
+  - useState, useEffect 등 React 훅 사용
+  - 이벤트 핸들러 (onClick, onChange 등)
+  - 브라우저 API 사용 (window, document 등)
+  - Jotai, React Query 훅 사용
+
+### Tailwind CSS 사용
+```typescript
+// ✅ 올바른 예시
+<div className="flex items-center justify-between bg-theme-bg-main p-4">
+  <h1 className="text-xl font-bold text-theme-text-main">Title</h1>
+  <Button className="bg-primary hover:bg-primary/90">Click</Button>
+</div>
+
+// ❌ 잘못된 예시 (인라인 스타일)
+<div style={{ display: 'flex', padding: '16px' }}>
+  <h1 style={{ fontSize: '20px' }}>Title</h1>
+</div>
+```
+
+## 🔌 API 통신
+
+### React Query 사용
+```typescript
+// services/stock/get-stock-data.ts
+import { axiosInstance } from '@/lib/axios';
+import { StockData } from '@/shared/types/stock';
+
+export async function getStockData(symbol: string): Promise<StockData> {
+  const { data } = await axiosInstance.get(`/stock/${symbol}`);
+  return data;
+}
+
+// app/stock/page.tsx
+'use client';
+
+import { useQuery } from '@tanstack/react-query';
+
+import { getStockData } from '@/services/stock';
+import { QUERY_KEY } from '@/shared/constant/query-key';
+
+export function StockPage() {
+  const { data, isLoading, error } = useQuery({
+    queryKey: [QUERY_KEY.STOCK, symbol],
+    queryFn: () => getStockData(symbol),
+  });
+
+  if (isLoading) return <LoadingSpinner />;
+  if (error) return <ErrorMessage error={error} />;
+
+  return <div>{/* 데이터 표시 */}</div>;
+}
+```
+
+### 에러 처리
+```typescript
+import { useApiError } from '@/hooks';
+
+const { handleError } = useApiError();
+
+try {
+  await someApiCall();
+} catch (error) {
+  handleError(error);
+}
+```
+
+## 🎯 상태 관리
+
+### Jotai (클라이언트 상태)
+```typescript
+// stores/modal.atom.ts
+import { atom } from 'jotai';
+
+export const modalAtom = atom<{
+  isOpen: boolean;
+  content: React.ReactNode;
+}>({
+  isOpen: false,
+  content: null,
+});
+
+// 컴포넌트에서 사용
+import { useAtom } from 'jotai';
+import { modalAtom } from '@/stores/modal.atom';
+
+const [modal, setModal] = useAtom(modalAtom);
+```
+
+## 🚫 금지 사항
+
+1. **console.log 금지**: 디버깅 코드는 커밋하지 않음
+2. **any 타입 금지**: 명시적 타입 선언 필수
+3. **인라인 스타일 금지**: Tailwind CSS 사용
+4. **상대 경로 금지**: 경로 별칭 사용 필수
+5. **var 키워드 금지**: const/let 사용
+6. **== 연산자 금지**: === 사용
+
+## ✅ 체크리스트
+
+코드를 작성하거나 수정할 때 다음을 확인하세요:
+
+- [ ] TypeScript 타입이 명시적으로 선언되었나?
+- [ ] 경로 별칭(@/*)을 사용했나?
+- [ ] Tailwind CSS를 사용했나?
+- [ ] 서버/클라이언트 컴포넌트를 올바르게 구분했나?
+- [ ] React Query를 API 호출에 사용했나?
+- [ ] 싱글 쿼트와 세미콜론을 사용했나?
+- [ ] console.log가 없나?
+- [ ] 컴포넌트명이 PascalCase인가?
+- [ ] 훅 이름이 use로 시작하나?
+- [ ] index.ts를 통해 export했나?
+
+## 💡 추가 가이드
+
+- **파일 생성 시**: 기존 구조와 패턴을 따를 것
+- **컴포넌트 수정 시**: 전체 맥락을 이해하고 일관성 유지
+- **새로운 기능 추가 시**: README.md 및 PROJECT_RULES.md 참조
+- **불확실한 경우**: 기존 유사 코드를 참고하여 패턴 유지
+
+---
+
+**중요**: 이 규칙은 프로젝트의 일관성과 품질을 위해 **반드시** 준수해야 합니다.
