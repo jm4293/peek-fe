@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-import { useKoreanStockSocket } from '@/hooks/socket';
+import { useStockKoreanSocket } from '@/hooks/socket';
 
 interface IProps {
   code: string;
@@ -11,7 +11,7 @@ interface IProps {
 export default function BoardDetail(props: IProps) {
   const { code } = props;
 
-  const { subscribeStock, unsubscribeStock, onStockUpdate, offStockUpdate } = useKoreanStockSocket();
+  const { subscribeStock, unsubscribeStock, onStockUpdate, offStockUpdate } = useStockKoreanSocket();
   const [stockData, setStockData] = useState<{
     symbol: string;
     name: string;

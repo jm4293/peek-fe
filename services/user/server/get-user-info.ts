@@ -37,8 +37,6 @@ export const getUserInfo = async (): Promise<IResponseType<UserAccountModel>> =>
 
     const data = (await response.json()) as GetUserInfoRes;
 
-    console.log('data', data);
-
     const { userInfo } = data;
 
     return { success: true, data: userInfo };

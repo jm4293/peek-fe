@@ -5,9 +5,9 @@ import Link from 'next/link';
 
 import { LineSkeleton } from '@/components/skeleton';
 import { NetworkErrorText, Text } from '@/components/text';
-import { Wrapper } from '@/components/wrapper';
+import { EmptyDataView, Wrapper } from '@/components/wrapper';
 
-import { useKoreanStockIndex } from '@/hooks/stock-index';
+import { useStockKoreanIndex } from '@/hooks/socket';
 
 import { StockPriceText } from '../stock-price';
 
@@ -22,19 +22,24 @@ interface IStockIndexData {
 }
 
 export const StockKoreanIndex = () => {
-  const { kospi, kosdaq, loading, isConnected } = useKoreanStockIndex({ isKospi: true, isKosdaq: true });
+  const { kospi, kosdaq, loading, isConnected } = useStockKoreanIndex({ isKospi: true, isKosdaq: true });
 
-  const titleComponent = (
-    <div className="flex justify-between items-center">
-      <div className="flex items-center gap-2">
-        <Text.HEADING text="국내 지수" />
-        {isConnected && kospi && (
-          <Text.CAPTION text={DayjsUtil.of(kospi.createdAt).formatMMDDHHmmss()} className="text-nowrap" />
-        )}
-      </div>
-      <Text.CAPTION text="10초마다 갱신됩니다." color="gray" className="text-end" />
-    </div>
-  );
+  const StockKoreanIndexWrapper = ({ children }: { children: React.ReactNode }) => {
+    return (
+      <Wrapper.SECTION>
+        <div className="flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <Text.HEADING text="국내 지수" />
+            {isConnected && kospi && (
+              <Text.CAPTION text={DayjsUtil.of(kospi.createdAt).formatMMDDHHmmss()} className="text-nowrap" />
+            )}
+          </div>
+          <Text.CAPTION text="10초마다 갱신됩니다." color="gray" className="text-end" />
+        </div>
+        {children}
+      </Wrapper.SECTION>
+    );
+  };
 
   const Render = (props: { indexData: IStockIndexData; title: string; href: string }) => {
     const { indexData, title, href } = props;
@@ -74,30 +79,34 @@ export const StockKoreanIndex = () => {
 
   if (loading) {
     return (
-      <Wrapper.SECTION>
-        {titleComponent}
+      <StockKoreanIndexWrapper>
         <LineSkeleton />
-      </Wrapper.SECTION>
+      </StockKoreanIndexWrapper>
     );
   }
 
   if (!isConnected) {
     return (
-      <Wrapper.SECTION>
-        {titleComponent}
+      <StockKoreanIndexWrapper>
         <NetworkErrorText />
-      </Wrapper.SECTION>
+      </StockKoreanIndexWrapper>
     );
   }
 
   return (
-    <Wrapper.SECTION>
-      {titleComponent}
-
+    <StockKoreanIndexWrapper>
       <div className="flex justify-center items-center gap-12">
-        {kospi && <Render indexData={kospi} title="코스피" href="/index/kospi" />}
-        {kosdaq && <Render indexData={kosdaq} title="코스닥" href="/index/kosdaq" />}
+        {kospi ? (
+          <Render indexData={kospi} title="코스피" href="/index/kospi" />
+        ) : (
+          <EmptyDataView text="코스티 데이터" />
+        )}
+        {kosdaq ? (
+          <Render indexData={kosdaq} title="코스닥" href="/index/kosdaq" />
+        ) : (
+          <EmptyDataView text="코스닥 데이터" />
+        )}
       </div>
-    </Wrapper.SECTION>
+    </StockKoreanIndexWrapper>
   );
 };

@@ -13,7 +13,7 @@ interface StockData {
   timestamp: Date;
 }
 
-export const useKoreanStockSocket = () => {
+export const useStockKoreanSocket = () => {
   const socketRef = useRef<Socket | null>(null);
 
   useEffect(() => {
@@ -25,22 +25,16 @@ export const useKoreanStockSocket = () => {
 
     socket.on('connect', () => {});
 
-    // 연결 성공 시
     socket.on('connected', () => {});
 
-    // 연결 해제 시
     socket.on('disconnect', (reason) => {});
 
-    // 연결 에러 처리
     socket.on('connect_error', (error) => {});
 
-    // 에러 처리
     socket.on('error', (error) => {});
 
-    // 구독 성공 응답
     socket.on('subscribed', (data) => {});
 
-    // 구독 해제 성공 응답
     socket.on('unsubscribed', (data) => {});
 
     return () => {

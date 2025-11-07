@@ -5,10 +5,10 @@ import { LineSkeleton } from '@/components/skeleton';
 import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
-import { useKoreanStockIndex } from '@/hooks/stock-index';
+import { useStockKoreanIndex } from '@/hooks/socket';
 
 export default function KosdaqIndex() {
-  const { kosdaq, loading } = useKoreanStockIndex({ isKospi: false, isKosdaq: true });
+  const { kosdaq, loading } = useStockKoreanIndex({ isKospi: false, isKosdaq: true });
 
   if (loading) {
     return <LineSkeleton />;

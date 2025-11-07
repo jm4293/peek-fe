@@ -3,14 +3,15 @@ import { Wrapper } from './Wrapper';
 
 interface IProps {
   text: string;
+  className?: string;
 }
 
 export const EmptyDataView = (props: IProps) => {
-  const { text } = props;
+  const { text, className } = props;
 
   return (
     <Wrapper.SECTION>
-      <Text.HEADING text={`${text}이(가) 없습니다.`} />
+      <Text.HEADING text={`${text}이(가) 없습니다.`} className={className} />
     </Wrapper.SECTION>
   );
 };

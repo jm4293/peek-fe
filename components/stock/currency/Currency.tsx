@@ -5,60 +5,54 @@ import Marquee from 'react-fast-marquee';
 
 import { LineSkeleton } from '@/components/skeleton';
 import { NetworkErrorText, Text } from '@/components/text';
-import { Wrapper } from '@/components/wrapper';
+import { EmptyDataView, Wrapper } from '@/components/wrapper';
 
 import { useCurrencyList } from '@/services/currency/query';
 
 export const Currency = () => {
   const { data, isPending, isSuccess } = useCurrencyList();
 
-  const titleComponent = (
-    <div className="flex justify-between items-center mb-2">
-      <div className="flex items-center gap-2">
-        <Text.HEADING text="환율" />
-        {isSuccess && data.length > 0 && <Text.CAPTION text={DayjsUtil.of(data[0].createdAt).formatMMDDHHmmss()} />}
-      </div>
-      <Text.CAPTION text="30초마다 갱신됩니다." color="gray" className="text-end" />
-    </div>
-  );
-
-  const EmptyData = () => (
-    <div className="text-center">
-      <Text.HEADING text="환율 데이터가 없습니다." />
-    </div>
-  );
+  const CurrencyWrapper = ({ children }: { children: React.ReactNode }) => {
+    return (
+      <Wrapper.SECTION>
+        <div className="flex justify-between items-center mb-2">
+          <div className="flex items-center gap-2">
+            <Text.HEADING text="환율" />
+            {isSuccess && data.length > 0 && <Text.CAPTION text={DayjsUtil.of(data[0].createdAt).formatMMDDHHmmss()} />}
+          </div>
+          <Text.CAPTION text="30초마다 갱신됩니다." color="gray" className="text-end" />
+        </div>
+        {children}
+      </Wrapper.SECTION>
+    );
+  };
 
   if (isPending) {
     return (
-      <Wrapper.SECTION>
-        {titleComponent}
+      <CurrencyWrapper>
         <LineSkeleton />
-      </Wrapper.SECTION>
+      </CurrencyWrapper>
     );
   }
 
   if (!isSuccess) {
     return (
-      <Wrapper.SECTION>
-        {titleComponent}
+      <CurrencyWrapper>
         <NetworkErrorText />
-      </Wrapper.SECTION>
+      </CurrencyWrapper>
     );
   }
 
   if (data.length === 0) {
     return (
-      <Wrapper.SECTION>
-        {titleComponent}
-        <EmptyData />
-      </Wrapper.SECTION>
+      <CurrencyWrapper>
+        <EmptyDataView text="환율 데이터" className="text-center" />
+      </CurrencyWrapper>
     );
   }
 
   return (
-    <Wrapper.SECTION>
-      {titleComponent}
-
+    <CurrencyWrapper>
       <Marquee speed={30} pauseOnHover={true} gradient={false}>
         {data.map((item) => (
           <div key={item.curUnit} className="flex flex-col items-center gap-4 mr-8">
@@ -81,7 +75,7 @@ export const Currency = () => {
           </div>
         ))}
       </Marquee>
-    </Wrapper.SECTION>
+    </CurrencyWrapper>
   );
 
   // return (

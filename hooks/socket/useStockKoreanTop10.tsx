@@ -2,25 +2,16 @@ import { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 
 import { API_URL } from '@/shared/constant/api-url';
-import { KOSDAQ_CODE, KOSPI_CODE } from '@/shared/constant/korean-stock-index-code';
-import { IKoreanStockIndex } from '@/shared/types/stock-index';
+import { IKoreanStockTop10 } from '@/shared/types';
 
-interface IProps {
-  isKospi: boolean;
-  isKosdaq: boolean;
-}
-
-export const useKoreanStockIndex = (props: IProps) => {
-  const { isKospi, isKosdaq } = props;
-
+export const useStockKoreanTop10 = () => {
   const [loading, setLoading] = useState(true);
   const [isConnected, setIsConnected] = useState(false);
 
-  const [kospi, setKospi] = useState<IKoreanStockIndex | null>(null);
-  const [kosdaq, setKosdaq] = useState<IKoreanStockIndex | null>(null);
+  const [data, setData] = useState<{ list: IKoreanStockTop10[]; createdAt: Date } | null>(null);
 
   useEffect(() => {
-    const socket = io(`${API_URL}/ls/korean/index`, {
+    const socket = io(`${API_URL}/ls/korean/top10`, {
       transports: ['websocket'],
     });
 
@@ -44,45 +35,34 @@ export const useKoreanStockIndex = (props: IProps) => {
       setLoading(false);
     });
 
-    if (isKospi) {
-      socket.on(KOSPI_CODE, (data: IKoreanStockIndex) => {
-        setKospi(data || null);
-      });
-    }
-
-    if (isKosdaq) {
-      socket.on(KOSDAQ_CODE, (data: IKoreanStockIndex) => {
-        setKosdaq(data || null);
-      });
-    }
+    socket.on('korean-top-10', (data: IKoreanStockTop10[], createdAt: Date) => {
+      setData(data ? { list: data, createdAt } : null);
+    });
 
     return () => {
       socket.disconnect();
     };
-  }, [isKospi, isKosdaq]);
+  }, []);
 
   if (loading) {
     return {
-      kospi: null,
-      kosdaq: null,
       loading: true,
       isConnected: true,
+      data: null,
     };
   }
 
   if (!isConnected) {
     return {
-      kospi: null,
-      kosdaq: null,
       loading: false,
       isConnected: false,
+      data: null,
     };
   }
 
   return {
-    kospi,
-    kosdaq,
     loading: false,
     isConnected: true,
+    data,
   };
 };
