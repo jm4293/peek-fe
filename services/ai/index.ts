@@ -6,7 +6,7 @@ import type { ChatMessage } from './types';
 const DEFAULT_MODEL = 'gemini-2.5-flash';
 
 export const requestGeminiStockAnswer = async (messages: ChatMessage[]) => {
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
 
   if (!apiKey) {
     throw new Error('Gemini API 키가 설정되어 있지 않습니다.');
