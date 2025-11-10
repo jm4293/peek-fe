@@ -1,4 +1,4 @@
-import { Text } from '@/components/text';
+import { AnimatedText } from '@/components/text';
 
 interface IProps {
   price: string;
@@ -7,12 +7,12 @@ interface IProps {
   className?: string;
 }
 
-export const StockPriceText = (props: IProps) => {
+export const KoreanStockIndexText = (props: IProps) => {
   const { price, sign, size, className } = props;
 
   if (size === 'HEADING') {
     return (
-      <Text.TITLE
+      <AnimatedText.TITLE
         text={price}
         color={`${sign === '2' ? 'red' : sign === '5' ? 'blue' : 'default'}`}
         className={`text-nowrap ${className}`}
@@ -21,7 +21,7 @@ export const StockPriceText = (props: IProps) => {
   }
 
   return (
-    <Text.PARAGRAPH
+    <AnimatedText.PARAGRAPH
       text={price}
       color={`${sign === '2' ? 'red' : sign === '5' ? 'blue' : 'default'}`}
       className={`text-nowrap ${className}`}

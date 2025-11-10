@@ -4,12 +4,10 @@ import { DayjsUtil } from '@/utils';
 import Link from 'next/link';
 
 import { LineSkeleton } from '@/components/skeleton';
-import { NetworkErrorText, Text } from '@/components/text';
+import { KoreanStockIndexText, NetworkErrorText, Text } from '@/components/text';
 import { EmptyDataView, Wrapper } from '@/components/wrapper';
 
 import { useStockKoreanIndex } from '@/hooks/socket';
-
-import { StockPriceText } from '../stock-price';
 
 interface IStockIndexData {
   jisu: string;
@@ -48,13 +46,13 @@ export const StockKoreanIndex = () => {
       <Link href={href} className="flex flex-col justify-center items-center gap-2">
         <div className="flex flex-col items-center">
           <Text.HEADING text={title} />
-          <StockPriceText
+          <KoreanStockIndexText
             price={(+indexData.jisu).toLocaleString()}
             sign={indexData.sign}
             size="HEADING"
             className="text-end"
           />
-          <StockPriceText
+          <KoreanStockIndexText
             price={`${indexData.change}(${indexData.drate}%)`}
             sign={indexData.sign}
             size="PARAGRAPH"

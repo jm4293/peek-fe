@@ -4,7 +4,6 @@ import { LocalStorageUtil, StockSignMarkUtil } from '@/utils';
 import { useRouter } from 'next/navigation';
 
 import { InfinityList } from '@/components/infinity-list';
-import { StockPriceText } from '@/components/stock/stock-price';
 import { Text } from '@/components/text';
 import { InternalErrorView, LoadingView } from '@/components/wrapper';
 
@@ -54,8 +53,8 @@ export default function PopularStock() {
   //             <Text.CAPTION text={shcode} color="gray" />
   //           </div>
   //           <div className="flex flex-col">
-  //             <StockPriceText price={String(price.toLocaleString())} sign={sign} size="HEADING" className="text-end" />
-  //             <StockPriceText
+  //             <KoreanStockIndexText price={String(price.toLocaleString())} sign={sign} size="HEADING" className="text-end" />
+  //             <KoreanStockIndexText
   //               price={`${StockSignMarkUtil(sign)}${String(change.toLocaleString())}(${diff}%)`}
   //               sign={sign}
   //               size="PARAGRAPH"

@@ -1,6 +1,5 @@
 import { StockSignMarkUtil } from '@/utils';
 
-import { StockPriceText } from '@/components/stock/stock-price';
 import { Text } from '@/components/text';
 import { EmptyDataView, InternalErrorView, Wrapper } from '@/components/wrapper';
 
@@ -40,13 +39,13 @@ export default async function StockDetailPage(props: IProps) {
   //           <Text.PARAGRAPH text={data.stk_cd} color="gray" />
   //         </div>
   //         <div>
-  //           <StockPriceText
+  //           <KoreanStockIndexText
   //             price={(+data.cur_prc.slice(1)).toLocaleString()}
   //             sign={data.pre_sig}
   //             size="HEADING"
   //             className="text-end"
   //           />
-  //           <StockPriceText
+  //           <KoreanStockIndexText
   //             price={`${StockSignMarkUtil(data.pre_sig.slice(1))}${(+data.pred_pre).toLocaleString()}(${data.flu_rt}%)`}
   //             sign={data.pre_sig}
   //             size="PARAGRAPH"
