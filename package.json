@@ -9,7 +9,9 @@
     "start": "next start",
     "lint": "next lint",
     "build-rm": "rm -rf .next",
-    "node_modules-rm": "rm -rf node_modules"
+    "node_modules-rm": "rm -rf node_modules",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
@@ -37,21 +39,34 @@
     "socket.io-client": "^4.8.1"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^4.1.2",
     "@eslint/eslintrc": "^3",
+    "@storybook/addon-a11y": "^10.0.6",
+    "@storybook/addon-docs": "^10.0.6",
+    "@storybook/addon-onboarding": "^10.0.6",
+    "@storybook/addon-vitest": "^10.0.6",
+    "@storybook/nextjs": "^10.0.6",
+    "@storybook/nextjs-vite": "^10.0.6",
     "@tailwindcss/postcss": "^4.0.14",
     "@trivago/prettier-plugin-sort-imports": "^5.2.2",
     "@types/crypto-js": "^4.2.2",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitest/browser-playwright": "^4.0.8",
+    "@vitest/coverage-v8": "^4.0.8",
     "autoprefixer": "^10.4.21",
     "eslint": "^9",
     "eslint-config-next": "15.2.2",
+    "eslint-plugin-storybook": "^10.0.6",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.2",
     "next-pwa": "^5.6.0",
+    "playwright": "^1.56.1",
+    "storybook": "^10.0.6",
     "tailwindcss": "^3.4.17",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.0.8"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "eslint --fix"
