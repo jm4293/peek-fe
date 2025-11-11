@@ -10,16 +10,21 @@ import { Text } from '@/components/text';
 import { Textarea } from '@/components/textarea';
 import { InternalErrorView, Wrapper } from '@/components/wrapper';
 
+import { useInput } from '@/hooks/input';
 import { useModal } from '@/hooks/modal';
 
 import { useBoardMutation } from '@/services/board';
 import { useStockCategoryList } from '@/services/stock';
 
+const initialFormData = {
+  title: '',
+  content: '',
+};
+
 export default function BoardRegister() {
   const [category, setCategory] = useState<number | null>(null);
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
 
+  const [value, onChange] = useInput<typeof initialFormData>({ ...initialFormData });
   const { openModal, closeModal } = useModal();
 
   const { data, isPending, isSuccess } = useStockCategoryList();
@@ -36,7 +41,7 @@ export default function BoardRegister() {
       return;
     }
 
-    if (!title || !title.trim()) {
+    if (!value.title || !value.title.trim()) {
       openModal({
         title: '알림',
         content: '제목을 입력해주세요.',
@@ -46,7 +51,7 @@ export default function BoardRegister() {
       return;
     }
 
-    if (!content || !content.trim()) {
+    if (!value.content || !value.content.trim()) {
       openModal({
         title: '알림',
         content: '내용을 입력해주세요.',
@@ -55,7 +60,7 @@ export default function BoardRegister() {
       return;
     }
 
-    createBoardMutation.mutate({ categoryId: category, title, content });
+    createBoardMutation.mutate({ categoryId: category, ...value });
   };
 
   if (isPending) {
@@ -90,16 +95,16 @@ export default function BoardRegister() {
             <Input
               title="제목"
               name="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
               placeholder="제목을 입력해주세요"
+              value={value.title}
+              onChange={onChange}
               required
             />
             <Textarea
               title="내용"
               name="content"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
+              value={value.content}
+              onChange={onChange}
               placeholder="내용을 입력해주세요"
               required
             />
