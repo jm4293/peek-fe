@@ -13,10 +13,10 @@ export default async function HomePage() {
         </div>
       }>
       <div className="flex flex-wrap gap-2">
-        <div className="flex-1 min-w-[300px]">
+        <div className="flex-1 min-w-full md:min-w-[300px]">
           <StockKoreanIndex />
         </div>
-        <div className="flex-1 min-w-[300px]">
+        <div className="flex-1 min-w-full md:min-w-[300px]">
           <StockKoreanTop10 />
         </div>
       </div>
