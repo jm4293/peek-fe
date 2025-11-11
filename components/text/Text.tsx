@@ -1,3 +1,5 @@
+import React from 'react';
+
 interface IProps extends React.HTMLAttributes<HTMLElement> {
   text: string;
   className?: string;
