@@ -1,75 +1,67 @@
 'use client';
 
+import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 import { Button } from '@/components/button';
 import { Input } from '@/components/input';
+import { Text } from '@/components/text';
 import { Textarea } from '@/components/textarea';
 import { Wrapper } from '@/components/wrapper';
 
-import { useToast } from '@/hooks/modal';
+import { BoardModel, UpdateBoardReq, updateBoardReqSchema, useBoardMutation } from '@/services/board';
 
-import { BoardModel, useBoardMutation } from '@/services/board';
-
-interface IProps {
+interface Props {
   data: BoardModel;
   id: string;
 }
 
-export default function BoardModify(props: IProps) {
+export default function BoardModify(props: Props) {
   const { data, id } = props;
 
-  const [title, setTitle] = useState(data.title || '');
-  const [content, setContent] = useState(data.boardArticle.content || '');
-
-  const { openToast } = useToast();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<UpdateBoardReq>({
+    resolver: zodResolver(updateBoardReqSchema),
+    defaultValues: {
+      title: data.title || '',
+      content: data.boardArticle.content || '',
+      boardId: Number(id),
+    },
+  });
 
   const { updateBoardMutation } = useBoardMutation();
 
-  const clickHandler = () => {
-    if (!title || !title.trim()) {
-      openToast({ message: '제목을 입력해주세요', type: 'error' });
-      return;
-    }
-
-    if (!content || !content.trim()) {
-      openToast({ message: '내용을 입력해주세요', type: 'error' });
-      return;
-    }
-
-    updateBoardMutation.mutate({ boardId: Number(id), title, content });
+  const onSubmit = (data: UpdateBoardReq) => {
+    updateBoardMutation.mutate({ ...data });
   };
 
   return (
     <Wrapper.SECTION>
-      <div className="flex flex-col gap-8">
-        <div className="col-span-5 flex flex-col gap-4">
-          <Input
-            title="제목"
-            name="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="제목을 입력해주세요"
-            required
-          />
-          <Textarea
-            title="내용"
-            name="content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            placeholder="내용을 입력해주세요"
-            required
-          />
-        </div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex flex-col gap-8">
+          <div className="col-span-5 flex flex-col gap-4">
+            <div className="flex flex-col gap-2">
+              <Input title="제목" placeholder="제목을 입력해주세요" {...register('title')} />
+              {errors.title && <Text.PARAGRAPH text={errors.title.message} color="red" />}
+            </div>
+            <div className="flex flex-col gap-2">
+              <Textarea title="내용" placeholder="내용을 입력해주세요" {...register('content')} />
+              {errors.content && <Text.PARAGRAPH text={errors.content.message} color="red" />}
+            </div>
+          </div>
 
-        <div className="flex justify-end gap-2">
-          <Link href={`/board/${id}`} className="w-full">
-            <Button.OUTLINE text="취소" />
-          </Link>
-          <Button.CONTAINER text="수정하기" onClick={clickHandler} />
+          <div className="flex justify-end gap-2">
+            <Link href={`/board/${id}`} className="w-full">
+              <Button.OUTLINE text="취소" />
+            </Link>
+            <Button.CONTAINER text="수정하기" type="submit" disabled={updateBoardMutation.isPending} />
+          </div>
         </div>
-      </div>
+      </form>
     </Wrapper.SECTION>
   );
 }
