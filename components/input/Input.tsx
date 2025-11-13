@@ -1,10 +1,10 @@
 'use client';
 
-import { InputHTMLAttributes } from 'react';
+import { forwardRef } from 'react';
 
 import { Text } from '@/components/text';
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   name: string;
   title?: string;
   placeholder?: string;
@@ -14,7 +14,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   children?: React.ReactNode;
 }
 
-export const Input = (props: Props) => {
+export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const { name, title, placeholder, isOptional, isError, className, children, ...rest } = props;
 
   return (
@@ -26,6 +26,7 @@ export const Input = (props: Props) => {
       )}
       <div className="relative">
         <input
+          ref={ref}
           id={name}
           name={name}
           className={`border-b-theme-txt-gray ${isError ? 'border-red-500' : ''} ${children ? 'pr-16' : ''}`}
@@ -36,4 +37,6 @@ export const Input = (props: Props) => {
       </div>
     </div>
   );
-};
+});
+
+Input.displayName = 'Input';
