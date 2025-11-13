@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 
 import { API_URL } from '@/shared/constant/api-url';
-import { IKoreanStockTop10 } from '@/shared/types';
+import { KoreanStockTop10 } from '@/shared/types';
 
 export const useStockKoreanTop10 = () => {
   const [loading, setLoading] = useState(true);
   const [isConnected, setIsConnected] = useState(false);
 
-  const [data, setData] = useState<{ list: IKoreanStockTop10[]; createdAt: Date } | null>(null);
+  const [data, setData] = useState<{ list: KoreanStockTop10[]; createdAt: Date } | null>(null);
 
   useEffect(() => {
     const socket = io(`${API_URL}/ls/korean/top10`, {
@@ -35,7 +35,7 @@ export const useStockKoreanTop10 = () => {
       setLoading(false);
     });
 
-    socket.on('korean-top-10', (data: IKoreanStockTop10[], createdAt: Date) => {
+    socket.on('korean-top-10', (data: KoreanStockTop10[], createdAt: Date) => {
       setData(data ? { list: data, createdAt } : null);
     });
 

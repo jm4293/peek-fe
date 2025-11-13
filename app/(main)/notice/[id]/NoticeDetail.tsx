@@ -10,13 +10,13 @@ import { EmptyDataView, InternalErrorView, Wrapper } from '@/components/wrapper'
 
 import { NoticeModel } from '@/services/notice';
 
-import { IResponseType } from '@/shared/types';
+import { ResponseType } from '@/shared/types';
 
-interface IProps {
-  notice: Promise<IResponseType<NoticeModel | null>>;
+interface Props {
+  notice: Promise<ResponseType<NoticeModel | null>>;
 }
 
-export default function NoticeDetail(props: IProps) {
+export default function NoticeDetail(props: Props) {
   const { notice } = props;
 
   const { data, success } = use(notice);

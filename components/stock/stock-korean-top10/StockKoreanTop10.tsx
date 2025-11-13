@@ -10,7 +10,7 @@ import { EmptyDataView, Wrapper } from '@/components/wrapper';
 
 import { useStockKoreanTop10 } from '@/hooks/socket';
 
-import { IKoreanStockTop10 } from '@/shared/types';
+import { KoreanStockTop10 } from '@/shared/types';
 
 export const StockKoreanTop10 = () => {
   const { data, isConnected, loading } = useStockKoreanTop10();
@@ -35,7 +35,7 @@ export const StockKoreanTop10 = () => {
     );
   };
 
-  const Render = (props: { data: IKoreanStockTop10[] }) => {
+  const Render = (props: { data: KoreanStockTop10[] }) => {
     const { data } = props;
 
     return (

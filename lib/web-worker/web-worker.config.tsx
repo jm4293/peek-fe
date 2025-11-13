@@ -3,11 +3,11 @@
 // import { useEffect } from 'react';
 // import { requestForToken } from '@/common/firebase';
 //
-// interface IProps {
+// interface Props {
 //   children: React.ReactNode;
 // }
 //
-// export default function WebWorkerConfig(props: IProps) {
+// export default function WebWorkerConfig(props: Props) {
 //   const { children } = props;
 //
 //   useEffect(() => {

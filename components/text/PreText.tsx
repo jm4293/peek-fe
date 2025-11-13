@@ -1,4 +1,4 @@
-interface IProps {
+interface Props {
   text: string;
   color?: 'default' | 'gray' | 'blue' | 'red';
   size?: 'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl';
@@ -37,7 +37,7 @@ const fontWeight = {
   bold: 'font-bold',
 };
 
-export function PreText(props: IProps) {
+export function PreText(props: Props) {
   const { text, color = 'default', size = 'base', align = 'left', weight = 'normal', className } = props;
 
   return (

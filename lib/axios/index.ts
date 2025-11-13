@@ -3,16 +3,16 @@ import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 
 import { API_URL } from '@/shared/constant/api-url';
 
-interface IReq {
+interface Req {
   url: string;
   headers?: AxiosRequestConfig['headers'];
 }
 
-interface IGetReq<D> extends IReq {
+interface GetReq<D> extends Req {
   params?: D | null;
 }
 
-interface IPostReq<D> extends IReq {
+interface PostReq<D> extends Req {
   data?: D | null;
 }
 
@@ -94,19 +94,19 @@ const createAxiosInstance = (headers: AxiosRequestConfig['headers'] = {}) => {
   );
 
   return {
-    get: async <T, D>({ url, params, headers }: IGetReq<D>) => {
+    get: async <T, D>({ url, params, headers }: GetReq<D>) => {
       return await axiosInstance.get<T>(url, { params, headers });
     },
-    post: async <T, D>({ url, data, headers }: IPostReq<D>) => {
+    post: async <T, D>({ url, data, headers }: PostReq<D>) => {
       return await axiosInstance.post<T>(url, data, { headers });
     },
-    put: async <T, D>({ url, data, headers }: IPostReq<D>) => {
+    put: async <T, D>({ url, data, headers }: PostReq<D>) => {
       return await axiosInstance.put<T>(url, data, { headers });
     },
-    delete: async <T, D>({ url, params, headers }: IGetReq<D>) => {
+    delete: async <T, D>({ url, params, headers }: GetReq<D>) => {
       return await axiosInstance.delete<T>(url, { params, headers });
     },
-    patch: async <T, D>({ url, data, headers }: IPostReq<D>) => {
+    patch: async <T, D>({ url, data, headers }: PostReq<D>) => {
       return await axiosInstance.patch<T>(url, data, { headers });
     },
   };

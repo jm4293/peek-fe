@@ -6,9 +6,9 @@ import { QueryKeys } from '@/shared/constant/query-key';
 import stockApi from '../api';
 import { GetStockKoreanIndexCandleListReq } from '../type';
 
-interface IProps extends GetStockKoreanIndexCandleListReq {}
+interface Props extends GetStockKoreanIndexCandleListReq {}
 
-export const useStockKoreanIndexCandleList = (props: IProps) => {
+export const useStockKoreanIndexCandleList = (props: Props) => {
   const { code, ...rest } = props;
 
   return useQuery({

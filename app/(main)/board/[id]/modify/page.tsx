@@ -4,11 +4,11 @@ import { getBoardDetail } from '@/services/board';
 
 import BoardModify from './BoardModify';
 
-interface IProps {
+interface Props {
   params: Promise<{ id: string }>;
 }
 
-export default async function BoardModifyPage(props: IProps) {
+export default async function BoardModifyPage(props: Props) {
   const { id } = await props.params;
 
   const { success, data } = await getBoardDetail(id);

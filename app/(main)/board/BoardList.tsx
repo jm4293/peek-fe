@@ -60,7 +60,7 @@ export default function BoardList() {
   };
 
   if (isPending) {
-    return <LoadingView />;
+    return null;
   }
 
   if (!isSuccess) {

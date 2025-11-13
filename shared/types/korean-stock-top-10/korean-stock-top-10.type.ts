@@ -1,4 +1,4 @@
-export interface IKoreanStockTop10 {
+export interface KoreanStockTop10 {
   shcode: string; // 종목코드
   hname: string; // 종목명
   price: number; // 현재가

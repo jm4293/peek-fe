@@ -1,6 +1,6 @@
 import { Text } from '@/components/text';
 
-interface IProps {
+interface Props {
   title: string;
   name: string;
   checked: boolean;
@@ -8,7 +8,7 @@ interface IProps {
   className?: string;
 }
 
-export const CheckBox = (props: IProps) => {
+export const CheckBox = (props: Props) => {
   const { title, name, checked, onChange, className } = props;
 
   return (

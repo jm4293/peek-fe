@@ -4,11 +4,11 @@ import Link from 'next/link';
 import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
-interface IProps {
+interface Props {
   text: string;
 }
 
-export function NotAuthView(props: IProps) {
+export function NotAuthView(props: Props) {
   const { text } = props;
 
   return (

@@ -1,12 +1,12 @@
 import { Text } from '../text';
 import { Wrapper } from './Wrapper';
 
-interface IProps {
+interface Props {
   text: string;
   className?: string;
 }
 
-export const EmptyDataView = (props: IProps) => {
+export const EmptyDataView = (props: Props) => {
   const { text, className } = props;
 
   return (

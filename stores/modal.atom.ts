@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 
-export interface IModalState {
+export interface ModalState {
   visible: boolean;
   title: string;
   content?: string | React.ReactNode;
@@ -10,7 +10,7 @@ export interface IModalState {
   cancelText?: string;
 }
 
-export const modalAtom = atom<IModalState>({
+export const modalAtom = atom<ModalState>({
   visible: false,
   title: '',
   content: '',

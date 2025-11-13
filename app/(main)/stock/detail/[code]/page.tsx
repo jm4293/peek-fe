@@ -5,11 +5,11 @@ import { EmptyDataView, InternalErrorView, Wrapper } from '@/components/wrapper'
 
 import { getStockKoreanDetail } from '@/services/stock';
 
-interface IProps {
+interface Props {
   params: Promise<{ code: string }>;
 }
 
-export default async function StockDetailPage(props: IProps) {
+export default async function StockDetailPage(props: Props) {
   const { code } = await props.params;
 
   // const { success, data } = await getStockKoreanDetail({ code });

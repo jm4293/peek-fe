@@ -1,13 +1,13 @@
 import { AnimatedText } from '@/components/text';
 
-interface IProps {
+interface Props {
   price: string;
   sign: string;
   size: 'HEADING' | 'PARAGRAPH';
   className?: string;
 }
 
-export const KoreanStockIndexText = (props: IProps) => {
+export const KoreanStockIndexText = (props: Props) => {
   const { price, sign, size, className } = props;
 
   if (size === 'HEADING') {

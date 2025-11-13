@@ -1,12 +1,12 @@
 import { CircleUser } from 'lucide-react';
 import Image from 'next/image';
 
-interface IProps {
+interface Props {
   thumbnail: string | null;
   size?: number;
 }
 
-export const Thumbnail = (props: IProps) => {
+export const Thumbnail = (props: Props) => {
   const { thumbnail, size = 24 } = props;
 
   return (

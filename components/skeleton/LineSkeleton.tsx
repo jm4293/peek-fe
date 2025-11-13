@@ -1,7 +1,7 @@
 import { Text } from '../text';
 import styles from './skeleton.module.css';
 
-interface IProps {
+interface Props {
   h?: number;
   text?: string;
   variant?: 'default' | 'rounded' | 'circle';
@@ -9,7 +9,7 @@ interface IProps {
   className?: string;
 }
 
-export const LineSkeleton = (props: IProps) => {
+export const LineSkeleton = (props: Props) => {
   const { h = 1, text, variant = 'default', animation = 'wave', className = '' } = props;
 
   const variantStyles = {

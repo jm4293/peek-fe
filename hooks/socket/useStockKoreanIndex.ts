@@ -3,21 +3,21 @@ import { io } from 'socket.io-client';
 
 import { API_URL } from '@/shared/constant/api-url';
 import { KOSDAQ_CODE, KOSPI_CODE } from '@/shared/constant/korean-stock-index-code';
-import { IKoreanStockIndex } from '@/shared/types/korean-stock-index';
+import { KoreanStockIndex } from '@/shared/types/korean-stock-index';
 
-interface IProps {
+interface Props {
   isKospi: boolean;
   isKosdaq: boolean;
 }
 
-export const useStockKoreanIndex = (props: IProps) => {
+export const useStockKoreanIndex = (props: Props) => {
   const { isKospi, isKosdaq } = props;
 
   const [loading, setLoading] = useState(true);
   const [isConnected, setIsConnected] = useState(false);
 
-  const [kospi, setKospi] = useState<IKoreanStockIndex | null>(null);
-  const [kosdaq, setKosdaq] = useState<IKoreanStockIndex | null>(null);
+  const [kospi, setKospi] = useState<KoreanStockIndex | null>(null);
+  const [kosdaq, setKosdaq] = useState<KoreanStockIndex | null>(null);
 
   useEffect(() => {
     const socket = io(`${API_URL}/ls/korean/index`, {
@@ -45,13 +45,13 @@ export const useStockKoreanIndex = (props: IProps) => {
     });
 
     if (isKospi) {
-      socket.on(KOSPI_CODE, (data: IKoreanStockIndex, createdAt: Date) => {
+      socket.on(KOSPI_CODE, (data: KoreanStockIndex, createdAt: Date) => {
         setKospi(data ? { ...data, createdAt } : null);
       });
     }
 
     if (isKosdaq) {
-      socket.on(KOSDAQ_CODE, (data: IKoreanStockIndex, createdAt: Date) => {
+      socket.on(KOSDAQ_CODE, (data: KoreanStockIndex, createdAt: Date) => {
         setKosdaq(data ? { ...data, createdAt } : null);
       });
     }

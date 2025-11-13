@@ -1,13 +1,13 @@
 import { JSX } from 'react';
 
-interface IProps {
+interface Props {
   currentPage: number;
   totalPages: number;
   onPageChange: (page: number) => void;
   children: JSX.Element | JSX.Element[];
 }
 
-export const PaginationTable = (props: IProps) => {
+export const PaginationTable = (props: Props) => {
   const { currentPage, totalPages, onPageChange, children } = props;
 
   return (

@@ -6,10 +6,10 @@ import { useEffect, useRef } from 'react';
 
 import { useStockKoreanIndexCandleList } from '@/services/stock';
 
-import { IKoreanStockIndex } from '@/shared/types/korean-stock-index';
+import { KoreanStockIndex } from '@/shared/types/korean-stock-index';
 
-interface IProps {
-  data: IKoreanStockIndex;
+interface Props {
+  data: KoreanStockIndex;
 }
 
 const light = {
@@ -79,7 +79,7 @@ const getChartTheme = (theme: string | undefined) => {
   }
 };
 
-export const ChartStockIndex = (props: IProps) => {
+export const ChartStockIndex = (props: Props) => {
   const { data } = props;
   const { theme } = useTheme();
 

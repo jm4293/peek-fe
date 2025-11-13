@@ -17,7 +17,7 @@
 // import { ButtonKakao } from './ButtonKakao';
 // import { ButtonNaver } from './ButtonNaver';
 
-// interface IProps {
+// interface Props {
 //   email?: string;
 // }
 
@@ -26,7 +26,7 @@
 //   password: '',
 // };
 
-// export default function Login(props: IProps) {
+// export default function Login(props: Props) {
 //   const { email } = props;
 
 //   const { openToast } = useToast();

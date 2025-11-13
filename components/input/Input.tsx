@@ -4,7 +4,7 @@ import { InputHTMLAttributes } from 'react';
 
 import { Text } from '@/components/text';
 
-interface IProps extends InputHTMLAttributes<HTMLInputElement> {
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   title?: string;
   placeholder?: string;
@@ -14,8 +14,8 @@ interface IProps extends InputHTMLAttributes<HTMLInputElement> {
   children?: React.ReactNode;
 }
 
-export const Input = (props: IProps) => {
-  const { title, name, className, placeholder, isOptional, isError, children, ...rest } = props;
+export const Input = (props: Props) => {
+  const { name, title, placeholder, isOptional, isError, className, children, ...rest } = props;
 
   return (
     <div className={`w-full flex flex-col gap-1 ${className}`}>

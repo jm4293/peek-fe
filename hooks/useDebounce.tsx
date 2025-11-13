@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 
-interface IProps {
+interface Props {
   text: string;
   delay: number;
 }
 
-export function useDebounce(props: IProps) {
+export function useDebounce(props: Props) {
   const { text, delay } = props;
 
   const [debouncedText, setDebouncedText] = useState(text);

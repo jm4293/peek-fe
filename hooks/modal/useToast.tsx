@@ -1,11 +1,11 @@
 import { useAtom } from 'jotai';
 
-import { IToastState, toastAtom } from '@/stores/toast.atom';
+import { ToastState, toastAtom } from '@/stores/toast.atom';
 
 export const useToast = () => {
   const [toast, setToast] = useAtom(toastAtom);
 
-  const openToast = (params: Omit<IToastState, 'visible'>) => {
+  const openToast = (params: Omit<ToastState, 'visible'>) => {
     const { message, type = 'info' } = params;
 
     setToast({

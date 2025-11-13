@@ -5,9 +5,9 @@ import { QueryKeys } from '@/shared/constant/query-key';
 import boardApi from '../api';
 import { GetBoardListReq, GetBoardListRes } from '../type';
 
-interface IProps extends Omit<GetBoardListReq, 'page'> {}
+interface Props extends Omit<GetBoardListReq, 'page'> {}
 
-export const useBoardList = (props: IProps) => {
+export const useBoardList = (props: Props) => {
   const { stockCategory } = props;
 
   return useInfiniteQuery({

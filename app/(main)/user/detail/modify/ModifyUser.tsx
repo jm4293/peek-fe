@@ -11,11 +11,11 @@ import { useModal } from '@/hooks/modal';
 
 import { UserAccountModel, useUserMutation } from '@/services/user';
 
-interface IProps {
+interface Props {
   userInfo: UserAccountModel;
 }
 
-export default function ModifyUser(props: IProps) {
+export default function ModifyUser(props: Props) {
   const { userInfo } = props;
 
   const { openModal, closeModal } = useModal();

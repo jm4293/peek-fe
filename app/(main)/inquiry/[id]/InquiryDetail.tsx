@@ -9,31 +9,23 @@ import { EmptyDataView, InternalErrorView, Wrapper } from '@/components/wrapper'
 
 import { InquiryModel } from '@/services/inquiry';
 
-import { IResponseType } from '@/shared/types';
+import { ResponseType } from '@/shared/types';
 
-interface IProps {
-  inquiry: Promise<IResponseType<InquiryModel | null>>;
+interface Props {
+  inquiry: Promise<ResponseType<InquiryModel | null>>;
 }
 
-export default function InquiryDetail(props: IProps) {
+export default function InquiryDetail(props: Props) {
   const { inquiry } = props;
 
   const { data, success } = use(inquiry);
 
   if (!success) {
-    return (
-      <Wrapper.MAIN text="문의">
-        <InternalErrorView />
-      </Wrapper.MAIN>
-    );
+    return <InternalErrorView />;
   }
 
   if (!data) {
-    return (
-      <Wrapper.MAIN text="문의">
-        <EmptyDataView text="문의 내역" />
-      </Wrapper.MAIN>
-    );
+    return <EmptyDataView text="문의 내역" />;
   }
 
   return (

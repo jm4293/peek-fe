@@ -4,7 +4,7 @@ import { SelectHTMLAttributes } from 'react';
 
 import { Text } from '../text';
 
-interface IProps extends SelectHTMLAttributes<HTMLSelectElement> {
+interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
   name: string;
   options: { value: string; label: string }[];
   title?: string;
@@ -12,7 +12,7 @@ interface IProps extends SelectHTMLAttributes<HTMLSelectElement> {
   className?: string;
 }
 
-export default function Select(props: IProps) {
+export default function Select(props: Props) {
   const { options, title, name, isError, className, ...rest } = props;
 
   return (

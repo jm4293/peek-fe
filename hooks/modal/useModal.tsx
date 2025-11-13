@@ -1,11 +1,11 @@
 import { useAtom } from 'jotai';
 
-import { IModalState, modalAtom } from '@/stores/modal.atom';
+import { ModalState, modalAtom } from '@/stores/modal.atom';
 
 export const useModal = () => {
   const [modal, setModal] = useAtom(modalAtom);
 
-  const openModal = (params: Omit<IModalState, 'visible'>) => {
+  const openModal = (params: Omit<ModalState, 'visible'>) => {
     const { title = '알림', content, onConfirm, confirmText, onCancel, cancelText } = params;
 
     setModal({

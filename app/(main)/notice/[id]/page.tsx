@@ -7,11 +7,11 @@ import { getNoticeDetail } from '@/services/notice';
 
 import NoticeDetail from './NoticeDetail';
 
-interface IProps {
+interface Props {
   params: Promise<{ id: string }>;
 }
 
-export default async function UserNoticeDetailPage(props: IProps) {
+export default async function UserNoticeDetailPage(props: Props) {
   const { id } = await props.params;
 
   const notice = getNoticeDetail(id);

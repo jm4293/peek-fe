@@ -1,7 +1,7 @@
 import React from 'react';
 
-interface IProps extends React.HTMLAttributes<HTMLElement> {
-  text: string;
+interface Props extends React.HTMLAttributes<HTMLElement> {
+  text: string | undefined | null;
   className?: string;
   color?: 'default' | 'gray' | 'blue' | 'red' | 'main';
 }
@@ -14,7 +14,7 @@ const textColor = {
   main: 'text-theme-main-color',
 };
 
-const TITLE = (props: IProps) => {
+const TITLE = (props: Props) => {
   const { className, text, color = 'default', ...rest } = props;
   return (
     <h1 className={`text-xl font-semibold ${textColor[color]} ${className}`} {...rest}>
@@ -23,7 +23,7 @@ const TITLE = (props: IProps) => {
   );
 };
 
-const SUBTITLE = (props: IProps) => {
+const SUBTITLE = (props: Props) => {
   const { className, text, color = 'default', ...rest } = props;
   return (
     <h2 className={`text-lg font-medium ${textColor[color]} ${className}`} {...rest}>
@@ -32,7 +32,7 @@ const SUBTITLE = (props: IProps) => {
   );
 };
 
-const HEADING = (props: IProps) => {
+const HEADING = (props: Props) => {
   const { className, text, color = 'default', ...rest } = props;
   return (
     <h3 className={`text-base font-medium ${textColor[color]} ${className}`} {...rest}>
@@ -41,7 +41,7 @@ const HEADING = (props: IProps) => {
   );
 };
 
-const PARAGRAPH = (props: IProps) => {
+const PARAGRAPH = (props: Props) => {
   const { className, text, color = 'default', ...rest } = props;
   return (
     <p className={`text-sm ${textColor[color]} ${className}`} {...rest}>
@@ -50,7 +50,7 @@ const PARAGRAPH = (props: IProps) => {
   );
 };
 
-const CAPTION = (props: IProps) => {
+const CAPTION = (props: Props) => {
   const { className, text, color = 'default', ...rest } = props;
   return (
     <p className={`text-xs italic ${textColor[color]} ${className}`} {...rest}>

@@ -1,12 +1,12 @@
 import { API_URL } from '@/shared/constant/api-url';
 import { REFRESH_TOKEN_NAME } from '@/shared/constant/cookie';
 
-interface IProps {
+interface Props {
   tkn: string | undefined;
   rtkn: string | undefined;
 }
 
-export const ValidToken = async (props: IProps) => {
+export const ValidToken = async (props: Props) => {
   const { tkn, rtkn } = props;
 
   if (!rtkn) {

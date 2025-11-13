@@ -1,14 +1,14 @@
 'use server';
 
 import { API_URL } from '@/shared/constant/api-url';
-import { IResponseType } from '@/shared/types';
+import { ResponseType } from '@/shared/types';
 
 import { StockKoreanModel } from '../model/stock-korean.model';
 import { GetStockKoreanDetailReq } from '../type';
 
 export const getStockKoreanDetail = async (
   dto: GetStockKoreanDetailReq,
-): Promise<IResponseType<StockKoreanModel | null>> => {
+): Promise<ResponseType<StockKoreanModel | null>> => {
   const { code } = dto;
 
   try {

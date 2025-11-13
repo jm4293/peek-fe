@@ -4,11 +4,11 @@ import { getValidTokens } from '@/utils';
 import { headers } from 'next/headers';
 
 import { API_URL } from '@/shared/constant/api-url';
-import { IResponseType } from '@/shared/types';
+import { ResponseType } from '@/shared/types';
 
 import { InquiryModel } from '../model';
 
-export const getInquiryDetail = async (inquiryId: string): Promise<IResponseType<InquiryModel | null>> => {
+export const getInquiryDetail = async (inquiryId: string): Promise<ResponseType<InquiryModel | null>> => {
   const headerList = await headers();
   const cookie = headerList.get('cookie');
 

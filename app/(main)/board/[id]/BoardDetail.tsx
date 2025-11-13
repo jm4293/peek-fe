@@ -12,14 +12,14 @@ import { EmptyDataView, InternalErrorView, Wrapper } from '@/components/wrapper'
 import { BoardModel, useBoardMutation } from '@/services/board';
 import { UserAccountModel } from '@/services/user';
 
-import { IResponseType } from '@/shared/types';
+import { ResponseType } from '@/shared/types';
 
-interface IProps {
-  board: Promise<IResponseType<BoardModel | null>>;
+interface Props {
+  board: Promise<ResponseType<BoardModel | null>>;
   userInfo: UserAccountModel | null;
 }
 
-export default function BoardDetail(props: IProps) {
+export default function BoardDetail(props: Props) {
   const { board, userInfo } = props;
 
   const { data, success } = use(board);

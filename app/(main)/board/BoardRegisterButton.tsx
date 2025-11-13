@@ -10,11 +10,11 @@ import { useModal } from '@/hooks/modal';
 
 import { UserAccountModel } from '@/services/user';
 
-interface IProps {
+interface Props {
   userInfo: UserAccountModel | null;
 }
 
-export const BoardRegisterButton = (props: IProps) => {
+export const BoardRegisterButton = (props: Props) => {
   const { userInfo } = props;
   const router = useRouter();
 

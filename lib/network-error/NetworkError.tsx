@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react';
 
 import { Text } from '@/components/text';
 
-interface IProps {
+interface Props {
   children: React.ReactNode;
 }
 
-export const NetworkError = (props: IProps) => {
+export const NetworkError = (props: Props) => {
   const { children } = props;
 
   const [isNetworkOffline, setIsNetworkOffline] = useState(() => {

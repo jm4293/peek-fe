@@ -1,5 +1,5 @@
 // 한국투자증권 국내 지수
-// export interface IKoreanStockIndex {
+// export interface KoreanStockIndex {
 //   bstp_cls_code: string; // ResponseBodybstp_cls_code    #업종 구분 코드
 //   bsop_hour: string; // 영업 시간
 //   prpr_nmix: string; // 현재가 지수
@@ -33,7 +33,7 @@
 // }
 
 // LS증권 국내 지수
-export interface IKoreanStockIndex {
+export interface KoreanStockIndex {
   time: string; // 시간
   jisu: string; // 지수
   sign: string; // 전일대비구분

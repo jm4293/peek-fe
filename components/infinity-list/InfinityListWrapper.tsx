@@ -5,13 +5,13 @@ import { JSX } from 'react';
 import { Text } from '../text';
 import { Wrapper } from '../wrapper';
 
-interface IProps {
+interface Props {
   total: number | undefined;
   children: JSX.Element;
   title?: string | JSX.Element;
 }
 
-export const InfinityListWrapper = (props: IProps) => {
+export const InfinityListWrapper = (props: Props) => {
   const { total = 0, children, title } = props;
 
   return (

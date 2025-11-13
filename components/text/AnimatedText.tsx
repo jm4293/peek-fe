@@ -3,7 +3,7 @@
 import { gsap } from 'gsap';
 import { useEffect, useRef } from 'react';
 
-interface IProps extends React.HTMLAttributes<HTMLElement> {
+interface Props extends React.HTMLAttributes<HTMLElement> {
   text: string;
   className?: string;
   color?: 'default' | 'gray' | 'blue' | 'red' | 'main';
@@ -58,7 +58,7 @@ const useTextAnimation = <T extends HTMLElement>(text: string) => {
   return textRef;
 };
 
-const TITLE = (props: IProps) => {
+const TITLE = (props: Props) => {
   const { className, text, color = 'default', ...rest } = props;
   const textRef = useTextAnimation<HTMLHeadingElement>(text);
 
@@ -69,7 +69,7 @@ const TITLE = (props: IProps) => {
   );
 };
 
-const SUBTITLE = (props: IProps) => {
+const SUBTITLE = (props: Props) => {
   const { className, text, color = 'default', ...rest } = props;
   const textRef = useTextAnimation<HTMLHeadingElement>(text);
 
@@ -80,7 +80,7 @@ const SUBTITLE = (props: IProps) => {
   );
 };
 
-const HEADING = (props: IProps) => {
+const HEADING = (props: Props) => {
   const { className, text, color = 'default', ...rest } = props;
   const textRef = useTextAnimation<HTMLHeadingElement>(text);
 
@@ -91,7 +91,7 @@ const HEADING = (props: IProps) => {
   );
 };
 
-const PARAGRAPH = (props: IProps) => {
+const PARAGRAPH = (props: Props) => {
   const { className, text, color = 'default', ...rest } = props;
   const textRef = useTextAnimation<HTMLParagraphElement>(text);
 
@@ -102,7 +102,7 @@ const PARAGRAPH = (props: IProps) => {
   );
 };
 
-const CAPTION = (props: IProps) => {
+const CAPTION = (props: Props) => {
   const { className, text, color = 'default', ...rest } = props;
   const textRef = useTextAnimation<HTMLParagraphElement>(text);
 

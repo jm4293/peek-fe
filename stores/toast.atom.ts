@@ -2,7 +2,7 @@ import { atom } from 'jotai';
 
 export type ToastType = 'success' | 'error' | 'info' | 'warning';
 
-export interface IToastState {
+export interface ToastState {
   visible: boolean;
   type: ToastType;
   message: string;

@@ -10,11 +10,11 @@ import BoardComment from './BoardComment';
 import BoardCommentRegister from './BoardCommentRegister';
 import BoardDetail from './BoardDetail';
 
-interface IProps {
+interface Props {
   params: Promise<{ id: string }>;
 }
 
-export default async function BoardDetailPage(props: IProps) {
+export default async function BoardDetailPage(props: Props) {
   const { id } = await props.params;
 
   const { data: userInfo } = await getUserInfo();

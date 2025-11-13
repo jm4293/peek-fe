@@ -5,9 +5,9 @@ import { QueryKeys } from '@/shared/constant/query-key';
 import noticeApi from '../api';
 import { GetNoticeListReq, GetNoticeListRes } from '../type/get-notice-list.type';
 
-export interface IProps extends Omit<GetNoticeListReq, 'page'> {}
+export interface Props extends Omit<GetNoticeListReq, 'page'> {}
 
-export const useNoticeList = (props: IProps) => {
+export const useNoticeList = (props: Props) => {
   const { type } = props;
 
   return useInfiniteQuery({

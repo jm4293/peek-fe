@@ -1,9 +1,9 @@
 // import { Wrapper } from '@/components/wrapper';
 // import { LoginClient } from './LoginClient';
-// interface IProps {
+// interface Props {
 //   searchParams: Promise<{ email?: string }>;
 // }
-// export default async function LoginPage(props: IProps) {
+// export default async function LoginPage(props: Props) {
 //   const { email } = await props.searchParams;
 //   return (
 //     <Wrapper.MAIN text="로그인">

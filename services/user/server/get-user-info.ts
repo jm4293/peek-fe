@@ -6,12 +6,12 @@ import { cookies } from 'next/headers';
 import { API_URL } from '@/shared/constant/api-url';
 import { ACCESS_TOKEN_NAME, REFRESH_TOKEN_NAME } from '@/shared/constant/cookie';
 import { ERROR_CODE } from '@/shared/constant/error-code/error-code';
-import { IResponseType } from '@/shared/types';
+import { ResponseType } from '@/shared/types';
 
 import { UserAccountModel } from '../model';
 import { GetUserInfoRes } from '../type';
 
-export const getUserInfo = async (): Promise<IResponseType<UserAccountModel>> => {
+export const getUserInfo = async (): Promise<ResponseType<UserAccountModel>> => {
   const cookieStore = await cookies();
 
   const tkn = cookieStore.get(ACCESS_TOKEN_NAME);

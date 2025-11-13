@@ -5,9 +5,9 @@ import { QueryKeys } from '@/shared/constant/query-key';
 import inquiryApi from '../api';
 import { GetInquiryListReq, GetInquiryListRes } from '../type';
 
-export interface IProps extends Omit<GetInquiryListReq, 'page'> {}
+export interface Props extends Omit<GetInquiryListReq, 'page'> {}
 
-export const useInquiryList = (props: IProps) => {
+export const useInquiryList = (props: Props) => {
   return useInfiniteQuery({
     queryKey: QueryKeys.inquiry.list(),
     queryFn: ({ pageParam }) => inquiryApi.getInquiryList({ page: pageParam }),

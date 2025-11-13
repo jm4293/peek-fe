@@ -9,7 +9,7 @@ import { EmptyDataView, Wrapper } from '@/components/wrapper';
 
 import { useStockKoreanIndex } from '@/hooks/socket';
 
-interface IStockIndexData {
+interface StockIndexData {
   jisu: string;
   sign: string;
   change: string;
@@ -39,7 +39,7 @@ export const StockKoreanIndex = () => {
     );
   };
 
-  const Render = (props: { indexData: IStockIndexData; title: string; href: string }) => {
+  const Render = (props: { indexData: StockIndexData; title: string; href: string }) => {
     const { indexData, title, href } = props;
 
     return (

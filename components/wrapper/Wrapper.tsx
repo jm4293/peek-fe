@@ -1,12 +1,12 @@
 import { Text } from '@/components/text';
 
-interface IProps {
+interface Props {
   id?: string;
   text?: string | React.ReactNode;
   children: React.ReactNode;
 }
 
-const MAIN = (props: IProps) => {
+const MAIN = (props: Props) => {
   const { text, children } = props;
 
   return (
@@ -17,7 +17,7 @@ const MAIN = (props: IProps) => {
   );
 };
 
-const SECTION = (props: IProps) => {
+const SECTION = (props: Props) => {
   const { id, text, children } = props;
 
   return (

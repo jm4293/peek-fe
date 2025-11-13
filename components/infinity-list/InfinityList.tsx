@@ -4,7 +4,7 @@ import { JSX, useEffect, useRef } from 'react';
 
 import { LineSkeleton } from '../skeleton';
 
-interface IProps {
+interface Props {
   hasNextPage: boolean;
   isFetchingNextPage: boolean;
   fetchNextPage: () => void;
@@ -12,7 +12,7 @@ interface IProps {
   maxHeight?: number;
 }
 
-export const InfinityList = (props: IProps) => {
+export const InfinityList = (props: Props) => {
   const { fetchNextPage, hasNextPage, isFetchingNextPage, children, maxHeight = 70 } = props;
 
   const observerRef = useRef<IntersectionObserver | null>(null);

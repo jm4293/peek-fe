@@ -5,11 +5,11 @@ import { QueryKeys } from '@/shared/constant/query-key';
 import boardApi from '../api';
 import { GetBoardCommentListRes } from '../type';
 
-interface IProps {
+interface Props {
   boardId: string;
 }
 
-export const useBoardCommentList = (props: IProps) => {
+export const useBoardCommentList = (props: Props) => {
   const { boardId } = props;
 
   return useInfiniteQuery({

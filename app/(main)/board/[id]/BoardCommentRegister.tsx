@@ -13,12 +13,12 @@ import { useModal } from '@/hooks/modal';
 import { useBoardCommentMutation } from '@/services/board';
 import { UserAccountModel } from '@/services/user';
 
-interface IProps {
+interface Props {
   id: string;
   userInfo: UserAccountModel | null;
 }
 
-export default function BoardCommentRegister(props: IProps) {
+export default function BoardCommentRegister(props: Props) {
   const { id, userInfo } = props;
   const router = useRouter();
 

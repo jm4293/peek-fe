@@ -2,7 +2,7 @@
 
 import { ButtonHTMLAttributes } from 'react';
 
-interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string | React.ReactNode;
   color?: 'default' | 'danger';
 }
@@ -17,7 +17,7 @@ const outlineStyles = {
   danger: 'border-[#FF5A5F] text-[#FF5A5F] hover:bg-[#FFEBEE] disabled:bg-[#FFEBEE] active:scale-95',
 };
 
-const CONTAINER = (props: IProps) => {
+const CONTAINER = (props: Props) => {
   const { text, color = 'default', className = '', ...rest } = props;
 
   return (
@@ -37,7 +37,7 @@ const CONTAINER = (props: IProps) => {
   );
 };
 
-const OUTLINE = (props: IProps) => {
+const OUTLINE = (props: Props) => {
   const { text, color = 'default', className = '', ...rest } = props;
 
   return (

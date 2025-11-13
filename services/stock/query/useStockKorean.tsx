@@ -6,9 +6,9 @@ import { QueryKeys } from '@/shared/constant/query-key';
 import stockApi from '../api';
 import { GetStockKoreanDetailReq } from '../type';
 
-interface IProps extends GetStockKoreanDetailReq {}
+interface Props extends GetStockKoreanDetailReq {}
 
-export const useStockKorean = (props: IProps) => {
+export const useStockKorean = (props: Props) => {
   const { code } = props;
 
   return useQuery({

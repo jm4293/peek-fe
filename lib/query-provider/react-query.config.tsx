@@ -7,11 +7,11 @@ import { ErrorBoundary } from 'react-error-boundary';
 
 import { useApiError } from '@/hooks/useApiError';
 
-interface IProps {
+interface Props {
   children: React.ReactNode;
 }
 
-export default function QueryProvider(props: IProps) {
+export default function QueryProvider(props: Props) {
   const { children } = props;
 
   const [queryClient] = useState(

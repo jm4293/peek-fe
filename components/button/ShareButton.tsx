@@ -2,11 +2,11 @@
 
 import { Share } from 'lucide-react';
 
-interface IProps {
+interface Props {
   text: string;
 }
 
-export const ShareButton = (props: IProps) => {
+export const ShareButton = (props: Props) => {
   const { text } = props;
 
   const handleShare = async () => {

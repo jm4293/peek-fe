@@ -7,11 +7,11 @@ import { requestForToken } from '@/lib/firebase/firebase.config';
 
 import { notificationTokenAtom } from '@/stores/notification-token.atom';
 
-interface IProps {
+interface Props {
   children: React.ReactNode;
 }
 
-export default function MessagingConfig(props: IProps) {
+export default function MessagingConfig(props: Props) {
   const { children } = props;
 
   const hasRequested = useRef(false);

@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react';
 
 import { useStockKoreanSocket } from '@/hooks/socket';
 
-interface IProps {
+interface Props {
   code: string;
 }
 
-export default function BoardDetail(props: IProps) {
+export default function BoardDetail(props: Props) {
   const { code } = props;
 
   const { subscribeStock, unsubscribeStock, onStockUpdate, offStockUpdate } = useStockKoreanSocket();

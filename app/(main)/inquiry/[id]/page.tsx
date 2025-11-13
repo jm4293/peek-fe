@@ -7,11 +7,11 @@ import { getInquiryDetail } from '@/services/inquiry/server';
 
 import InquiryDetail from './InquiryDetail';
 
-interface IProps {
+interface Props {
   params: Promise<{ id: string }>;
 }
 
-export default async function UserInquiryDetailPage(props: IProps) {
+export default async function UserInquiryDetailPage(props: Props) {
   const { id } = await props.params;
 
   const inquiry = getInquiryDetail(id);

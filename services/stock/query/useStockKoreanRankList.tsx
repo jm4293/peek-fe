@@ -5,9 +5,9 @@ import { QueryKeys } from '@/shared/constant/query-key';
 import stockApi from '../api';
 import { GetStockKoreanRankListReq } from '../type';
 
-interface IProps extends Omit<GetStockKoreanRankListReq, 'page'> {}
+interface Props extends Omit<GetStockKoreanRankListReq, 'page'> {}
 
-export const useStockKoreanRankList = (props: IProps) => {
+export const useStockKoreanRankList = (props: Props) => {
   const { type } = props;
 
   // return useInfiniteQuery({

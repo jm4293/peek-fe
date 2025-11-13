@@ -4,7 +4,7 @@ import { InputHTMLAttributes } from 'react';
 
 import { Text } from '@/components/text';
 
-interface IProps extends InputHTMLAttributes<HTMLInputElement> {
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   options: { value: string; label: string }[];
   title?: string;
@@ -14,7 +14,7 @@ interface IProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
 }
 
-export const Datalist = (props: IProps) => {
+export const Datalist = (props: Props) => {
   const { title, name, className, placeholder, isOptional, isError, ...rest } = props;
 
   const datalistId = `${name}-datalist`;

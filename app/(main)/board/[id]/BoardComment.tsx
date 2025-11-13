@@ -14,12 +14,12 @@ import { useToast } from '@/hooks/modal';
 import { useBoardCommentList, useBoardCommentMutation } from '@/services/board';
 import { UserAccountModel } from '@/services/user';
 
-interface IProps {
+interface Props {
   id: string;
   userInfo: UserAccountModel | null;
 }
 
-export default function BoardComment(props: IProps) {
+export default function BoardComment(props: Props) {
   const { id, userInfo } = props;
 
   const [replyComment, setReplyComment] = useState('');

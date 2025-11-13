@@ -6,11 +6,11 @@ import { useRouter } from 'next/navigation';
 
 import { useModal } from '@/hooks/modal';
 
-interface IProps {
+interface Props {
   isAuth: boolean;
 }
 
-export const InquiryRegisterButton = (props: IProps) => {
+export const InquiryRegisterButton = (props: Props) => {
   const { isAuth } = props;
   const router = useRouter();
 
