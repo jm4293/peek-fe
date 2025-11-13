@@ -1,6 +1,7 @@
 'use client';
 
 import { DayjsUtil } from '@/utils';
+import { ChevronRight } from 'lucide-react';
 import Marquee from 'react-fast-marquee';
 
 import { LineSkeleton } from '@/components/skeleton';
@@ -20,7 +21,12 @@ export const Currency = () => {
             <Text.HEADING text="환율" />
             {isSuccess && data.length > 0 && <Text.CAPTION text={DayjsUtil.of(data[0].createdAt).formatMMDDHHmmss()} />}
           </div>
-          <Text.CAPTION text="30초마다 갱신됩니다." color="gray" className="text-end" />
+          {isSuccess && data && (
+            <div className="flex items-center gap-2">
+              <Text.CAPTION text="10초마다 갱신됩니다." color="gray" className="text-end" />
+              <ChevronRight />
+            </div>
+          )}{' '}
         </div>
         {children}
       </Wrapper.SECTION>

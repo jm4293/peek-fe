@@ -3,7 +3,7 @@ import { Text } from '@/components/text';
 interface Props {
   id?: string;
   text?: string | React.ReactNode;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 const MAIN = (props: Props) => {

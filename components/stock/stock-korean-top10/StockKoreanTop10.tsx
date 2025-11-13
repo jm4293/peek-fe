@@ -25,10 +25,12 @@ export const StockKoreanTop10 = () => {
               <Text.CAPTION text={DayjsUtil.of(data.createdAt).formatMMDDHHmmss()} className="text-nowrap" />
             )}
           </div>
-          <div className="flex items-center gap-2">
-            <Text.CAPTION text="10초마다 갱신됩니다." color="gray" className="text-end" />
-            <ChevronRight />
-          </div>
+          {isConnected && data && (
+            <div className="flex items-center gap-2">
+              <Text.CAPTION text="10초마다 갱신됩니다." color="gray" className="text-end" />
+              <ChevronRight />
+            </div>
+          )}
         </Link>
         {children}
       </Wrapper.SECTION>
