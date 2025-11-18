@@ -9,7 +9,7 @@ export default function KakaoOauthPage() {
       <Wrapper.SECTION>
         <LineSkeleton />
         <LineSkeleton />
-        <KakaoOauth />
+        {/* <KakaoOauth /> */}
       </Wrapper.SECTION>
     </Wrapper.MAIN>
   );

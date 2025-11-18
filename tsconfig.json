@@ -13,6 +13,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "baseUrl": ".",
     "plugins": [
       {
         "name": "next"
@@ -24,8 +25,8 @@
       "@/app/home/*": ["./app/(main)/home/*"],
       "@/app/stock/*": ["./app/(main)/stock/*"],
       "@/app/user/*": ["./app/(main)/user/*"],
-      "@/app/auth/login/*": ["./app/auth/login/*"],
-      "@/app/auth/register/*": ["./app/auth/register/*"],
+      "@/app/auth/login/*": ["app/(auth)/auth/login/*"],
+      "@/app/auth/register/*": ["app/(auth)/auth/register/*"],
 
       "@/asset": ["./asset"],
       "@/asset/*": ["./asset/*"],

@@ -39,21 +39,23 @@ export const Header = () => {
 
   if (isMobile) {
     return (
-      <header className="flex justify-between items-center bg-theme-bg-header">
-        {pathname.split('/').length > 2 ? (
-          <ChevronLeft onClick={() => router.back()} />
-        ) : (
-          <div style={{ width: '24px' }} />
-        )}
-        <Logo />
-        <ThemeSwitcher />
+      <header className="bg-theme-bg-header">
+        <div className="w-full h-full flex justify-between items-center px-4">
+          {pathname.split('/').length > 2 ? (
+            <ChevronLeft onClick={() => router.back()} />
+          ) : (
+            <div style={{ width: '24px' }} />
+          )}
+          <Logo />
+          <ThemeSwitcher />
+        </div>
       </header>
     );
   }
 
   return (
-    <header className="flex justify-center items-center bg-theme-bg-header">
-      <div className="w-full max-w-screen-xl flex justify-between">
+    <header className="bg-theme-bg-header">
+      <div className="w-full h-full max-w-[2345px] px-16 mx-auto flex justify-between items-center">
         <div className="flex items-center gap-8">
           <Logo />
 

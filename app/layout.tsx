@@ -9,9 +9,7 @@ import MessagingConfig from '@/lib/firebase/messaging.config';
 import { NetworkError } from '@/lib/network-error';
 import QueryProvider from '@/lib/query-provider';
 
-import { Footer } from './Footer';
 import GlobalLoading from './GlobalLoading';
-import { Header } from './Header';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -50,15 +48,8 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           <NetworkError>
             <QueryProvider>
               <MessagingConfig>
-                <div className="relative">
-                  <Header />
-                  <main className="bg-theme-bg-main">
-                    <div className="m-auto max-w-screen-xl">{children}</div>
-                  </main>
-                  <Footer />
-
-                  <GlobalLoading />
-                </div>
+                {children}
+                <GlobalLoading />
               </MessagingConfig>
             </QueryProvider>
           </NetworkError>

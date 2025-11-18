@@ -17,7 +17,7 @@ import { LoginOAuth } from './LoginOAuth';
 
 export default function LoginPage() {
   return (
-    <Wrapper.MAIN text="로그인">
+    <Wrapper.MAIN>
       <LoginOAuth />
     </Wrapper.MAIN>
   );
