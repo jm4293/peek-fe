@@ -7,8 +7,8 @@ export default function GoogleOauthPage() {
   return (
     <Wrapper.MAIN text="구글 로그인">
       <Wrapper.SECTION>
-        <LineSkeleton />
-        <LineSkeleton />
+        {/* <LineSkeleton />
+        <LineSkeleton /> */}
         <GoogleOauth />
       </Wrapper.SECTION>
     </Wrapper.MAIN>

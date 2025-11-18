@@ -7,8 +7,8 @@ export default function NaverOauthPage() {
   return (
     <Wrapper.MAIN text="네이버 로그인">
       <Wrapper.SECTION>
-        <LineSkeleton />
-        <LineSkeleton />
+        {/* <LineSkeleton />
+        <LineSkeleton /> */}
         <NaverOauth />
       </Wrapper.SECTION>
     </Wrapper.MAIN>
