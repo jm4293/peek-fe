@@ -84,7 +84,7 @@ export function LoginOAuth() {
         <Text.SUBTITLE text="다양한 서비스를 이용해보세요." className="text-center" />
       </div>
 
-      <div className="flex flex-col gap-8 w-full" ref={buttonsRef}>
+      <div className="flex flex-col gap-8 w-full px-8" ref={buttonsRef}>
         <div className="relative w-full">
           {lastLoginMethod === UserAccountTypeEnum.GOOGLE && <LastLoginCheck />}
           <ButtonGoogle />
@@ -99,9 +99,12 @@ export function LoginOAuth() {
           {lastLoginMethod === UserAccountTypeEnum.KAKAO && <LastLoginCheck />}
           <ButtonKakao />
         </div>
-      </div>
 
-      <Text.PARAGRAPH text="계속 진행하면 PEEK의 이용약관 및 개인정보처리방침에 동의하는 것입니다." />
+        <Text.PARAGRAPH
+          text="계속 진행하면 PEEK의 이용약관 및 개인정보처리방침에 동의하는 것입니다."
+          className="text-center"
+        />
+      </div>
     </div>
   );
 }
