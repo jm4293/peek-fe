@@ -1,40 +1,51 @@
 'use client';
 
+import gsap from 'gsap';
 import React, { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 
 import { useToast } from '@/hooks/modal';
 
-const TOAST_BG_COLOR: Record<string, string> = {
-  success: 'bg-green-600',
-  error: 'bg-red-600',
-  warning: 'bg-yellow-500',
-  info: 'bg-white/90 dark:bg-gray-800',
-};
-
-const TOAST_TEXT_COLOR: Record<string, string> = {
-  success: 'text-white',
-  error: 'text-white',
-  warning: 'text-black',
-  info: 'text-black dark:text-white',
-};
-
 export const Toast = () => {
   const toastRoot = useRef<Element | null>(null);
-
+  const toastRef = useRef<HTMLDivElement>(null);
   const { toast, closeToast } = useToast();
-
-  const bgColor = TOAST_BG_COLOR[toast.type] || TOAST_BG_COLOR.info;
-  const textColor = TOAST_TEXT_COLOR[toast.type] || TOAST_TEXT_COLOR.info;
 
   useEffect(() => {
     toastRoot.current = document.getElementById('toast-root');
   }, []);
 
   useEffect(() => {
-    if (toast.visible) {
+    if (toast.visible && toastRef.current) {
+      // 나타날 때: 위에서 아래로 슬라이드 + 페이드인
+      gsap.fromTo(
+        toastRef.current,
+        {
+          y: -100,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.5,
+          ease: 'none',
+        },
+      );
+
+      // 3초 후 사라지는 타이머
       const timer = setTimeout(() => {
-        closeToast();
+        if (toastRef.current) {
+          // 사라질 때: 아래에서 위로 슬라이드 + 페이드아웃
+          gsap.to(toastRef.current, {
+            y: -100,
+            opacity: 0,
+            duration: 0.5,
+            ease: 'none',
+            onComplete: () => {
+              closeToast();
+            },
+          });
+        }
       }, 3000);
 
       return () => {
@@ -49,9 +60,10 @@ export const Toast = () => {
 
   return ReactDOM.createPortal(
     <div
-      className={`fixed left-1/2 bottom-24 -translate-x-1/2 p-2 rounded shadow-lg z-[1100] animate-fadeIn ${bgColor}`}
+      ref={toastRef}
+      className="fixed left-1/2 top-24 -translate-x-1/2 px-4 py-3 rounded-lg border shadow-lg z-[1100] bg-theme-bg-card border-theme-border-light text-theme-txt-default"
       style={{ minWidth: 200, textAlign: 'center' }}>
-      <p className={`whitespace-pre-line w-full break-keep ${textColor}`}>{toast.message}</p>
+      <p className="whitespace-pre-line w-full break-keep">{toast.message}</p>
     </div>,
     toastRoot.current,
   );

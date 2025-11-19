@@ -10,7 +10,6 @@ import { Text } from '../text';
 
 export const Modal = () => {
   const modalRoot = useRef<Element | null>(null);
-
   const { modal, closeModal } = useModal();
 
   const handleCancel = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -42,7 +41,7 @@ export const Modal = () => {
       className="fixed inset-0 w-screen h-screen bg-black/40 flex items-center justify-center z-[1000]"
       onClick={closeModal}>
       <div
-        className="rounded-2xl shadow-lg p-4 min-w-[320px] flex flex-col bg-theme-bg-main"
+        className="rounded-2xl shadow-lg p-6 min-w-[320px] flex flex-col border bg-theme-bg-card border-theme-border-light text-theme-txt-default"
         onClick={(e) => e.stopPropagation()}>
         <Text.TITLE text={modal.title} className="mb-4" />
 

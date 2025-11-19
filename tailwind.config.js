@@ -5,27 +5,31 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // 'light-bg-1': '#FDFDFD',
-        // 'light-bg-2': '#F5F5F5',
-        // 'light-txt-1': '#151515',
-        // 'light-txt-2': '#949494',
-
-        // 'dark-bg-1': '#1B1B1D',
-        // 'dark-bg-2': '#1F1F22',
-        // 'dark-txt-1': '#D0D0D4',
-        // 'dark-txt-2': '#8B8B8E',
+        // Main Brand Colors
         'theme-main-color': 'var(--main-color)',
+        'theme-main-color-light': 'var(--main-color-light)',
+        'theme-main-color-dark': 'var(--main-color-dark)',
 
+        // Backgrounds
         'theme-bg-header': 'var(--bg-header)',
         'theme-bg-main': 'var(--bg-main)',
         'theme-bg-section': 'var(--bg-section)',
         'theme-bg-blue': 'var(--bg-blue)',
+        'theme-bg-card': 'var(--bg-card)',
+        'theme-bg-card-hover': 'var(--bg-card-hover)',
 
+        // Borders
+        'theme-border-light': 'var(--border-light)',
+        'theme-border-medium': 'var(--border-medium)',
+
+        // Text
         'theme-txt-default': 'var(--txt-default)',
+        'theme-txt-secondary': 'var(--txt-secondary)',
         'theme-txt-gray': 'var(--txt-gray)',
         'theme-txt-blue': 'var(--txt-blue)',
         'theme-txt-red': 'var(--txt-red)',
 
+        // Other
         'theme-skeleton-bg': 'var(--skeleton-bg)',
       },
     },

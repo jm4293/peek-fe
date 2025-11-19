@@ -3,33 +3,56 @@
 @tailwind utilities;
 
 :root {
+  /* Main Brand Color */
   --main-color: #9470dc;
+  --main-color-light: #b99aed;
+  --main-color-dark: #7854c4;
 
-  --bg-header: #fdfdfd;
+  /* Light Mode - Backgrounds */
+  --bg-header: #ffffff;
   --bg-main: #f5f5f5;
-  --bg-section: #fdfdfd;
+  --bg-section: #ffffff;
   --bg-blue: #f9f9fc;
+  --bg-card: #ffffff;
+  --bg-card-hover: #fafafa;
 
-  --txt-default: #151515;
-  --txt-gray: #c4c4c4;
+  /* Light Mode - Borders */
+  --border-light: #e0e0e0;
+  --border-medium: #c4c4c4;
+
+  /* Light Mode - Text */
+  --txt-default: #1a1a1a;
+  --txt-secondary: #666666;
+  --txt-gray: #999999;
   --txt-blue: #0894e2;
   --txt-red: #db2840;
 
-  --skeleton-bg: #ececec;
+  /* Light Mode - Other */
+  --skeleton-bg: #e8e8e8;
 }
 
 html.dark {
-  --bg-header: #1b1b1d;
+  /* Dark Mode - Backgrounds */
+  --bg-header: #1f1f22;
   --bg-main: #27272a;
-  --bg-section: #1b1b1d;
-  --bg-blue: #202329;
+  --bg-section: #1f1f22;
+  --bg-blue: #2a2a35;
+  --bg-card: #2d2d32;
+  --bg-card-hover: #35353a;
 
-  --txt-default: #d0d0d4;
-  --txt-gray: #a8a8ab;
-  --txt-blue: #0894e2;
-  --txt-red: #f1455f;
+  /* Dark Mode - Borders */
+  --border-light: #3a3a40;
+  --border-medium: #4a4a52;
 
-  --skeleton-bg: #232326;
+  /* Dark Mode - Text */
+  --txt-default: #f5f5f5;
+  --txt-secondary: #d4d4d8;
+  --txt-gray: #a1a1aa;
+  --txt-blue: #60a5fa;
+  --txt-red: #f87171;
+
+  /* Dark Mode - Other */
+  --skeleton-bg: #35353a;
 }
 
 * {
