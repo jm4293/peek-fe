@@ -81,7 +81,6 @@ export function LoginOAuth() {
     <div className="flex flex-col items-center gap-8 w-full max-w-md" ref={containerRef}>
       <div ref={textRef}>
         <Text.TITLE text="안녕하세요!" className="text-center" />
-        <Text.SUBTITLE text="다양한 서비스를 이용해보세요." className="text-center" />
       </div>
 
       <div className="flex flex-col gap-8 w-full px-8" ref={buttonsRef}>

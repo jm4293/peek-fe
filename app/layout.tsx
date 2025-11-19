@@ -9,7 +9,6 @@ import MessagingConfig from '@/lib/firebase/messaging.config';
 import { NetworkError } from '@/lib/network-error';
 import QueryProvider from '@/lib/query-provider';
 
-import GlobalLoading from './GlobalLoading';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -49,7 +48,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
             <QueryProvider>
               <MessagingConfig>
                 {children}
-                <GlobalLoading />
+                {/* <GlobalLoading /> */}
               </MessagingConfig>
             </QueryProvider>
           </NetworkError>

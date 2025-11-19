@@ -1,7 +1,7 @@
 'use client';
 
 import { useTheme } from 'next-themes';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface Particle {
   x: number;
@@ -17,8 +17,16 @@ export const AnimatedBackground = () => {
   const animationFrameRef = useRef<number | undefined>(undefined);
   const particlesRef = useRef<Particle[]>([]);
   const { theme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  // 클라이언트 마운트 확인
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
+    if (!mounted) return; // 마운트되기 전에는 실행하지 않음
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -204,7 +212,13 @@ export const AnimatedBackground = () => {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [theme, resolvedTheme]);
+  }, [theme, resolvedTheme, mounted]);
 
-  return <canvas ref={canvasRef} className="fixed inset-0 w-full h-full pointer-events-none" style={{ zIndex: 0 }} />;
+  return (
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 w-full h-full pointer-events-none"
+      style={{ zIndex: 0, opacity: mounted ? 1 : 0, transition: 'opacity 0.3s ease-in' }}
+    />
+  );
 };
