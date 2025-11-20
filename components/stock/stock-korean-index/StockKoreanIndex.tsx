@@ -28,7 +28,7 @@ export const StockKoreanIndex = () => {
       <Wrapper.SECTION>
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">
-            <Text.HEADING text="국내 지수" />
+            <Text.HEADING text="지수" />
             {isConnected && kospi && (
               <Text.CAPTION text={DayjsUtil.of(kospi.createdAt).formatMMDDHHmmss()} className="text-nowrap" />
             )}
@@ -68,13 +68,13 @@ export const StockKoreanIndex = () => {
 
         <div className="flex gap-4">
           <div className="">
-            <Text.CAPTION text="최고" className="text-end" />
-            <Text.CAPTION text={indexData.highjisu} />
+            <Text.PARAGRAPH text="최고" className="text-center" />
+            <Text.PARAGRAPH text={indexData.highjisu} />
           </div>
 
           <div className="">
-            <Text.CAPTION text="최저" className="text-end" />
-            <Text.CAPTION text={indexData.lowjisu} />
+            <Text.PARAGRAPH text="최저" className="text-center" />
+            <Text.PARAGRAPH text={indexData.lowjisu} />
           </div>
         </div>
       </Link>

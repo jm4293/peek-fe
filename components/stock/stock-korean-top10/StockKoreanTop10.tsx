@@ -5,7 +5,7 @@ import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 
 import { LineSkeleton } from '@/components/skeleton';
-import { NetworkErrorText, Text } from '@/components/text';
+import { KoreanStockIndexText, NetworkErrorText, Text } from '@/components/text';
 import { EmptyDataView, Wrapper } from '@/components/wrapper';
 
 import { useStockKoreanTop10 } from '@/hooks/socket';
@@ -20,7 +20,7 @@ export const StockKoreanTop10 = () => {
       <Wrapper.SECTION>
         <Link className="flex justify-between items-center" href="/stock/korean/top10">
           <div className="flex items-center gap-2">
-            <Text.HEADING text="국내 시가총액" />
+            <Text.HEADING text="시가총액" />
             {isConnected && data && (
               <Text.CAPTION text={DayjsUtil.of(data.createdAt).formatMMDDHHmmss()} className="text-nowrap" />
             )}
@@ -45,11 +45,21 @@ export const StockKoreanTop10 = () => {
         {data.map((item, index) => (
           <div key={item.hname} className="flex items-center gap-4">
             <Text.PARAGRAPH text={`${index + 1}.`} />
-            <div>
+            <div className="w-full flex justify-between items-center">
               <Text.HEADING text={item.hname} />
-              <div className="flex items-center gap-2">
-                <Text.PARAGRAPH text={`현재가: ${item.price.toLocaleString()}`} />
-                <Text.PARAGRAPH text={`변동: ${item.change} (${item.diff}%)`} />
+              <div className="flex flex-col items-end">
+                <KoreanStockIndexText
+                  price={(+item.price).toLocaleString()}
+                  sign={item.sign}
+                  size="PARAGRAPH"
+                  className="text-end"
+                />
+                <KoreanStockIndexText
+                  price={`${item.change} (${item.diff}%)`}
+                  sign={item.sign}
+                  size="PARAGRAPH"
+                  className="text-end"
+                />
               </div>
             </div>
           </div>

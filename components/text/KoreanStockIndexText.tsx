@@ -12,7 +12,7 @@ export const KoreanStockIndexText = (props: Props) => {
 
   if (size === 'HEADING') {
     return (
-      <AnimatedText.TITLE
+      <AnimatedText.HEADING
         text={price}
         color={`${sign === '2' ? 'red' : sign === '5' ? 'blue' : 'default'}`}
         className={`text-nowrap ${className}`}
