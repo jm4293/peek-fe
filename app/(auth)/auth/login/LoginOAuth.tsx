@@ -31,6 +31,28 @@ const LastLoginCheck = () => {
   );
 };
 
+const getTimeBasedMessage = () => {
+  const hour = new Date().getHours();
+
+  if (hour >= 0 && hour < 3) {
+    return '밤늦게까지 투자 정보를 찾고 계시는군요';
+  } else if (hour >= 3 && hour < 6) {
+    return '새벽의 고요함 속에서 시장을 준비해요';
+  } else if (hour >= 6 && hour < 9) {
+    return '장 시작 전, 새로운 기회를 함께 찾아요';
+  } else if (hour >= 9 && hour < 12) {
+    return '장이 활발하게 움직이는 시간이에요';
+  } else if (hour >= 12 && hour < 14) {
+    return '점심 시간, 잠시 휴식하며 시장을 바라봐요';
+  } else if (hour >= 14 && hour < 18) {
+    return '장 마감 전, 하루의 마무리를 함께해요';
+  } else if (hour >= 18 && hour < 21) {
+    return '장이 마감되었어요, 오늘 하루는 어떠셨나요?';
+  } else {
+    return '내일을 위한 준비, 함께 정보를 나눠요';
+  }
+};
+
 export function LoginOAuth() {
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
@@ -79,8 +101,9 @@ export function LoginOAuth() {
 
   return (
     <div className="flex flex-col items-center gap-8 w-full max-w-md" ref={containerRef}>
-      <div ref={textRef}>
+      <div ref={textRef} className="flex flex-col gap-2">
         <Text.TITLE text="안녕하세요!" className="text-center" />
+        <Text.PARAGRAPH text={getTimeBasedMessage()} className="text-center" />
       </div>
 
       <div className="flex flex-col gap-8 w-full px-8" ref={buttonsRef}>
