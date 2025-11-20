@@ -11,7 +11,7 @@ export const EmptyDataView = (props: Props) => {
 
   return (
     <Wrapper.SECTION>
-      <Text.HEADING text={`${text}이(가) 없습니다.`} className={className} />
+      <Text.PARAGRAPH text={`${text}이(가) 없습니다.`} className={className} />
     </Wrapper.SECTION>
   );
 };

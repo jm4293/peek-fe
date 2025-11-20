@@ -1,4 +1,4 @@
-import { ChevronRight } from 'lucide-react';
+import { Bell, ChevronRight, FileText, HelpCircle, MessageSquare, Palette, Star } from 'lucide-react';
 import Link from 'next/link';
 
 import { Thumbnail } from '@/components/image';
@@ -40,33 +40,51 @@ export default async function UserPage() {
 
       <Wrapper.SECTION text="히스토리">
         <Link href="/user/stock/favorite" className="flex items-center justify-between">
-          <Text.HEADING text="즐겨찾기 종목" />
+          <div className="flex items-center gap-3">
+            <Star size={20} />
+            <Text.HEADING text="즐겨찾기 종목" />
+          </div>
           <ChevronRight />
         </Link>
         <Link href="/user/board" className="flex items-center justify-between">
-          <Text.HEADING text="작성한 커뮤니티 게시글" />
+          <div className="flex items-center gap-3">
+            <FileText size={20} />
+            <Text.HEADING text="작성한 커뮤니티 게시글" />
+          </div>
           <ChevronRight />
         </Link>
         <Link href="/user/board/comment" className="flex items-center justify-between">
-          <Text.HEADING text="작성한 커뮤니티 게시글 댓글" />
+          <div className="flex items-center gap-3">
+            <MessageSquare size={20} />
+            <Text.HEADING text="작성한 커뮤니티 게시글 댓글" />
+          </div>
           <ChevronRight />
         </Link>
       </Wrapper.SECTION>
 
       <Wrapper.SECTION text="고객센터">
         <Link href="/user/notice" className="flex items-center justify-between">
-          <Text.HEADING text="공지사항" />
+          <div className="flex items-center gap-3">
+            <Bell size={20} />
+            <Text.HEADING text="공지사항" />
+          </div>
           <ChevronRight />
         </Link>
         <Link href="/user/inquiry" className="flex items-center justify-between">
-          <Text.HEADING text="문의하기" />
+          <div className="flex items-center gap-3">
+            <HelpCircle size={20} />
+            <Text.HEADING text="문의하기" />
+          </div>
           <ChevronRight />
         </Link>
       </Wrapper.SECTION>
 
       <Wrapper.SECTION text="설정">
         <Link href="/user/setting/theme" className="flex items-center justify-between">
-          <Text.HEADING text="테마 설정" />
+          <div className="flex items-center gap-3">
+            <Palette size={20} />
+            <Text.HEADING text="테마 설정" />
+          </div>
           <ChevronRight />
         </Link>
       </Wrapper.SECTION>

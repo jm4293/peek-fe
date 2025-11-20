@@ -54,7 +54,7 @@ export default function BoardModify(props: Props) {
             </div>
           </div>
 
-          <div className="flex justify-end gap-2">
+          <div className="grid grid-cols-2 gap-2">
             <Link href={`/board/${id}`} className="w-full">
               <Button.OUTLINE text="취소" />
             </Link>

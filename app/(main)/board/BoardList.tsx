@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { Thumbnail } from '@/components/image';
 import { InfinityList } from '@/components/infinity-list';
 import { Text } from '@/components/text';
-import { EmptyDataView, InternalErrorView, LoadingView, Wrapper } from '@/components/wrapper';
+import { EmptyDataView, InternalErrorView, Wrapper } from '@/components/wrapper';
 
 import { useQueryParams } from '@/hooks/queryParams';
 
@@ -30,7 +30,7 @@ export default function BoardList() {
           <Link href={`/board/${id}`} className="flex flex-col gap-2">
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-2">
-                <Text.PARAGRAPH text={`[${stockCategory.name}]`} color="gray" />
+                <Text.PARAGRAPH text={`[${stockCategory.name}]`} />
                 <Text.HEADING text={title} />
               </div>
               <div className="flex items-center gap-1">
@@ -42,12 +42,12 @@ export default function BoardList() {
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-1">
-                  <Heart color="#8b8b8e" size={18} />
-                  <Text.PARAGRAPH text={String(likeCount)} color="gray" />
+                  <Heart size={18} />
+                  <Text.PARAGRAPH text={String(likeCount)} />
                 </div>
                 <div className="flex items-center gap-1">
-                  <MessageCircle color="#8b8b8e" size={18} />
-                  <Text.PARAGRAPH text={String(commentCount)} color="gray" />
+                  <MessageCircle size={18} />
+                  <Text.PARAGRAPH text={String(commentCount)} />
                 </div>
               </div>
 

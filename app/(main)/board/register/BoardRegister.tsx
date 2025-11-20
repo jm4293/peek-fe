@@ -76,7 +76,7 @@ export default function BoardRegister() {
             </div>
           </div>
 
-          <div className="flex justify-end gap-2">
+          <div className="grid grid-cols-2 gap-2">
             <Link href="/board" className="w-full">
               <Button.OUTLINE text="취소" />
             </Link>
