@@ -54,12 +54,19 @@ export default async function UserPage() {
       </Wrapper.SECTION>
 
       <Wrapper.SECTION text="고객센터">
-        <Link href="/notice" className="flex items-center justify-between">
+        <Link href="/user/notice" className="flex items-center justify-between">
           <Text.HEADING text="공지사항" />
           <ChevronRight />
         </Link>
-        <Link href="/inquiry" className="flex items-center justify-between">
+        <Link href="/user/inquiry" className="flex items-center justify-between">
           <Text.HEADING text="문의하기" />
+          <ChevronRight />
+        </Link>
+      </Wrapper.SECTION>
+
+      <Wrapper.SECTION text="설정">
+        <Link href="/user/setting/theme" className="flex items-center justify-between">
+          <Text.HEADING text="테마 설정" />
           <ChevronRight />
         </Link>
       </Wrapper.SECTION>

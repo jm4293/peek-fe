@@ -17,7 +17,7 @@ interface Props {
 export default async function BoardDetailPage(props: Props) {
   const { id } = await props.params;
 
-  const { data: userInfo } = await getUserInfo();
+  const { data: userInfo, success } = await getUserInfo();
 
   const board = getBoardDetail(id);
 
@@ -26,8 +26,13 @@ export default async function BoardDetailPage(props: Props) {
       <Suspense fallback={<SkeletonSuspense />}>
         <BoardDetail board={board} userInfo={userInfo} />
       </Suspense>
-      <BoardComment id={id} userInfo={userInfo} />
-      <BoardCommentRegister id={id} userInfo={userInfo} />
+
+      {success && (
+        <>
+          <BoardComment id={id} userInfo={userInfo} />
+          <BoardCommentRegister id={id} userInfo={userInfo} />
+        </>
+      )}
     </Wrapper.MAIN>
   );
 }

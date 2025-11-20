@@ -5,7 +5,6 @@ import { ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 
-import { ThemeSwitcher } from '@/components/button';
 import { Text } from '@/components/text';
 
 const menuItems = [
@@ -27,9 +26,9 @@ export const Header = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const { isMobile } = useDeviceLayout();
+  const { isMobile, isPending } = useDeviceLayout();
 
-  if (isMobile === null) {
+  if (isPending) {
     return (
       <header className="flex justify-center items-center bg-theme-bg-header">
         <Logo />
@@ -40,14 +39,14 @@ export const Header = () => {
   if (isMobile) {
     return (
       <header className="bg-theme-bg-header">
-        <div className="w-full h-full flex justify-between items-center px-4">
-          {pathname.split('/').length > 2 ? (
-            <ChevronLeft onClick={() => router.back()} />
-          ) : (
-            <div style={{ width: '24px' }} />
-          )}
-          <Logo />
-          <ThemeSwitcher />
+        <div className="w-full h-full grid grid-cols-3 items-center px-4">
+          <div className="justify-self-start">
+            {pathname.split('/').length > 2 && <ChevronLeft onClick={() => router.back()} />}
+          </div>
+          <div className="justify-self-center">
+            <Logo />
+          </div>
+          <div className="justify-self-end">{/* 우측 공간 (필요시 버튼 추가) */}</div>
         </div>
       </header>
     );
@@ -56,7 +55,7 @@ export const Header = () => {
   return (
     <header className="bg-theme-bg-header">
       <div className="w-full h-full max-w-[2345px] px-16 mx-auto flex justify-between items-center">
-        <div className="flex items-center gap-8">
+        <div className="w-full flex items-center gap-8">
           <Logo />
 
           <div className="flex items-center gap-4">
@@ -67,8 +66,6 @@ export const Header = () => {
             ))}
           </div>
         </div>
-
-        <ThemeSwitcher />
       </div>
     </header>
   );

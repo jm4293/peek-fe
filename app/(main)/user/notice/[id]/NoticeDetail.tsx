@@ -22,19 +22,11 @@ export default function NoticeDetail(props: Props) {
   const { data, success } = use(notice);
 
   if (!success) {
-    return (
-      <Wrapper.MAIN text="공지사항">
-        <InternalErrorView />
-      </Wrapper.MAIN>
-    );
+    return <InternalErrorView />;
   }
 
   if (!data) {
-    return (
-      <Wrapper.MAIN text="공지사항">
-        <EmptyDataView text="공지사항" />
-      </Wrapper.MAIN>
-    );
+    return <EmptyDataView text="공지사항" />;
   }
 
   return (

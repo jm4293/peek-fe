@@ -1,6 +1,5 @@
 'use client';
 
-import { useTheme } from 'next-themes';
 import Link from 'next/link';
 
 const GoogleLogo = () => (
@@ -25,23 +24,18 @@ const GoogleLogo = () => (
 );
 
 export const ButtonGoogle = () => {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
-
   return (
     <Link
       href={`https://accounts.google.com/o/oauth2/v2/auth?client_id=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_GOOGLE_OAUTH_REDIRECT_URL}&response_type=token&scope=openid email profile&include_granted_scopes=true`}
-      className={`
+      className="
         w-full flex items-center justify-center gap-3
         px-4 py-3 rounded-lg
-        border transition-all duration-200
-        hover:shadow-md active:scale-[0.98]
-        ${
-          isDark
-            ? 'border-gray-700 bg-gray-800/50 hover:bg-gray-800 text-gray-100'
-            : 'border-gray-300 bg-white hover:bg-gray-50 text-gray-900'
-        }
-      `}>
+        border-2 border-theme-border-light bg-theme-bg-card
+        hover:bg-theme-bg-card-hover hover:shadow-md
+        active:scale-[0.98]
+        text-theme-text-main
+        transition-all duration-200
+      ">
       <GoogleLogo />
       <span className="font-medium">Login with Google</span>
     </Link>

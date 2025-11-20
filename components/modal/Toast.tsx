@@ -21,11 +21,11 @@ export const Toast = () => {
       gsap.fromTo(
         toastRef.current,
         {
-          y: -100,
+          // y: -100,
           opacity: 0,
         },
         {
-          y: 0,
+          // y: 0,
           opacity: 1,
           duration: 0.5,
           ease: 'none',
@@ -37,7 +37,7 @@ export const Toast = () => {
         if (toastRef.current) {
           // 사라질 때: 아래에서 위로 슬라이드 + 페이드아웃
           gsap.to(toastRef.current, {
-            y: -100,
+            // y: -100,
             opacity: 0,
             duration: 0.5,
             ease: 'none',

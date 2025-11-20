@@ -33,7 +33,7 @@ export const AnimatedBackground = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const isDark = resolvedTheme === 'dark' || theme === 'dark';
+    const isDark = resolvedTheme === 'dark';
 
     // Canvas 크기 설정
     const resizeCanvas = () => {
@@ -52,8 +52,8 @@ export const AnimatedBackground = () => {
       particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.8,
-        vy: (Math.random() - 0.5) * 0.8,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
         radius: Math.random() * 3 + 1,
         opacity: Math.random() * 0.5 + 0.2,
       });
@@ -76,8 +76,8 @@ export const AnimatedBackground = () => {
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         radius: Math.random() * 200 + 100,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
         opacity: isDark ? 0.1 : 0.15,
       });
     }
@@ -116,8 +116,8 @@ export const AnimatedBackground = () => {
 
         if (distance < maxDistance) {
           const force = (maxDistance - distance) / maxDistance;
-          circle.vx += (dx / distance) * force * 0.015;
-          circle.vy += (dy / distance) * force * 0.015;
+          circle.vx += (dx / distance) * force * 0.005;
+          circle.vy += (dy / distance) * force * 0.005;
         }
 
         // 속도 감쇠
@@ -159,12 +159,12 @@ export const AnimatedBackground = () => {
 
         if (distance < maxDistance) {
           const force = (maxDistance - distance) / maxDistance;
-          particle.vx += (dx / distance) * force * 0.08;
-          particle.vy += (dy / distance) * force * 0.08;
+          particle.vx += (dx / distance) * force * 0.03;
+          particle.vy += (dy / distance) * force * 0.03;
         }
 
         // 속도 제한
-        const maxSpeed = 3;
+        const maxSpeed = 1.5;
         const speed = Math.sqrt(particle.vx * particle.vx + particle.vy * particle.vy);
         if (speed > maxSpeed) {
           particle.vx = (particle.vx / speed) * maxSpeed;

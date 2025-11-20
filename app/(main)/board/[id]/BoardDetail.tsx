@@ -37,19 +37,11 @@ export default function BoardDetail(props: Props) {
   };
 
   if (!success) {
-    return (
-      <Wrapper.MAIN text="게시글">
-        <InternalErrorView />
-      </Wrapper.MAIN>
-    );
+    return <InternalErrorView />;
   }
 
   if (!data) {
-    return (
-      <Wrapper.MAIN text="게시글">
-        <EmptyDataView text="게시글" />
-      </Wrapper.MAIN>
-    );
+    return <EmptyDataView text="게시글" />;
   }
 
   return (
