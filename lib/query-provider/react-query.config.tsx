@@ -1,7 +1,6 @@
 'use client';
 
 import { QueryClient, QueryClientProvider, QueryErrorResetBoundary } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 
@@ -32,10 +31,24 @@ export default function QueryProvider(props: Props) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* <QueryErrorResetBoundary>
+      <QueryErrorResetBoundary>
         {({ reset }) => (
           <ErrorBoundary
             onReset={reset}
+            onError={(error, errorInfo) => {
+              // Capture error in Sentry before showing fallback UI
+              if (typeof window !== 'undefined') {
+                import('@sentry/nextjs').then((Sentry) => {
+                  Sentry.captureException(error, {
+                    contexts: {
+                      react: {
+                        componentStack: errorInfo.componentStack,
+                      },
+                    },
+                  });
+                });
+              }
+            }}
             fallbackRender={({ error, resetErrorBoundary }) => (
               <div className="flex flex-col items-center justify-center h-screen">
                 <p>{handleError(error)}</p>
@@ -45,11 +58,9 @@ export default function QueryProvider(props: Props) {
             {children}
           </ErrorBoundary>
         )}
-      </QueryErrorResetBoundary> */}
+      </QueryErrorResetBoundary>
 
       {/* <ReactQueryDevtools initialIsOpen={false} /> */}
-
-      {children}
     </QueryClientProvider>
   );
 }
