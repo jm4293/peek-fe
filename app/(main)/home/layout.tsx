@@ -12,8 +12,10 @@ export default function HomeLayout(props: Props) {
     <div className="flex flex-col gap-4">
       {children}
       {stockKoreanIndex}
-      {stockKoreanTop10}
-      {currency}
+      <div className="flex flex-wrap gap-4">
+        <div className="flex-1 min-w-full md:min-w-[calc(50%-0.5rem)]">{stockKoreanTop10}</div>
+        <div className="flex-1 min-w-full md:min-w-[calc(50%-0.5rem)]">{currency}</div>
+      </div>
     </div>
   );
 }

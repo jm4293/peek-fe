@@ -6,7 +6,7 @@ import Marquee from 'react-fast-marquee';
 
 import { LineSkeleton } from '@/components/skeleton';
 import { NetworkErrorText, Text } from '@/components/text';
-import { EmptyDataView, Wrapper } from '@/components/wrapper';
+import { Wrapper } from '@/components/wrapper';
 
 import { useCurrencyList } from '@/services/currency/query';
 
@@ -16,7 +16,7 @@ export const Currency = () => {
   const CurrencyWrapper = ({ children }: { children: React.ReactNode }) => {
     return (
       <Wrapper.SECTION>
-        <div className="flex justify-between items-center mb-2">
+        <div className="flex justify-between items-center">
           <div className="flex items-center gap-2">
             <Text.HEADING text="환율" />
             {isSuccess && data.length > 0 && <Text.CAPTION text={DayjsUtil.of(data[0].createdAt).formatMMDDHHmmss()} />}
@@ -26,7 +26,7 @@ export const Currency = () => {
               <Text.CAPTION text="10초마다 갱신됩니다." color="gray" className="text-end" />
               <ChevronRight />
             </div>
-          )}{' '}
+          )}
         </div>
         {children}
       </Wrapper.SECTION>
@@ -52,7 +52,7 @@ export const Currency = () => {
   if (data.length === 0) {
     return (
       <CurrencyWrapper>
-        <EmptyDataView text="환율 데이터" className="text-center" />
+        <Text.PARAGRAPH text="환율 데이터가 없습니다." className="text-center" />
       </CurrencyWrapper>
     );
   }

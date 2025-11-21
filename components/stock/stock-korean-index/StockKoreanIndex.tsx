@@ -103,12 +103,12 @@ export const StockKoreanIndex = () => {
         {kospi ? (
           <Render indexData={kospi} title="코스피" href="/index/kospi" />
         ) : (
-          <EmptyDataView text="코스티 데이터" />
+          <Text.PARAGRAPH text="코스피 데이터가 없습니다." />
         )}
         {kosdaq ? (
           <Render indexData={kosdaq} title="코스닥" href="/index/kosdaq" />
         ) : (
-          <EmptyDataView text="코스닥 데이터" />
+          <Text.PARAGRAPH text="코스닥 데이터가 없습니다." />
         )}
       </div>
     </StockKoreanIndexWrapper>

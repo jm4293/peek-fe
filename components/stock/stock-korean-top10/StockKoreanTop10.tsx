@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 import { LineSkeleton } from '@/components/skeleton';
 import { KoreanStockIndexText, NetworkErrorText, Text } from '@/components/text';
-import { EmptyDataView, Wrapper } from '@/components/wrapper';
+import { Wrapper } from '@/components/wrapper';
 
 import { useStockKoreanTop10 } from '@/hooks/socket';
 
@@ -84,11 +84,17 @@ export const StockKoreanTop10 = () => {
     );
   }
 
+  if (!data?.list.length) {
+    return (
+      <StockKoreanTop10Wrapper>
+        <Text.PARAGRAPH text="시가총액 데이터가 없습니다." className="text-center" />
+      </StockKoreanTop10Wrapper>
+    );
+  }
+
   return (
     <StockKoreanTop10Wrapper>
-      <div className="flex justify-center items-center gap-12">
-        {data ? <Render data={data.list} /> : <EmptyDataView text="국내 시가총액 데이터" />}
-      </div>
+      <Render data={data?.list || []} />
     </StockKoreanTop10Wrapper>
   );
 };
