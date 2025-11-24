@@ -1,4 +1,4 @@
-import { Bell, ChevronRight, FileText, HelpCircle, MessageSquare, Palette, Star } from 'lucide-react';
+import { Bell, ChevronRight, FileText, HelpCircle, MessageSquare, Palette, Shield, Star } from 'lucide-react';
 import Link from 'next/link';
 
 import { Thumbnail } from '@/components/image';
@@ -62,6 +62,16 @@ export default async function UserPage() {
         </Link>
       </Wrapper.SECTION>
 
+      <Wrapper.SECTION text="설정">
+        <Link href="/user/setting/theme" className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <Palette size={20} />
+            <Text.HEADING text="테마 설정" />
+          </div>
+          <ChevronRight />
+        </Link>
+      </Wrapper.SECTION>
+
       <Wrapper.SECTION text="고객센터">
         <Link href="/user/notice" className="flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -77,13 +87,10 @@ export default async function UserPage() {
           </div>
           <ChevronRight />
         </Link>
-      </Wrapper.SECTION>
-
-      <Wrapper.SECTION text="설정">
-        <Link href="/user/setting/theme" className="flex items-center justify-between">
+        <Link href="/privacy" className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Palette size={20} />
-            <Text.HEADING text="테마 설정" />
+            <Shield size={20} />
+            <Text.HEADING text="개인정보 처리방침" />
           </div>
           <ChevronRight />
         </Link>

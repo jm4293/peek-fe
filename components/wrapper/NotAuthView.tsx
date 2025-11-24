@@ -1,4 +1,4 @@
-import { Bell, ChevronRight, Palette } from 'lucide-react';
+import { Bell, ChevronRight, Palette, Shield } from 'lucide-react';
 import Link from 'next/link';
 
 import { Text } from '@/components/text';
@@ -22,7 +22,17 @@ export function NotAuthView(props: Props) {
         </Link>
       </Wrapper.SECTION>
 
-      <Wrapper.SECTION text="알림">
+      <Wrapper.SECTION text="설정">
+        <Link href="/user/setting/theme" className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <Palette size={20} />
+            <Text.HEADING text="테마 설정" />
+          </div>
+          <ChevronRight />
+        </Link>
+      </Wrapper.SECTION>
+
+      <Wrapper.SECTION text="고객센터">
         <Link href="/user/notice" className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Bell size={20} />
@@ -30,13 +40,10 @@ export function NotAuthView(props: Props) {
           </div>
           <ChevronRight />
         </Link>
-      </Wrapper.SECTION>
-
-      <Wrapper.SECTION text="설정">
-        <Link href="/user/setting/theme" className="flex items-center justify-between">
+        <Link href="/privacy" className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Palette size={20} />
-            <Text.HEADING text="테마 설정" />
+            <Shield size={20} />
+            <Text.HEADING text="개인정보 처리방침" />
           </div>
           <ChevronRight />
         </Link>

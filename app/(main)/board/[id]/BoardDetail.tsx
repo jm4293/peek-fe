@@ -61,9 +61,9 @@ export default function BoardDetail(props: Props) {
 
       <Wrapper.SECTION>
         <div className="flex flex-col gap-4">
-          <div className="flex items-center gap-2">
-            <Text.PARAGRAPH text={`[${data.stockCategory.name}]`} color="gray" />
-            <Text.HEADING text={data.title} />
+          <div className="flex items-start gap-2 flex-wrap">
+            <Text.PARAGRAPH text={`[${data.stockCategory.name}]`} color="gray" className="flex-shrink-0" />
+            <Text.HEADING text={data.title} className="break-words" />
           </div>
 
           <PreText text={data.boardArticle.content} />
