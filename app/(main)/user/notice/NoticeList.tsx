@@ -20,7 +20,7 @@ export default function NoticeList() {
     return (
       <li key={id}>
         <Wrapper.SECTION>
-          <Link href={`/notice/${id}`} className="flex flex-col gap-1">
+          <Link href={`/user/notice/${id}`} className="flex flex-col gap-1">
             <div className="flex items-center gap-2">
               <Text.PARAGRAPH text={`[${NoticeTypeEnumList[type].label}]`} color={NoticeTypeEnumList[type].color} />
               <Text.HEADING text={title} />

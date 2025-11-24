@@ -8,7 +8,8 @@ export default function CatchAllPage() {
   return (
     <Wrapper.SECTION>
       <div className="min-h-[70vh] flex flex-col justify-center items-center gap-8">
-        <p className="text-8xl font-bold text-gray-500 select-none animate-pulse">404</p>
+        {/* <p className="text-8xl font-bold text-gray-500 select-none animate-pulse">404</p> */}
+        <p className="text-8xl font-bold text-gray-500 select-none">404</p>
 
         <div className="text-center">
           <Text.TITLE text="PEEK" color="main" />
