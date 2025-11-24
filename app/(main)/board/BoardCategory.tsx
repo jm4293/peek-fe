@@ -24,15 +24,19 @@ export default function BoardCategory() {
   }
 
   return (
-    <Wrapper.SECTION text="카테고리">
-      <div className="flex items-center gap-4">
+    <Wrapper.SECTION>
+      <div className="flex flex-col gap-4">
         <Link href="/board">
-          <Text.HEADING text="전체" color={stockCategory === null ? 'default' : 'gray'} />
+          <Text.HEADING text="전체" color={stockCategory === null ? 'default' : 'gray'} className="whitespace-nowrap" />
         </Link>
 
         {data.map((cur) => (
           <Link key={cur.id} href={`/board?stockCategory=${cur.id}`}>
-            <Text.HEADING text={cur.name} color={stockCategory === cur.id.toString() ? 'default' : 'gray'} />
+            <Text.HEADING
+              text={cur.name}
+              color={stockCategory === cur.id.toString() ? 'default' : 'gray'}
+              className="whitespace-nowrap"
+            />
           </Link>
         ))}
       </div>

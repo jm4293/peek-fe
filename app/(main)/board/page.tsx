@@ -11,9 +11,13 @@ export default async function BoardPage() {
 
   return (
     <Wrapper.MAIN text="커뮤니티">
-      <BoardCategory />
-      <BoardList />
-      <BoardRegisterButton userInfo={userInfo} />
+      <div className="relative flex gap-4">
+        <div className="sticky top-20 self-start">
+          <BoardCategory />
+        </div>
+        <BoardList />
+        <BoardRegisterButton userInfo={userInfo} />
+      </div>
     </Wrapper.MAIN>
   );
 }

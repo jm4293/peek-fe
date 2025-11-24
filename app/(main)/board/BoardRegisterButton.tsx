@@ -1,6 +1,6 @@
 'use client';
 
-import { useDeviceLayout } from '@/hooks';
+import { useDeviceLayout, useFooterVisibility } from '@/hooks';
 import { PencilLine } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
@@ -20,6 +20,7 @@ export const BoardRegisterButton = (props: Props) => {
 
   const { isMobile, isPending } = useDeviceLayout();
   const { openModal, closeModal } = useModal();
+  const { isVisible: isFooterVisible } = useFooterVisibility();
 
   const clickHandler = () => {
     if (!userInfo) {
@@ -46,9 +47,15 @@ export const BoardRegisterButton = (props: Props) => {
     return null;
   }
 
+  const bottomValue = isMobile && !isFooterVisible ? '1rem' : '4rem';
+
   return (
     <div
-      className="bg-theme-main-color rounded-full p-4 fixed bottom-16 right-0 -translate-x-1/2 -translate-y-1/2"
+      className="bg-theme-main-color rounded-full p-4 fixed -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ease-in-out"
+      style={{
+        right: 'max(1rem, calc((100vw - min(100vw, 2345px)) / 2 + 1rem))',
+        bottom: bottomValue,
+      }}
       onClick={clickHandler}>
       <PencilLine color="white" />
     </div>

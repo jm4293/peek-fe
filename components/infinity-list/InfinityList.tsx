@@ -40,8 +40,17 @@ export const InfinityList = (props: Props) => {
     };
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
+  // return (
+  //   <ol className={`w-full max-h-[${maxHeight}vh] overflow-y-auto flex flex-col gap-2 pb-2`}>
+  //     {children}
+  //     <div ref={loadMoreRef} className="flex justify-center items-center">
+  //       {isFetchingNextPage && <LineSkeleton />}
+  //     </div>
+  //   </ol>
+  // );
+
   return (
-    <ol className={`w-full max-h-[${maxHeight}vh] overflow-y-auto flex flex-col gap-2 pb-2`}>
+    <ol className={`w-full flex flex-col gap-2`}>
       {children}
       <div ref={loadMoreRef} className="flex justify-center items-center">
         {isFetchingNextPage && <LineSkeleton />}
