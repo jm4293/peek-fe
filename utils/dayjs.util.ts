@@ -95,6 +95,31 @@ export class DayjsUtil {
     return dayjs(this.date).format('YYYY.MM.DD HH:mm:ss');
   }
 
+  // 상대 시간 포맷 (1시간 이전: "N분 전", 1시간 초과: "HH:mm", 하루 초과: "YYYY.MM.DD")
+  formatRelative() {
+    if (!this.date) {
+      return '-';
+    }
+
+    const now = dayjs();
+    const target = dayjs(this.date);
+    const diffInMinutes = now.diff(target, 'minute');
+    const diffInHours = now.diff(target, 'hour');
+
+    // 1시간 이전: "N분 전"
+    if (diffInMinutes < 60) {
+      return `${diffInMinutes}분 전`;
+    }
+
+    // 1시간 초과 ~ 하루 이내: "HH:mm"
+    if (diffInHours < 24) {
+      return target.format('HH:mm');
+    }
+
+    // 하루 초과: "YYYY.MM.DD"
+    return target.format('YY.MM.DD');
+  }
+
   // 날짜 조작
   addDays(days: number) {
     if (!this.date) {

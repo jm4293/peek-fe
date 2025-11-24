@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { Thumbnail } from '@/components/image';
 import { InfinityList } from '@/components/infinity-list';
 import { Text } from '@/components/text';
-import { EmptyDataView, InternalErrorView, Wrapper } from '@/components/wrapper';
+import { EmptyDataView, InternalErrorView, LoadingView, Wrapper } from '@/components/wrapper';
 
 import { useQueryParams } from '@/hooks/queryParams';
 
@@ -28,30 +28,32 @@ export default function BoardList() {
       <li key={id}>
         <Wrapper.SECTION>
           <Link href={`/board/${id}`} className="flex flex-col gap-2">
-            <div className="flex justify-between items-center">
-              <div className="flex items-center gap-2">
-                <Text.PARAGRAPH text={`[${stockCategory.name}]`} />
-                <Text.HEADING text={title} />
-              </div>
-              <div className="flex items-center gap-1">
-                <Thumbnail thumbnail={userAccount.user.thumbnail} size={16} />
-                <Text.PARAGRAPH text={userAccount.user.nickname} />
+            <div className="w-full flex justify-between items-center">
+              <div className="w-full flex items-center gap-2">
+                <Text.PARAGRAPH text={`[${stockCategory.name}]`} className="whitespace-nowrap" />
+                <Text.HEADING text={title} className="truncate" />
               </div>
             </div>
 
             <div className="flex justify-between items-center">
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
                 <div className="flex items-center gap-1">
-                  <Heart size={18} />
-                  <Text.PARAGRAPH text={String(likeCount)} />
+                  <Thumbnail thumbnail={userAccount.user.thumbnail} size={16} />
+                  <Text.PARAGRAPH text={userAccount.user.nickname} className="whitespace-nowrap" />
                 </div>
-                <div className="flex items-center gap-1">
-                  <MessageCircle size={18} />
-                  <Text.PARAGRAPH text={String(commentCount)} />
-                </div>
+                <Text.CAPTION text={DayjsUtil.of(createdAt).formatRelative()} color="gray" />
               </div>
 
-              <Text.CAPTION text={DayjsUtil.of(createdAt).formatYYMMDDHHmm()} color="gray" />
+              <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1">
+                  <Heart size={16} color="gray" />
+                  <Text.PARAGRAPH text={String(likeCount)} color="gray" />
+                </div>
+                <div className="flex items-center gap-1">
+                  <MessageCircle size={16} color="gray" />
+                  <Text.PARAGRAPH text={String(commentCount)} color="gray" />
+                </div>
+              </div>
             </div>
           </Link>
         </Wrapper.SECTION>
@@ -60,7 +62,7 @@ export default function BoardList() {
   };
 
   if (isPending) {
-    return null;
+    return <LoadingView />;
   }
 
   if (!isSuccess) {

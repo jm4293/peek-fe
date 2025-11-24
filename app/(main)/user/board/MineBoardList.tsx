@@ -20,26 +20,26 @@ export default function MineBoardList() {
       <li key={id}>
         <Wrapper.SECTION>
           <Link href={`/board/${id}`} className="flex flex-col gap-1">
-            <div className="flex justify-between items-center">
-              <div className="flex items-center gap-2">
-                <Text.PARAGRAPH text={`[${stockCategory.name}]`} color="gray" />
-                <Text.HEADING text={title} />
+            <div className="w-full flex justify-between items-center">
+              <div className="w-full flex items-center gap-2">
+                <Text.PARAGRAPH text={`[${stockCategory.name}]`} color="gray" className="whitespace-nowrap" />
+                <Text.HEADING text={title} className="truncate" />
               </div>
             </div>
 
             <div className="flex justify-between items-center">
               <div className="flex gap-2">
                 <div className="flex items-center gap-1">
-                  <Heart color="#8b8b8e" size={18} />
+                  <Heart color="#8b8b8e" size={16} />
                   <Text.PARAGRAPH text={String(likeCount)} color="gray" />
                 </div>
                 <div className="flex items-center gap-1">
-                  <MessageCircle color="#8b8b8e" size={18} />
+                  <MessageCircle color="#8b8b8e" size={16} />
                   <Text.PARAGRAPH text={String(commentCount)} color="gray" />
                 </div>
               </div>
 
-              <Text.PARAGRAPH text={DayjsUtil.of(createdAt).formatYYMMDDHHmm()} color="gray" />
+              <Text.CAPTION text={DayjsUtil.of(createdAt).formatYYMMDDHHmm()} color="gray" />
             </div>
           </Link>
         </Wrapper.SECTION>

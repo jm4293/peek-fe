@@ -47,13 +47,13 @@ export const BoardRegisterButton = (props: Props) => {
     return null;
   }
 
-  const bottomValue = isMobile && !isFooterVisible ? '1rem' : '4rem';
+  const bottomValue = isMobile && !isFooterVisible ? '0rem' : '4rem';
 
   return (
     <div
       className="bg-theme-main-color rounded-full p-4 fixed -translate-x-1/2 -translate-y-1/2 transition-all duration-500 ease-in-out"
       style={{
-        right: 'max(1rem, calc((100vw - min(100vw, 2345px)) / 2 + 1rem))',
+        right: 'max(0rem, calc((100vw - min(100vw, 2345px)) / 2))',
         bottom: bottomValue,
       }}
       onClick={clickHandler}>

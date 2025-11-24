@@ -25,7 +25,7 @@ export default function BoardCategory() {
 
   return (
     <Wrapper.SECTION>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-8">
         <Link href="/board">
           <Text.HEADING text="전체" color={stockCategory === null ? 'default' : 'gray'} className="whitespace-nowrap" />
         </Link>

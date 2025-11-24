@@ -19,17 +19,21 @@ export default function MineBoardCommentList() {
       <li key={id}>
         <Wrapper.SECTION>
           <Link href={`/board/${board.id}`} className="flex flex-col gap-1">
-            <div className="flex items-center gap-2">
-              <Text.PARAGRAPH text={`[${board.stockCategory.name}]`} color="gray" />
-              <Text.PARAGRAPH text={board.title} />
-            </div>
-            <div className="flex justify-between items-center">
-              <div className="flex items-center gap-1">
-                <Text.PARAGRAPH text="댓글:" />
-                <Text.PARAGRAPH text={content} />
+            <div className="w-full flex justify-between items-center">
+              <div className="w-full flex items-center gap-2">
+                <Text.PARAGRAPH text={`[${board.stockCategory.name}]`} color="gray" className="whitespace-nowrap" />
+                <Text.PARAGRAPH text={board.title} className="truncate" />
               </div>
 
-              <Text.CAPTION text={DayjsUtil.of(createdAt).formatYYMMDDHHmm()} color="gray" />
+              <Text.CAPTION
+                text={DayjsUtil.of(createdAt).formatYYMMDDHHmm()}
+                color="gray"
+                className="whitespace-nowrap"
+              />
+            </div>
+            <div className="w-full flex justify-between items-center">
+              <Text.PARAGRAPH text="댓글:" className="whitespace-nowrap" />
+              <Text.PARAGRAPH text={content} className="truncate" />
             </div>
           </Link>
         </Wrapper.SECTION>

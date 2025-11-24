@@ -78,50 +78,52 @@ export default function BoardComment(props: Props) {
         data.total > 0 ? (
           data.boardCommentList.map((boardComment) => (
             <div key={boardComment.id} className="flex flex-col gap-4">
-              <div className="flex gap-2">
-                <Thumbnail thumbnail={boardComment.userAccount.user.thumbnail} size={32} />
-
-                <div className="w-full">
+              <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1">
+                  <Thumbnail thumbnail={boardComment.userAccount.user.thumbnail} size={16} />
                   <Text.PARAGRAPH text={boardComment.userAccount.user.nickname} />
-                  <Text.HEADING text={boardComment.content} className="break-words" />
-                  <div className="w-full flex justify-between items-center">
-                    <div className="flex items-end gap-4">
-                      <Text.CAPTION text={DayjsUtil.of(boardComment.createdAt).formatYYMMDDHHmm()} color="gray" />
-                      {userInfo && (
-                        <Text.PARAGRAPH
-                          text="답글 쓰기"
-                          color="blue"
-                          className="cursor-pointer"
-                          onClick={() => setIsReply(isReply === boardComment.id ? -1 : boardComment.id)}
-                        />
-                      )}
-                    </div>
+                </div>
+                <Text.CAPTION text={DayjsUtil.of(boardComment.createdAt).formatRelative()} color="gray" />
+              </div>
 
-                    {boardComment.userAccount.uuid === userInfo?.uuid && (
-                      <div className="cursor-pointer" onClick={() => onDeleteCommentHandler(boardComment.id)}>
-                        <Text.PARAGRAPH text="삭제" color="red" />
-                      </div>
-                    )}
-                  </div>
+              <div className="flex flex-col">
+                <Text.HEADING text={boardComment.content} className="break-words" />
+
+                <div className="flex justify-end items-center gap-4">
+                  {boardComment.userAccount.uuid === userInfo?.uuid && (
+                    <div className="cursor-pointer" onClick={() => onDeleteCommentHandler(boardComment.id)}>
+                      <Text.PARAGRAPH text="삭제" color="red" />
+                    </div>
+                  )}
+                  {userInfo && (
+                    <Text.PARAGRAPH
+                      text="답글 쓰기"
+                      color="blue"
+                      className="cursor-pointer"
+                      onClick={() => setIsReply(isReply === boardComment.id ? -1 : boardComment.id)}
+                    />
+                  )}
                 </div>
               </div>
 
               {boardComment.replies.length > 0 &&
                 boardComment.replies.map((reply) => (
-                  <div key={reply.id} className="flex flex-col pl-8">
-                    <div className="flex gap-2">
-                      <Thumbnail thumbnail={reply.userAccount.user.thumbnail} size={32} />
-
-                      <div className="w-full">
+                  <div key={reply.id} className="flex flex-col pl-8 gap-4">
+                    <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-1">
+                        <Thumbnail thumbnail={reply.userAccount.user.thumbnail} size={16} />
                         <Text.PARAGRAPH text={reply.userAccount.user.nickname} />
-                        <Text.HEADING text={reply.content} />
                       </div>
+                      <Text.CAPTION text={DayjsUtil.of(reply.createdAt).formatRelative()} color="gray" />
                     </div>
 
-                    <div className="flex justify-between items-center gap-2">
-                      <Text.CAPTION text={DayjsUtil.of(reply.createdAt).formatYYMMDDHHmm()} color="gray" />
+                    <div className="flex flex-col">
+                      <Text.HEADING text={reply.content} />
+
                       {reply.userAccount.uuid === userInfo?.uuid && (
-                        <div className="cursor-pointer" onClick={() => onDeleteCommentHandler(reply.id)}>
+                        <div
+                          className="flex justify-end cursor-pointer"
+                          onClick={() => onDeleteCommentHandler(reply.id)}>
                           <Text.PARAGRAPH text="삭제" color="red" />
                         </div>
                       )}
