@@ -31,8 +31,8 @@ export default function BoardRegister() {
 
   const { createBoardMutation } = useBoardMutation();
 
-  const onSubmit = (data: CreateBoardReq) => {
-    createBoardMutation.mutate({ ...data });
+  const onSubmit = (formData: CreateBoardReq) => {
+    createBoardMutation.mutate({ ...formData });
   };
 
   if (isPending) {
@@ -66,12 +66,12 @@ export default function BoardRegister() {
         <div className="flex flex-col gap-12">
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
-              <Input title="제목" placeholder="제목을 입력해주세요" {...register('title')} />
+              <Input label="제목" placeholder="제목을 입력해주세요" {...register('title')} />
               {errors.title && <Text.PARAGRAPH text={errors.title.message} color="red" />}
             </div>
 
             <div className="flex flex-col gap-2">
-              <Textarea title="내용" placeholder="내용을 입력해주세요" {...register('content')} />
+              <Textarea label="내용" placeholder="내용을 입력해주세요" {...register('content')} />
               {errors.content && <Text.PARAGRAPH text={errors.content.message} color="red" />}
             </div>
           </div>

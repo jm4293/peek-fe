@@ -79,11 +79,11 @@ export default function InquiryRegister() {
         <div className="flex flex-col gap-12">
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
-              <Input title="제목" placeholder="제목" {...register('title')} />
+              <Input label="제목" placeholder="제목" {...register('title')} />
               {errors.title && <Text.PARAGRAPH text={errors.title.message} color="red" />}
             </div>
             <div className="flex flex-col gap-2">
-              <Textarea title="내용" placeholder="내용" {...register('content')} />
+              <Textarea label="내용" placeholder="내용" {...register('content')} />
               {errors.content && <Text.PARAGRAPH text={errors.content.message} color="red" />}
             </div>
 

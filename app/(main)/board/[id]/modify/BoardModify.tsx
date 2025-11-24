@@ -45,11 +45,11 @@ export default function BoardModify(props: Props) {
         <div className="flex flex-col gap-8">
           <div className="col-span-5 flex flex-col gap-4">
             <div className="flex flex-col gap-2">
-              <Input title="제목" placeholder="제목을 입력해주세요" {...register('title')} />
+              <Input label="제목" placeholder="제목을 입력해주세요" {...register('title')} />
               {errors.title && <Text.PARAGRAPH text={errors.title.message} color="red" />}
             </div>
             <div className="flex flex-col gap-2">
-              <Textarea title="내용" placeholder="내용을 입력해주세요" {...register('content')} />
+              <Textarea label="내용" placeholder="내용을 입력해주세요" {...register('content')} />
               {errors.content && <Text.PARAGRAPH text={errors.content.message} color="red" />}
             </div>
           </div>

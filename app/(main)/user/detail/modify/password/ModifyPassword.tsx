@@ -70,9 +70,9 @@ export default function ModifyPassword() {
     <Wrapper.SECTION>
       <form className="flex flex-col gap-16" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-8">
-          <Input title="현재 비밀번호" name="currentPassword" placeholder="현재 비밀번호" />
-          <Input title="새 비밀번호" name="newPassword" placeholder="새 비밀번호" />
-          <Input title="비밀번호 확인" name="confirmPassword" placeholder="비밀번호 확인" />
+          <Input label="현재 비밀번호" name="currentPassword" placeholder="현재 비밀번호" />
+          <Input label="새 비밀번호" name="newPassword" placeholder="새 비밀번호" />
+          <Input label="비밀번호 확인" name="confirmPassword" placeholder="비밀번호 확인" />
         </div>
 
         <div className="w-full grid grid-cols-2 gap-2">

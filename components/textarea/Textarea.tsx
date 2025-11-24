@@ -6,7 +6,7 @@ import { Text } from '../text/Text';
 
 interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   name: string;
-  title?: string;
+  label?: string;
   placeholder?: string;
   isOptional?: boolean;
   isError?: boolean;
@@ -14,7 +14,7 @@ interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 }
 
 export const Textarea = (props: Props) => {
-  const { name, title, onChange, placeholder, isOptional, isError, className, ...rest } = props;
+  const { name, label, onChange, placeholder, isOptional, isError, className, ...rest } = props;
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -28,9 +28,9 @@ export const Textarea = (props: Props) => {
 
   return (
     <div className={`w-full flex flex-col gap-1 ${className}`}>
-      {title && (
+      {label && (
         <label className="pl-2" htmlFor={name}>
-          <Text.HEADING text={title} />
+          <Text.HEADING text={label} />
         </label>
       )}
       <textarea

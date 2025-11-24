@@ -79,7 +79,7 @@ export default function StockSearch() {
     <div className="flex flex-col gap-4">
       <Wrapper.SECTION>
         <Input
-          title="종목 검색"
+          label="종목 검색"
           name="title"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}

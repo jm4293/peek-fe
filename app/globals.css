@@ -108,8 +108,9 @@ svg {
 
 input {
   width: 100%;
-  border-bottom-width: 1px;
-  padding: 0.75rem 0.5rem;
+  border-width: 1px;
+  border-radius: 0.25rem;
+  padding: 0.75rem 1rem;
 }
 
 select,
@@ -118,7 +119,7 @@ textarea {
   border-width: 1px;
   border-radius: 0.25rem;
   border-color: rgb(209 213 219);
-  padding: 0.75rem 0.5rem;
+  padding: 0.75rem 1rem;
   resize: none;
 }
 
