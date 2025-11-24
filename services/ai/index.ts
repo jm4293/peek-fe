@@ -3,7 +3,8 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import { buildPromptFromMessages } from './prompts';
 import type { ChatMessage } from './types';
 
-const DEFAULT_MODEL = 'gemini-2.5-flash';
+// const DEFAULT_MODEL = 'gemini-2.5-flash';
+const DEFAULT_MODEL = 'gemini-2.5-flash-lite';
 
 export const requestGeminiStockAnswer = async (messages: ChatMessage[]) => {
   const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
