@@ -19,7 +19,7 @@ export const StockKoreanTop10 = () => {
       <Wrapper.SECTION>
         <Link className="flex justify-between items-center" href="/stock/korean/top10">
           <div className="flex items-center gap-2">
-            <Text.HEADING text="시가총액" />
+            <Text.HEADING text="한국 시가총액" />
             {isConnected && data && (
               <Text.CAPTION text={DayjsUtil.of(data.createdAt).formatMMDDHHmmss()} className="text-nowrap" />
             )}

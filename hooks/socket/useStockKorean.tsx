@@ -13,7 +13,7 @@ interface StockData {
   timestamp: Date;
 }
 
-export const useStockKoreanSocket = () => {
+export const useStockKorean = () => {
   const socketRef = useRef<Socket | null>(null);
 
   useEffect(() => {
