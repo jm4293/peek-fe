@@ -1,28 +1,21 @@
+'use client';
+
+import { Text } from '@/components/text';
+
 interface SuggestionChipsProps {
-  items: string[];
   onSelect: (value: string) => void;
-  disabled?: boolean;
 }
 
-const SuggestionChips = ({ items, onSelect, disabled }: SuggestionChipsProps) => {
-  if (!items.length) return null;
+const SUGGESTIONS = [
+  '삼성전자 최근 실적과 향후 전망 알려줘',
+  'LG에너지솔루션에 투자할 때 주의할 점은 뭐야?',
+  '2차전지 관련 국내 대장주 후보 정리해줘',
+];
 
-  return (
-    <div className="flex flex-wrap gap-2">
-      {items.map((item) => (
-        <button
-          key={item}
-          type="button"
-          disabled={disabled}
-          onClick={() => onSelect(item)}
-          className="rounded-full border border-theme-main-color/40 bg-theme-bg-section px-3 py-1.5 text-xs font-medium text-theme-main-color transition hover:bg-theme-main-color/10 disabled:cursor-not-allowed disabled:opacity-60"
-        >
-          {item}
-        </button>
-      ))}
+export const SuggestionChips = ({ onSelect }: SuggestionChipsProps) => {
+  return SUGGESTIONS.map((el, index) => (
+    <div key={el} className="cursor-pointer" onClick={() => onSelect(el)}>
+      <Text.PARAGRAPH text={`${index + 1}. ${el}`} />
     </div>
-  );
+  ));
 };
-
-export default SuggestionChips;
-

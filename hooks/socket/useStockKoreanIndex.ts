@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 
 import { API_URL } from '@/shared/constant/api-url';
-import { KOSDAQ_CODE, KOSPI_CODE } from '@/shared/constant/korean-stock-index-code';
-import { KoreanStockIndex } from '@/shared/types/korean-stock-index';
+import { KOSDAQ_CODE, KOSPI_CODE } from '@/shared/constant/stock-code';
+import { KoreanStockIndex } from '@/shared/types/stock';
 
 interface Props {
   isKospi: boolean;

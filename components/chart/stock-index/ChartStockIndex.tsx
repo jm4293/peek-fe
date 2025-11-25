@@ -6,7 +6,7 @@ import { useEffect, useRef } from 'react';
 
 import { useStockKoreanIndexCandleList } from '@/services/stock';
 
-import { KoreanStockIndex } from '@/shared/types/korean-stock-index';
+import { KoreanStockIndex } from '@/shared/types/stock';
 
 interface Props {
   data: KoreanStockIndex;

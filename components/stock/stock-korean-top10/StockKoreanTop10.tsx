@@ -9,7 +9,7 @@ import { Wrapper } from '@/components/wrapper';
 
 import { useStockKoreanTop10 } from '@/hooks/socket';
 
-import { KoreanStockTop10 } from '@/shared/types';
+import { KoreanStockTop10 } from '@/shared/types/stock';
 
 export const StockKoreanTop10 = () => {
   const { data, isConnected, loading } = useStockKoreanTop10();
