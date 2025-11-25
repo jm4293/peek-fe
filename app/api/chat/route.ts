@@ -13,7 +13,7 @@ const SYSTEM_INSTRUCTION = `당신은 국내 주식 시장 정보를 정리해 �
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { messages, id, trigger } = body as {
+    const { messages } = body as {
       messages?: UIMessage[];
       id?: string;
       trigger?: string;
@@ -29,11 +29,16 @@ export async function POST(req: Request) {
     // Vercel AI Gateway API 키 확인
     const apiKey = process.env.AI_GATEWAY_API_KEY;
     if (!apiKey) {
+      // eslint-disable-next-line no-console
+      console.error('AI_GATEWAY_API_KEY is not set');
       return new Response(JSON.stringify({ message: 'AI Gateway API 키가 설정되어 있지 않습니다.' }), {
         status: 500,
         headers: { 'Content-Type': 'application/json' },
       });
     }
+
+    // eslint-disable-next-line no-console
+    console.log('API Key exists:', !!apiKey, 'Length:', apiKey.length, 'First 10 chars:', apiKey.substring(0, 10));
 
     // Gateway provider 생성
     const gateway = createGateway({
@@ -43,16 +48,32 @@ export async function POST(req: Request) {
     // Gemini 모델 이름: google/gemini-1.5-flash 형식으로 사용
     const modelName = process.env.GEMINI_MODEL || 'google/gemini-1.5-flash';
 
+    const modelMessages = convertToModelMessages(messages);
+
     const result = streamText({
       model: gateway(modelName),
       system: SYSTEM_INSTRUCTION,
-      messages: convertToModelMessages(messages),
+      messages: modelMessages,
       temperature: 0.4,
       maxOutputTokens: 1024,
+      onFinish: (event) => {
+        // eslint-disable-next-line no-console
+        console.log('Stream finished:', {
+          finishReason: event.finishReason,
+          usage: event.usage,
+          textLength: event.text?.length || 0,
+        });
+      },
+      onError: (error) => {
+        // eslint-disable-next-line no-console
+        console.error('Stream error:', error);
+      },
     });
 
     return result.toUIMessageStreamResponse();
   } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error('Error in /api/chat:', error);
     if (error instanceof Error) {
       return new Response(JSON.stringify({ message: error.message }), {
         status: 500,

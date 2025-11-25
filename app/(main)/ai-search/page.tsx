@@ -1,14 +1,13 @@
 'use client';
 
+import { useChat } from '@ai-sdk/react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
-import type { ChatMessage } from '@/services/ai/types';
-
 import ChatInput from './components/ChatInput';
-import ChatMessageBubble, { type ChatMessageWithMeta } from './components/ChatMessage';
+import ChatMessageBubble from './components/ChatMessage';
 import SuggestionChips from './components/SuggestionChips';
 
 const SUGGESTIONS = [
@@ -17,115 +16,58 @@ const SUGGESTIONS = [
   '2차전지 관련 국내 대장주 후보 정리해줘',
 ];
 
-const generateId = () => {
-  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
-    return crypto.randomUUID();
-  }
-
-  return `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
-};
-
-const createMessage = (
-  role: ChatMessage['role'],
-  content: string,
-  status?: ChatMessageWithMeta['status'],
-): ChatMessageWithMeta => ({
-  id: generateId(),
-  role,
-  content,
-  status,
-  createdAt: new Date().toISOString(),
-});
-
-const INITIAL_MESSAGE = createMessage(
-  'assistant',
-  `안녕하세요! Gemini 모델을 활용한 국내 주식 AI 도우미입니다.
+const INITIAL_MESSAGE = `안녕하세요! Gemini 모델을 활용한 국내 주식 AI 도우미입니다.
 
 - 종목 기본 정보, 최근 이슈, 참고 리포트 등을 요약해 드릴 수 있어요.
 - 실시간 시세나 확정된 데이터는 제공되지 않으니 반드시 증권사 HTS/MTS 등에서 최종 확인해 주세요.
 - 투자 자문이 아닌 참고용 정보라는 점을 유의해 주세요!
 
-무엇이 궁금하신가요?`,
-);
+무엇이 궁금하신가요?`;
 
 const AiSearchPage = () => {
-  const [messages, setMessages] = useState<ChatMessageWithMeta[]>([INITIAL_MESSAGE]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [input, setInput] = useState('');
+  const { messages, sendMessage, status } = useChat({
+    api: '/api/chat',
+    initialMessages: [
+      {
+        id: 'initial',
+        role: 'assistant',
+        parts: [{ type: 'text', text: INITIAL_MESSAGE }],
+        createdAt: new Date(),
+      },
+    ],
+  } as any);
+
+  const isLoading = status === 'submitted' || status === 'streaming';
+
   const endRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  const callAiApi = useCallback(
-    async (prompt: string) => {
-      const userMessage = createMessage('user', prompt);
-      const pendingAssistantMessage = createMessage('assistant', '', 'pending');
-
-      const requestPayload: { messages: ChatMessage[] } = {
-        messages: [...messages, userMessage].map(({ role, content }) => ({ role, content })),
-      };
-
-      setMessages((prev) => [...prev, userMessage, pendingAssistantMessage]);
-      setIsLoading(true);
-
-      try {
-        const response = await fetch('/api/ai-search', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(requestPayload),
-        });
-
-        if (!response.ok) {
-          const errorBody = await response.json().catch(() => ({}));
-          throw new Error(errorBody.message || 'AI 응답을 받지 못했습니다.');
-        }
-
-        const data = (await response.json()) as { content?: string };
-        const content = data.content?.trim();
-
-        setMessages((prev) =>
-          prev.map((message) =>
-            message.id === pendingAssistantMessage.id
-              ? {
-                  ...message,
-                  content:
-                    content && content.length > 0
-                      ? content
-                      : '답변을 정상적으로 가져오지 못했어요. 잠시 후 다시 시도해 주세요.',
-                  status: 'done',
-                }
-              : message,
-          ),
-        );
-      } catch (error) {
-        setMessages((prev) =>
-          prev.map((message) =>
-            message.id === pendingAssistantMessage.id ? { ...message, status: 'error', content: '' } : message,
-          ),
-        );
-      } finally {
-        setIsLoading(false);
-      }
+  const handleFormSubmit = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault();
+      if (!input.trim() || isLoading) return;
+      const trimmedInput = input.trim();
+      setInput('');
+      await sendMessage({ text: trimmedInput });
     },
-    [messages],
+    [input, isLoading, sendMessage],
   );
 
-  const handleSubmit = useCallback(
-    async (value: string) => {
-      if (isLoading) return;
-      await callAiApi(value);
-    },
-    [callAiApi, isLoading],
-  );
+  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setInput(e.target.value);
+  }, []);
 
   const handleSuggestionSelect = useCallback(
     (value: string) => {
-      void handleSubmit(value);
+      if (isLoading) return;
+      setInput('');
+      void sendMessage({ text: value });
     },
-    [handleSubmit],
+    [isLoading, sendMessage],
   );
 
   return (
@@ -147,7 +89,17 @@ const AiSearchPage = () => {
           <div ref={endRef} />
         </div>
 
-        <ChatInput onSubmit={handleSubmit} disabled={isLoading} />
+        <form onSubmit={handleFormSubmit} className="border-t border-white/10 bg-theme-bg-section/90 p-3">
+          <ChatInput
+            value={input}
+            onChange={handleInputChange}
+            onSubmit={async (value) => {
+              setInput('');
+              await sendMessage({ text: value });
+            }}
+            disabled={isLoading}
+          />
+        </form>
       </div>
 
       <Text.CAPTION
