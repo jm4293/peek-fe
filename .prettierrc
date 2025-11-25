@@ -7,7 +7,7 @@
   "printWidth": 120,
   "importOrder": [
     "^@/app/(.*)$",
-    "^@/asset/(.*)$",
+    "^@/assets/(.*)$",
     "^@/components/(.*)$",
     "^@/hooks/(.*)$",
     "^@/lib/(.*)$",

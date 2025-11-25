@@ -28,8 +28,8 @@
       "@/app/auth/login/*": ["app/(auth)/auth/login/*"],
       "@/app/auth/register/*": ["app/(auth)/auth/register/*"],
 
-      "@/asset": ["./asset"],
-      "@/asset/*": ["./asset/*"],
+      "@/assets": ["./assets"],
+      "@/assets/*": ["./assets/*"],
 
       "@/components": ["./components"],
       "@/components/*": ["./components/*"],
