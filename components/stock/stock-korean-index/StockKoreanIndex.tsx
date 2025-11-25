@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 import { LineSkeleton } from '@/components/skeleton';
 import { KoreanStockIndexText, NetworkErrorText, Text } from '@/components/text';
-import { EmptyDataView, Wrapper } from '@/components/wrapper';
+import { Wrapper } from '@/components/wrapper';
 
 import { useStockKoreanIndex } from '@/hooks/socket';
 

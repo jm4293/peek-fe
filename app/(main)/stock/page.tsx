@@ -1,7 +1,6 @@
 import { CurrentTimeText, Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
-import PopularStock from './PopularStock';
 import RecentStockList from './RecentStockList';
 
 export default function Page() {
