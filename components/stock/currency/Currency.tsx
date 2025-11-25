@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 import auFlag from '@/assets/country/au.png';
 import cnFlag from '@/assets/country/cn.png';
-import euFlag from '@/assets/country/eu2.png';
+import euFlag from '@/assets/country/eu.png';
 import jpFlag from '@/assets/country/jp.png';
 import ukFlag from '@/assets/country/uk.png';
 import usFlag from '@/assets/country/us.png';
