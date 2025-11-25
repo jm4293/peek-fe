@@ -2,13 +2,31 @@
 
 import { DayjsUtil } from '@/utils';
 import { ChevronRight } from 'lucide-react';
-import Marquee from 'react-fast-marquee';
+import Image from 'next/image';
+
+import auFlag from '@/assets/country/au.png';
+import cnFlag from '@/assets/country/cn.png';
+import euFlag from '@/assets/country/eu.png';
+import jpFlag from '@/assets/country/jp.png';
+import krFlag from '@/assets/country/kr.png';
+import ukFlag from '@/assets/country/uk.png';
+import usFlag from '@/assets/country/us.png';
 
 import { LineSkeleton } from '@/components/skeleton';
 import { NetworkErrorText, Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
 
 import { useCurrencyList } from '@/services/currency/query';
+
+const currencyMap = {
+  JPY: jpFlag,
+  KRW: krFlag,
+  USD: usFlag,
+  EUR: euFlag,
+  GBP: ukFlag,
+  AUD: auFlag,
+  CNH: cnFlag,
+};
 
 export const Currency = () => {
   const { data, isPending, isSuccess } = useCurrencyList();
@@ -59,57 +77,34 @@ export const Currency = () => {
 
   return (
     <CurrencyWrapper>
-      <Marquee speed={30} pauseOnHover={true} gradient={false}>
-        {data.map((item) => (
-          <div key={item.curUnit} className="flex flex-col items-center gap-4 mr-8">
-            <Text.HEADING text={item.curNm} />
+      {data.map((item) => (
+        <div key={item.uuid} className="flex flex-col gap-1">
+          <div className="flex gap-2">
+            <Image
+              src={currencyMap[item.curUnit as keyof typeof currencyMap]}
+              alt={item.curNm}
+              width={20}
+              height={20}
+            />
+            <Text.HEADING text={`${item.curNm}(${item.curUnitDesc})`} />
+          </div>
 
-            <div>
-              <Text.CAPTION text="매매 기준" className="text-end" />
+          <div className="flex justify-center gap-4">
+            <div className="flex flex-col">
+              <Text.PARAGRAPH text="매매 기준" className="text-end" />
               <Text.HEADING text={item.dealBasR} />
             </div>
-
-            <div>
-              <Text.CAPTION text="받으실 때" className="text-end" />
-              <Text.HEADING text={item.ttb} className="text-nowrap text-end" />
+            <div className="flex flex-col">
+              <Text.PARAGRAPH text="받으실 때" className="text-end" />
+              <Text.HEADING text={item.ttb} />
             </div>
-
-            <div>
-              <Text.CAPTION text="보내실 때" className="text-end" />
-              <Text.HEADING text={item.tts} className="text-nowrap text-end" />
+            <div className="flex flex-col">
+              <Text.PARAGRAPH text="보내실 때" className="text-end" />
+              <Text.HEADING text={item.tts} />
             </div>
           </div>
-        ))}
-      </Marquee>
+        </div>
+      ))}
     </CurrencyWrapper>
   );
-
-  // return (
-  //   <Wrapper.SECTION>
-  //     {titleComponent}
-
-  //     <div className="flex flex-col gap-4">
-  //       {data.map((item) => (
-  //         <div key={item.curUnit} className="w-full flex justify-evenly items-center">
-  //           <Text.HEADING className="min-w-20" text={item.curNm} />
-
-  //           <div className="min-w-20 flex flex-col">
-  //             <Text.PARAGRAPH text="매매 기준" className="text-end" />
-  //             <Text.HEADING text={item.dealBasR} className="text-nowrap text-end" />
-  //           </div>
-
-  //           <div className="min-w-20 flex flex-col">
-  //             <Text.PARAGRAPH text="받으실 때" className="text-end" />
-  //             <Text.HEADING text={item.ttb} className="text-nowrap text-end" />
-  //           </div>
-
-  //           <div className="min-w-20 flex flex-col">
-  //             <Text.PARAGRAPH text="보내실 때" className="text-end" />
-  //             <Text.HEADING text={item.tts} className="text-nowrap text-end" />
-  //           </div>
-  //         </div>
-  //       ))}
-  //     </div>
-  //   </Wrapper.SECTION>
-  // );
 };

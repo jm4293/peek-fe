@@ -38,15 +38,19 @@ export default function QueryProvider(props: Props) {
             onError={(error, errorInfo) => {
               // Capture error in Sentry before showing fallback UI
               if (typeof window !== 'undefined') {
-                import('@sentry/nextjs').then((Sentry) => {
-                  Sentry.captureException(error, {
-                    contexts: {
-                      react: {
-                        componentStack: errorInfo.componentStack,
-                      },
-                    },
-                  });
-                });
+                if (process.env.NODE_ENV === 'production') {
+                  return;
+                }
+
+                // import('@sentry/nextjs').then((Sentry) => {
+                //   Sentry.captureException(error, {
+                //     contexts: {
+                //       react: {
+                //         componentStack: errorInfo.componentStack,
+                //       },
+                //     },
+                //   });
+                // });
               }
             }}
             fallbackRender={({ error, resetErrorBoundary }) => (
