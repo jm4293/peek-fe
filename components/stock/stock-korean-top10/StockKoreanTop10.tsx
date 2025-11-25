@@ -1,7 +1,6 @@
 'use client';
 
 import { DayjsUtil } from '@/utils';
-import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 
 import { LineSkeleton } from '@/components/skeleton';
@@ -25,12 +24,7 @@ export const StockKoreanTop10 = () => {
               <Text.CAPTION text={DayjsUtil.of(data.createdAt).formatMMDDHHmmss()} className="text-nowrap" />
             )}
           </div>
-          {isConnected && data && (
-            <div className="flex items-center gap-2">
-              <Text.CAPTION text="10초마다 갱신됩니다." color="gray" className="text-end" />
-              <ChevronRight />
-            </div>
-          )}
+          {isConnected && data && <Text.CAPTION text="10초마다 갱신됩니다." color="gray" className="text-end" />}
         </Link>
         {children}
       </Wrapper.SECTION>
