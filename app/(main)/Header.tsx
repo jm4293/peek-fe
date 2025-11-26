@@ -39,7 +39,7 @@ export const Header = () => {
 
     return (
       <header className="w-full backdrop-blur-xl">
-        <div className="px-12 py-4 flex justify-center items-center backdrop-blur-xl bg-white/70 dark:bg-[#1f1f22]/70 border border-white/20 dark:border-white/10 rounded-full shadow-lg">
+        <div className="px-12 py-3 flex justify-center items-center backdrop-blur-xl bg-white/70 dark:bg-[#1f1f22]/70 border border-white/20 dark:border-white/10 rounded-full shadow-lg">
           <Logo />
         </div>
       </header>
@@ -64,7 +64,7 @@ export const Header = () => {
 
   return (
     <header className="w-full backdrop-blur-xl">
-      <div className="px-12 py-2 flex items-center justify-between backdrop-blur-xl bg-white/70 dark:bg-[#1f1f22]/70 border border-white/20 dark:border-white/10 rounded-full shadow-lg">
+      <div className="px-12 py-3 flex items-center justify-between backdrop-blur-xl bg-white/70 dark:bg-[#1f1f22]/70 border border-white/20 dark:border-white/10 rounded-full shadow-lg">
         <div className="flex items-center gap-12">
           <Logo />
 
