@@ -29,11 +29,11 @@ export const Footer = () => {
     return (
       <footer
         className={`
-          px-4 backdrop-blur-xl
+          px-4 backdrop-blur-sm bg-white/10 dark:bg-[#1f1f22]/10
           transition-transform duration-500 ease-in-out
           ${isVisible ? 'translate-y-0' : 'translate-y-full'}
         `}>
-        <div className="px-6 py-2 mb-4 flex justify-between items-center backdrop-blur-xl bg-white/70 dark:bg-[#1f1f22]/70 border border-white/20 dark:border-white/10 rounded-full shadow-lg">
+        <div className="px-6 py-2 mb-4 flex justify-between items-center backdrop-blur-md bg-white/50 dark:bg-[#1f1f22]/50 border border-white/30 dark:border-white/20 rounded-full shadow-lg">
           {menuItems.map(({ path, icon: Icon, label }) => {
             const isActive = pathname === path || (path !== '/home' && pathname.startsWith(path));
             return (

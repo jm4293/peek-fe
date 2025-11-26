@@ -32,8 +32,8 @@ export const Header = () => {
   if (isPending) {
     if (isMobile) {
       return (
-        <header className="px-4 pt-2 backdrop-blur-xl">
-          <div className="px-4 py-2 flex justify-center items-center backdrop-blur-xl bg-white/70 dark:bg-[#1f1f22]/70 border border-white/20 dark:border-white/10 rounded-full shadow-lg">
+        <header className="px-4 pt-2 backdrop-blur-sm bg-white/10 dark:bg-[#1f1f22]/10">
+          <div className="px-4 py-2 flex justify-center items-center backdrop-blur-md bg-white/50 dark:bg-[#1f1f22]/50 border border-white/30 dark:border-white/20 rounded-full shadow-lg">
             <Logo />
           </div>
         </header>
@@ -41,8 +41,8 @@ export const Header = () => {
     }
 
     return (
-      <header className="w-full backdrop-blur-xl">
-        <div className="px-12 py-3 flex justify-center items-center backdrop-blur-xl bg-white/70 dark:bg-[#1f1f22]/70 border border-white/20 dark:border-white/10 rounded-full shadow-lg">
+      <header className="w-full backdrop-blur-sm bg-white/10 dark:bg-[#1f1f22]/10">
+        <div className="px-12 py-3 flex justify-center items-center backdrop-blur-md bg-white/50 dark:bg-[#1f1f22]/50 border border-white/30 dark:border-white/20 rounded-full shadow-lg">
           <Logo />
         </div>
       </header>
@@ -51,8 +51,8 @@ export const Header = () => {
 
   if (isMobile) {
     return (
-      <header className="px-4 py-2 backdrop-blur-xl">
-        <div className="px-4 py-2 backdrop-blur-xl bg-white/70 dark:bg-[#1f1f22]/70 border border-white/20 dark:border-white/10 rounded-full shadow-lg">
+      <header className="px-4 py-2 backdrop-blur-sm bg-white/10 dark:bg-[#1f1f22]/10">
+        <div className="px-4 py-2 backdrop-blur-md bg-white/50 dark:bg-[#1f1f22]/50 border border-white/30 dark:border-white/20 rounded-full shadow-lg">
           <div className="grid grid-cols-3 items-center">
             <div className="justify-self-start h-9 flex items-center">
               {pathname.split('/').length > 2 ? (
@@ -82,8 +82,8 @@ export const Header = () => {
   }
 
   return (
-    <header className="w-full backdrop-blur-xl">
-      <div className="px-12 py-3 flex items-center justify-between backdrop-blur-xl bg-white/70 dark:bg-[#1f1f22]/70 border border-white/20 dark:border-white/10 rounded-full shadow-lg">
+    <header className="w-full backdrop-blur-sm bg-white/10 dark:bg-[#1f1f22]/10">
+      <div className="px-12 py-3 flex items-center justify-between backdrop-blur-md bg-white/50 dark:bg-[#1f1f22]/50 border border-white/30 dark:border-white/20 rounded-full shadow-lg">
         <div className="flex items-center gap-12">
           <Logo />
 
