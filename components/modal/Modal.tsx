@@ -41,8 +41,9 @@ export const Modal = () => {
       className="fixed inset-0 w-screen h-screen bg-black/40 flex items-center justify-center z-[1000]"
       onClick={closeModal}>
       <div
-        className="rounded-2xl shadow-lg p-6 min-w-[320px] flex flex-col border bg-theme-bg-card border-theme-border-light text-theme-txt-default"
-        onClick={(e) => e.stopPropagation()}>
+        className="rounded-2xl shadow-2xl p-6 min-w-[320px] flex flex-col backdrop-blur-xl bg-white/90 dark:bg-[#1f1f22]/90 border border-white/20 dark:border-white/10 text-theme-txt-default"
+        onClick={(e) => e.stopPropagation()}
+      >
         <Text.TITLE text={modal.title} className="mb-4" />
 
         <div className="mb-6">
