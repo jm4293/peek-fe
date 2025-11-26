@@ -31,8 +31,10 @@ export const Header = () => {
   if (isPending) {
     if (isMobile) {
       return (
-        <header className="flex justify-center items-center bg-theme-bg-header border-b border-theme-border-light">
-          <Logo />
+        <header className="px-4 pt-2 backdrop-blur-xl">
+          <div className="px-4 py-2 flex justify-center items-center backdrop-blur-xl bg-white/70 dark:bg-[#1f1f22]/70 border border-white/20 dark:border-white/10 rounded-full shadow-lg">
+            <Logo />
+          </div>
         </header>
       );
     }
@@ -48,15 +50,25 @@ export const Header = () => {
 
   if (isMobile) {
     return (
-      <header className="h-16 bg-theme-bg-header border-b border-theme-border-light">
-        <div className="w-full h-full grid grid-cols-3 items-center px-4">
-          <div className="justify-self-start">
-            {pathname.split('/').length > 2 && <ChevronLeft onClick={() => router.back()} />}
+      <header className="px-4 pt-2 backdrop-blur-xl">
+        <div className="px-4 py-2 backdrop-blur-xl bg-white/70 dark:bg-[#1f1f22]/70 border border-white/20 dark:border-white/10 rounded-full shadow-lg">
+          <div className="grid grid-cols-3 items-center">
+            <div className="justify-self-start h-9 flex items-center">
+              {pathname.split('/').length > 2 ? (
+                <div
+                  className="p-2 rounded-full hover:bg-white/30 dark:hover:bg-white/5 transition-all duration-300 ease-in-out active:scale-95 cursor-pointer"
+                  onClick={() => router.back()}>
+                  <ChevronLeft className="text-theme-txt-default" size={20} />
+                </div>
+              ) : (
+                <div className="w-9" />
+              )}
+            </div>
+            <div className="justify-self-center">
+              <Logo />
+            </div>
+            <div className="justify-self-end h-9 flex items-center">{/* 우측 공간 (필요시 버튼 추가) */}</div>
           </div>
-          <div className="justify-self-center">
-            <Logo />
-          </div>
-          <div className="justify-self-end">{/* 우측 공간 (필요시 버튼 추가) */}</div>
         </div>
       </header>
     );
