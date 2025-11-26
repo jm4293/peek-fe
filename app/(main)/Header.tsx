@@ -27,6 +27,7 @@ export const Header = () => {
   const pathname = usePathname();
 
   const { isMobile, isPending } = useDeviceLayout();
+  // const { openMenu } = useMobileMenu();
 
   if (isPending) {
     if (isMobile) {
@@ -50,7 +51,7 @@ export const Header = () => {
 
   if (isMobile) {
     return (
-      <header className="px-4 pt-2 backdrop-blur-xl">
+      <header className="px-4 py-2 backdrop-blur-xl">
         <div className="px-4 py-2 backdrop-blur-xl bg-white/70 dark:bg-[#1f1f22]/70 border border-white/20 dark:border-white/10 rounded-full shadow-lg">
           <div className="grid grid-cols-3 items-center">
             <div className="justify-self-start h-9 flex items-center">
@@ -67,7 +68,13 @@ export const Header = () => {
             <div className="justify-self-center">
               <Logo />
             </div>
-            <div className="justify-self-end h-9 flex items-center">{/* 우측 공간 (필요시 버튼 추가) */}</div>
+            <div className="justify-self-end h-9 flex items-center">
+              {/* <div
+                className="p-2 rounded-full hover:bg-white/30 dark:hover:bg-white/5 transition-all duration-300 ease-in-out active:scale-95 cursor-pointer"
+                onClick={openMenu}>
+                <Menu className="text-theme-txt-default" size={20} />
+              </div> */}
+            </div>
           </div>
         </div>
       </header>
