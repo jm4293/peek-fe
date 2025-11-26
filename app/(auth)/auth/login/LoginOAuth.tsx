@@ -3,8 +3,10 @@
 import { LocalStorageUtil } from '@/utils';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
+import { AnimatedBackground } from '@/components/canvas';
 import { Text } from '@/components/text';
 
 import { LocalStorageKey } from '@/shared/constant/local-storage-key';
@@ -54,15 +56,17 @@ const getTimeBasedMessage = () => {
 };
 
 export function LoginOAuth() {
+  const router = useRouter();
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
+  const backButtonRef = useRef<HTMLButtonElement>(null);
 
   const [lastLoginMethod, setLastLoginMethod] = useState<UserAccountTypeEnum | null>(null);
 
   useGSAP(
     () => {
-      if (!buttonsRef.current) {
+      if (!buttonsRef.current || !backButtonRef.current) {
         return;
       }
 
@@ -80,6 +84,17 @@ export function LoginOAuth() {
           ease: 'power2.out',
         },
         0.3,
+      );
+
+      tl.from(
+        backButtonRef.current,
+        {
+          opacity: 0,
+          y: 20,
+          duration: 0.5,
+          ease: 'power2.out',
+        },
+        '-=0.2',
       );
 
       return () => {
@@ -100,32 +115,42 @@ export function LoginOAuth() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center gap-8 w-full max-w-md" ref={containerRef}>
-      <div ref={textRef} className="flex flex-col gap-2">
-        <Text.TITLE text="안녕하세요!" className="text-center" />
-        <Text.PARAGRAPH text={getTimeBasedMessage()} className="text-center" />
-      </div>
-
-      <div className="flex flex-col gap-8 w-full px-8" ref={buttonsRef}>
-        <div className="relative w-full">
-          {lastLoginMethod === UserAccountTypeEnum.GOOGLE && <LastLoginCheck />}
-          <ButtonGoogle />
+    <div className="relative w-screen h-screen flex justify-center items-center bg-theme-bg-main overflow-hidden">
+      <AnimatedBackground />
+      <div className="relative z-10 flex flex-col items-center gap-8 w-full max-w-md" ref={containerRef}>
+        <div ref={textRef} className="flex flex-col gap-2">
+          <Text.TITLE text="안녕하세요!" className="text-center" />
+          <Text.PARAGRAPH text={getTimeBasedMessage()} className="text-center" />
         </div>
 
-        <div className="relative w-full">
-          {lastLoginMethod === UserAccountTypeEnum.NAVER && <LastLoginCheck />}
-          <ButtonNaver />
+        <div className="flex flex-col gap-8 w-full px-8" ref={buttonsRef}>
+          <div className="relative w-full">
+            {lastLoginMethod === UserAccountTypeEnum.GOOGLE && <LastLoginCheck />}
+            <ButtonGoogle />
+          </div>
+
+          <div className="relative w-full">
+            {lastLoginMethod === UserAccountTypeEnum.NAVER && <LastLoginCheck />}
+            <ButtonNaver />
+          </div>
+
+          <div className="relative w-full">
+            {lastLoginMethod === UserAccountTypeEnum.KAKAO && <LastLoginCheck />}
+            <ButtonKakao />
+          </div>
+
+          <Text.PARAGRAPH
+            text="계속 진행하면 PEEK의 이용약관 및 개인정보처리방침에 동의하는 것입니다."
+            className="text-center"
+          />
         </div>
 
-        <div className="relative w-full">
-          {lastLoginMethod === UserAccountTypeEnum.KAKAO && <LastLoginCheck />}
-          <ButtonKakao />
-        </div>
-
-        <Text.PARAGRAPH
-          text="계속 진행하면 PEEK의 이용약관 및 개인정보처리방침에 동의하는 것입니다."
-          className="text-center"
-        />
+        <button
+          ref={backButtonRef}
+          onClick={() => router.back()}
+          className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors duration-200 text-sm underline">
+          돌아가기
+        </button>
       </div>
     </div>
   );

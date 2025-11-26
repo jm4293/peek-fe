@@ -30,19 +30,9 @@ export const Header = () => {
   // const { openMenu } = useMobileMenu();
 
   if (isPending) {
-    if (isMobile) {
-      return (
-        <header className="px-4 pt-2 backdrop-blur-sm bg-white/10 dark:bg-[#1f1f22]/10">
-          <div className="px-4 py-2 flex justify-center items-center backdrop-blur-md bg-white/50 dark:bg-[#1f1f22]/50 border border-white/30 dark:border-white/20 rounded-full shadow-lg">
-            <Logo />
-          </div>
-        </header>
-      );
-    }
-
     return (
       <header className="w-full backdrop-blur-sm bg-white/10 dark:bg-[#1f1f22]/10">
-        <div className="px-12 py-3 flex justify-center items-center backdrop-blur-md bg-white/50 dark:bg-[#1f1f22]/50 border border-white/30 dark:border-white/20 rounded-full shadow-lg">
+        <div className="py-3 flex justify-center items-center backdrop-blur-md bg-white/50 dark:bg-[#1f1f22]/50 shadow-lg">
           <Logo />
         </div>
       </header>
@@ -51,13 +41,13 @@ export const Header = () => {
 
   if (isMobile) {
     return (
-      <header className="px-4 py-2 backdrop-blur-sm bg-white/10 dark:bg-[#1f1f22]/10">
-        <div className="px-4 py-2 backdrop-blur-md bg-white/50 dark:bg-[#1f1f22]/50 border border-white/30 dark:border-white/20 rounded-full shadow-lg">
+      <header className="backdrop-blur-sm bg-white/10 dark:bg-[#1f1f22]/10">
+        <div className="px-4 py-2 shadow-lg">
           <div className="grid grid-cols-3 items-center">
             <div className="justify-self-start h-9 flex items-center">
               {pathname.split('/').length > 2 ? (
                 <div
-                  className="p-2 rounded-full hover:bg-white/30 dark:hover:bg-white/5 transition-all duration-300 ease-in-out active:scale-95 cursor-pointer"
+                  className="p-2 rounded-full hover:bg-white/30 dark:hover:bg-white/5 cursor-pointer"
                   onClick={() => router.back()}>
                   <ChevronLeft className="text-theme-txt-default" size={20} />
                 </div>
@@ -82,8 +72,8 @@ export const Header = () => {
   }
 
   return (
-    <header className="w-full backdrop-blur-sm bg-white/10 dark:bg-[#1f1f22]/10">
-      <div className="px-12 py-3 flex items-center justify-between backdrop-blur-md bg-white/50 dark:bg-[#1f1f22]/50 border border-white/30 dark:border-white/20 rounded-full shadow-lg">
+    <header className="backdrop-blur-sm bg-white/10 dark:bg-[#1f1f22]/10">
+      <div className="px-12 py-3 flex items-center justify-between backdrop-blur-md bg-white/50 dark:bg-[#1f1f22]/50 rounded-full shadow-lg">
         <div className="flex items-center gap-12">
           <Logo />
 

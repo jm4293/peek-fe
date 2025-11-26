@@ -1,5 +1,3 @@
-import { MobileMenuModal } from '@/components/mobile-menu';
-
 import { Footer } from './Footer';
 import { Header } from './Header';
 
@@ -9,7 +7,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
       <Header />
       <main>{children}</main>
       <Footer />
-      <MobileMenuModal />
+      {/* <MobileMenuModal /> */}
     </div>
   );
 }

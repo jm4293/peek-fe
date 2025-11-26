@@ -31,7 +31,7 @@ export default async function UserPage() {
       <Wrapper.SECTION>
         <Link href="/user/detail" className="w-full flex justify-between items-center">
           <div className="flex items-center gap-4">
-            <Thumbnail thumbnail={data.user.thumbnail} size={36} />
+            <Thumbnail thumbnail={data.user.thumbnail} size={24} />
             <Text.HEADING text={data.user.nickname} />
           </div>
           <ChevronRight />

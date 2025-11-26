@@ -33,8 +33,8 @@ export default function NoticeDetail(props: Props) {
     <>
       <Wrapper.SECTION>
         <div className="flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <Thumbnail thumbnail={data.userAccount.user.thumbnail} size={32} />
+          <div className="flex items-center gap-4">
+            <Thumbnail thumbnail={data.userAccount.user.thumbnail} size={24} />
             <div className="flex flex-col">
               <Text.HEADING text={data.userAccount.user.nickname} />
               <Text.CAPTION text={DayjsUtil.of(data.createdAt).formatYYMMDDHHmm()} color="gray" />
