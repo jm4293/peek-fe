@@ -27,12 +27,8 @@ export default async function BoardDetailPage(props: Props) {
         <BoardDetail board={board} userInfo={userInfo} />
       </Suspense>
 
-      {success && (
-        <>
-          <BoardComment id={id} userInfo={userInfo} />
-          <BoardCommentRegister id={id} userInfo={userInfo} />
-        </>
-      )}
+      <BoardComment id={id} userInfo={userInfo} />
+      <BoardCommentRegister id={id} userInfo={userInfo} />
     </Wrapper.MAIN>
   );
 }
