@@ -1,0 +1,2 @@
+export { useNewsPanel } from './useNewsPanel';
+
