@@ -12,7 +12,7 @@ export default async function BoardPage() {
   return (
     <Wrapper.MAIN text="커뮤니티">
       <div className="relative grid grid-cols-4 gap-4">
-        <div className="sticky top-20 self-start col-span-1">
+        <div className="sticky top-24 self-start col-span-1">
           <BoardCategory />
         </div>
         <div className="col-span-3">
