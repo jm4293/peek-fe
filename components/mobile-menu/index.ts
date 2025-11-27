@@ -1,2 +1,0 @@
-export { MobileMenuModal } from './MobileMenuModal';
-
