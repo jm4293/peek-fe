@@ -1,8 +1,8 @@
 'use client';
 
-import { useNewsPanel } from '@/hooks/news-panel';
+import { Text } from '@/components/text';
 
-import { Text } from '../text';
+import { useNewsPanel } from '@/hooks/news-panel';
 
 export const NewsButton = () => {
   const { openPanel } = useNewsPanel();

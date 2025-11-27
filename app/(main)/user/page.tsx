@@ -2,7 +2,6 @@ import { ChevronRight, FileText, HelpCircle, MessageSquare, Palette, Shield, Sta
 import Link from 'next/link';
 
 import { Thumbnail } from '@/components/image';
-import { NewsButton, NewsPanel } from '@/components/news';
 import { Text } from '@/components/text';
 import { InternalErrorView, NotAuthView, Wrapper } from '@/components/wrapper';
 
@@ -11,6 +10,8 @@ import { getUserInfo } from '@/services/user';
 import { ERROR_CODE } from '@/shared/constant/error-code/error-code';
 
 import UserLogout from './Logout';
+import { NewsButton } from './NewsButton';
+import { NewsPanel } from './NewsPanel';
 
 export default async function UserPage() {
   const { success, data, code } = await getUserInfo();
@@ -77,7 +78,7 @@ export default async function UserPage() {
           </Link>
         </Wrapper.SECTION>
 
-        <Wrapper.SECTION text="고객센터">
+        <Wrapper.SECTION text="지원">
           <Link href="/user/inquiry" className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <HelpCircle size={20} />

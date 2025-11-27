@@ -1,10 +1,11 @@
-import { Bell, ChevronRight, Palette, Shield } from 'lucide-react';
+import { ChevronRight, Palette, Shield } from 'lucide-react';
 import Link from 'next/link';
+
+import { NewsButton } from '@/app/(main)/user/NewsButton';
+import { NewsPanel } from '@/app/(main)/user/NewsPanel';
 
 import { Text } from '@/components/text';
 import { Wrapper } from '@/components/wrapper';
-
-import { NewsButton, NewsPanel } from '../news';
 
 interface Props {
   text: string;
@@ -38,14 +39,7 @@ export function NotAuthView(props: Props) {
           </Link>
         </Wrapper.SECTION>
 
-        <Wrapper.SECTION text="고객센터">
-          <Link href="/user/notice" className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <Bell size={20} />
-              <Text.HEADING text="공지사항" />
-            </div>
-            <ChevronRight />
-          </Link>
+        <Wrapper.SECTION text="지원">
           <Link href="/privacy" className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <Shield size={20} />

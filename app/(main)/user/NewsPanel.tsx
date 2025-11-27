@@ -5,15 +5,15 @@ import { X } from 'lucide-react';
 import Image from 'next/image';
 import { useEffect } from 'react';
 
+import { InfinityList } from '@/components/infinity-list';
+import { PreText, Text } from '@/components/text';
+import { Wrapper } from '@/components/wrapper';
+
 import { useNewsPanel } from '@/hooks/news-panel';
 
 import { NoticeModel, useNoticeList } from '@/services/notice';
 
 import { NoticeTypeEnumList } from '@/shared/enum/notice';
-
-import { InfinityList } from '../infinity-list';
-import { PreText, Text } from '../text';
-import { Wrapper } from '../wrapper';
 
 export const NewsPanel = () => {
   const { isOpen, closePanel } = useNewsPanel();
