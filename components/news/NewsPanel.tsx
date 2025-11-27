@@ -51,14 +51,29 @@ export const NewsPanel = () => {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
+      // 모달이 열릴 때 history entry 추가 (안드로이드 백 버튼 처리용)
+      window.history.pushState(null, '', window.location.href);
+
+      // 안드로이드 백 버튼 처리
+      const handlePopState = () => {
+        // 모달이 열려있을 때 백 버튼이 눌리면 모달을 닫음
+        closePanel();
+        // history를 다시 push해서 페이지가 뒤로 가지 않도록 함
+        window.history.pushState(null, '', window.location.href);
+      };
+
+      window.addEventListener('popstate', handlePopState);
+
+      return () => {
+        document.body.style.overflow = '';
+        window.removeEventListener('popstate', handlePopState);
+      };
     }
 
     return () => {
       document.body.style.overflow = '';
     };
-  }, [isOpen]);
+  }, [isOpen, closePanel]);
 
   return (
     <>
@@ -69,7 +84,7 @@ export const NewsPanel = () => {
       />
 
       <div
-        className={`fixed top-0 left-0 h-full w-[420px] max-w-[100vw] backdrop-blur-xl bg-white/95 dark:bg-[#1f1f22]/95 border-r border-theme-border-light/50 dark:border-white/10 z-50 transition-transform duration-300 ease-out flex flex-col gap-4
+        className={`fixed top-0 left-0 h-full w-[420px] max-w-[100vw] backdrop-blur-xl bg-white/95 dark:bg-[#1f1f22]/95 z-50 transition-transform duration-300 ease-out flex flex-col gap-4
           ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="flex flex-col gap-2 p-5">
           <div className="flex justify-between items-center">
