@@ -104,6 +104,8 @@ export const NewsPanel = () => {
               fetchNextPage={fetchNextPage}>
               {data?.noticeList?.map(renderItem) || []}
             </InfinityList>
+
+            <div className="mb-12" />
           </div>
         </div>
       </div>
