@@ -7,7 +7,6 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
       <Header />
       <main>{children}</main>
       <Footer />
-      {/* <MobileMenuModal /> */}
     </div>
   );
 }

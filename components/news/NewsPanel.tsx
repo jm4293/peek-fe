@@ -1,16 +1,53 @@
 'use client';
 
+import { DayjsUtil } from '@/utils';
 import { X } from 'lucide-react';
+import Image from 'next/image';
 import { useEffect } from 'react';
 
 import { useNewsPanel } from '@/hooks/news-panel';
 
-import { Text } from '../text';
+import { NoticeModel, useNoticeList } from '@/services/notice';
+
+import { NoticeTypeEnumList } from '@/shared/enum/notice';
+
+import { InfinityList } from '../infinity-list';
+import { PreText, Text } from '../text';
+import { Wrapper } from '../wrapper';
 
 export const NewsPanel = () => {
   const { isOpen, closePanel } = useNewsPanel();
+  const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isPending, isSuccess } = useNoticeList({});
 
-  // 패널이 열릴 때 body 스크롤 방지
+  const renderItem = (item: NoticeModel) => {
+    const { id, type, title, content, createdAt, noticeImages } = item;
+
+    return (
+      <li key={id}>
+        <Wrapper.SECTION>
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col">
+              <Text.PARAGRAPH text={DayjsUtil.of(createdAt).formatYYMMDDHHmm()} color="gray" />
+              <div className="flex items-center gap-2">
+                <Text.PARAGRAPH text={`[${NoticeTypeEnumList[type].label}]`} color={NoticeTypeEnumList[type].color} />
+                <Text.PARAGRAPH text={title} />
+              </div>
+            </div>
+            <div className="border-b border-theme-border-light/50" />
+            <div>
+              <PreText text={content} />
+              <div className="flex flex-wrap justify-center gap-2">
+                {noticeImages.map((image) => (
+                  <Image key={image.id} src={image.image} alt={image.image} width={100} height={100} />
+                ))}
+              </div>
+            </div>
+          </div>
+        </Wrapper.SECTION>
+      </li>
+    );
+  };
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -25,36 +62,29 @@ export const NewsPanel = () => {
 
   return (
     <>
-      {/* 오버레이 */}
       <div
         className={`fixed inset-0 bg-black/30 backdrop-blur-sm z-40 transition-opacity duration-300 ease-out 
           ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
         onClick={closePanel}
       />
 
-      {/* 패널 - 오른쪽에서 왼쪽으로 슬라이드 */}
       <div
-        className={`fixed top-0 right-0 h-full w-[420px] max-w-[85vw] backdrop-blur-xl bg-white/95 dark:bg-[#1f1f22]/95 border-l border-theme-border-light/50 dark:border-white/10 z-50 transition-transform duration-300 ease-out flex flex-col 
-          ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        {/* 헤더 */}
-        <div className="p-5 border-b border-theme-border-light/50">
-          <div className="flex items-center justify-between">
+        className={`fixed top-0 left-0 h-full w-[420px] max-w-[100vw] backdrop-blur-xl bg-white/95 dark:bg-[#1f1f22]/95 border-r border-theme-border-light/50 dark:border-white/10 z-50 transition-transform duration-300 ease-out flex flex-col gap-4
+          ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+        <div className="flex flex-col gap-2 p-5 border-b border-theme-border-light/50">
+          <div className="flex justify-between items-center">
             <Text.TITLE text="PEEK" />
-
             <X className="text-theme-txt-secondary" size={20} onClick={closePanel} />
+          </div>
+          <div>
+            <Text.PARAGRAPH text="최신 소식을 확인하세요!" color="gray" />
           </div>
         </div>
 
-        {/* 컨텐츠 영역 - 스크롤 가능 */}
-        <div className="flex-1 overflow-y-auto p-5">
-          {/* 여기에 새로운 소식 컨텐츠를 추가하세요 */}
-          <div className="space-y-3">
-            <div className="p-4 rounded-xl bg-theme-bg-card/50 border border-theme-border-light/50 hover:border-theme-border-light transition-colors">
-              <Text.HEADING text="새로운 기능이 추가되었습니다!" className="mb-1.5" />
-              <Text.PARAGRAPH text="더 나은 서비스를 위해 계속 업데이트 중입니다." color="gray" />
-            </div>
-            {/* 추가 컨텐츠... */}
-          </div>
+        <div className="flex flex-col gap-4 p-5">
+          <InfinityList hasNextPage={hasNextPage} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage}>
+            {data?.noticeList?.map(renderItem) || []}
+          </InfinityList>
         </div>
       </div>
     </>

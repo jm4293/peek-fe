@@ -2,6 +2,8 @@ import { UserAccountModel } from '@/services/user';
 
 import { NoticeTypeEnum } from '@/shared/enum/notice';
 
+import { NoticeImageModel } from './notice-image.model';
+
 export interface NoticeModel {
   id: number;
   uuid: string;
@@ -12,5 +14,6 @@ export interface NoticeModel {
   createdAt: Date;
   updatedAt: Date;
 
+  noticeImages: NoticeImageModel[];
   userAccount: UserAccountModel;
 }
