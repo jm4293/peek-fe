@@ -50,7 +50,7 @@ export const InfinityList = (props: Props) => {
   // );
 
   return (
-    <ol className="flex flex-col gap-2">
+    <ol className="flex flex-col gap-4">
       {children}
       <div ref={loadMoreRef} className="flex justify-center items-center">
         {isFetchingNextPage && <LineSkeleton />}

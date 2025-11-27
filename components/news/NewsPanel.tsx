@@ -71,7 +71,7 @@ export const NewsPanel = () => {
       <div
         className={`fixed top-0 left-0 h-full w-[420px] max-w-[100vw] backdrop-blur-xl bg-white/95 dark:bg-[#1f1f22]/95 border-r border-theme-border-light/50 dark:border-white/10 z-50 transition-transform duration-300 ease-out flex flex-col gap-4
           ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-        <div className="flex flex-col gap-2 p-5 border-b border-theme-border-light/50">
+        <div className="flex flex-col gap-2 p-5">
           <div className="flex justify-between items-center">
             <Text.TITLE text="PEEK" />
             <X className="text-theme-txt-secondary" size={20} onClick={closePanel} />
@@ -79,12 +79,17 @@ export const NewsPanel = () => {
           <div>
             <Text.PARAGRAPH text="최신 소식을 확인하세요!" color="gray" />
           </div>
-        </div>
 
-        <div className="flex flex-col gap-4 p-5">
-          <InfinityList hasNextPage={hasNextPage} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage}>
-            {data?.noticeList?.map(renderItem) || []}
-          </InfinityList>
+          <div className="border-b border-theme-border-light/50" />
+
+          <div className="h-[calc(100vh-100px)] overflow-y-auto">
+            <InfinityList
+              hasNextPage={hasNextPage}
+              isFetchingNextPage={isFetchingNextPage}
+              fetchNextPage={fetchNextPage}>
+              {data?.noticeList?.map(renderItem) || []}
+            </InfinityList>
+          </div>
         </div>
       </div>
     </>

@@ -23,8 +23,7 @@ const SECTION = (props: Props) => {
   return (
     <section
       key={id}
-      className="flex flex-col justify-center gap-4 p-4 rounded-2xl backdrop-blur-xl bg-white/70 dark:bg-[#1f1f22]/70 border border-white/20 dark:border-white/10 shadow-lg"
-    >
+      className="flex flex-col justify-center gap-4 p-4 rounded-2xl backdrop-blur-xl bg-white/70 dark:bg-[#1f1f22]/70 border border-white/20 dark:border-white/10 shadow-md">
       {typeof text === 'string' ? <Text.SUBTITLE text={text} /> : text}
       {children}
     </section>
