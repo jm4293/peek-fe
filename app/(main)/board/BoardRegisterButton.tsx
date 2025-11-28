@@ -14,7 +14,7 @@ interface Props {
   userInfo: UserAccountModel | null;
 }
 
-export const BoardRegisterButton = (props: Props) => {
+export default function BoardRegisterButton(props: Props) {
   const { userInfo } = props;
   const router = useRouter();
 
@@ -63,4 +63,4 @@ export const BoardRegisterButton = (props: Props) => {
       </div>
     </div>
   );
-};
+}

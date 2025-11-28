@@ -4,7 +4,7 @@ import { getUserInfo } from '@/services/user';
 
 import BoardCategory from './BoardCategory';
 import BoardList from './BoardList';
-import { BoardRegisterButton } from './BoardRegisterButton';
+import BoardRegisterButton from './BoardRegisterButton';
 
 export default async function BoardPage() {
   const { data: userInfo } = await getUserInfo();
