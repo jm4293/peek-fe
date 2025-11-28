@@ -1,2 +1,2 @@
-export * from './Datalist2';
-export * from './Select2';
+export * from './Datalist';
+export * from './Select';
