@@ -4,9 +4,8 @@
 
 :root {
   /* Main Brand Color */
-  --main-color: #9470dc;
-  --main-color-light: #b99aed;
-  --main-color-dark: #7854c4;
+  --main-color: #5a4fcf;
+  --main-color-light: #786de8;
 
   /* Light Mode - Backgrounds */
   --bg-header: #ffffff;
@@ -32,6 +31,9 @@
 }
 
 html.dark {
+  /* Main Brand Color */
+  --main-color-dark: #4a3fbf;
+
   /* Dark Mode - Backgrounds */
   --bg-header: #1f1f22;
   --bg-main: #27272a;

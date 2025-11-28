@@ -66,7 +66,7 @@ export const Toast = () => {
         return 'bg-yellow-50 dark:bg-yellow-900/20 border-yellow-200 dark:border-yellow-800 text-yellow-800 dark:text-yellow-200';
       case 'info':
       default:
-        return 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800 text-blue-800 dark:text-blue-200';
+        return 'bg-theme-main-color/10 dark:bg-theme-main-color/20 border-theme-main-color/30 dark:border-theme-main-color/50 text-theme-main-color dark:text-theme-main-color-light';
     }
   })();
 

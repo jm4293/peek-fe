@@ -37,7 +37,9 @@ export const Textarea = (props: Props) => {
         id={name}
         name={name}
         ref={textareaRef}
-        className={`border-theme-txt-gray min-h-[20vh] max-h-[60vh] ${isError ? 'border-red-500' : ''}`}
+        className={`w-full pl-4 pr-4 py-3 rounded-xl border ${
+          isError ? 'border-red-500' : 'border-theme-border-light/50 dark:border-white/10'
+        } bg-theme-bg-card/30 dark:bg-[#1f1f22]/30 backdrop-blur-md text-theme-txt-default placeholder:text-theme-txt-gray focus:outline-none focus:ring-2 focus:ring-theme-main-color/20 focus:border-theme-main-color transition-all duration-200 shadow-lg shadow-black/5 dark:shadow-black/20 min-h-[20vh] max-h-[60vh] resize-none`}
         onChange={handleInput}
         placeholder={`${isOptional ? '[선택] ' : ''}${placeholder}`}
         {...rest}
