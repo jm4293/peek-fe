@@ -1,6 +1,6 @@
 'use server';
 
-import { getValidTokens } from '@/utils';
+import { parseAndRefreshTokensFromCookie } from '@/utils';
 import { headers } from 'next/headers';
 
 import { apiFetch } from '@/lib/fetch';
@@ -14,7 +14,7 @@ export const getInquiryDetail = async (inquiryId: string): Promise<ResponseType<
   const cookie = headerList.get('cookie');
 
   try {
-    const { cookieHeader } = await getValidTokens(cookie);
+    const { cookieHeader } = await parseAndRefreshTokensFromCookie(cookie);
 
     // apiFetch가 자동으로 NestJS 응답에서 data를 추출
     const { inquiry } = await apiFetch<{ inquiry: InquiryModel }>(`/inquiry/${inquiryId}`, {

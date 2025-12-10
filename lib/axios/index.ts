@@ -1,5 +1,6 @@
-import { LocalStorageUtil, SessionStorageUtil } from '@/utils';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
+
+import { TokenManager } from '@/lib/auth/token-manager';
 
 import { API_URL } from '@/shared/constant/api-url';
 
@@ -50,50 +51,16 @@ const createAxiosInstance = (headers: AxiosRequestConfig['headers'] = {}) => {
       return response;
     },
     async (error) => {
-      if (error.status === 302) {
-        // const { redirect } = error.response.data;
-        // window.location.href = redirect;
+      // TokenManager를 사용한 통합 인증 에러 처리
+      const shouldRetry = await TokenManager.handleAuthError(error);
+
+      if (shouldRetry) {
+        // 401 에러에서 토큰 갱신 성공 시 원래 요청 재시도
+        const originalRequest = error.config;
+        return axiosInstance(originalRequest);
       }
 
-      if (error.status === 400) {
-        // const { message } = error.response.data;
-        // if (message) {
-        //   alert(message);
-        // }
-      }
-
-      if (error.status === 401) {
-        const refreshInstance = axios.create({
-          baseURL: API_URL,
-          headers: { 'Content-Type': 'application/json' },
-          withCredentials: true,
-        });
-
-        try {
-          await refreshInstance.post('/auth/refresh', {});
-
-          const originalRequest = error.config;
-
-          return axiosInstance(originalRequest);
-        } catch (err: any) {
-          if (err.status === 403) {
-            LocalStorageUtil.clear();
-            SessionStorageUtil.clear();
-
-            alert('로그인 세션이 만료되었습니다. 로그인 페이지로 이동합니다.');
-            window.location.href = '/auth/login';
-          }
-        }
-      }
-
-      if (error.status === 403) {
-        LocalStorageUtil.clear();
-        SessionStorageUtil.clear();
-
-        alert('로그인 세션이 만료되었습니다. 로그인 페이지로 이동합니다.');
-        window.location.href = '/auth/login';
-      }
-
+      // 재시도 불가능한 경우 에러 전파
       return Promise.reject(error);
     },
   );

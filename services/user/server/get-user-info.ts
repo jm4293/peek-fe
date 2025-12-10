@@ -1,6 +1,6 @@
 'use server';
 
-import { ValidToken } from '@/utils';
+import { getOrRefreshAccessToken } from '@/utils';
 import { cookies } from 'next/headers';
 
 import { apiFetch } from '@/lib/fetch';
@@ -19,7 +19,7 @@ export const getUserInfo = async (): Promise<ResponseType<UserAccountModel>> => 
   const rtkn = cookieStore.get(REFRESH_TOKEN_NAME);
 
   try {
-    const validTkn = await ValidToken({ tkn: tkn?.value, rtkn: rtkn?.value });
+    const validTkn = await getOrRefreshAccessToken(tkn?.value, rtkn?.value);
 
     if (!validTkn) {
       return { success: false, data: null, code: ERROR_CODE.UNAUTHORIZED };
