@@ -4,6 +4,7 @@ import { useDeviceLayout, useFooterVisibility } from '@/hooks';
 import { ChartCandlestick, House, MessagesSquare, User } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useEffect, useMemo, useState } from 'react';
 
 import { Text } from '@/components/text';
 
@@ -12,15 +13,45 @@ import { StockCategoryEnum } from '@/shared/enum/stock/stock-category.enum';
 
 import { LocalStorageUtil } from '@/utils/local-storage.util';
 
-const savedCategory = LocalStorageUtil.getItem(LocalStorageKey.boardStockCategory);
-const boardStockCategory = savedCategory || StockCategoryEnum.KOSPI.toString();
-const boardPath = `/board?stockCategory=${boardStockCategory}`;
-
 export const Footer = () => {
   const pathname = usePathname();
 
   const { isVisible } = useFooterVisibility();
   const { isMobile } = useDeviceLayout();
+
+  // 로컬스토리지 값 변경을 감지하기 위한 state
+  const [boardStockCategory, setBoardStockCategory] = useState(() => {
+    const savedCategory = LocalStorageUtil.getItem(LocalStorageKey.boardStockCategory);
+    return savedCategory || StockCategoryEnum.KOSPI.toString();
+  });
+
+  // storage 이벤트 리스너로 로컬스토리지 변경 감지
+  useEffect(() => {
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === LocalStorageKey.boardStockCategory) {
+        setBoardStockCategory(e.newValue || StockCategoryEnum.KOSPI.toString());
+      }
+    };
+
+    // 같은 탭에서의 로컬스토리지 변경도 감지하기 위한 커스텀 이벤트
+    const handleCustomStorageChange = () => {
+      const savedCategory = LocalStorageUtil.getItem(LocalStorageKey.boardStockCategory);
+      setBoardStockCategory(savedCategory || StockCategoryEnum.KOSPI.toString());
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    window.addEventListener('localStorageChange', handleCustomStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('localStorageChange', handleCustomStorageChange);
+    };
+  }, []);
+
+  // boardStockCategory가 변경될 때만 boardPath 재계산
+  const boardPath = useMemo(() => {
+    return `/board?stockCategory=${boardStockCategory}`;
+  }, [boardStockCategory]);
 
   const menuItems = [
     { path: '/home', icon: House, label: '메인', basePath: '/home' },

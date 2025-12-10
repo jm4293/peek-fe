@@ -8,7 +8,13 @@ export const QueryKeys = {
   },
   board: {
     detail: (boardId: string) => ['board', 'detail', boardId],
-    list: (category?: number) => ['board', 'list', category],
+    list: (category?: number, sort?: 'createdAt' | 'viewCount', text?: string) => [
+      'board',
+      'list',
+      category,
+      sort,
+      text,
+    ],
     commentList: (boardId: string) => ['board', 'comment', boardId],
     mineList: () => ['board', 'list-mine'],
     mineCommentList: () => ['board', 'comment', 'mine'],

@@ -35,6 +35,9 @@ export default function BoardCategory() {
   const handleCategoryChange = (value: string | number) => {
     LocalStorageUtil.setItem(LocalStorageKey.boardStockCategory, value.toString());
 
+    // 같은 탭에서 로컬스토리지 변경을 감지하기 위한 커스텀 이벤트 발생
+    window.dispatchEvent(new Event('localStorageChange'));
+
     router.push(`/board?stockCategory=${value}`);
   };
 
