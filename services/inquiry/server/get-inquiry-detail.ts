@@ -3,7 +3,8 @@
 import { getValidTokens } from '@/utils';
 import { headers } from 'next/headers';
 
-import { API_URL } from '@/shared/constant/api-url';
+import { apiFetch } from '@/lib/fetch';
+
 import { ResponseType } from '@/shared/types';
 
 import { InquiryModel } from '../model';
@@ -15,22 +16,16 @@ export const getInquiryDetail = async (inquiryId: string): Promise<ResponseType<
   try {
     const { cookieHeader } = await getValidTokens(cookie);
 
-    const res = await fetch(`${API_URL}/inquiry/${inquiryId}`, {
+    // apiFetch가 자동으로 NestJS 응답에서 data를 추출
+    const { inquiry } = await apiFetch<{ inquiry: InquiryModel }>(`/inquiry/${inquiryId}`, {
       credentials: 'include',
       headers: {
         cookie: cookieHeader,
       },
     });
 
-    if (!res.ok) {
-      return { success: false, data: null };
-    }
-
-    const json = await res.json();
-    const { inquiry } = json;
-
     return { success: true, data: inquiry };
-  } catch (error: unknown) {
+  } catch {
     return { success: false, data: null };
   }
 };

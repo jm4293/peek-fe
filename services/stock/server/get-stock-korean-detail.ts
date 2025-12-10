@@ -1,6 +1,7 @@
 'use server';
 
-import { API_URL } from '@/shared/constant/api-url';
+import { apiFetch } from '@/lib/fetch';
+
 import { ResponseType } from '@/shared/types';
 
 import { StockKoreanModel } from '../model/stock-korean.model';
@@ -12,17 +13,11 @@ export const getStockKoreanDetail = async (
   const { code } = dto;
 
   try {
-    const res = await fetch(`${API_URL}/stock/korean/detail/${code}`);
-
-    if (!res.ok) {
-      return { success: false, data: null };
-    }
-
-    const json = await res.json();
-    const { stockKorean } = json;
+    // apiFetch가 자동으로 NestJS 응답에서 data를 추출
+    const { stockKorean } = await apiFetch<{ stockKorean: StockKoreanModel }>(`/stock/korean/detail/${code}`);
 
     return { success: true, data: stockKorean };
-  } catch (error) {
+  } catch {
     return { success: false, data: null };
   }
 };

@@ -42,6 +42,11 @@ const createAxiosInstance = (headers: AxiosRequestConfig['headers'] = {}) => {
 
   axiosInstance.interceptors.response.use(
     (response) => {
+      // NestJS ResponseInterceptor로 감싸진 응답에서 data 추출
+      // { success, timestamp, path, statusCode, data } 형식에서 data만 추출
+      if (response.data && typeof response.data === 'object' && 'data' in response.data) {
+        response.data = response.data.data;
+      }
       return response;
     },
     async (error) => {
