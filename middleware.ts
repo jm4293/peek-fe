@@ -1,59 +1,70 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const ACCESS_TOKEN_NAME = 'TKN';
+const REFRESH_TOKEN_NAME = 'RTKN';
+
+/**
+ * Refresh token으로 새로운 access token을 발급받습니다.
+ */
+async function refreshAccessToken(refreshToken: string): Promise<string | null> {
+  try {
+    const response = await fetch(`${API_URL}/auth/refresh`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        cookie: `${REFRESH_TOKEN_NAME}=${refreshToken}`,
+      },
+    });
+
+    if (!response.ok) {
+      return null;
+    }
+
+    const data = await response.json();
+
+    // NestJS ResponseInterceptor로 래핑된 응답에서 data 추출
+    const responseData = data.data || data;
+
+    // 다양한 응답 형식 지원
+    const accessToken = responseData.accessToken || responseData.tkn || responseData.access_token;
+
+    return accessToken || null;
+  } catch {
+    // 토큰 갱신 실패 시 null 반환
+    return null;
+  }
+}
+
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // 루트 경로는 /home으로 리다이렉트
   if (pathname === '/') {
     return NextResponse.redirect(new URL('/home', request.url));
   }
 
-  // const cookie = request.cookies.get('__rt');
+  const accessToken = request.cookies.get(ACCESS_TOKEN_NAME);
+  const refreshToken = request.cookies.get(REFRESH_TOKEN_NAME);
 
-  // if (pathname === '/home') {
-  //   if (!cookie) {
-  //     return NextResponse.redirect(new URL('/home/guest', request.url));
-  //   }
-  // }
+  // Access token이 없고 refresh token이 있으면 갱신 시도
+  if (!accessToken && refreshToken) {
+    const newAccessToken = await refreshAccessToken(refreshToken.value);
 
-  // if (pathname === '/stock') {
-  //   if (!cookie) {
-  //     return NextResponse.redirect(new URL('/stock/guest', request.url));
-  //   }
-  // }
+    if (newAccessToken) {
+      // 새로운 access token을 쿠키에 설정
+      const response = NextResponse.next();
+      response.cookies.set(ACCESS_TOKEN_NAME, newAccessToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        maxAge: 60 * 15, // 15분
+        path: '/',
+      });
 
-  // if (pathname.includes('/board') && !pathname.includes('/board/guest') && !pathname.includes('/board/detail')) {
-  //   if (!cookie) {
-  //     return NextResponse.redirect(new URL(`/board/guest`, request.url));
-  //   }
-  // }
-
-  // if (pathname.includes('/board/detail')) {
-  //   if (!cookie) {
-  //     const number = pathname.split('/').at(-1);
-  //
-  //     return NextResponse.redirect(new URL(`/board/guest/detail/${number}`, request.url));
-  //   }
-  // }
-
-  // const boardFilter = ['/board/register', '/board/modify'];
-  //
-  // if (boardFilter.some((path) => pathname.startsWith(path))) {
-  //   if (!cookie) {
-  //     return NextResponse.redirect(new URL('/board/guest', request.url));
-  //   }
-  // }
-
-  // if (pathname === '/board') {
-  //   if (!cookie) {
-  //     return NextResponse.redirect(new URL('/board/guest', request.url));
-  //   }
-  // }
-
-  // if (pathname === '/user') {
-  //   if (!cookie) {
-  //     return NextResponse.redirect(new URL('/guest', request.url));
-  //   }
-  // }
+      return response;
+    }
+  }
 
   return NextResponse.next();
 }
