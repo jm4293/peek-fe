@@ -4,7 +4,7 @@ import { useToast } from '@/hooks/modal';
 
 import { QueryKeys } from '@/shared/constant/query-key';
 
-import boardApi from '../api';
+import boardApi from '../api/board.api';
 import { CreateBoardCommentReq, DeleteBoardCommentReq, UpdateBoardCommentReq } from '../type';
 
 export const useBoardCommentMutation = () => {

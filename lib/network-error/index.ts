@@ -1,1 +1,1 @@
-export * from './NetworkError';
+export * from './network-error.config';

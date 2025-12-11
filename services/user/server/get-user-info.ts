@@ -3,7 +3,7 @@
 import { getOrRefreshAccessToken } from '@/utils';
 import { cookies } from 'next/headers';
 
-import { apiFetch } from '@/lib/fetch';
+import { apiFetch } from '@/lib/fetch/fetch.config';
 
 import { ACCESS_TOKEN_NAME, REFRESH_TOKEN_NAME } from '@/shared/constant/cookie';
 import { ERROR_CODE } from '@/shared/constant/error-code/error-code';

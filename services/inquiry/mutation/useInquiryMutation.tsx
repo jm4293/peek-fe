@@ -5,7 +5,7 @@ import { useToast } from '@/hooks/modal';
 
 import { QueryKeys } from '@/shared/constant/query-key';
 
-import inquiryApi from '../api';
+import inquiryApi from '../api/inquiry.api';
 import { CreateInquiryReq, DeleteInquiryReq, UpdateInquiryReq } from '../type';
 
 export const useInquiryMutation = () => {

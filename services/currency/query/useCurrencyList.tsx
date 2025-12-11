@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { QueryKeys } from '@/shared/constant/query-key';
 
-import currencyApi from '../api';
+import currencyApi from '../api/currency.api';
 
 export const useCurrencyList = () => {
   return useQuery({

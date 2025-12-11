@@ -2,7 +2,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { QueryKeys } from '@/shared/constant/query-key';
 
-import boardApi from '../api';
+import boardApi from '../api/board.api';
 import { GetBoardCommentListRes } from '../type';
 
 interface Props {

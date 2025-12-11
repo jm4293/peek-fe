@@ -3,7 +3,7 @@
 import { parseAndRefreshTokensFromCookie } from '@/utils';
 import { headers } from 'next/headers';
 
-import { apiFetch } from '@/lib/fetch';
+import { apiFetch } from '@/lib/fetch/fetch.config';
 
 import { ResponseType } from '@/shared/types';
 

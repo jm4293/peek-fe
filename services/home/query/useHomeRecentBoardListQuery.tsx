@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import homeApi from '../api';
+import homeApi from '../api/home.api';
 
 export const useHomeRecentBoardListQuery = () => {
   return useQuery({

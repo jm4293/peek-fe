@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { QueryKeys } from '@/shared/constant/query-key';
 
-import boardApi from '../api';
+import boardApi from '../api/board.api';
 
 export const useBoard = (boardId: string) => {
   return useQuery({

@@ -1,4 +1,4 @@
-import createAxiosInstance from '@/lib/axios';
+import createAxiosInstance from '@/lib/axios/axios.config';
 
 import {
   CreateUserPushTokenReq,

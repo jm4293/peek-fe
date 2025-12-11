@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-import userApi from '../api';
+import userApi from '../api/user.api';
 
 export const useNotificationListQuery = () => {
   // return useInfiniteQuery({

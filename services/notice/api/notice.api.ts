@@ -1,4 +1,4 @@
-import createAxiosInstance from '@/lib/axios';
+import createAxiosInstance from '@/lib/axios/axios.config';
 
 import { GetNoticeDetailReq, GetNoticeDetailRes } from '../type/get-notice-detail.type';
 import { GetNoticeListReq, GetNoticeListRes } from '../type/get-notice-list.type';

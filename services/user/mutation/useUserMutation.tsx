@@ -8,7 +8,7 @@ import { useModal, useToast } from '@/hooks/modal';
 
 import { QueryKeys } from '@/shared/constant/query-key';
 
-import userApi from '../api';
+import userApi from '../api/user.api';
 import { ResetUserPasswordReq, UpdateUserInfoReq, UpdateUserPasswordReq, UpdateUserThumbnailReq } from '../type';
 
 export const useUserMutation = () => {

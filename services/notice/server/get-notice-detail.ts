@@ -1,6 +1,6 @@
 'use server';
 
-import { apiFetch } from '@/lib/fetch';
+import { apiFetch } from '@/lib/fetch/fetch.config';
 
 import { ERROR_CODE } from '@/shared/constant/error-code/error-code';
 import { ResponseType } from '@/shared/types';

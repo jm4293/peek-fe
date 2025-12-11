@@ -7,7 +7,7 @@ import { useToast } from '@/hooks/modal';
 
 import { QueryKeys } from '@/shared/constant/query-key';
 
-import boardApi from '../api';
+import boardApi from '../api/board.api';
 import { CreateBoardReq, DeleteBoardReq, UpdateBoardReq } from '../type';
 
 export const useBoardMutation = () => {

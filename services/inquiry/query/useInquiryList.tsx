@@ -2,7 +2,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { QueryKeys } from '@/shared/constant/query-key';
 
-import inquiryApi from '../api';
+import inquiryApi from '../api/inquiry.api';
 import { GetInquiryListReq, GetInquiryListRes } from '../type';
 
 export interface Props extends Omit<GetInquiryListReq, 'page'> {}

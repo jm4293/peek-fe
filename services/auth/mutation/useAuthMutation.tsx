@@ -12,7 +12,7 @@ import { userAccountTypeDescription } from '@/shared/enum/user';
 
 import { notificationTokenAtom } from '@/stores/notification-token.atom';
 
-import authApi from '../api';
+import authApi from '../api/auth.api';
 import { CheckEmailCodeReq, CheckEmailReq, SignInEmailReq, SignInOAuthReq, SignUpEmailReq } from '../type';
 
 export const useAuthMutation = () => {

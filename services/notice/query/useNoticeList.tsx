@@ -2,7 +2,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { QueryKeys } from '@/shared/constant/query-key';
 
-import noticeApi from '../api';
+import noticeApi from '../api/notice.api';
 import { GetNoticeListReq, GetNoticeListRes } from '../type/get-notice-list.type';
 
 export interface Props extends Omit<GetNoticeListReq, 'page'> {}

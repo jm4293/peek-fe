@@ -2,7 +2,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { QueryKeys } from '@/shared/constant/query-key';
 
-import stockApi from '../api';
+import stockApi from '../api/stock.api';
 import { GetStockKoreanFavoriteListRes } from '../type';
 
 export const useStockKoreanFavoriteList = () => {
