@@ -2,10 +2,6 @@ import { TokenManager } from '@/lib/auth/token-manager';
 
 import { API_URL } from '@/shared/constant/api-url';
 
-/**
- * NestJS ResponseInterceptor 응답 형식
- * @template T - 실제 데이터 타입
- */
 interface NestJSResponse<T> {
   success: boolean;
   timestamp: string;
@@ -21,23 +17,11 @@ interface NestJSResponse<T> {
  * 미들웨어 이후 토큰이 만료된 경우를 대비한 백업 재시도 로직을 포함합니다.
  *
  * @template T - 반환될 데이터의 타입
- * @param url - API 엔드포인트 경로 (예: '/board/123')
+ * @param url - API 엔드포인트 경로
  * @param options - fetch RequestInit 옵션
  * @param retryCount - 내부 재시도 카운터 (사용자가 직접 설정하지 않음)
  * @returns 언래핑된 데이터
  * @throws fetch 실패 시 에러
- *
- * @example
- * ```typescript
- * // 기본 사용
- * const board = await apiFetch<BoardModel>('/board/123');
- *
- * // 옵션과 함께 사용
- * const user = await apiFetch<UserModel>('/user', {
- *   credentials: 'include',
- *   headers: { cookie: `token=${token}` }
- * });
- * ```
  */
 export const apiFetch = async <T>(url: string, options?: RequestInit, retryCount = 0): Promise<T> => {
   try {

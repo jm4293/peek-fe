@@ -39,7 +39,6 @@ async function refreshAccessToken(refreshToken: string): Promise<string | null> 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // 루트 경로는 /home으로 리다이렉트
   if (pathname === '/') {
     return NextResponse.redirect(new URL('/home', request.url));
   }
@@ -47,12 +46,18 @@ export async function middleware(request: NextRequest) {
   const accessToken = request.cookies.get(ACCESS_TOKEN_NAME);
   const refreshToken = request.cookies.get(REFRESH_TOKEN_NAME);
 
-  // Access token이 없고 refresh token이 있으면 갱신 시도
+  if (!refreshToken) {
+    const response = NextResponse.next();
+    response.cookies.delete(ACCESS_TOKEN_NAME);
+    response.cookies.delete(REFRESH_TOKEN_NAME);
+
+    return response;
+  }
+
   if (!accessToken && refreshToken) {
     const newAccessToken = await refreshAccessToken(refreshToken.value);
 
     if (newAccessToken) {
-      // 새로운 access token을 쿠키에 설정
       const response = NextResponse.next();
       response.cookies.set(ACCESS_TOKEN_NAME, newAccessToken, {
         httpOnly: true,

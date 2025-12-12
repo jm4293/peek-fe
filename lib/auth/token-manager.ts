@@ -109,14 +109,6 @@ export class TokenManager {
    *
    * @param error - HTTP 에러 객체 (status 또는 response.status 포함)
    * @returns 재시도 가능 여부 (true: 재시도 가능, false: 재시도 불가)
-   *
-   * @example
-   * ```typescript
-   * const shouldRetry = await TokenManager.handleAuthError(error);
-   * if (shouldRetry) {
-   *   // 요청 재시도
-   * }
-   * ```
    */
   static async handleAuthError(error: { status?: number; response?: { status?: number } }): Promise<boolean> {
     const status = error.status || error.response?.status;
