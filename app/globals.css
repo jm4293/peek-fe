@@ -83,8 +83,8 @@ body {
 
 header {
   position: fixed;
-  width: 100%;
-  max-width: 2345px;
+  /* width: 100%; */
+  /* max-width: 1920px; */
   top: 0;
   left: 50%;
   transform: translateX(-50%);
@@ -93,7 +93,7 @@ header {
 
 main {
   min-width: 256px;
-  max-width: 2345px;
+  max-width: 1920px;
   min-height: 100dvh;
   margin: 0 auto;
   position: relative;

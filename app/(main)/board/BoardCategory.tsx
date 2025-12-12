@@ -49,24 +49,20 @@ export default function BoardCategory() {
   if (isMobile) {
     return (
       <div className="sticky z-40 top-16 flex flex-col gap-4">
-        <Wrapper.SECTION>
-          <Tab
-            items={tabItems}
-            value={stockCategory || undefined}
-            onChange={handleCategoryChange}
-            direction="horizontal"
-            size="sm"
-          />
-        </Wrapper.SECTION>
+        <Tab
+          items={tabItems}
+          value={stockCategory || undefined}
+          onChange={handleCategoryChange}
+          direction="horizontal"
+          size="sm"
+        />
       </div>
     );
   }
 
   return (
     <div className="sticky z-40 top-20 flex flex-col gap-4">
-      <Wrapper.SECTION>
-        <Tab items={tabItems} value={stockCategory || undefined} onChange={handleCategoryChange} size="sm" />
-      </Wrapper.SECTION>
+      <Tab items={tabItems} value={stockCategory || undefined} onChange={handleCategoryChange} size="sm" />
     </div>
   );
 }

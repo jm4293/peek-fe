@@ -78,23 +78,21 @@ export const Footer = () => {
             const isActive = pathname.startsWith(basePath);
 
             return (
-              <Link key={basePath} href={path} className="relative flex flex-col items-center">
-                <div
-                  className={`relative px-3 py-1 rounded-full transition-all duration-300 ease-in-out ${
-                    isActive
-                      ? 'backdrop-blur-sm bg-white/50 dark:bg-white/10 shadow-md scale-110'
-                      : 'hover:bg-white/30 dark:hover:bg-white/5 hover:scale-110 active:scale-95'
-                  }`}>
-                  <Icon className={isActive ? 'text-theme-main-color' : 'text-theme-txt-secondary'} size={18} />
-                  {isActive && (
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-white/20 to-transparent pointer-events-none animate-pulse" />
-                  )}
-                </div>
+              <Link
+                key={basePath}
+                href={path}
+                className={`relative flex flex-col items-center w-16 px-3 py-1 rounded-full transition-all duration-300 ease-in-out ${
+                  isActive
+                    ? 'backdrop-blur-sm bg-white/50 dark:bg-white/10 shadow-md scale-110'
+                    : 'hover:bg-white/30 dark:hover:bg-white/5 hover:scale-110 active:scale-95'
+                }`}>
+                <Icon className={isActive ? 'text-theme-main-color' : 'text-theme-txt-secondary'} size={18} />
                 <Text.PARAGRAPH
                   text={label}
                   color={isActive ? 'main' : 'gray'}
-                  className={`text-xs mt-0.5 transition-all duration-300 ${isActive ? 'font-semibold' : 'font-medium'}`}
+                  className={`whitespace-nowrap text-xs mt-0.5 transition-all duration-300 ${isActive ? 'font-semibold' : 'font-medium'}`}
                 />
+                {isActive && <div className="absolute inset-0 rounded-full" />}
               </Link>
             );
           })}
