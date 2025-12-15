@@ -4,7 +4,7 @@ import { useDeviceLayout } from '@/hooks';
 import { useRouter } from 'next/navigation';
 
 import { Tab } from '@/components/tab';
-import { InternalErrorView, LoadingView, Wrapper } from '@/components/wrapper';
+import { InternalErrorView, LoadingView } from '@/components/wrapper';
 
 import { useQueryParams } from '@/hooks/queryParams';
 
@@ -35,9 +35,7 @@ export default function BoardCategory() {
   const handleCategoryChange = (value: string | number) => {
     LocalStorageUtil.setItem(LocalStorageKey.boardStockCategory, value.toString());
 
-    // 같은 탭에서 로컬스토리지 변경을 감지하기 위한 커스텀 이벤트 발생
-    window.dispatchEvent(new Event('localStorageChange'));
-
+    window.dispatchEvent(new Event('stockCategoryChange'));
     router.push(`/board?stockCategory=${value}`);
   };
 
@@ -46,22 +44,8 @@ export default function BoardCategory() {
     label: category.name,
   }));
 
-  if (isMobile) {
-    return (
-      <div className="sticky z-40 top-16 flex flex-col gap-4">
-        <Tab
-          items={tabItems}
-          value={stockCategory || undefined}
-          onChange={handleCategoryChange}
-          direction="horizontal"
-          size="sm"
-        />
-      </div>
-    );
-  }
-
   return (
-    <div className="sticky z-40 top-20 flex flex-col gap-4">
+    <div className={`sticky z-40 flex flex-col gap-4 ${isMobile ? 'top-12' : 'top-16'}`}>
       <Tab items={tabItems} value={stockCategory || undefined} onChange={handleCategoryChange} size="sm" />
     </div>
   );
